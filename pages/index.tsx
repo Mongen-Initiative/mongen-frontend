@@ -82,13 +82,13 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    Sponsor a children
+                  <Button variant="contained" color="primary" href="/sponsorForm">
+                    Sponsor a child
                   </Button>
                 </Grid>
                 <Grid item>
                   <Button variant="outlined" color="primary">
-                    How Visible Children works?
+                    How "Visible Children" works?
                   </Button>
                 </Grid>
               </Grid>
