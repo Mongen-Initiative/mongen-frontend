@@ -68,7 +68,6 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
               Visible Children
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary">
-            A Global movement of revolutionaries changing the world one street child at a time.
             Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
 the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
 to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
