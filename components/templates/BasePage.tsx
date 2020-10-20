@@ -45,6 +45,7 @@ export const BasePage = function(props: Props) {
       <CssBaseline />
       <AppBar position="absolute">
         <Toolbar className={classes.toolbarLight}>
+          <img src="vc_logo.png"></img>
           <Typography
             variant="h5"
             style={{ fontWeight: 400, margin: "5px", fontSize: "25px"}}
