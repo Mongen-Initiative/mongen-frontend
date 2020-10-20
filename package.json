@@ -1,5 +1,5 @@
 {
-  "name": "delta-frontend",
+  "name": "mongen-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/delta-reporter/delta-frontend.git"
+    "url": "https://github.com/mongen-reporter/mongen-frontend.git"
   },
   "license": "Apache-2.0",
   "dependencies": {

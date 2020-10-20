@@ -1,295 +1,150 @@
 import {
   Container,
-  Paper,
   Grid,
   Typography,
-  ListItem,
-  List,
   NoSsr,
-  FormGroup,
-  FormControlLabel,
-  Switch,
   Button,
-  TextField,
-  Modal,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
 } from "@material-ui/core"
 import { GetServerSideProps } from 'next'
 import { InferGetServerSidePropsType } from 'next'
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { BasePage } from "../components/templates"
-import fetch from "isomorphic-unfetch"
-// import useSocket from '../hooks/useSocket'
-import Router from "next/router"
-import SettingsIcon from '@material-ui/icons/Settings'
 
-const useStyles = makeStyles(theme => ({
-  rootLight: {
-    flexGrow: 1,
-    color: theme.palette.secondary.light,
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
   },
-  rootSemiLight: {
-    flexGrow: 1,
-    backgroundColor: "#656464",
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
   },
-  rootDark:{
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
     flexGrow: 1,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  paperLight: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    height: 240,
-    width: 300,
-  },
-  paperDark: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    backgroundColor: theme.palette.secondary.main,
-    height: 240,
-    width: 300,
-    border: "1px grey solid",
+  rootLight: {
+    flexGrow: 1,
     color: theme.palette.secondary.light,
   },
-  projectStatusLight: {
-    flex: 1,
-    paddingTop: theme.spacing(1),
-    textAlign: "center",
-  },
-  projectStatusDark: {
-    flex: 1,
-    paddingTop: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.secondary.light,
-  },
-  projectTitle: {
-    paddingTop: theme.spacing(4),
-    textAlign: "center",
-  },
-  pageTitleSectionDark: {
-    backgroundColor: theme.palette.secondary.dark,
-    padding: theme.spacing(5),
-    textAlign: "center",
-    color: theme.palette.secondary.light,
-  },
-  pageTitleSectionLight: {
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(5),
-    textAlign: "center",
-  },
-  pageTitle: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "3em",
-    padding: theme.spacing(1),
-  },
-  toggleModeDark: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
-    border: "1px grey solid",
-  }, 
-  toggleModeLight: {
-    border: "1px grey solid",
-  }, 
-  modalLight: {
-    position: 'absolute',
-    width: 400,
-    height: 300,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(10, 15, 3),
-  },
-  modalDark: {
-    position: 'absolute',
-    width: 400,
-    height: 300,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(10, 15, 3),
-  },
-}))
-export interface TestProject {
-  project_id: number
-  name: string
-  project_status: string
-  data: { url?: string }
+}));
+
+export interface Projects {
 }
 
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const classes = useStyles(projects)
-
-  // dark mode switch
-  const [state, setState] = useState({
-    darkMode: getInitialDarkModeState(),
-  });
-
-  const [testProjects, setTestProjects] = useState(projects || [])
-  
-  const handleDarkModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  // useSocket('delta_project', testProject => {
-  //   setTestProjects(testProjects => [...testProjects, testProject])
-  // })
-  
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(state.darkMode)) //setting a variable in the browser storage
-  }, [state.darkMode])
-
-  function getInitialDarkModeState() :boolean {
-    if (typeof window !== 'undefined') {
-     const savedColorMode = JSON.parse(localStorage.getItem('darkMode')) //checking the 'dark' var from browser storage
-     return savedColorMode || false
-    }
-    else {
-      return false
-    }
-  }
-  
-  function getModalStyle() {
-    return {
-      top: `50%`,
-      left: `50%`,
-      transform: `translate(-50%, -50%)`,
-    }
-  }
-  const [openModal, setOpenModal] = React.useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
-  const [openModalProjectId, setOOpenModalProjectId] = React.useState("");
-  const [openModalProjectName, setOpenModalProjectName] = React.useState("");
-
-  const handleModalOpen = (id, name) => {
-    setOOpenModalProjectId(id)
-    setOpenModalProjectName(name)
-    setOpenModal(true);
-  }
-
-  const handleModalClose = () => {
-    setOpenModal(false);
-  }
-
-  async function getNewProjectName(projectId) {
-    const projectName = (document.getElementById("modal_" + projectId) as HTMLInputElement).value
-    
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: projectId,
-        name: projectName
-      }),
-    }
-    console.log(requestOptions)
-
-    const response = await fetch(
-      `${process.env.publicDeltaCore}/api/v1/update_project_name`,
-      requestOptions
-    )
-    await response.json()
-    if (typeof window !== 'undefined') {
-      window.location.reload(false) // reloading the page whe project name is changed
-      }
-  }
+  const classes = useStyles(projects)  
 
   return (
       <NoSsr>
-        <BasePage className={state.darkMode ? classes.rootDark : classes.rootLight} darkMode={state.darkMode}>
-        <title>Δ | Projects</title>
-        <Paper square={true} className={state.darkMode ? classes.pageTitleSectionDark : classes.pageTitleSectionLight}>
-              <Typography variant="h1" color="inherit" className={classes.pageTitle}>
-              Projects
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="inherit"
-              >
-                Select a project to view latest test runs
-              </Typography>
-            </Paper>
-          <Container maxWidth="lg" className={classes.container}>
-            <FormGroup row>
-              <FormControlLabel
-                control={<Switch checked={state.darkMode} onChange={handleDarkModeChange} name="darkMode" />}
-                label="Dark Mode"
-              />
-            </FormGroup>
-            {testProjects[0] ? ( // checking if props exist (if there are projects)
-              <Grid container spacing={3}>
-                {testProjects.map(project => (
-                  <Grid item xs={12} sm={3} key={project.project_id}>
-                    <List>
-                      <ListItem
-                        button
-                      >  
-                        <Paper className={state.darkMode ? classes.paperDark : classes.paperLight} id={`paper_${project.project_id}`}>
-                          <Button  onClick={() => handleModalOpen(project.project_id, project.name) } id={`${project.project_id}`}><SettingsIcon style={{color: "grey", marginLeft:"90%"}}></SettingsIcon></Button> 
-                          <Modal
-                            open={openModal}
-                            onClose={handleModalClose}
-                          >
-                            <div style={modalStyle}  className={state.darkMode ? classes.modalDark : classes.modalLight}>
-                          <Typography style={{ marginBottom: "15px"}}> Update project name: 
-                          </Typography>
-                          <form noValidate autoComplete="off">
-                            <TextField id={`modal_${openModalProjectId}`} style={{width: "max-content"}} label={openModalProjectName} className={state.darkMode ? classes.rootSemiLight : classes.rootLight} variant="outlined"/>
-                            <Button variant="contained" style={{border: "1px solid grey", marginTop: "15px", marginLeft: "30px"}} onClick={() => getNewProjectName(project.project_id)}>Submit</Button> 
-                          </form>
-
-                          </div>
-                          </Modal>
-                          <div onClick={() => Router.push(`/launches/${project.project_id}`)}>
-                            <Typography
-                              component="p"
-                              variant="h4"
-                              className={classes.projectTitle}
-                            >
-                              {project.name}
-                            </Typography>
-                            <Typography
-                              color="textSecondary"
-                              className={state.darkMode ? classes.projectStatusDark : classes.projectStatusLight}
-                              component="p"
-                            >
-                              {project.project_status}
-                            </Typography>
-                          </div>
-                        </Paper>{" "}
-                       
-                      </ListItem>
-                    </List>
-                  </Grid>
-                ))}
+        <BasePage className={classes.rootLight}>
+        <title>Mongen Initiative</title>
+           {/* Hero unit */}
+           <div className={classes.heroContent}>
+          <Container maxWidth="sm">
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              Visible Children
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            A Global movement of revolutionaries changing the world one street child at a time.
+            Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
+the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
+to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
+            </Typography>
+            <div className={classes.heroButtons}>
+              <Grid container spacing={2} justify="center">
+                <Grid item>
+                  <Button variant="contained" color="primary" href="/sponsorForm">
+                    Sponsor a child
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" color="primary">
+                    How "Visible Children" works?
+                  </Button>
+                </Grid>
               </Grid>
-            ) : (
-              <h1>No projects were found! </h1>
-            )}
+            </div>
           </Container>
+        </div>
+        <Container className={classes.cardGrid} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="child.jpg"
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      A child
+                    </Typography>
+                    <Typography>
+                      This is a clickable information card. You can use this section to put some key info about the child.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary" href="/child">
+                      Learn more
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+         {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Visible Children
+        </Typography>
+        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+          Transforming the lives of street children and turn their potentials into assets for the society.
+        </Typography>
+      </footer>
         </BasePage>
       </NoSsr>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // const projectReq = await fetch(`${process.env.deltaCore}/api/v1/projects`, {
+  // const projectReq = await fetch(`${process.env.mongenCore}/api/v1/projects`, {
   //   method: "GET",
   // })
   // const projects: TestProject[] = await projectReq.json()
 
-  const projects: TestProject[] = [
+  const projects: Projects[] = [
     {
     project_id: 1,
     name: "string",
