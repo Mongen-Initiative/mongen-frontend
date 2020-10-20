@@ -6,9 +6,6 @@ import {
   ListItem,
   List,
   NoSsr,
-  FormGroup,
-  FormControlLabel,
-  Switch,
   Button,
   TextField,
   Modal,
@@ -16,10 +13,9 @@ import {
 import { GetServerSideProps } from 'next'
 import { InferGetServerSidePropsType } from 'next'
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { BasePage } from "../components/templates"
 import fetch from "isomorphic-unfetch"
-// import useSocket from '../hooks/useSocket'
 import Router from "next/router"
 import SettingsIcon from '@material-ui/icons/Settings'
 
@@ -31,11 +27,6 @@ const useStyles = makeStyles(theme => ({
   rootSemiLight: {
     flexGrow: 1,
     backgroundColor: "#656464",
-  },
-  rootDark:{
-    flexGrow: 1,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -49,37 +40,14 @@ const useStyles = makeStyles(theme => ({
     height: 240,
     width: 300,
   },
-  paperDark: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    backgroundColor: theme.palette.secondary.main,
-    height: 240,
-    width: 300,
-    border: "1px grey solid",
-    color: theme.palette.secondary.light,
-  },
   projectStatusLight: {
     flex: 1,
     paddingTop: theme.spacing(1),
     textAlign: "center",
   },
-  projectStatusDark: {
-    flex: 1,
-    paddingTop: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.secondary.light,
-  },
   projectTitle: {
     paddingTop: theme.spacing(4),
     textAlign: "center",
-  },
-  pageTitleSectionDark: {
-    backgroundColor: theme.palette.secondary.dark,
-    padding: theme.spacing(5),
-    textAlign: "center",
-    color: theme.palette.secondary.light,
   },
   pageTitleSectionLight: {
     backgroundColor: theme.palette.primary.main,
@@ -93,11 +61,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: "3em",
     padding: theme.spacing(1),
   },
-  toggleModeDark: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
-    border: "1px grey solid",
-  }, 
   toggleModeLight: {
     border: "1px grey solid",
   }, 
@@ -106,16 +69,6 @@ const useStyles = makeStyles(theme => ({
     width: 400,
     height: 300,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(10, 15, 3),
-  },
-  modalDark: {
-    position: 'absolute',
-    width: 400,
-    height: 300,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.light,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(10, 15, 3),
@@ -129,36 +82,7 @@ export interface TestProject {
 }
 
 function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const classes = useStyles(projects)
-
-  // dark mode switch
-  const [state, setState] = useState({
-    darkMode: getInitialDarkModeState(),
-  });
-
-  const [testProjects, setTestProjects] = useState(projects || [])
-  
-  const handleDarkModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  // useSocket('delta_project', testProject => {
-  //   setTestProjects(testProjects => [...testProjects, testProject])
-  // })
-  
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(state.darkMode)) //setting a variable in the browser storage
-  }, [state.darkMode])
-
-  function getInitialDarkModeState() :boolean {
-    if (typeof window !== 'undefined') {
-     const savedColorMode = JSON.parse(localStorage.getItem('darkMode')) //checking the 'dark' var from browser storage
-     return savedColorMode || false
-    }
-    else {
-      return false
-    }
-  }
+  const classes = useStyles(projects)  
   
   function getModalStyle() {
     return {
@@ -196,7 +120,7 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
     console.log(requestOptions)
 
     const response = await fetch(
-      `${process.env.publicDeltaCore}/api/v1/update_project_name`,
+      `${process.env.publicmongenCore}/api/v1/update_project_name`,
       requestOptions
     )
     await response.json()
@@ -207,9 +131,9 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
 
   return (
       <NoSsr>
-        <BasePage className={state.darkMode ? classes.rootDark : classes.rootLight} darkMode={state.darkMode}>
+        <BasePage className={classes.rootLight}>
         <title>Δ | Projects</title>
-        <Paper square={true} className={state.darkMode ? classes.pageTitleSectionDark : classes.pageTitleSectionLight}>
+        <Paper square={true} className={classes.pageTitleSectionLight}>
               <Typography variant="h1" color="inherit" className={classes.pageTitle}>
               Projects
               </Typography>
@@ -221,31 +145,25 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
               </Typography>
             </Paper>
           <Container maxWidth="lg" className={classes.container}>
-            <FormGroup row>
-              <FormControlLabel
-                control={<Switch checked={state.darkMode} onChange={handleDarkModeChange} name="darkMode" />}
-                label="Dark Mode"
-              />
-            </FormGroup>
-            {testProjects[0] ? ( // checking if props exist (if there are projects)
+            {projects[0] ? ( // checking if props exist (if there are projects)
               <Grid container spacing={3}>
-                {testProjects.map(project => (
+                {projects.map(project => (
                   <Grid item xs={12} sm={3} key={project.project_id}>
                     <List>
                       <ListItem
                         button
                       >  
-                        <Paper className={state.darkMode ? classes.paperDark : classes.paperLight} id={`paper_${project.project_id}`}>
+                        <Paper className={classes.paperLight} id={`paper_${project.project_id}`}>
                           <Button  onClick={() => handleModalOpen(project.project_id, project.name) } id={`${project.project_id}`}><SettingsIcon style={{color: "grey", marginLeft:"90%"}}></SettingsIcon></Button> 
                           <Modal
                             open={openModal}
                             onClose={handleModalClose}
                           >
-                            <div style={modalStyle}  className={state.darkMode ? classes.modalDark : classes.modalLight}>
+                            <div style={modalStyle}  className={classes.modalLight}>
                           <Typography style={{ marginBottom: "15px"}}> Update project name: 
                           </Typography>
                           <form noValidate autoComplete="off">
-                            <TextField id={`modal_${openModalProjectId}`} style={{width: "max-content"}} label={openModalProjectName} className={state.darkMode ? classes.rootSemiLight : classes.rootLight} variant="outlined"/>
+                            <TextField id={`modal_${openModalProjectId}`} style={{width: "max-content"}} label={openModalProjectName} className={classes.rootLight} variant="outlined"/>
                             <Button variant="contained" style={{border: "1px solid grey", marginTop: "15px", marginLeft: "30px"}} onClick={() => getNewProjectName(project.project_id)}>Submit</Button> 
                           </form>
 
@@ -261,7 +179,7 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
                             </Typography>
                             <Typography
                               color="textSecondary"
-                              className={state.darkMode ? classes.projectStatusDark : classes.projectStatusLight}
+                              className={classes.projectStatusLight}
                               component="p"
                             >
                               {project.project_status}
@@ -284,7 +202,7 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // const projectReq = await fetch(`${process.env.deltaCore}/api/v1/projects`, {
+  // const projectReq = await fetch(`${process.env.mongenCore}/api/v1/projects`, {
   //   method: "GET",
   // })
   // const projects: TestProject[] = await projectReq.json()

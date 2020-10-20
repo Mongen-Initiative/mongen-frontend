@@ -11,10 +11,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
   },
-  toolbarDark: {
-    paddingLeft: "40px",
-    backgroundColor: theme.palette.secondary.dark,
-  },
   toolbarLight: {
     paddingLeft: "40px",
   },
@@ -24,15 +20,7 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     overflow: "auto",
   },
-  deltaTitleDark: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "1em",
-    padding: theme.spacing(1),
-    color: theme.palette.secondary.light,
-  },
-  deltaTitleLight: {
+  mongenTitleLight: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -45,19 +33,18 @@ const useStyles = makeStyles(theme => ({
 type Props = {
   children: React.ReactNode
   className?: string
-  darkMode: boolean
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, darkMode } = props
+  const { children, className } = props
   const classes = useStyles(props)
   
   return (
     <div className={`${classes.root} ${className}`}>
-        {/* top nav bar with Delta name */}
+        {/* top nav bar with mongen name */}
       <CssBaseline />
       <AppBar position="absolute">
-        <Toolbar className={darkMode ? classes.toolbarDark : classes.toolbarLight}>
+        <Toolbar className={classes.toolbarLight}>
           <Typography
             variant="h5"
             style={{ fontWeight: 400, margin: "5px", fontSize: "25px"}}
@@ -65,9 +52,9 @@ export const BasePage = function(props: Props) {
             <Link
               underline="none"
               href="/"
-              className={darkMode ? classes.deltaTitleDark : classes.deltaTitleLight}
+              className={classes.mongenTitleLight}
             >
-              Δ Delta Reporter
+              Mongen Initiative
             </Link>
           </Typography>
         </Toolbar>
