@@ -66,7 +66,7 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
   return (
       <NoSsr>
         <BasePage className={classes.rootLight}>
-        <title>Δ | Projects</title>
+        <title>Mongen Initiative</title>
            {/* Hero unit */}
            <div className={classes.heroContent}>
           <Container maxWidth="sm">
@@ -74,10 +74,10 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
               Visible Children
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, 
-            velit sed aliquam vestibulum, lectus dui dapibus dolor, in dapibus lorem libero 
-            scelerisque urna. Phasellus tempus condimentum elementum. Aenean aliquam imperdiet nisl. 
-            Ut nec neque non libero tincidunt sollicitudin in eu turpis.
+            A Global movement of revolutionaries changing the world one street child at a time.
+            Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
+the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
+to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
@@ -103,23 +103,20 @@ function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image="child.jpg"
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Name, Age
+                      A child
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      This is a clickable information card. You can use this section to put some key info about the child.
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
+                    <Button size="small" color="primary" href="/child">
+                      Learn more
                     </Button>
                   </CardActions>
                 </Card>

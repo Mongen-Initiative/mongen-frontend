@@ -5,9 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function AddressForm() {
+export default function PaymentAddressStep() {
   return (
-    <React.Fragment>
+    <div>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
@@ -91,6 +91,6 @@ export default function AddressForm() {
           />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </div>
   );
 }

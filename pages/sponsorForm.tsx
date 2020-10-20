@@ -6,9 +6,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from './toReview/addressForm';
-import PaymentForm from './toReview/paymentForm';
-import Review from './toReview/review';
+import PaymentAddressStep from '../components/templates/paymentAddressStep';
+import PaymentCardStep from '../components/templates/paymentCardStep';
+import PaymentSummaryStep from '../components/templates/paymentSummaryStep';
 import { BasePage } from '../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
 
@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(5),
+    marginLeft: theme.spacing(2),
   },
   rootLight: {
     flexGrow: 1,
@@ -58,11 +58,11 @@ const steps = ['Shipping address', 'Payment details', 'Review your order'];
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <PaymentAddressStep />;
     case 1:
-      return <PaymentForm />;
+      return <PaymentCardStep />;
     case 2:
-      return <Review />;
+      return <PaymentSummaryStep />;
     default:
       throw new Error('Unknown step');
   }
@@ -83,11 +83,11 @@ export default function Checkout() {
   return (
     <NoSsr>
       <BasePage className={classes.rootLight}>
-        <title>Δ | Projects</title>
+      <title>Mongen | Sponsor a child</title>
         <Container className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
-              Checkout
+            <Typography component="h1" variant="h4" align="center" style={{paddingTop:"5px", paddingBottom:"5px"}}>
+              Help a child with your donation
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map((label) => (
@@ -99,11 +99,11 @@ export default function Checkout() {
               {activeStep === steps.length ? (
                 <div>
                   <Typography variant="h5" gutterBottom>
-                    Thank you for your order.
+                    Thank you for your contribution.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your order number is #2001539. We have emailed your order confirmation, and will
-                    send you an update when your order has shipped.
+                    Your donation number is #2001539. We have emailed your order confirmation, and will
+                    send you an update on how your contribution was used.
                   </Typography>
                 </div>
               ) : (
@@ -111,7 +111,7 @@ export default function Checkout() {
                   {getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
+                      <Button onClick={handleBack} className={classes.button}  variant="outlined">
                         Back
                       </Button>
                     )}
