@@ -6,11 +6,13 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
+import { BasePage } from '../components/templates';
+import { Container, NoSsr } from '@material-ui/core';
 import PaymentAddressStep from '../components/templates/paymentAddressStep';
 import PaymentCardStep from '../components/templates/paymentCardStep';
 import PaymentSummaryStep from '../components/templates/paymentSummaryStep';
-import { BasePage } from '../components/templates';
-import { Container, NoSsr } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
