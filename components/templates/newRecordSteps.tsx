@@ -20,7 +20,6 @@ export function GeneralInfoStep() {
             name="firstName"
             label="First name"
             fullWidth
-            autoComplete="given-name"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -30,7 +29,6 @@ export function GeneralInfoStep() {
             name="lastName"
             label="Last name"
             fullWidth
-            autoComplete="family-name"
           />
         </Grid>
         <Grid item xs={12}>
@@ -40,7 +38,6 @@ export function GeneralInfoStep() {
             name="dob"
             label="Date of birth"
             fullWidth
-            autoComplete="shipping address-line1"
           />
         </Grid>
         <Grid item xs={12}>
@@ -55,7 +52,6 @@ export function GeneralInfoStep() {
             name="location"
             label="Location on the street"
             fullWidth
-            autoComplete="shipping address-line2"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -65,7 +61,6 @@ export function GeneralInfoStep() {
             name="disability"
             label="Disability if any"
             fullWidth
-            autoComplete="shipping address-level2"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -78,7 +73,6 @@ export function GeneralInfoStep() {
             name="skill"
             label="Special skill, Ability"
             fullWidth
-            autoComplete="shipping postal-code"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -88,7 +82,6 @@ export function GeneralInfoStep() {
             name="reason-being-on-the-street"
             label="Reason for being on the street"
             fullWidth
-            autoComplete="shipping country"
           />
         </Grid>
         <Button
@@ -115,7 +108,7 @@ export function AcademicRecordsStep() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={3} md={6}>
-          <TextField required id="last-school" label="Last school attended" fullWidth autoComplete="cc-name" />
+          <TextField required id="last-school" label="Last school attended" fullWidth/>
         </Grid>
         <Grid item xs={3} md={3}>
           <TextField
@@ -123,11 +116,10 @@ export function AcademicRecordsStep() {
             id="last-school"
             label="Las't class"
             fullWidth
-            autoComplete="cc-number"
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="depDate" label="Departure date" fullWidth autoComplete="cc-exp" />
+          <TextField required id="depDate" label="Departure date" fullWidth/>
         </Grid>
       </Grid>
     </React.Fragment>
@@ -142,7 +134,7 @@ export function ParentStep() {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <TextField required id="parent-name" label="Name of parent/ward" fullWidth autoComplete="cc-name" />
+            <TextField required id="parent-name" label="Name of parent/ward" fullWidth/>
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
@@ -150,11 +142,10 @@ export function ParentStep() {
               id="parent-phone"
               label="Phone number of parent/ward"
               fullWidth
-              autoComplete="cc-number"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField required id="parent-address" label="Address of parent/ward" fullWidth autoComplete="cc-exp" />
+            <TextField required id="parent-address" label="Address of parent/ward" fullWidth />
           </Grid>
         </Grid>
       </React.Fragment>
@@ -169,7 +160,7 @@ export function ParentStep() {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <TextField required id="counsellor-name" label="Name of counsellor in charge" fullWidth autoComplete="cc-name" />
+            <TextField required id="counsellor-name" label="Name of counsellor in charge" fullWidth/>
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
@@ -177,11 +168,10 @@ export function ParentStep() {
               id="times-counselled"
               label="Times counselled"
               fullWidth
-              autoComplete="cc-number"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField required id="counsellor-note" label="Remark about the child" fullWidth autoComplete="cc-exp" />
+            <TextField required id="counsellor-note" label="Remark about the child"  multiline rows={4} fullWidth />
           </Grid>
         </Grid>
       </React.Fragment>
