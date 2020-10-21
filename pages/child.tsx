@@ -108,8 +108,8 @@ import {
       title: 'Child 1',
     };
     
-  function Child({children}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const classes = useStyles(children)  
+  function Child() {
+    const classes = useStyles()  
   
     return (
         <NoSsr>
@@ -227,26 +227,6 @@ import {
         </NoSsr>
     )
   }
-  
-  export const getServerSideProps: GetServerSideProps = async () => {
-    // const projectReq = await fetch(`${process.env.mongenCore}/api/v1/projects`, {
-    //   method: "GET",
-    // })
-    // const projects: TestProject[] = await projectReq.json()
-  
-    const children: Children[] = [
-      {
-      project_id: 1,
-      name: "string",
-      project_status: "string",
-      data: null
-      }
-    ]
-  
-    return {
-      props: { children },
-    }
-  }
-  
+
   export default Child
   

@@ -49,13 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export interface Projects {
+export interface Homepage {
 }
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function Index({projects}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const classes = useStyles(projects)  
+function Index() {
+  const classes = useStyles()  
 
   return (
       <NoSsr>
@@ -118,26 +118,6 @@ to rehabilitate, mentor, engage and equip ‘all positively’ children on the s
         </BasePage>
       </NoSsr>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  // const projectReq = await fetch(`${process.env.mongenCore}/api/v1/projects`, {
-  //   method: "GET",
-  // })
-  // const projects: TestProject[] = await projectReq.json()
-
-  const projects: Projects[] = [
-    {
-    project_id: 1,
-    name: "string",
-    project_status: "string",
-    data: null
-    }
-  ]
-
-  return {
-    props: { projects },
-  }
 }
 
 export default Index
