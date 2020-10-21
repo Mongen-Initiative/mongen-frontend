@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
+import { MuiTheme } from '../MuiTheme';
 
 
 export const CallToActionButtons = function() {
@@ -13,7 +14,7 @@ export const CallToActionButtons = function() {
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="/about">
+                <Button variant="outlined" color="primary" size="large" href="/about" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
                     How "Visible Children" works?
                 </Button>
             </Grid>

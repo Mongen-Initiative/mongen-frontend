@@ -15,6 +15,7 @@ import { InferGetServerSidePropsType } from 'next'
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { BasePage, CallToActionButtons } from "../components/templates"
+import { MuiTheme } from "../components/MuiTheme"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -96,7 +97,7 @@ to rehabilitate, mentor, engage and equip ‘all positively’ children on the s
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary" href="/child">
+                    <Button size="small"  href="/child" style={{color: MuiTheme.palette.primary.dark}}>
                       Learn more
                     </Button>
                   </CardActions>
