@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { makeStyles, List, ListItem, ListItemText } from '@material-ui/core';
+import { makeStyles, List, ListItem, ListItemText, Button } from '@material-ui/core';
 
 export function GeneralInfoStep() {
   return (
@@ -91,6 +91,17 @@ export function GeneralInfoStep() {
             autoComplete="shipping country"
           />
         </Grid>
+        <Button
+            variant="contained"
+            component="label"
+            style = {{margin:"15px"}}
+        >
+        Upload Child's photo
+        <input
+            type="file"
+            style={{ display: "none" }}
+        />
+        </Button>
       </Grid>
     </div>
   );

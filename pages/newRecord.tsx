@@ -91,7 +91,7 @@ export default function AddNewRecord() {
           <Container className={classes.layout}>
             <Paper className={classes.paper}>
               <Typography component="h1" variant="h4" align="center" style={{paddingTop:"5px", paddingBottom:"5px"}}>
-                Add new child here
+                Add a new child
               </Typography>
               <Stepper activeStep={activeStep} className={classes.stepper}>
                 {steps.map((label) => (
