@@ -92,7 +92,7 @@ to rehabilitate, mentor, engage and equip ‘all positively’ children on the s
                       A child
                     </Typography>
                     <Typography>
-                      This is a clickable information card. You can use this section to put some key info about the child.
+                      This is a child that needs your help. You can use this section to put some key info about the child.
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -105,6 +105,7 @@ to rehabilitate, mentor, engage and equip ‘all positively’ children on the s
             ))}
           </Grid>
         </Container>
+        <CallToActionButtons/>
          {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>

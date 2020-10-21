@@ -9,9 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { BasePage } from '../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
-import PaymentAddressStep from '../components/templates/paymentAddressStep';
-import PaymentCardStep from '../components/templates/paymentCardStep';
-import PaymentSummaryStep from '../components/templates/paymentSummaryStep';
+import {PaymentAddressStep, PaymentCardStep, PaymentSummaryStep}  from '../components/templates/paymentSteps';
 
 
 const useStyles = makeStyles((theme) => ({

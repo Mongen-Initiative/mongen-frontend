@@ -58,6 +58,17 @@ export const BasePage = function(props: Props) {
               Mongen Initiative
             </Link>
           </Typography>
+          <Typography
+            variant="h5"
+            style={{ fontWeight: 400, marginLeft: "960px", fontSize: "15px"}}
+          >
+            <Link
+              href="/newRecord"
+              className={classes.mongenTitleLight}
+            >
+              Add a New Record
+            </Link>
+          </Typography>
         </Toolbar>
       </AppBar>
       <main className={classes.content}>
