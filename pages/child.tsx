@@ -1,30 +1,16 @@
 import {
     Container,
-    Grid,
     Typography,
     NoSsr,
-    Button,
-    Card,
-    CardMedia,
-    CardContent,
+    ButtonBase,
   } from "@material-ui/core"
   import { GetServerSideProps } from 'next'
   import { InferGetServerSidePropsType } from 'next'
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage } from "../components/templates"
+  import { BasePage, CallToActionButtons } from "../components/templates"
   
   const useStyles = makeStyles((theme) => ({
-    icon: {
-      marginRight: theme.spacing(2),
-    },
-    heroContent: {
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(8, 0, 6),
-    },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
     cardGrid: {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(8),
@@ -33,12 +19,7 @@ import {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
+      alignContent: "center",
     },
     footer: {
       backgroundColor: theme.palette.background.paper,
@@ -52,57 +33,186 @@ import {
       flexGrow: 1,
       color: theme.palette.secondary.light,
     },
+    image: {
+        position: 'relative',
+        height: 200,
+        [theme.breakpoints.down('xs')]: {
+          width: '100% !important', // Overrides inline-style
+          height: 100,
+        },
+        '&:hover, &$focusVisible': {
+          zIndex: 1,
+          '& $imageBackdrop': {
+            opacity: 0.15,
+          },
+          '& $imageMarked': {
+            opacity: 0,
+          },
+          '& $imageTitle': {
+            border: '4px solid currentColor',
+          },
+        },
+      },
+      focusVisible: {},
+      imageButton: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: theme.palette.common.white,
+      },
+      imageSrc: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
+      },
+      imageBackdrop: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundColor: theme.palette.common.black,
+        opacity: 0.4,
+        transition: theme.transitions.create('opacity'),
+      },
+      imageTitle: {
+        position: 'relative',
+        padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+      },
+      imageMarked: {
+        height: 3,
+        width: 18,
+        backgroundColor: theme.palette.common.white,
+        position: 'absolute',
+        bottom: -2,
+        left: 'calc(50% - 9px)',
+        transition: theme.transitions.create('opacity'),
+      },
   }));
   
   export interface Children {
   }
+
+  const image = 
+    {
+      url: '/child.jpg',
+      title: 'Child 1',
+    };
     
-  function Child({children}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const classes = useStyles(children)  
+  function Child() {
+    const classes = useStyles()  
   
     return (
         <NoSsr>
           <BasePage className={classes.rootLight}>
           <title>Mongen Initiative</title>
-             {/* Hero unit */}
-             <div className={classes.heroContent}>
-            <Container maxWidth="sm">
-              <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                Child 1
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Info about the child
-              </Typography>
-              <div className={classes.heroButtons}>
-                <Grid container spacing={2} justify="center">
-                  <Grid item>
-                    <Button variant="contained" color="primary" href="/sponsorForm">
-                      Sponsor a child
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" color="primary">
-                      How "Visible Children" works?
-                    </Button>
-                  </Grid>
-                </Grid>
-              </div>
-            </Container>
-          </div>
           <Container className={classes.cardGrid}>
             {/* End hero unit */}
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="child.jpg"
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography>
-                        Info about the child
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                    <ButtonBase
+                        focusRipple
+                        key={image.title}
+                        className={classes.image}
+                        focusVisibleClassName={classes.focusVisible}
+                        style={{height: "350px", width: "600px", marginLeft: "320px"}}
+                        href ="/sponsorForm"
+                        >
+                            <span
+                                className={classes.imageSrc}
+                                style={{
+                                backgroundImage: `url(${image.url})`,
+                                }}
+                            />
+                            <span className={classes.imageBackdrop} />
+                            <span className={classes.imageButton}>
+                                <Typography
+                                component="span"
+                                variant="subtitle1"
+                                color="inherit"
+                                className={classes.imageTitle}
+                                >
+                                {image.title}
+                                    <span className={classes.imageMarked}/>
+                                </Typography>
+                            </span>
+                    </ButtonBase>
+                  <CallToActionButtons/>
+                  <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                    Information about "Child 1"
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Name and Surname:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Location:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Date of birth, gender, state of origin:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Fear/trauma:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Skills and strengths:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Reason for child being on the street:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Last school attended, last class stopped:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                    Name, phone and address of the parent/ward:
+                  </Typography>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                   Information about the child. Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. 
+                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  </Typography>
+                  <CallToActionButtons/>
           </Container>
            {/* Footer */}
         <footer className={classes.footer}>
@@ -117,26 +227,6 @@ import {
         </NoSsr>
     )
   }
-  
-  export const getServerSideProps: GetServerSideProps = async () => {
-    // const projectReq = await fetch(`${process.env.mongenCore}/api/v1/projects`, {
-    //   method: "GET",
-    // })
-    // const projects: TestProject[] = await projectReq.json()
-  
-    const children: Children[] = [
-      {
-      project_id: 1,
-      name: "string",
-      project_status: "string",
-      data: null
-      }
-    ]
-  
-    return {
-      props: { children },
-    }
-  }
-  
+
   export default Child
   

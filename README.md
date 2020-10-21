@@ -1,6 +1,6 @@
 # Mongen - Frontend
 
-The frontend for Mongen is designed with the intention to provide enough flexibility to be deployed both on normal servers or on serverless cloud services
+The frontend for Mongen is now a mock version of Visible Children project. 
 
 ## How to use it?
 
@@ -23,8 +23,6 @@ The server will reload automatically after a change is saved
 - [Typescript](https://www.typescriptlang.org/)
 - [Serverless Framework](https://github.com/serverless/serverless)
 - [MaterialUI](https://material-ui.com/)
-- [Redux](https://redux.js.org/)
-- [Redux Saga](https://redux-saga.js.org/)
 
 ## Recommended Google Chrome & VSCode addons
 
