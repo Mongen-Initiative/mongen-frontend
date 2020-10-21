@@ -10,8 +10,6 @@ import {
   CardActions,
   Divider,
 } from "@material-ui/core"
-import { GetServerSideProps } from 'next'
-import { InferGetServerSidePropsType } from 'next'
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { BasePage, CallToActionButtons } from "../components/templates"

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { makeStyles, List, ListItem, ListItemText, Button } from '@material-ui/core';
+import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 
 export function GeneralInfoStep() {
   return (
