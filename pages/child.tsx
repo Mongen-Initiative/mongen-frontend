@@ -113,7 +113,7 @@ import { Footer } from "../components/templates/Footer";
     return (
         <NoSsr>
           <BasePage className={classes.rootLight}>
-          <title>Mongen Initiative</title>
+          <title>Mongen | Child details</title>
           <Container className={classes.cardGrid}>
             {/* End hero unit */}
                     <ButtonBase

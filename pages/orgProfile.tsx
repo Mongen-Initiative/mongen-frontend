@@ -4,12 +4,16 @@ import {
     Container,
     Typography,
     NoSsr,
+    TextField,
+    Button,
+    Grid,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../components/templates"
 import { Footer } from "../components/templates/Footer";
-  
+import {DropzoneArea} from 'material-ui-dropzone'
+
   const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
@@ -57,34 +61,35 @@ import { Footer } from "../components/templates/Footer";
     return (
         <NoSsr>
           <BasePage className={classes.rootLight}>
-          <title>Mongen | About us</title>
+          <title>Mongen | Organization profile </title>
              {/* Hero unit */}
              <div className={classes.heroContent}>
             <Container>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> About Us
+              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Organization profile
               </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              We’re on a mission to address the societal challenge of street children.
+              <Typography variant="h6" align="center" color="textSecondary" paragraph>
+              On this page you can enter information related to your Organization, it will be displayed throughout the site.
               </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Mission
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-              </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Values
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-             </Typography>
-             <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Story
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.              
-            </Typography>
-            </Container>
+                <div>
+                    <div style={{width:"30%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
+                        <DropzoneArea
+                        acceptedFiles={['image/*']}
+                        onChange={(files) => console.log('Files:', files)}
+                        dropzoneText="Upload organization logo"
+                        />
+                    </div> 
+                <div style={{width:"60%", float: "right"}}>
+            <form>
+                <TextField id="name" label="Organization name" style={{width:"60%", marginTop:"3%", marginLeft:"20%"}} />
+                <TextField id="tagline" label="Tagline about organization" style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
+                <TextField id="mission" label="Your Mission" multiline rowsMax={4} style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
+                <TextField id="values" label="Your Values" multiline rowsMax={4}  style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
+                <TextField id="story" label="Your Story" multiline rowsMax={4} style={{width:"60%", marginTop:"3%", marginLeft:"20%", marginBottom:"4%",}}/>
+            </form>
+            </div>
+        </div>
+        <Button variant="contained" color="primary" size="large" style = {{marginLeft:"40%", marginTop:"4%", width: "10%"}}> Update </Button>
+        </Container>
           </div>
           </BasePage>
           <Footer />

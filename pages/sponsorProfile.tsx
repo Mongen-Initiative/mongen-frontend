@@ -51,13 +51,13 @@ import { Footer } from "../components/templates/Footer";
   }));
   
     
-  function OrgProfile() {
+  function SponsorProfile() {
     const classes = useStyles()  
   
     return (
         <NoSsr>
           <BasePage className={classes.rootLight}>
-          <title>Mongen | About us</title>
+          <title>Mongen | Sponsor's profile</title>
              {/* Hero unit */}
              <div className={classes.heroContent}>
             <Container>
@@ -92,4 +92,4 @@ import { Footer } from "../components/templates/Footer";
     )
   }
   
-  export default OrgProfile
+  export default SponsorProfile
