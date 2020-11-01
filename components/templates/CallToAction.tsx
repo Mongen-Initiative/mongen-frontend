@@ -9,7 +9,7 @@ export const CallToActionButtons = function() {
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href="/sponsorForm" size="large">
+                <Button variant="contained" color="primary" href="/paymentForm" size="large">
                     Sponsor a child
                 </Button>
             </Grid>

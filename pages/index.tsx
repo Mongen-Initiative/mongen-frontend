@@ -63,9 +63,9 @@ function Index() {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
               Your title
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
-            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
-            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
+            <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
+            <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
+            <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
           </Container>
         </div>
         <CallToActionButtons/>
