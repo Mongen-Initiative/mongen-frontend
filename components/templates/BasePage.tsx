@@ -5,7 +5,12 @@ import {
   AppBar,
   Typography,
   Link,
-  Toolbar } from "@material-ui/core"
+  Toolbar, 
+  Menu,
+  MenuItem,
+  IconButton} from "@material-ui/core"
+import { useRouter } from "next/router"
+import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,36 +44,57 @@ export const BasePage = function(props: Props) {
   const { children, className } = props
   const classes = useStyles(props)
   
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+  };
+  
+  const router = useRouter()
+
+  
   return (
     <div className={`${classes.root} ${className}`}>
         {/* top nav bar with mongen name */}
       <CssBaseline />
       <AppBar position="absolute">
         <Toolbar className={classes.toolbarLight}>
-          {/* <img src="vc_logo.png"></img> */}
-          <Typography
-            variant="h5"
-            style={{ fontWeight: 400, margin: "5px", fontSize: "25px"}}
-          >
-            <Link
-              underline="none"
-              href="/"
-              className={classes.mongenTitleLight}
+          <div  style={{ width: "100%"}}>
+            <Typography
+              variant="h5"
+              style={{ fontWeight: 400, fontSize: "25px", float: "left"}}
             >
-              Mongen Initiative
-            </Link>
-          </Typography>
-          <Typography
-            variant="h5"
-            style={{ fontWeight: 400, marginLeft: "960px", fontSize: "15px"}}
-          >
-            <Link
-              href="/newRecord"
-              className={classes.mongenTitleLight}
-            >
-              Add a New Record
-            </Link>
-          </Typography>
+              <Link
+                underline="none"
+                href="/"
+                className={classes.mongenTitleLight}
+              >
+                Mongen Initiative
+              </Link>
+            </Typography>
+            <div style={{ float: "right", width: "5%"}}>
+            {/* Menu dropdown */}
+            <IconButton onClick={handleMenuClick}>
+              <MenuIcon />
+            </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                style={{marginTop:"2%"}}
+              >
+                <MenuItem onClick={() => router.push(`/newRecord`)}>Add new Child Record</MenuItem>
+                <MenuItem onClick={() => router.push(`/orgProfile`)}>Go to organization profile</MenuItem>
+                <MenuItem onClick={() => router.push(`/sponsorProfile`)}>Go to sponsor's profile</MenuItem>
+              </Menu>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       <main className={classes.content}>

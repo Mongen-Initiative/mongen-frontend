@@ -7,6 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage, CallToActionButtons } from "../components/templates"
+import { Footer } from "../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -112,7 +113,7 @@ import {
     return (
         <NoSsr>
           <BasePage className={classes.rootLight}>
-          <title>Mongen Initiative</title>
+          <title>Mongen | Child details</title>
           <Container className={classes.cardGrid}>
             {/* End hero unit */}
                     <ButtonBase
@@ -121,7 +122,7 @@ import {
                         className={classes.image}
                         focusVisibleClassName={classes.focusVisible}
                         style={{height: "350px", width: "600px", marginLeft: "320px"}}
-                        href ="/sponsorForm"
+                        href ="/paymentForm"
                         >
                             <span
                                 className={classes.imageSrc}
@@ -212,15 +213,7 @@ import {
                   </Typography>
                   <CallToActionButtons/>
           </Container>
-           {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Visible Children
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Transforming the lives of street children and turn their potentials into assets for the society.
-          </Typography>
-        </footer>
+            <Footer />
           </BasePage>
         </NoSsr>
     )

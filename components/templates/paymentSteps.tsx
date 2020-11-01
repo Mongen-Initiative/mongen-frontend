@@ -6,6 +6,30 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, List, ListItem, ListItemText } from '@material-ui/core';
 
+export function RecurringPaymentStep() {
+  return (
+    <div>
+      <Typography variant="h6" gutterBottom>
+        Recurring Payment
+      </Typography>
+        <Grid item style={{marginLeft:"200px", marginTop:"50px"}}>
+          <FormControlLabel
+            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            label="Help this child every month *"
+          />
+        </Grid>
+        <Grid container spacing={3}>
+        <Grid item >
+        <Typography align="center" style={{marginTop:"20px", marginBottom:"50px", fontStyle:"italic"}}>
+        * Please let us know if you can help this child on the regular basis. 
+        By ticking this, you agree to make this payment recurring, you will be charged once per month.
+      </Typography>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
+
 export function PaymentAddressStep() {
   return (
     <div>
@@ -209,6 +233,9 @@ export function PaymentSummaryStep() {
               </div>
             ))}
           </Grid>
+        </Grid>
+        <Grid item style={{fontStyle:"italic", marginTop: "20px"}}>
+          <Typography gutterBottom>This payment will be made each month. You'll receive an invoice 14 days prior payment</Typography>
         </Grid>
       </Grid>
     </div>
