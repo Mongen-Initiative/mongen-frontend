@@ -15,7 +15,7 @@ export const CallToActionButtons = function() {
             </Grid>
             <Grid item>
                 <Button variant="outlined" color="primary" size="large" href="/about" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
-                    How "Visible Children" works?
+                    How "Your title" works?
                 </Button>
             </Grid>
         </Grid>

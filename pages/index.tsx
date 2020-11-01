@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { BasePage, CallToActionButtons } from "../components/templates"
 import { MuiTheme } from "../components/MuiTheme"
+import { Footer } from "../components/templates/Footer"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -33,10 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -64,13 +61,11 @@ function Index() {
            <div>
           <Container maxWidth="sm" className={classes.heroContent}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-              Visible Children
+              Your title
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary">
-            Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
-            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
+            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
+            <Typography variant="h5" align="center" color="textSecondary"> Information about your organization. You can add/change in your org profile. </Typography>
           </Container>
         </div>
         <CallToActionButtons/>
@@ -105,15 +100,7 @@ to rehabilitate, mentor, engage and equip ‘all positively’ children on the s
           </Grid>
         </Container>
         <CallToActionButtons/>
-         {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Visible Children
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Transforming the lives of street children and turn their potentials into assets for the society.
-        </Typography>
-      </footer>
+          <Footer />
         </BasePage>
       </NoSsr>
   )

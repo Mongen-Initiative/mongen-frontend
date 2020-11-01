@@ -8,6 +8,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../components/templates"
+import { Footer } from "../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
     icon: {
@@ -68,39 +69,25 @@ import {
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Mission
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
+                Information about your organization. Information about your organization. Information about your organization. Information about your organization.
               </Typography>
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Values
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
              </Typography>
              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Story
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
-Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.             
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.              
             </Typography>
             </Container>
           </div>
-           {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Visible Children
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Transforming the lives of street children and turn their potentials into assets for the society.
-          </Typography>
-        </footer>
           </BasePage>
+          <Footer />
         </NoSsr>
     )
   }

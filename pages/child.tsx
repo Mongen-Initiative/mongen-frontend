@@ -7,6 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage, CallToActionButtons } from "../components/templates"
+import { Footer } from "../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -212,15 +213,7 @@ import {
                   </Typography>
                   <CallToActionButtons/>
           </Container>
-           {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Visible Children
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Transforming the lives of street children and turn their potentials into assets for the society.
-          </Typography>
-        </footer>
+            <Footer />
           </BasePage>
         </NoSsr>
     )
