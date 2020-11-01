@@ -87,6 +87,7 @@ export const BasePage = function(props: Props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
+                style={{marginTop:"2%"}}
               >
                 <MenuItem onClick={() => router.push(`/newRecord`)}>Add new Child Record</MenuItem>
                 <MenuItem onClick={() => router.push(`/orgProfile`)}>Go to organization profile</MenuItem>

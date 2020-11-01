@@ -6,7 +6,6 @@ import {
     NoSsr,
     TextField,
     Button,
-    Grid,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
@@ -22,31 +21,14 @@ import {DropzoneArea} from 'material-ui-dropzone'
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(8, 0, 6),
     },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
-    },
     footer: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
     },
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
+    textField: {
+        width:"60%",
+        marginTop:"3%",
+        marginLeft:"20%",
     },
     rootLight: {
       flexGrow: 1,
@@ -80,15 +62,15 @@ import {DropzoneArea} from 'material-ui-dropzone'
                     </div> 
                 <div style={{width:"60%", float: "right"}}>
             <form>
-                <TextField id="name" label="Organization name" style={{width:"60%", marginTop:"3%", marginLeft:"20%"}} />
-                <TextField id="tagline" label="Tagline about organization" style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
-                <TextField id="mission" label="Your Mission" multiline rowsMax={4} style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
-                <TextField id="values" label="Your Values" multiline rowsMax={4}  style={{width:"60%", marginTop:"3%", marginLeft:"20%"}}/>
-                <TextField id="story" label="Your Story" multiline rowsMax={4} style={{width:"60%", marginTop:"3%", marginLeft:"20%", marginBottom:"4%",}}/>
+                <TextField id="name" label="Organization name" className={classes.textField} />
+                <TextField id="tagline" label="Tagline about organization"className={classes.textField}/>
+                <TextField id="mission" label="Your Mission" multiline rowsMax={4} className={classes.textField}/>
+                <TextField id="values" label="Your Values" multiline rowsMax={4} className={classes.textField}/>
+                <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
             </form>
             </div>
         </div>
-        <Button variant="contained" color="primary" size="large" style = {{marginLeft:"40%", marginTop:"4%", width: "10%"}}> Update </Button>
+        <Button variant="contained" color="primary" size="large" style = {{marginLeft:"40%", marginTop:"8%", width: "10%"}}> Update </Button>
         </Container>
           </div>
           </BasePage>

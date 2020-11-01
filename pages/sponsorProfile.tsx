@@ -4,31 +4,28 @@ import {
     Container,
     Typography,
     NoSsr,
+    Card,
+    CardMedia,
+    CardContent,
+    Button,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../components/templates"
-import { Footer } from "../components/templates/Footer";
-  
+import { Footer } from "../components/templates/Footer"
+import { MuiTheme } from "../components/MuiTheme"
+
   const useStyles = makeStyles((theme) => ({
-    icon: {
-      marginRight: theme.spacing(2),
-    },
     heroContent: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(8, 0, 6),
-    },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
+      width: "100%"
     },
     card: {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
+      width: "100%"
     },
     cardMedia: {
       paddingTop: '56.25%', // 16:9
@@ -39,10 +36,6 @@ import { Footer } from "../components/templates/Footer";
     footer: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
-    },
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
     },
     rootLight: {
       flexGrow: 1,
@@ -58,33 +51,49 @@ import { Footer } from "../components/templates/Footer";
         <NoSsr>
           <BasePage className={classes.rootLight}>
           <title>Mongen | Sponsor's profile</title>
-             {/* Hero unit */}
              <div className={classes.heroContent}>
-            <Container>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> About Us
+             <Container>
+              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Hello, hero!
               </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              We’re on a mission to address the societal challenge of street children.
+              <Typography variant="h6" align="center" color="textSecondary" paragraph>
+              Thank you for your contributions, you are doing a great job!
               </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Mission
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-              </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Values
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-             </Typography>
-             <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Story
-              </Typography>
-              <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.              
-            </Typography>
-            </Container>
+                <div>
+                  <div style={{float: "left", marginTop:"10%"}}>
+                    <Typography  variant="h4" align="center" color="textPrimary" gutterBottom style={{marginTop: "5%", fontWeight:300}}> Your donations: </Typography>
+                </div>
+                <div style={{width:"25%", float: "left", marginTop:"10%", marginLeft: "10%"}}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image="child.jpg"
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
+                    <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
+                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
+                    <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
+                    </CardContent>
+                  </Card>
+                </div> 
+                <div style={{width:"25%", float: "left", marginTop:"10%", marginLeft: "5%"}}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image="child.jpg"
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
+                    <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
+                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
+                    <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
+                    </CardContent>
+                  </Card>
+                </div> 
+        </div>
+        </Container>
           </div>
           </BasePage>
           <Footer />
