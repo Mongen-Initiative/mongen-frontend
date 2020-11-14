@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['General', 'Academic ', 'Parental/Ward ', "Counsellor's ", "Summary "];
+const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
 function getStepContent(step) {
   switch (step) {

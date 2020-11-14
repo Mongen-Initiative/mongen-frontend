@@ -156,7 +156,7 @@ export function ParentStep() {
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
-          Counsellor's segment
+          Counselor's segment
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
@@ -201,7 +201,7 @@ export function NewRecordSummaryStep() {
             <Typography variant="subtitle1">John Smith</Typography>
           </ListItem>
           <ListItem>
-          <ListItemText>Counsellor's notes:</ListItemText>
+          <ListItemText>Counselor's notes:</ListItemText>
             <Typography variant="subtitle1">Needs another appointment</Typography>
           </ListItem>
         </List>

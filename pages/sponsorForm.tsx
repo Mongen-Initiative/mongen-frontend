@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { BasePage } from '../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
-import {PaymentAddressStep, PaymentCardStep, PaymentSummaryStep}  from '../components/templates/paymentSteps';
+import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep}  from '../components/templates/donationSteps';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,12 +53,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Your information', 'Payment details', 'Review your information'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <PaymentAddressStep />;
+      return <DonationContributorStep />;
     case 1:
       return <PaymentCardStep />;
     case 2:
@@ -102,8 +102,8 @@ export default function Checkout() {
                     Thank you for your contribution.
                   </Typography>
                   <Typography variant="subtitle1">
-                    Your donation number is #2001539. We have emailed your order confirmation, and will
-                    send you an update on how your contribution was used.
+                    Your donation number is #2001539. We have emailed you <a href=""></a> a confirmation, and will
+                    send you an update on how your contribution is being used.
                   </Typography>
                 </div>
               ) : (
@@ -121,7 +121,7 @@ export default function Checkout() {
                       onClick={handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Start sponsorship' : 'Next'}
                     </Button>
                   </div>
                 </div>
