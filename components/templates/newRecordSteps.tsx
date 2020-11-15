@@ -5,6 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, List, ListItem, ListItemText, Button } from '@material-ui/core';
+import DisabilitiesController from '../autocomplete/Disabilities'
+import FearTraumaController from '../autocomplete/FearsTraumas'
+import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
 
 export function GeneralInfoStep() {
   return (
@@ -55,25 +58,13 @@ export function GeneralInfoStep() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="disability"
-            name="disability"
-            label="Disability if any"
-            fullWidth
-          />
+          <DisabilitiesController/>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="trauma" name="trauma" label="Fear/Trauma" fullWidth />
+          <FearTraumaController/>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="skill"
-            name="skill"
-            label="Special skill, Ability"
-            fullWidth
-          />
+          <SkillsAbilitiesController/>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
