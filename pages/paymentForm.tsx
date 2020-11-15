@@ -6,10 +6,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import { BasePage } from '../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
-import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep}  from '../components/templates/donationSteps';
+import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep, RecurringPaymentStep}  from '../components/templates/donationSteps';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: 800,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Your information', 'Payment details', 'Review your information'];
+const steps = ['Your information', 'Payment details', 'Recurring Payment', 'Review your information'];
 
 function getStepContent(step) {
   switch (step) {
@@ -62,6 +61,8 @@ function getStepContent(step) {
     case 1:
       return <PaymentCardStep />;
     case 2:
+      return <RecurringPaymentStep />
+    case 3:
       return <PaymentSummaryStep />;
     default:
       throw new Error('Unknown step');

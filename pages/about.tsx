@@ -8,40 +8,20 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../components/templates"
+import { Footer } from "../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
-    icon: {
-      marginRight: theme.spacing(2),
-    },
     heroContent: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(8, 0, 6),
-    },
-    heroButtons: {
-      marginTop: theme.spacing(4),
-    },
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
     },
     footer: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
     },
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
+    infoText: {
+      marginTop: "15px",
+      fontWeight:300,
     },
     rootLight: {
       flexGrow: 1,
@@ -60,47 +40,33 @@ import {
              {/* Hero unit */}
              <div className={classes.heroContent}>
             <Container>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> About Us
+              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
               We’re on a mission to address the societal challenge of street children.
               </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Mission
+              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Mission
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
+                Information about your organization. Information about your organization. Information about your organization. Information about your organization.
               </Typography>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Values
+              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Values
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
              </Typography>
-             <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "55px", fontWeight:300}}> Our Story
+             <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Story
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.
-Street Priests is a youth‐led non‐governmental organization with a vision to be the foremost at addressing
-the societal challenge of street children and actively advocate for indigent children all over the world with special concentration in Africa,
-to rehabilitate, mentor, engage and equip ‘all positively’ children on the streets and have their potentials turned into assets for the society.             
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
+              Information about your organization. Information about your organization. Information about your organization. Information about your organization.              
             </Typography>
             </Container>
           </div>
-           {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Visible Children
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Transforming the lives of street children and turn their potentials into assets for the society.
-          </Typography>
-        </footer>
           </BasePage>
+          <Footer />
         </NoSsr>
     )
   }
