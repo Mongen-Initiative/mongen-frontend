@@ -30,11 +30,11 @@ export function RecurringPaymentStep() {
   );
 }
 
-export function PaymentAddressStep() {
+export function DonationContributorStep() {
   return (
     <div>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        Information about yourself
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -106,15 +106,15 @@ export function PaymentAddressStep() {
             name="country"
             label="Country"
             fullWidth
-            autoComplete="shipping country"
+            autoComplete="country"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );
@@ -152,12 +152,12 @@ export function PaymentCardStep() {
             autoComplete="cc-cvc"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveCard" value="yes" />}
             label="Remember credit card details for next time"
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
@@ -212,7 +212,7 @@ export function PaymentSummaryStep() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Shipping
+            Sponsor
           </Typography>
           <Typography gutterBottom>John Smith</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>

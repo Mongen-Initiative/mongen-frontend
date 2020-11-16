@@ -4,6 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import DisabilitiesController from '../autocomplete/Disabilities'
+import FearTraumaController from '../autocomplete/FearsTraumas'
+import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
 import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 
 export function GeneralInfoStep() {
@@ -55,25 +58,13 @@ export function GeneralInfoStep() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="disability"
-            name="disability"
-            label="Disability if any"
-            fullWidth
-          />
+          <DisabilitiesController/>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="trauma" name="trauma" label="Fear/Trauma" fullWidth />
+          <FearTraumaController/>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="skill"
-            name="skill"
-            label="Special skill, Ability"
-            fullWidth
-          />
+          <SkillsAbilitiesController/>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -156,7 +147,7 @@ export function ParentStep() {
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
-          Counsellor's segment
+          Counselor's segment
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
@@ -201,7 +192,7 @@ export function NewRecordSummaryStep() {
             <Typography variant="subtitle1">John Smith</Typography>
           </ListItem>
           <ListItem>
-          <ListItemText>Counsellor's notes:</ListItemText>
+          <ListItemText>Counselor's notes:</ListItemText>
             <Typography variant="subtitle1">Needs another appointment</Typography>
           </ListItem>
         </List>
