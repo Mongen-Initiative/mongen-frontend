@@ -38,7 +38,7 @@ export default function FearTraumaController() {
     <React.Fragment>
       <Autocomplete
         value={value}
-        onChange={(event, newValue) => {
+        onChange={(_, newValue) => {
           if (typeof newValue === 'string') {
             // timeout to avoid instant validation of the dialog's form.
             setTimeout(() => {
