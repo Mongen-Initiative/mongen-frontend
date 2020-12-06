@@ -22,9 +22,10 @@ import { MuiTheme } from "../../components/MuiTheme"
       width: "100%"
     },
     card: {
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      width: "100%"
+      width: "100%",
     },
     cardMedia: {
       paddingTop: '56.25%', // 16:9
@@ -84,7 +85,7 @@ import { MuiTheme } from "../../components/MuiTheme"
               </Container>
             </div>
           </BasePage>
-          <Footer/>
+          <Footer />
         </NoSsr>
     )
   }

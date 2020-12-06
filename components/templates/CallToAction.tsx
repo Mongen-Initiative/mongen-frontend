@@ -9,12 +9,12 @@ export const CallToActionButtons = function() {
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href="/paymentForm" size="large">
+                <Button variant="contained" color="primary" href="/visible-children/paymentForm" size="large">
                     Sponsor a child
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="/about" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
+                <Button variant="outlined" color="primary" size="large" href="/visible-children/about" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
                     How "Your title" works?
                 </Button>
             </Grid>
