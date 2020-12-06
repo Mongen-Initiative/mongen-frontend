@@ -26,6 +26,13 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: "2%",
+    color: "black",
+  },
+  titleLight: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     paddingTop: "3%",
     color: "black",
   },
@@ -67,7 +74,7 @@ export const BasePage = function(props: Props) {
               <Link
                 underline="none"
                 href="/"
-                className={classes.mongenTitleLight}
+                className={classes.titleLight}
               >
                 Mongen Initiative
               </Link>
@@ -90,6 +97,42 @@ export const BasePage = function(props: Props) {
                 <MenuItem onClick={() => router.push(`/sponsorProfile`)}>Go to sponsor's profile</MenuItem>
               </Menu>
             </div>
+          </div>
+        </Toolbar>
+      </AppBar>
+      <main className={classes.content}>
+        <div className={classes.spaceAfterNavBar} />
+          {/* all the main body */}
+        <section>{children}</section>
+      </main>
+    </div>
+  )
+}
+
+
+export const BasePageAboutMongen = function(props: Props) {
+  const { children, className } = props
+  const classes = useStyles(props)
+  
+  return (
+    <div className={`${classes.root} ${className}`}>
+        {/* top nav bar with mongen name */}
+      <CssBaseline />
+      <AppBar position="absolute">
+        <Toolbar>
+          <div  style={{ width: "100%"}}>
+            <Typography
+              variant="h5"
+              style={{ fontWeight: 400, fontSize: "1.8em", float: "left"}}
+            >
+              <Link
+                underline="none"
+                href="/"
+                className={classes.mongenTitleLight}
+              >
+                Mongen Initiative
+              </Link>
+            </Typography>
           </div>
         </Toolbar>
       </AppBar>

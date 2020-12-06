@@ -12,3 +12,14 @@ export const Footer = function() {
       </footer>
   );
 }
+
+export const AboutMongenFooter = function() {
+  return (
+      <footer style={{ background:"white", paddingTop: "30px", paddingBottom: "40px", marginTop:"15px"}}>
+      <Typography variant="h6" align="center" gutterBottom> Mongen Initiative </Typography>
+      <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+        Helping charities to save people!
+      </Typography>
+    </footer>
+);
+}

@@ -13,9 +13,9 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePage, CallToActionButtons } from "../../components/templates"
-import { MuiTheme } from "../../components/MuiTheme"
-import { Footer } from "../../components/templates/Footer"
+import { BasePageAboutMongen, AboutMongenCallToActionButtons } from "../components/templates"
+import { MuiTheme } from "../components/MuiTheme"
+import { AboutMongenFooter } from "../components/templates/Footer"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -49,28 +49,29 @@ const useStyles = makeStyles((theme) => ({
 export interface Homepage {
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3, 4, 5, 6];
 
 function Index() {
   const classes = useStyles()  
 
   return (
       <NoSsr>
-        <BasePage className={classes.rootLight}>
+        <BasePageAboutMongen className={classes.rootLight}>
         <title>Mongen Initiative</title>
            <div>
           <Container maxWidth="sm" className={classes.heroContent}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-              Your title
+            Mongen Initiative
             </Typography>
-            <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
-               Information about your organization. You can add/change in your org profile. 
-               Information about your organization. You can add/change in your org profile. 
-               Information about your organization. You can add/change in your org profile.
+            <Typography style={{fontSize: "1.8em", width:"100%"}} align="center" color="textSecondary">
+               Mongen Initiative is a volunteering project created by developers: 
+              Juan Negrier  <span style={{fontStyle:"italic"}}>(Chile)</span>, Marcelo Negrier <span style={{fontStyle:"italic"}}>(Chile)</span> and Oleksandra Pishcheiko <span style={{fontStyle:"italic"}}>(Ukraine)</span>. 
+               We want to help small charity Organizations to have a place where they can store, access, view their data, 
+               and share their great missions with the world!
             </Typography>
           </Container>
         </div>
-        <CallToActionButtons/>
+        <AboutMongenCallToActionButtons/>
         <Divider />
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
@@ -80,15 +81,15 @@ function Index() {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image="child.jpg"
+                      image="charity.jpg"
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        A child
+                        An organization
                       </Typography>
                       <Typography>
-                        This is a child that needs your help. You can use this section to put some key info about the child.
+                        This Organisation works with us. Click to view their webiste
                       </Typography>
                     </CardContent>
                     <CardActions>
@@ -102,9 +103,8 @@ function Index() {
             ))}
           </Grid>
         </Container>
-        <CallToActionButtons/>
-          <Footer />
-        </BasePage>
+          <AboutMongenFooter />
+        </BasePageAboutMongen>
       </NoSsr>
   )
 }

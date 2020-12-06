@@ -22,3 +22,22 @@ export const CallToActionButtons = function() {
     </div>
   );
 }
+
+export const AboutMongenCallToActionButtons = function() {
+    return (
+    <div style={{margin: "60px"}}>
+        <Grid container spacing={3} justify="center">
+            <Grid item>
+                <Button variant="contained" color="primary" href="#" size="large">
+                    Learn how to create your org website
+                </Button>
+            </Grid>
+            <Grid item>
+                <Button variant="outlined" color="primary" size="large" href="#" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
+                    Contact Us
+                </Button>
+            </Grid>
+        </Grid>
+    </div>
+  );
+}
