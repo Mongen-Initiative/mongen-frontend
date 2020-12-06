@@ -63,7 +63,7 @@ function Index() {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
             Mongen Initiative
             </Typography>
-            <Typography style={{fontSize: "1.8em", width:"100%"}} align="center" color="textSecondary">
+            <Typography style={{fontSize: "1.7em", width:"100%"}} align="center" color="textSecondary">
                Mongen Initiative is a volunteering project created by developers: 
               Juan Negrier  <span style={{fontStyle:"italic"}}>(Chile)</span>, Marcelo Negrier <span style={{fontStyle:"italic"}}>(Chile)</span> and Oleksandra Pishcheiko <span style={{fontStyle:"italic"}}>(Ukraine)</span>. 
                We want to help small charity Organizations to have a place where they can store, access, view their data, 
@@ -89,11 +89,11 @@ function Index() {
                         An organization
                       </Typography>
                       <Typography>
-                        This Organisation works with us. Click to view their webiste
+                        This Organization works with us. Click to view their website
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small"  href="/child" style={{color: MuiTheme.palette.primary.dark}}>
+                      <Button size="small"  href="#" style={{color: MuiTheme.palette.primary.dark}}>
                         Learn more
                       </Button>
                     </CardActions>

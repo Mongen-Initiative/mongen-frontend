@@ -28,13 +28,13 @@ export const AboutMongenCallToActionButtons = function() {
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href="#" size="large">
-                    Learn how to create your org website
+                <Button variant="contained" color="primary" href="mailto:support@example.com" size="large">
+                Send Us A Request
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="#" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
-                    Contact Us
+                <Button variant="outlined" color="primary" size="large" href="/loginOrgMember" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
+                    Login to your org profile
                 </Button>
             </Grid>
         </Grid>
