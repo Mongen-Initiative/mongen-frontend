@@ -95,15 +95,11 @@ export default function Checkout() {
               Help a child with your donation
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
-               
-                  {steps.map((label) => (
-                 
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                    </Step>
-                 
-                  ))}
-                
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}     
             </Stepper>
               {activeStep === steps.length ? (
                 <div>

@@ -72,4 +72,3 @@ import {
   }
   
   export default LoginAdmin
-  
