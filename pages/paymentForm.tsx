@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     padding: theme.spacing(3, 0, 5),
+    display:'flex',
+    maxWidth:"auto",
   },
   buttons: {
     display: 'flex',
@@ -48,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   rootLight: {
     flexGrow: 1,
+    display:"flex",
     color: theme.palette.secondary.light,
+    width:"100%",
   },
 }));
 
@@ -91,11 +95,15 @@ export default function Checkout() {
               Help a child with your donation
             </Typography>
             <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
+               
+                  {steps.map((label) => (
+                 
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                 
+                  ))}
+                
             </Stepper>
               {activeStep === steps.length ? (
                 <div>

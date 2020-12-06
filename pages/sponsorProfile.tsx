@@ -22,7 +22,6 @@ import { MuiTheme } from "../components/MuiTheme"
       width: "100%"
     },
     card: {
-      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       width: "100%"
@@ -39,10 +38,12 @@ import { MuiTheme } from "../components/MuiTheme"
     },
     rootLight: {
       flexGrow: 1,
+      display:"flex",
       color: theme.palette.secondary.light,
     },
   }));
-  
+ 
+  const cards = [1, 2];
     
   function SponsorProfile() {
     const classes = useStyles()  
@@ -51,52 +52,39 @@ import { MuiTheme } from "../components/MuiTheme"
         <NoSsr>
           <BasePage className={classes.rootLight}>
           <title>Mongen | Sponsor's profile</title>
-             <div className={classes.heroContent}>
-             <Container>
-              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Hello, hero!
-              </Typography>
-              <Typography variant="h6" align="center" color="textSecondary" paragraph>
-              Thank you for your contributions, you are doing a great job!
-              </Typography>
-                <div>
-                  <div style={{float: "left", marginTop:"10%"}}>
-                    <Typography  variant="h4" align="center" color="textPrimary" gutterBottom style={{marginTop: "5%", fontWeight:300}}> Your donations: </Typography>
-                </div>
-                <div style={{width:"25%", float: "left", marginTop:"10%", marginLeft: "10%"}}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="child.jpg"
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
-                    <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
-                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
-                    <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
-                    </CardContent>
-                  </Card>
-                </div> 
-                <div style={{width:"25%", float: "left", marginTop:"10%", marginLeft: "5%"}}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="child.jpg"
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
-                    <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
-                    <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
-                    <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
-                    </CardContent>
-                  </Card>
-                </div> 
-        </div>
-        </Container>
-          </div>
+            <div className={classes.heroContent}>
+              <Container>
+                <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Hello, hero!
+                </Typography>
+                <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                Thank you for your contributions, you are doing a great job!
+                </Typography>
+                  <div>
+                    <div >
+                      <Typography  variant="h4" align="center" color="textPrimary" gutterBottom style={{marginTop: "5%", fontWeight:300}}> Your donations: </Typography>
+                  </div>
+                  {cards.map((card) => (
+                  <div style={{width:"30%", float: "left", marginTop:"10%", marginLeft: "10%"}} key={card}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image="child.jpg"
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                      <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
+                      <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
+                      <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
+                      <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
+                      </CardContent>
+                    </Card>
+                  </div> 
+                  ))}
+                  </div>
+              </Container>
+            </div>
           </BasePage>
-          <Footer />
+          <Footer/>
         </NoSsr>
     )
   }

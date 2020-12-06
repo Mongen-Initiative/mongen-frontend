@@ -16,9 +16,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
   },
-  toolbarLight: {
-    paddingLeft: "40px",
-  },
   spaceAfterNavBar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -29,8 +26,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "1em",
-    padding: theme.spacing(1),
+    paddingTop: "3%",
     color: "black",
   },
 }))
@@ -62,11 +58,11 @@ export const BasePage = function(props: Props) {
         {/* top nav bar with mongen name */}
       <CssBaseline />
       <AppBar position="absolute">
-        <Toolbar className={classes.toolbarLight}>
+        <Toolbar>
           <div  style={{ width: "100%"}}>
             <Typography
               variant="h5"
-              style={{ fontWeight: 400, fontSize: "25px", float: "left"}}
+              style={{ fontWeight: 400, fontSize: "1.8em", float: "left"}}
             >
               <Link
                 underline="none"
@@ -76,7 +72,7 @@ export const BasePage = function(props: Props) {
                 Mongen Initiative
               </Link>
             </Typography>
-            <div style={{ float: "right", width: "5%"}}>
+            <div style={{ float: "right", width: "6%"}}>
             {/* Menu dropdown */}
             <IconButton onClick={handleMenuClick}>
               <MenuIcon />
