@@ -6,8 +6,8 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, CallToActionButtons } from "../components/templates"
-import { Footer } from "../components/templates/Footer";
+  import { BasePage, CallToActionButtons } from "../../components/templates"
+import { Footer } from "../../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -38,18 +38,6 @@ import { Footer } from "../components/templates/Footer";
         display: 'flex',
         height: 200,
         width: "100%",
-        '&:hover, &$focusVisible': {
-          zIndex: 1,
-          '& $imageBackdrop': {
-            opacity: 0.15,
-          },
-          '& $imageMarked': {
-            opacity: 0,
-          },
-          '& $imageTitle': {
-            border: '4px solid currentColor',
-          },
-        },
       },
       focusVisible: {},
       imageButton: {

@@ -11,9 +11,9 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage } from "../components/templates"
-import { Footer } from "../components/templates/Footer"
-import { MuiTheme } from "../components/MuiTheme"
+  import { BasePage } from "../../components/templates"
+import { Footer } from "../../components/templates/Footer"
+import { MuiTheme } from "../../components/MuiTheme"
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {

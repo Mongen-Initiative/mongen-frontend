@@ -13,9 +13,10 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePage, CallToActionButtons } from "../components/templates"
-import { MuiTheme } from "../components/MuiTheme"
-import { Footer } from "../components/templates/Footer"
+import { BasePage, CallToActionButtons } from "../../components/templates"
+import { MuiTheme } from "../../components/MuiTheme"
+import { Footer } from "../../components/templates/Footer"
+import { GetServerSideProps } from "next"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
