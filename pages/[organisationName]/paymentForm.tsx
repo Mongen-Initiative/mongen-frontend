@@ -6,9 +6,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { BasePage } from '../components/templates';
+import { BasePage } from '../../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
-import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep, RecurringPaymentStep}  from '../components/templates/donationSteps';
+import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep, RecurringPaymentStep}  from '../../components/templates/donationSteps';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     padding: theme.spacing(3, 0, 5),
+    display:'flex',
+    maxWidth:"auto",
   },
   buttons: {
     display: 'flex',
@@ -48,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   rootLight: {
     flexGrow: 1,
+    display:"flex",
     color: theme.palette.secondary.light,
+    width:"100%",
   },
 }));
 
@@ -95,7 +99,7 @@ export default function Checkout() {
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>
                 </Step>
-              ))}
+              ))}     
             </Stepper>
               {activeStep === steps.length ? (
                 <div>

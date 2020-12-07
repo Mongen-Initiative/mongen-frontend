@@ -13,9 +13,9 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePageAboutMongen, AboutMongenCallToActionButtons } from "../components/templates"
-import { MuiTheme } from "../components/MuiTheme"
-import { AboutMongenFooter } from "../components/templates/Footer"
+import { BasePage, CallToActionButtons } from "../../components/templates"
+import { MuiTheme } from "../../components/MuiTheme"
+import { Footer } from "../../components/templates/Footer"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -49,29 +49,28 @@ const useStyles = makeStyles((theme) => ({
 export interface Homepage {
 }
 
-const cards = [1, 2, 3, 4, 5, 6];
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Index() {
   const classes = useStyles()  
 
   return (
       <NoSsr>
-        <BasePageAboutMongen className={classes.rootLight}>
+        <BasePage className={classes.rootLight}>
         <title>Mongen Initiative</title>
            <div>
           <Container maxWidth="sm" className={classes.heroContent}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-            Mongen Initiative
+              Your title
             </Typography>
-            <Typography style={{fontSize: "1.7em", width:"100%"}} align="center" color="textSecondary">
-               Mongen Initiative is a volunteering project created by developers: 
-              Juan Negrier  <span style={{fontStyle:"italic"}}>(Chile)</span>, Marcelo Negrier <span style={{fontStyle:"italic"}}>(Chile)</span> and Oleksandra Pishcheiko <span style={{fontStyle:"italic"}}>(Ukraine)</span>. 
-               We want to help small charity Organizations to have a place where they can store, access, view their data, 
-               and share their great missions with the world!
+            <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
+               Information about your organization. You can add/change in your org profile. 
+               Information about your organization. You can add/change in your org profile. 
+               Information about your organization. You can add/change in your org profile.
             </Typography>
           </Container>
         </div>
-        <AboutMongenCallToActionButtons/>
+        <CallToActionButtons/>
         <Divider />
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
@@ -81,19 +80,19 @@ function Index() {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image="charity.jpg"
+                      image="child.jpg"
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        An organization
+                        A child
                       </Typography>
                       <Typography>
-                        This Organization works with us. Click to view their website
+                        This is a child that needs your help. You can use this section to put some key info about the child.
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small"  href="#" style={{color: MuiTheme.palette.primary.dark}}>
+                      <Button size="small"  href="/child" style={{color: MuiTheme.palette.primary.dark}}>
                         Learn more
                       </Button>
                     </CardActions>
@@ -103,8 +102,9 @@ function Index() {
             ))}
           </Grid>
         </Container>
-          <AboutMongenFooter />
-        </BasePageAboutMongen>
+        <CallToActionButtons/>
+          <Footer />
+        </BasePage>
       </NoSsr>
   )
 }

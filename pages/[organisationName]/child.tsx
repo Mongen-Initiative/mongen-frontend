@@ -6,8 +6,8 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, CallToActionButtons } from "../components/templates"
-import { Footer } from "../components/templates/Footer";
+  import { BasePage, CallToActionButtons } from "../../components/templates"
+import { Footer } from "../../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -16,6 +16,7 @@ import { Footer } from "../components/templates/Footer";
     },
     card: {
       height: '100%',
+      width: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignContent: "center",
@@ -34,23 +35,9 @@ import { Footer } from "../components/templates/Footer";
     },
     image: {
         position: 'relative',
+        display: 'flex',
         height: 200,
-        [theme.breakpoints.down('xs')]: {
-          width: '100% !important', // Overrides inline-style
-          height: 100,
-        },
-        '&:hover, &$focusVisible': {
-          zIndex: 1,
-          '& $imageBackdrop': {
-            opacity: 0.15,
-          },
-          '& $imageMarked': {
-            opacity: 0,
-          },
-          '& $imageTitle': {
-            border: '4px solid currentColor',
-          },
-        },
+        width: "100%",
       },
       focusVisible: {},
       imageButton: {
@@ -72,29 +59,6 @@ import { Footer } from "../components/templates/Footer";
         bottom: 0,
         backgroundSize: 'cover',
         backgroundPosition: 'center 40%',
-      },
-      imageBackdrop: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        backgroundColor: theme.palette.common.black,
-        opacity: 0.4,
-        transition: theme.transitions.create('opacity'),
-      },
-      imageTitle: {
-        position: 'relative',
-        padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-      },
-      imageMarked: {
-        height: 3,
-        width: 18,
-        backgroundColor: theme.palette.common.white,
-        position: 'absolute',
-        bottom: -2,
-        left: 'calc(50% - 9px)',
-        transition: theme.transitions.create('opacity'),
       },
   }));
   
@@ -121,8 +85,8 @@ import { Footer } from "../components/templates/Footer";
                         key={image.title}
                         className={classes.image}
                         focusVisibleClassName={classes.focusVisible}
-                        style={{height: "350px", width: "600px", marginLeft: "320px"}}
-                        href ="/paymentForm"
+                        style={{height: "350px", width: "55%", marginLeft: "25%"}}
+                        href ="/visible-children/paymentForm"
                         >
                             <span
                                 className={classes.imageSrc}
@@ -130,18 +94,6 @@ import { Footer } from "../components/templates/Footer";
                                 backgroundImage: `url(${image.url})`,
                                 }}
                             />
-                            <span className={classes.imageBackdrop} />
-                            <span className={classes.imageButton}>
-                                <Typography
-                                component="span"
-                                variant="subtitle1"
-                                color="inherit"
-                                className={classes.imageTitle}
-                                >
-                                {image.title}
-                                    <span className={classes.imageMarked}/>
-                                </Typography>
-                            </span>
                     </ButtonBase>
                   <CallToActionButtons/>
                   <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>

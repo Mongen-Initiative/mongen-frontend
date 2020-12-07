@@ -9,8 +9,8 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage } from "../components/templates"
-import { Footer } from "../components/templates/Footer";
+  import { BasePage } from "../../components/templates"
+import { Footer } from "../../components/templates/Footer";
 import {DropzoneArea} from 'material-ui-dropzone'
 
   const useStyles = makeStyles((theme) => ({
@@ -57,13 +57,13 @@ import {DropzoneArea} from 'material-ui-dropzone'
                         <DropzoneArea
                         acceptedFiles={['image/*']}
                         onChange={(files) => console.log('Files:', files)}
-                        dropzoneText="Upload organization logo"
+                        dropzoneText="Upload the logo"
                         />
                     </div> 
                 <div style={{width:"60%", float: "right"}}>
             <form>
                 <TextField id="name" label="Organization name" className={classes.textField} />
-                <TextField id="tagline" label="Tagline about organization"className={classes.textField}/>
+                <TextField id="tagline" label="Tagline"className={classes.textField}/>
                 <TextField id="mission" label="Your Mission" multiline rowsMax={4} className={classes.textField}/>
                 <TextField id="values" label="Your Values" multiline rowsMax={4} className={classes.textField}/>
                 <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
