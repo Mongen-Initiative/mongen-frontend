@@ -31,6 +31,7 @@
     "compression": "^1.7.4",
     "echarts": "^4.8.0",
     "echarts-for-react": "^2.0.16",
+    "eslint": "^7.15.0",
     "express": "^4.17.1",
     "immer": "^4.0.2",
     "isomorphic-unfetch": "^3.0.0",

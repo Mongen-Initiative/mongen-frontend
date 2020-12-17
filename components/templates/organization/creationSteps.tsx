@@ -3,7 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import MainContactController from '../../autocomplete/MainContact'
-import { List, ListItem, ListItemText, Button } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import CountriesController from '../../autocomplete/Countries';
 
 export function OrganizationDetailsStep() {
   return (
@@ -58,18 +59,13 @@ export function OrganizationLocationStep() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={3} md={6}>
-          <TextField required id="address" label="Address" fullWidth/>
+          <TextField required id="address" label="Address" fullWidth />
         </Grid>
         <Grid item xs={3} md={3}>
-          <TextField
-            required
-            id="country"
-            label="Country"
-            fullWidth
-          />
+          <CountriesController />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <MainContactController/>
+          <MainContactController />
         </Grid>
       </Grid>
     </React.Fragment>
@@ -79,39 +75,38 @@ export function OrganizationLocationStep() {
 export function SummaryStep() {
 
   return (
-      <div>
-        <Typography variant="h6" gutterBottom>
-          Organization Summary
+    <div>
+      <Typography variant="h6" gutterBottom>
+        Organization Summary
         </Typography>
-        <Typography variant="h5" align="center" style={{padding:"15px"}}>Street Priests</Typography>
-        <List>
-          <ListItem>
-            <ListItemText>Mission</ListItemText>
-          </ListItem>
-          <ListItem>
+      <Typography variant="h5" align="center" style={{ padding: "15px" }}>Street Priests</Typography>
+      <List>
+        <ListItem>
+          <ListItemText>Mission</ListItemText>
+        </ListItem>
+        <ListItem>
           <Typography variant="body1">To create a safe space for street children by providing, a fun and hands-on rehabilitative program that,
 engages them in formal education through unconventional ways</Typography>
-          </ListItem>
-          <ListItem>
+        </ListItem>
+        <ListItem>
           <ListItemText>Vision:</ListItemText>
-          </ListItem>
-          <ListItem>
+        </ListItem>
+        <ListItem>
           <Typography variant="body1">To transform the lives of street children and turn their potentials into assets for the society</Typography>
-          </ListItem>
-          <ListItem>
+        </ListItem>
+        <ListItem>
           <ListItemText>Address:</ListItemText>
-            <Typography variant="subtitle1">Some interesting address</Typography>
-          </ListItem>
-          <ListItem>
+          <Typography variant="subtitle1">Some interesting address</Typography>
+        </ListItem>
+        <ListItem>
           <ListItemText>Country:</ListItemText>
-            <Typography variant="subtitle1">Nigeria</Typography>
-          </ListItem>
-          <ListItem>
+          <Typography variant="subtitle1">Nigeria</Typography>
+        </ListItem>
+        <ListItem>
           <ListItemText>Main contact:</ListItemText>
-            <Typography variant="subtitle1">James Okina</Typography>
-          </ListItem>
-        </List>
+          <Typography variant="subtitle1">James Okina</Typography>
+        </ListItem>
+      </List>
     </div>
   );
 }
-
