@@ -8,6 +8,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import CountriesController from './Countries';
+import CollaboratorTypesController from './CollaboratorTypes';
 
 const filter = createFilterOptions<CollaboratorType>();
 
@@ -133,22 +135,8 @@ export default function MainContactController() {
               label="Last Name"
               type="text"
             />
-            <TextField
-              margin="dense"
-              id="country_code"
-              value={dialogValue.country_code}
-              onChange={(event) => setDialogValue({ ...dialogValue, country_code: event.target.value })}
-              label="Country"
-              type="text"
-            />
-            <TextField
-              margin="dense"
-              id="type"
-              value={dialogValue.type_id}
-              onChange={(event) => setDialogValue({ ...dialogValue, type_id: event.target.value })}
-              label="Type"
-              type="number"
-            />
+            <CountriesController />
+            <CollaboratorTypesController />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -173,7 +161,7 @@ interface CollaboratorType {
 }
 
 const collaborators: CollaboratorType[] = [
-  { first_name: 'Oleksandra', last_name: 'Pishcheiko', country_code: 'UKR', type_id: 0},
-  { first_name: 'Juan', last_name: 'Negrier', country_code: 'CHL', type_id: 0},
-  { first_name: 'Marcelo', last_name: 'Negrier', country_code: 'CHL', type_id: 0},
+  { first_name: 'Oleksandra', last_name: 'Pishcheiko', country_code: 'UKR', type_id: 0 },
+  { first_name: 'Juan', last_name: 'Negrier', country_code: 'CHL', type_id: 0 },
+  { first_name: 'Marcelo', last_name: 'Negrier', country_code: 'CHL', type_id: 0 },
 ];
