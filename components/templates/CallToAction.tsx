@@ -37,6 +37,11 @@ export const AboutMongenCallToActionButtons = function() {
                     Login to your org profile
                 </Button>
             </Grid>
+            <Grid item>
+                <Button variant="contained" color="primary" href="/createOrganization" size="large">
+                Add your organization
+                </Button>
+            </Grid>
         </Grid>
     </div>
   );
