@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
   },
   rootLight: {
     flexGrow: 1,
-    color: theme.palette.secondary.light,
   },
 }));
 
@@ -77,7 +76,7 @@ function Index() {
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
-                <Link href="/child" underline="none">
+                <Link href="/visible-children" underline="none">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
@@ -93,7 +92,7 @@ function Index() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small"  href="#" style={{color: MuiTheme.palette.primary.dark}}>
+                      <Button size="small" href="/visible-children" style={{color: MuiTheme.palette.primary.main}}>
                         Learn more
                       </Button>
                     </CardActions>

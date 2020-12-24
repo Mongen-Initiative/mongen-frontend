@@ -14,7 +14,7 @@ export const CallToActionButtons = function() {
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="/visible-children/about" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
+                <Button variant="outlined" color="primary" size="large" href="/visible-children/about" style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
                     How "Your title" works?
                 </Button>
             </Grid>
@@ -33,7 +33,7 @@ export const AboutMongenCallToActionButtons = function() {
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="/loginOrgMember" style={{border:"1px solid", color: MuiTheme.palette.primary.dark}}>
+                <Button variant="outlined" color="primary" size="large" href="/loginOrgMember" style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
                     Login to your org profile
                 </Button>
             </Grid>

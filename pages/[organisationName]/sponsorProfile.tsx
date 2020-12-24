@@ -76,7 +76,7 @@ import { MuiTheme } from "../../components/MuiTheme"
                       <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check how you helped this month</Button>
                       <Button variant="contained" size="large" color="primary" style = {{marginTop:"8%", width: "100%"}}> Check full report </Button>
                       <Button variant="contained" color="primary" size="large" style = {{marginTop:"8%", width: "100%"}}> Check donation reminders </Button>
-                      <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.dark}}> Read about the child </Button>
+                      <Button variant="outlined" size="large" style = {{marginTop:"8%", width: "100%", border:"1px solid", color: MuiTheme.palette.primary.main}}> Read about the child </Button>
                       </CardContent>
                     </Card>
                   </div> 

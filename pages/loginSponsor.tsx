@@ -39,6 +39,11 @@ import {
       flexGrow: 1,
       color: theme.palette.secondary.light,
     },
+    button: {
+      marginLeft:"100%",
+      width:"50%",
+      color: theme.palette.primary.main,
+    },
   }));
     
   function LoginSponsor() {
@@ -53,8 +58,8 @@ import {
                     Login as a sponsor
                     </Typography>
                         <div>
-                        <Button style={{ marginLeft:"100%", width:"50%", color:"#4e9025"}} href="/loginOrgMember">Log in as org member</Button>
-                        <Button style={{ marginLeft:"100%", width:"50%", color:"#4e9025"}} href="/loginAdmin">Log in as an admin</Button>
+                        <Button className={classes.button} href="/loginOrgMember">Log in as org member</Button>
+                        <Button className={classes.button} href="/loginAdmin">Log in as an admin</Button>
                         </div>
                         <Paper component="form" style={{width: "60%", padding: '12px 14px',  marginLeft:"23%",  alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Username" style={{flex: "1"}} />

@@ -22,29 +22,23 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     overflow: "auto",
   },
-  mongenTitleLight: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "2%",
-    color: "black",
-  },
   titleLight: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: "3%",
-    color: "black",
+    paddingTop: "7%",
+    color: "#edf2ea",
   },
 }))
 
 type Props = {
   children: React.ReactNode
   className?: string
+  color?: any
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className } = props
+  const { children, className, color } = props
   const classes = useStyles(props)
   
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -64,7 +58,7 @@ export const BasePage = function(props: Props) {
     <div className={`${classes.root} ${className}`}>
         {/* top nav bar with mongen name */}
       <CssBaseline />
-      <AppBar position="absolute">
+      <AppBar position="absolute" style={{color: `${color}`}}>
         <Toolbar>
           <div  style={{ width: "100%"}}>
             <Typography
@@ -73,10 +67,10 @@ export const BasePage = function(props: Props) {
             >
               <Link
                 underline="none"
-                href="/"
+                href="/visible-children"
                 className={classes.titleLight}
               >
-                Mongen Initiative
+                Your title
               </Link>
             </Typography>
             <div style={{ float: "right", width: "6%"}}>
@@ -118,26 +112,8 @@ export const BasePageAboutMongen = function(props: Props) {
     <div className={`${classes.root} ${className}`}>
         {/* top nav bar with mongen name */}
       <CssBaseline />
-      <AppBar position="absolute">
-        <Toolbar>
-          <div  style={{ width: "100%"}}>
-            <Typography
-              variant="h5"
-              style={{ fontWeight: 400, fontSize: "1.8em", float: "left"}}
-            >
-              <Link
-                underline="none"
-                href="/"
-                className={classes.mongenTitleLight}
-              >
-                Mongen Initiative
-              </Link>
-            </Typography>
-          </div>
-        </Toolbar>
-      </AppBar>
       <main className={classes.content}>
-        <div className={classes.spaceAfterNavBar} />
+        <div style={{marginTop:"30px"}} />
           {/* all the main body */}
         <section>{children}</section>
       </main>
