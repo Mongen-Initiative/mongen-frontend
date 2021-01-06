@@ -71,6 +71,8 @@ function getStepContent(step) {
   }
 }
 
+const title = "Your title"
+
 export default function AddNewRecord() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -85,7 +87,7 @@ export default function AddNewRecord() {
 
   return (
       <NoSsr>
-        <BasePage className={classes.rootLight}>
+        <BasePage className={classes.rootLight} title={title}>
         <title>Mongen | Add a new child</title>
           <Container className={classes.layout}>
             <Paper className={classes.paper}>

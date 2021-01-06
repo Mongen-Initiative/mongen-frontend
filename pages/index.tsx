@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePageAboutMongen, AboutMongenCallToActionButtons } from "../components/templates"
+import { BasePageAboutMongen, AboutMongenCallToActionButtons, convertTitleToSeoUrl } from "../components/templates"
 import { MuiTheme } from "../components/MuiTheme"
 import { AboutMongenFooter } from "../components/templates/Footer"
 
@@ -42,18 +42,18 @@ const useStyles = makeStyles((theme) => ({
   },
   rootLight: {
     flexGrow: 1,
-    color: theme.palette.secondary.light,
   },
 }));
 
 export interface Homepage {
 }
 
-const cards = [1, 2, 3, 4, 5, 6];
+const organizations = ["Visible Children", "Organization 1", "Organization 2", "Organization 3", "Organization 4", "Organization 5"]
 
 function Index() {
   const classes = useStyles()  
-
+  const url = convertTitleToSeoUrl(organizations[1])
+  
   return (
       <NoSsr>
         <BasePageAboutMongen className={classes.rootLight}>
@@ -66,7 +66,7 @@ function Index() {
             <Typography style={{fontSize: "1.7em", width:"100%"}} align="center" color="textSecondary">
                Mongen Initiative is a volunteering project created by developers: 
               Juan Negrier  <span style={{fontStyle:"italic"}}>(Chile)</span>, Marcelo Negrier <span style={{fontStyle:"italic"}}>(Chile)</span> and Oleksandra Pishcheiko <span style={{fontStyle:"italic"}}>(Ukraine)</span>. 
-               We want to help small charity Organizations to have a place where they can store, access, view their data, 
+               We want to help small charity organizations to have a place, where they can store, access, view their data, 
                and share their great missions with the world!
             </Typography>
           </Container>
@@ -75,9 +75,9 @@ function Index() {
         <Divider />
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Link href="/child" underline="none">
+            {organizations.map((org) => (
+              <Grid item key={org} xs={12} sm={6} md={4}>
+                <Link href={`/${url}`} underline="none">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
@@ -86,14 +86,14 @@ function Index() {
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        An organization
+                        {org}
                       </Typography>
                       <Typography>
                         This Organization works with us. Click to view their website
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small"  href="#" style={{color: MuiTheme.palette.primary.dark}}>
+                      <Button size="small" href={`/${url}`} style={{color: MuiTheme.palette.primary.main}}>
                         Learn more
                       </Button>
                     </CardActions>

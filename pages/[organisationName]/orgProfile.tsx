@@ -10,7 +10,6 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../../components/templates"
-import { Footer } from "../../components/templates/Footer";
 import {DropzoneArea} from 'material-ui-dropzone'
 
   const useStyles = makeStyles((theme) => ({
@@ -36,13 +35,14 @@ import {DropzoneArea} from 'material-ui-dropzone'
     },
   }));
   
-    
+  const title = "Your title"
+  
   function OrgProfile() {
     const classes = useStyles()  
   
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight}>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Organization profile </title>
              {/* Hero unit */}
              <div className={classes.heroContent}>
@@ -74,7 +74,6 @@ import {DropzoneArea} from 'material-ui-dropzone'
         </Container>
           </div>
           </BasePage>
-          <Footer />
         </NoSsr>
     )
   }
