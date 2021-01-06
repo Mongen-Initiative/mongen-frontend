@@ -8,8 +8,6 @@ import {
   import React from "react"
   import { BasePage, CallToActionButtons } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Children } from ".";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -79,8 +77,9 @@ import { Children } from ".";
 
   const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
   const title = "Your title"
+  const children = "123"
 
-  function Child({ children }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  function Child() {
     const classes = useStyles(children)
   
     return (
@@ -164,17 +163,17 @@ import { Children } from ".";
     )
   }
 
-  export const getServerSideProps: GetServerSideProps = async context => {
-    const { childId } = context.query
+  // export const getServerSideProps: GetServerSideProps = async context => {
+  //   const { childId } = context.query
   
-    const childReq = await fetch(`http://localhost:8080/api/v1/${childId}`, {
-      method: "GET",
-    })
-    const children: Children[] = await childReq.json()
+  //   const childReq = await fetch(`http://localhost:8080/api/v1/${childId}`, {
+  //     method: "GET",
+  //   })
+  //   const children: Children[] = await childReq.json()
   
-    return {
-      props: { children },
-    }
-  }
+  //   return {
+  //     props: { children},
+  //   }
+  // }
   
   export default Child  

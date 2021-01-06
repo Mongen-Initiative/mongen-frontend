@@ -10,7 +10,6 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
   import { BasePage } from "../../components/templates"
-import { Footer } from "../../components/templates/Footer";
 import {DropzoneArea} from 'material-ui-dropzone'
 
   const useStyles = makeStyles((theme) => ({

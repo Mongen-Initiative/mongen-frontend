@@ -16,7 +16,6 @@ import React from "react"
 import { BasePage, CallToActionButtons } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
-import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -59,12 +58,16 @@ export interface Organization {
 export interface Children {
   id: any
 }
+export interface Sponsor {
+  id: any
+}
 
 const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6", "Child 7", "Child 8", "Child 9"];
 const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
 const title = "Your title"
+const organization = ["123"]
 
-function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function Index() {
   const classes = useStyles(organization)
 
   return (
@@ -126,17 +129,17 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const { organizationName } = context.query
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const { organizationName } = context.query
 
-  const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
-    method: "GET",
-  })
-  const organization: Organization[] = await orgReq.json()
+//   const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
+//     method: "GET",
+//   })
+//   const organization: Organization[] = await orgReq.json()
 
-  return {
-    props: { organization },
-  }
-}
+//   return {
+//     props: { organization },
+//   }
+// }
 
 export default Index

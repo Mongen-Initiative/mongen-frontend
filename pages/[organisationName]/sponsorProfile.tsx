@@ -14,8 +14,6 @@ import {
   import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { MuiTheme } from "../../components/MuiTheme"
-import { InferGetServerSidePropsType, GetServerSideProps } from "next"
-import { Sponsor } from "."
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -52,15 +50,16 @@ import { Sponsor } from "."
  
   const children = [1, 2];
   const title = "Your title"
+  const sponsors = ["123"]
 
-  function SponsorProfile({ sponsor }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const classes = useStyles(sponsor)
+  function SponsorProfile() {
+    const classes = useStyles(sponsors)
   
     return (
         <NoSsr>
           <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Sponsor's profile</title>
-          {sponsor ? (
+          {sponsors ? (
             <div className={classes.heroContent}>
               <Container>
                 <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Hello, hero!
@@ -103,17 +102,17 @@ import { Sponsor } from "."
     )
   }
   
-  export const getServerSideProps: GetServerSideProps = async context => {
-    const { sponsorId } = context.query
+  // export const getServerSideProps: GetServerSideProps = async context => {
+  //   const { sponsorId } = context.query
   
-    const sponsorReq = await fetch(`http://localhost:8080/api/v1/${sponsorId}`, {
-      method: "GET",
-    })
-    const sponsor: Sponsor[] = await sponsorReq.json()
+  //   const sponsorReq = await fetch(`http://localhost:8080/api/v1/${sponsorId}`, {
+  //     method: "GET",
+  //   })
+  //   const sponsor: Sponsor[] = await sponsorReq.json()
   
-    return {
-      props: { sponsor },
-    }
-  }
+  //   return {
+  //     props: { sponsor },
+  //   }
+  // }
   
   export default SponsorProfile

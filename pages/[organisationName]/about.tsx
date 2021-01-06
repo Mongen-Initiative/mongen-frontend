@@ -9,8 +9,6 @@ import {
   import React from "react"
   import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Organization } from ".";
   
   const useStyles = makeStyles((theme) => ({
     content: {
@@ -33,8 +31,9 @@ import { Organization } from ".";
   
   const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
   const title ="Your title"
+  const organization = ["123"]
 
-  function About({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  function About() {
     const classes = useStyles(organization)
   
     return (
@@ -76,17 +75,17 @@ import { Organization } from ".";
     )
   }
   
-  export const getServerSideProps: GetServerSideProps = async context => {
-    const { organizationName } = context.query
+  // export const getServerSideProps: GetServerSideProps = async context => {
+  //   const { organizationName } = context.query
   
-    const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
-      method: "GET",
-    })
-    const organization: Organization[] = await orgReq.json()
+  //   const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
+  //     method: "GET",
+  //   })
+  //   const organization: Organization[] = await orgReq.json()
   
-    return {
-      props: { organization },
-    }
-  }
+  //   return {
+  //     props: { organization },
+  //   }
+  // }
   
   export default About
