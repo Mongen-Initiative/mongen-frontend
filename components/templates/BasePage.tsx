@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     height: "100vh",
-    overflow: "auto",
   },
   titleLight: {
     display: "flex",
@@ -35,10 +34,11 @@ type Props = {
   children: React.ReactNode
   className?: string
   color?: any
+  title?: string
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, color } = props
+  const { children, className, color, title } = props
   const classes = useStyles(props)
   
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -70,7 +70,7 @@ export const BasePage = function(props: Props) {
                 href="/visible-children"
                 className={classes.titleLight}
               >
-                Your title
+                {title}
               </Link>
             </Typography>
             <div style={{ float: "right", width: "6%"}}>

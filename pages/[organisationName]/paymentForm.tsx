@@ -84,10 +84,12 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+  
+  const title = "Your title"
 
   return (
     <NoSsr>
-      <BasePage className={classes.rootLight}>
+      <BasePage className={classes.rootLight} title={title}>
       <title>Mongen | Sponsor a child</title>
         <Container className={classes.layout}>
           <Paper className={classes.paper}>

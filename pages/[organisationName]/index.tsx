@@ -56,36 +56,39 @@ export interface Organization {
   mission: any
   vision: any
 }
+export interface Children {
+  id: any
+}
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6", "Child 7", "Child 8", "Child 9"];
+const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
+const title = "Your title"
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
 
   return (
       <NoSsr>
-        <BasePage className={classes.rootLight}>
+        <BasePage className={classes.rootLight} title={title}>
         <title>Mongen Initiative</title>
         {organization ? (
             <div>
               <div>
               <Container maxWidth="sm" className={classes.heroContent}>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-                  Your title {organization.name}
+                  {title}
                 </Typography>
                 <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
-                  Information about your organization. You can add/change in your org profile. 
-                  Information about your organization. You can add/change in your org profile. 
-                  Information about your organization. You can add/change in your org profile.
+                  {infoText}
                 </Typography>
               </Container>
               </div>
-              <CallToActionButtons/>
+              <CallToActionButtons title={title}/>
               <Divider />
                 <Container className={classes.cardGrid} maxWidth="md">
                   <Grid container spacing={4}>
-                    {cards.map((card) => (
-                      <Grid item key={card} xs={12} sm={6} md={4}>
+                    {children.map((child) => (
+                      <Grid item key={child} xs={12} sm={6} md={4}>
                         <Link href="visible-children/child" underline="none">
                           <Card className={classes.card}>
                             <CardMedia
@@ -95,7 +98,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                             />
                             <CardContent className={classes.cardContent}>
                               <Typography gutterBottom variant="h5" component="h2">
-                                A child
+                                {child}
                               </Typography>
                               <Typography>
                                 This is a child that needs your help. You can use this section to put some key info about the child.
@@ -112,7 +115,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     ))}
                   </Grid>
                 </Container>
-              <CallToActionButtons/>
+              <CallToActionButtons title={title}/>
               <Footer />
             </div>
         ) : (

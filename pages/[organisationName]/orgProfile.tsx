@@ -36,13 +36,14 @@ import {DropzoneArea} from 'material-ui-dropzone'
     },
   }));
   
-    
+  const title = "Your title"
+  
   function OrgProfile() {
     const classes = useStyles()  
   
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight}>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Organization profile </title>
              {/* Hero unit */}
              <div className={classes.heroContent}>
@@ -74,7 +75,6 @@ import {DropzoneArea} from 'material-ui-dropzone'
         </Container>
           </div>
           </BasePage>
-          <Footer />
         </NoSsr>
     )
   }

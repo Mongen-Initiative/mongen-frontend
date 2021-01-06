@@ -8,6 +8,8 @@ import {
   import React from "react"
   import { BasePage, CallToActionButtons } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Children } from ".";
   
   const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -60,24 +62,32 @@ import { Footer } from "../../components/templates/Footer";
         backgroundSize: 'cover',
         backgroundPosition: 'center 40%',
       },
+      textTitle: {
+        marginTop: "50px",
+      },
+      textInfo: {
+        marginTop: "50px",
+        fontStyle:"italic",
+      },
   }));
   
-  export interface Children {
-  }
-
   const image = 
     {
       url: '/child.jpg',
       title: 'Child 1',
     };
-    
-  function Child() {
-    const classes = useStyles()  
+
+  const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
+  const title = "Your title"
+
+  function Child({ children }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const classes = useStyles(children)
   
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight}>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Child details</title>
+          {children ? (
           <Container className={classes.cardGrid}>
             {/* End hero unit */}
                     <ButtonBase
@@ -95,81 +105,76 @@ import { Footer } from "../../components/templates/Footer";
                                 }}
                             />
                     </ButtonBase>
-                  <CallToActionButtons/>
-                  <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
+                  <CallToActionButtons title={title}/>
+                  <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
                     Information about "Child 1"
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <div style={{paddingLeft:"80px", paddingRight:"80px"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Name and Surname:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Location:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Date of birth, gender, state of origin:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
-                    Fear/trauma:
-                  </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
-                  </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Skills and strengths:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Reason for child being on the street:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textTitle} style={{fontStyle:"italic"}}>
                     Last school attended, last class stopped:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <Typography component="h3" align="center" color="textPrimary" gutterBottom style={{marginTop:"50px", fontStyle:"italic"}}>
+                  <Typography component="h3" align="center" color="textPrimary" gutterBottom className={classes.textInfo}>
                     Name, phone and address of the parent/ward:
                   </Typography>
-                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom style={{marginTop:"50px"}}>
-                   Information about the child. Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. 
-                    Information about the child. Information about the child. Information about the child. Information about the child. 
+                  <Typography component="h3"  align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
+                    {infoText}
                   </Typography>
-                  <CallToActionButtons/>
+                  </div>
+                  <CallToActionButtons title={title}/>
           </Container>
+          ) : (
+            <h1>Sorry, we can't display the info about this child now. Come back later, we are working hard to fix the issue!</h1>
+          )}
             <Footer />
           </BasePage>
         </NoSsr>
     )
   }
 
-  export default Child
+  export const getServerSideProps: GetServerSideProps = async context => {
+    const { childId } = context.query
   
+    const childReq = await fetch(`http://localhost:8080/api/v1/${childId}`, {
+      method: "GET",
+    })
+    const children: Children[] = await childReq.json()
+  
+    return {
+      props: { children },
+    }
+  }
+  
+  export default Child  

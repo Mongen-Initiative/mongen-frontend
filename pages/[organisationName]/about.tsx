@@ -9,9 +9,11 @@ import {
   import React from "react"
   import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Organization } from ".";
   
   const useStyles = makeStyles((theme) => ({
-    heroContent: {
+    content: {
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(8, 0, 6),
     },
@@ -20,7 +22,7 @@ import { Footer } from "../../components/templates/Footer";
       padding: theme.spacing(6),
     },
     infoText: {
-      marginTop: "15px",
+      marginTop: "30px",
       fontWeight:300,
     },
     rootLight: {
@@ -29,46 +31,62 @@ import { Footer } from "../../components/templates/Footer";
     },
   }));
   
-    
-  function About() {
-    const classes = useStyles()  
+  const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
+  const title ="Your title"
+
+  function About({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const classes = useStyles(organization)
   
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight}>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | About us</title>
-             {/* Hero unit */}
-             <div className={classes.heroContent}>
+          {organization ? (
+            <div className={classes.content}>
             <Container>
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              We’re on a mission to address the societal challenge of street children.
+                {infoText}
               </Typography>
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Mission
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Information about your organization. Information about your organization. Information about your organization. Information about your organization.
+                {infoText}
               </Typography>
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Values
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.
-             </Typography>
+                {infoText}
+              </Typography>
              <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Story
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization. 
-              Information about your organization. Information about your organization. Information about your organization. Information about your organization.              
-            </Typography>
+                {infoText}
+              </Typography>
             </Container>
           </div>
+          ) : (
+            <h1>There is no organization with such name</h1>
+          )}
           </BasePage>
+          <div style={{marginBottom:"50px"}}></div>
           <Footer />
         </NoSsr>
     )
+  }
+  
+  export const getServerSideProps: GetServerSideProps = async context => {
+    const { organizationName } = context.query
+  
+    const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
+      method: "GET",
+    })
+    const organization: Organization[] = await orgReq.json()
+  
+    return {
+      props: { organization },
+    }
   }
   
   export default About
