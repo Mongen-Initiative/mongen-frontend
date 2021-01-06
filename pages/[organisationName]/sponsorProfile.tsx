@@ -11,7 +11,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage } from "../../components/templates"
+  import { BasePage, convertTitleToSeoUrl } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { MuiTheme } from "../../components/MuiTheme"
 
@@ -50,16 +50,17 @@ import { MuiTheme } from "../../components/MuiTheme"
  
   const children = [1, 2];
   const title = "Your title"
-  const sponsors = ["123"]
+  const sponsor = ["123"]
 
   function SponsorProfile() {
-    const classes = useStyles(sponsors)
-  
+    const classes = useStyles(sponsor)
+    const url = convertTitleToSeoUrl(title)
+
     return (
         <NoSsr>
           <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Sponsor's profile</title>
-          {sponsors ? (
+          {sponsor ? (
             <div className={classes.heroContent}>
               <Container>
                 <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Hello, hero!
@@ -83,7 +84,7 @@ import { MuiTheme } from "../../components/MuiTheme"
                       <Button href="#" variant="contained" color="primary" size="large" className={classes.buttons}> Check how you helped this month</Button>
                       <Button href="#" variant="contained" size="large" color="primary" className={classes.buttons}> Check full report </Button>
                       <Button href="#" variant="contained" color="primary" size="large" className={classes.buttons}> Change notification settings </Button>
-                      <Button href="/visible-children/child" variant="outlined" size="large" className={classes.buttons} style = {{border:"1px solid", color: MuiTheme.palette.primary.main}}> Read about the child </Button>
+                      <Button href={`/${url}/child`} variant="outlined" size="large" className={classes.buttons} style = {{border:"1px solid", color: MuiTheme.palette.primary.main}}> Read about the child </Button>
                       </CardContent>
                     </Card>
                   </div> 

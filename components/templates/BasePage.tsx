@@ -53,6 +53,7 @@ export const BasePage = function(props: Props) {
   
   const router = useRouter()
 
+  const url = convertTitleToSeoUrl(title)
   
   return (
     <div className={`${classes.root} ${className}`}>
@@ -67,7 +68,7 @@ export const BasePage = function(props: Props) {
             >
               <Link
                 underline="none"
-                href="/visible-children"
+                href={`/${url}`}
                 className={classes.titleLight}
               >
                 {title}
@@ -119,4 +120,19 @@ export const BasePageAboutMongen = function(props: Props) {
       </main>
     </div>
   )
+}
+
+export function convertTitleToSeoUrl(title) {
+  if(typeof title === "string"){
+    return title
+        .normalize('NFD')               // Change diacritics
+        .replace(/[\u0300-\u036f]/g,'') // Remove illegal characters
+        .replace(/\s+/g,'-')            // Change whitespace to dashes
+        .toLowerCase()                  // Change to lowercase
+        .replace(/&/g,'-and-')          // Replace ampersand
+        .replace(/[^a-z0-9\-]/g,'')     // Remove anything that is not a letter, number or dash
+        .replace(/-+/g,'-')             // Remove duplicate dashes
+        .replace(/^-*/,'')              // Remove starting dashes
+        .replace(/-*$/,'');             // Remove trailing dashes
+  }
 }

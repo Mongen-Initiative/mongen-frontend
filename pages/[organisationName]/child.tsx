@@ -6,7 +6,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, CallToActionButtons } from "../../components/templates"
+  import { BasePage, CallToActionButtons, convertTitleToSeoUrl } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
@@ -81,7 +81,8 @@ import { Footer } from "../../components/templates/Footer";
 
   function Child() {
     const classes = useStyles(children)
-  
+    const url = convertTitleToSeoUrl(title)
+
     return (
         <NoSsr>
           <BasePage className={classes.rootLight} title={title}>
@@ -95,7 +96,7 @@ import { Footer } from "../../components/templates/Footer";
                         className={classes.image}
                         focusVisibleClassName={classes.focusVisible}
                         style={{height: "350px", width: "55%", marginLeft: "25%"}}
-                        href ="/visible-children/paymentForm"
+                        href={`/${url}/paymentForm`}
                         >
                             <span
                                 className={classes.imageSrc}

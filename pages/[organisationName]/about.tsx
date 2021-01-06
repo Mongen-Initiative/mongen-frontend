@@ -89,3 +89,4 @@ import { Footer } from "../../components/templates/Footer";
   // }
   
   export default About
+  

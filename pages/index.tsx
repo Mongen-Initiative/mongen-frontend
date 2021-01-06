@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePageAboutMongen, AboutMongenCallToActionButtons } from "../components/templates"
+import { BasePageAboutMongen, AboutMongenCallToActionButtons, convertTitleToSeoUrl } from "../components/templates"
 import { MuiTheme } from "../components/MuiTheme"
 import { AboutMongenFooter } from "../components/templates/Footer"
 
@@ -52,7 +52,8 @@ const organizations = ["Visible Children", "Organization 1", "Organization 2", "
 
 function Index() {
   const classes = useStyles()  
-
+  const url = convertTitleToSeoUrl(organizations[1])
+  
   return (
       <NoSsr>
         <BasePageAboutMongen className={classes.rootLight}>
@@ -76,7 +77,7 @@ function Index() {
           <Grid container spacing={4}>
             {organizations.map((org) => (
               <Grid item key={org} xs={12} sm={6} md={4}>
-                <Link href="/visible-children" underline="none">
+                <Link href={`/${url}`} underline="none">
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
@@ -92,7 +93,7 @@ function Index() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" href="/visible-children" style={{color: MuiTheme.palette.primary.main}}>
+                      <Button size="small" href={`/${url}`} style={{color: MuiTheme.palette.primary.main}}>
                         Learn more
                       </Button>
                     </CardActions>

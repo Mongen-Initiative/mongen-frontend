@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePage, CallToActionButtons } from "../../components/templates"
+import { BasePage, CallToActionButtons, convertTitleToSeoUrl } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
 
@@ -69,6 +69,7 @@ const organization = ["123"]
 
 function Index() {
   const classes = useStyles(organization)
+  const url = convertTitleToSeoUrl(title)
 
   return (
       <NoSsr>
@@ -92,7 +93,7 @@ function Index() {
                   <Grid container spacing={4}>
                     {children.map((child) => (
                       <Grid item key={child} xs={12} sm={6} md={4}>
-                        <Link href="visible-children/child" underline="none">
+                        <Link href={`/${url}/child`} underline="none">
                           <Card className={classes.card}>
                             <CardMedia
                               className={classes.cardMedia}
@@ -108,7 +109,7 @@ function Index() {
                               </Typography>
                             </CardContent>
                             <CardActions>
-                              <Button size="small"  href="visible-children/child" style={{color: MuiTheme.palette.primary.main}}>
+                              <Button size="small"  href={`/${url}/child`} style={{color: MuiTheme.palette.primary.main}}>
                                 Learn more
                               </Button>
                             </CardActions>

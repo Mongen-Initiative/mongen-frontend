@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 import { MuiTheme } from '../MuiTheme';
+import { convertTitleToSeoUrl } from './BasePage';
 
 type Props = {
     title: string
@@ -9,16 +10,18 @@ type Props = {
 
 export const CallToActionButtons = function(props: Props) {
     const { title } = props
+    const url = convertTitleToSeoUrl(title)
+
     return (
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href="/visible-children/paymentForm" size="large">
+                <Button variant="contained" color="primary" href={`/${url}/paymentForm`} size="large">
                     Sponsor a child
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href="/visible-children/about" style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
+                <Button variant="outlined" color="primary" size="large" href={`/${url}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
                     How "{title}" works?
                 </Button>
             </Grid>
