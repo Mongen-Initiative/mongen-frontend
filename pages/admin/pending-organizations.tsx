@@ -51,4 +51,3 @@ import OrgReviewModal from "../../components/templates/OrgReviewModal";
   }
   
   export default PendingOrganizations
-  

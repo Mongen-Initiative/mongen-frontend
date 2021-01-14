@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: theme.spacing(2, 4, 3),
         height: "80%",
         overflowY: "auto",
-      },
+    },
+    title: {
+        fontWeight:"bolder",
+        marginTop:"15px",
+    },
   }),
 );
 
@@ -60,37 +64,37 @@ export default function OrgReviewModal(children: any) {
                     <div >
                         <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
                         <h2 id="title" style={{marginLeft:"38%"}}>{org}</h2>
-                        <Typography style={{fontWeight:"bolder"}}>
+                        <Typography className={classes.title}>
                             Mission
                         </Typography>
                         <Typography>
                             {mission}
                         </Typography>
-                        <Typography style={{fontWeight:"bolder", marginTop:"15px"}}>
+                        <Typography className={classes.title}>
                         Vision
                         </Typography>
                         <Typography>
                             {mission}
                         </Typography>
-                        <Typography style={{fontWeight:"bolder",  marginTop:"15px"}}>
+                        <Typography className={classes.title}>
                         Country
                         </Typography>
                         <Typography>
                             {country}
                         </Typography>
-                        <Typography style={{fontWeight:"bolder",  marginTop:"15px"}}>
+                        <Typography className={classes.title}>
                         Social networks
                         </Typography>
                         <Link href={url}>
                             {url}
                         </Link>
-                        <Typography style={{fontWeight:"bolder",  marginTop:"15px"}}>
+                        <Typography className={classes.title}>
                         Main contact
                         </Typography>
                         <Typography>
                             {contact}
                         </Typography>
-                        <Typography style={{fontWeight:"bolder",  marginTop:"15px"}}>
+                        <Typography className={classes.title}>
                         Photo ID
                         </Typography>
                         <Avatar src="/photoId.jpg" className={classes.largePhoto}/>

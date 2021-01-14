@@ -54,4 +54,4 @@ import { BasePageAboutMongen } from "../../components/templates";
   }
   
   export default Organizations
-  
+ 
