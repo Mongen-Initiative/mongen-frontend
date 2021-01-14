@@ -13,7 +13,8 @@ import CollaboratorTypesController from './CollaboratorTypes';
 
 const filter = createFilterOptions<CollaboratorType>();
 
-export default function MainContactController() {
+// Not currently used
+export default function CollaboratorController() {
   const [value, setValue] = React.useState<CollaboratorType | null>(null);
   const [open, toggleOpen] = React.useState(false);
 

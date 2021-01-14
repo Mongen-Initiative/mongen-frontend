@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-import {OrganizationDetailsStep, OrganizationLocationStep, SummaryStep}  from '../components/templates/organization/creationSteps';
+import {MainContactStep, OrganizationDetailsStep, OrganizationLocationStep, SummaryStep}  from '../components/templates/organization/creationSteps';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location', 'Summary'];
+const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
 
 function getStepContent(step) {
   switch (step) {
@@ -66,6 +66,8 @@ function getStepContent(step) {
     case 1:
       return <OrganizationLocationStep />;
     case 2:
+      return <MainContactStep />;
+    case 3:
       return <SummaryStep />;
     default:
       throw new Error('Unknown step');

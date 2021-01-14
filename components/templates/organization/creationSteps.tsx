@@ -2,9 +2,10 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import MainContactController from '../../autocomplete/MainContact'
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import CountriesController from '../../autocomplete/Countries';
+import MainContactController from '../../forms/mainContact';
+
 
 export function OrganizationDetailsStep() {
   return (
@@ -64,9 +65,16 @@ export function OrganizationLocationStep() {
         <Grid item xs={3} md={3}>
           <CountriesController />
         </Grid>
-        <Grid item xs={12} sm={6}>
+      </Grid>
+    </React.Fragment>
+  );
+}
+
+export function MainContactStep() {
+  return (
+    <React.Fragment>
+      <Grid container spacing={3}>
           <MainContactController />
-        </Grid>
       </Grid>
     </React.Fragment>
   );
