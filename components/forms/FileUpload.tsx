@@ -18,15 +18,33 @@ const BorderLinearProgress = withStyles(() => ({
 }))(LinearProgress);
 
 interface filesParams {
-    selectedFiles,
-    currentFile,
-    progress,
-    message,
-    fileInfos,
-    isError
+    selectedFiles: any,
+    currentFile: any,
+    progress: number,
+    message: string,
+    fileInfos: [],
+    isError: boolean
+  }
+
+  interface file {
+    name: string,
+    url: string
   }
 
 export default class UploadFiles extends Component<{}, filesParams> {
+
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        selectedFiles: undefined,
+        currentFile: undefined,
+        progress: 0,
+        message: "",
+        isError: false,
+        fileInfos: [],
+      };
+    }
 
     upload() {
         let currentFile = this.state.selectedFiles[0];
@@ -139,14 +157,14 @@ export default class UploadFiles extends Component<{}, filesParams> {
             List of Files
             </Typography>
             <ul className="list-group">
-            {fileInfos &&
-                fileInfos.map((file, index) => (
+            {/* {fileInfos &&
+                fileInfos.map((file: file, index) => (
                 <ListItem
                     divider
                     key={index}>
                     <a href={file.url}>{file.name}</a>
                 </ListItem>
-                ))}
+                ))} */}
             </ul>
         </div >
         );
