@@ -87,8 +87,7 @@ export const BasePage = function(props: Props) {
                 onClose={handleMenuClose}
                 style={{marginTop:"2%"}}
               >
-                <MenuItem onClick={() => router.push(`/loginOrgMember`)}>Add new Child Record</MenuItem>
-                <MenuItem onClick={() => router.push(`/loginAdmin`)}>Go to organization profile</MenuItem>
+                <MenuItem onClick={() => router.push(`/loginOrgMember`)}>Go to organization profile</MenuItem>
                 <MenuItem onClick={() => router.push(`/loginSponsor`)}>Go to sponsor's profile</MenuItem>
               </Menu>
             </div>
