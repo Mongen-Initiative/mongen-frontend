@@ -7,7 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates";
-import OrgReviewModal from "../../components/templates/OrgReviewModal";
+import { PendingOrgReviewModal } from "../../components/templates/OrgReviewModal";
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -39,7 +39,7 @@ import OrgReviewModal from "../../components/templates/OrgReviewModal";
                     <div style={{paddingTop:"50px", paddingLeft:"18%"}}>
                         {organizations.map((org) => (
                             <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}} key={org}>
-                                <OrgReviewModal org={org}></OrgReviewModal>
+                                <PendingOrgReviewModal org={org}></PendingOrgReviewModal>
                             </div>
                         ))}
                     </div>
