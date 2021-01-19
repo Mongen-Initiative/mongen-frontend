@@ -22,13 +22,15 @@ interface filesParams {
     currentFile: any,
     progress: number,
     message: string,
-    fileInfos: [],
+    file_id: number,
+    fileInfo: file,
     isError: boolean
   }
 
   interface file {
-    name: string,
-    url: string
+    message: string,
+    file_id: number,
+    name: string
   }
 
 export default class UploadFiles extends Component<{}, filesParams> {
@@ -41,12 +43,13 @@ export default class UploadFiles extends Component<{}, filesParams> {
         currentFile: undefined,
         progress: 0,
         message: "",
+        file_id: 0,
         isError: false,
-        fileInfos: [],
+        fileInfo: undefined,
       };
     }
 
-    upload() {
+    upload = () => {
         let currentFile = this.state.selectedFiles[0];
     
         this.setState({
@@ -62,13 +65,14 @@ export default class UploadFiles extends Component<{}, filesParams> {
           .then((response) => {
             this.setState({
               message: response.data.message,
+              file_id: response.data.file_id,
               isError: false
             });
-            return UploadService.getFiles();
+            return UploadService.getFile(this.state.file_id);
           })
           .then((files) => {
             this.setState({
-              fileInfos: files.data,
+              fileInfo: files.data,
             });
           })
           .catch(() => {
@@ -85,18 +89,19 @@ export default class UploadFiles extends Component<{}, filesParams> {
         });
     }
 
-    selectFile(event) {
+    selectFile = (event) => {
+        console.log(this)
         this.setState({
         selectedFiles: event.target.files,
         });
     }
 
     componentDidMount() {
-        UploadService.getFiles().then((response) => {
-        this.setState({
-            fileInfos: response.data,
-        });
-        });
+        // UploadService.getFile().then((response) => {
+        // this.setState({
+        //     fileInfos: response.data,
+        // });
+        // });
     }
 
     render() {
@@ -105,7 +110,7 @@ export default class UploadFiles extends Component<{}, filesParams> {
         currentFile,
         progress,
         message,
-        fileInfos,
+        fileInfo,
         isError
         } = this.state;
         
@@ -157,14 +162,17 @@ export default class UploadFiles extends Component<{}, filesParams> {
             List of Files
             </Typography>
             <ul className="list-group">
-            {/* {fileInfos &&
-                fileInfos.map((file: file, index) => (
+            {fileInfo? //&&
+                // fileInfo.map((file: file, index) => (
                 <ListItem
                     divider
-                    key={index}>
-                    <a href={file.url}>{file.name}</a>
+                    key={fileInfo.file_id}>
+                    <a href={`http://localhost:9090/api/v1/get_file/${fileInfo.file_id}`}>{fileInfo.name}</a>
                 </ListItem>
-                ))} */}
+                :
+                <div></div>
+                // ))
+                }
             </ul>
         </div >
         );
