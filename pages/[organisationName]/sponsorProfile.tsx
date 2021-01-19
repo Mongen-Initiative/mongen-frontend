@@ -97,7 +97,7 @@ import { MuiTheme } from "../../components/MuiTheme"
               )}
           </BasePage>
         {/* a bit of space between cards and footer */}
-          <div style={{marginBottom:"150px"}}></div> 
+          <div style={{marginBottom:"250px"}}></div> 
           <Footer />
         </NoSsr>
     )
