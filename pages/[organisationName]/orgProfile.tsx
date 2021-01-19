@@ -67,6 +67,10 @@ import {DropzoneArea} from 'material-ui-dropzone'
                 <TextField id="mission" label="Your Mission" multiline rowsMax={4} className={classes.textField}/>
                 <TextField id="values" label="Your Values" multiline rowsMax={4} className={classes.textField}/>
                 <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
+                <TextField id="country" label="Country" multiline rowsMax={4} className={classes.textField}/>
+                <TextField id="social" label="Social Network Url" multiline rowsMax={4} className={classes.textField}/>
+                <TextField id="main_contact" label="Main Contact" multiline rowsMax={4} className={classes.textField}/>
+
             </form>
             </div>
         </div>

@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
         fontWeight:"bolder",
         marginTop:"15px",
     },
+    buttons: {
+        marginTop:"30px",
+        width: "280px",
+        marginRight:"30px",
+    },
   }),
 );
 
@@ -34,7 +39,7 @@ const country = "Nigeria"
 const url = "https://instagram.com/saving-children"
 const contact = "James The Boss"
 
-export default function OrgReviewModal(children: any) {
+export function PendingOrgReviewModal(children: any) {
   const { org } = children
 
   const classes = useStyles();
@@ -112,3 +117,86 @@ export default function OrgReviewModal(children: any) {
     </div>
   );
 }
+
+export function LiveOrgReviewModal(children: any) {
+    const { org } = children
+  
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+  
+    const handleModalOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleModalClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <div>
+          <Button variant="outlined" href="#" style={{ paddingLeft:"15%"}} onClick={handleModalOpen}>
+              View
+          </Button>
+          <Modal
+              open={open}
+              onClose={handleModalClose}
+              className={classes.modal}
+          >
+              <Fade in={open}>
+                  <div className={classes.frameLight} id="frame">
+                      <div >
+                          <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
+                          <h2 id="title" style={{marginLeft:"38%"}}>{org}</h2>
+                          <Typography className={classes.title}>
+                              Mission
+                          </Typography>
+                          <Typography>
+                              {mission}
+                          </Typography>
+                          <Typography className={classes.title}>
+                          Vision
+                          </Typography>
+                          <Typography>
+                              {mission}
+                          </Typography>
+                          <Typography className={classes.title}>
+                          Country
+                          </Typography>
+                          <Typography>
+                              {country}
+                          </Typography>
+                          <Typography className={classes.title}>
+                          Social networks
+                          </Typography>
+                          <Link href={url}>
+                              {url}
+                          </Link>
+                          <Typography className={classes.title}>
+                          Main contact
+                          </Typography>
+                          <Typography>
+                              {contact}
+                          </Typography>
+                          <Button variant="contained" className={classes.buttons}>
+                          List of Collaborators
+                          </Button>
+                          <Button variant="contained" className={classes.buttons}>
+                          List of Beneficiaries
+                          </Button>
+                          <Typography className={classes.title}>
+                          Photo ID
+                          </Typography>
+                          <Avatar src="/photoId.jpg" className={classes.largePhoto}/>
+                          <div id="approvalPart" style={{marginTop:"30px"}} >
+                              <TextField label="Comments"/>
+                              <div>
+                                  <Button style={{marginLeft:"80%", color:"red"}} href="#">Disable</Button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </Fade>
+        </Modal>
+      </div>
+    );
+  }
