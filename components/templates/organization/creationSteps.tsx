@@ -1,72 +1,21 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import CountriesController from '../../autocomplete/Countries';
-import MainContactController from '../../forms/mainContact';
+import MainContactController from '../../forms/MainContact';
+import OrganizationNameVisionMission from '../../forms/OrganizationNameVisionMission';
+import OrganizationLocation from '../../forms/OrganizationLocation';
 
 
 export function OrganizationDetailsStep() {
   return (
-    <div>
-      <Typography variant="h6" gutterBottom>
-        Organization details
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="name"
-            name="name"
-            label="Organization Name"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="mission"
-            name="mission"
-            label="Mission"
-            multiline={true}
-            rows={6}
-            rowsMax={10}
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="vision"
-            name="vision"
-            label="Vision"
-            multiline={true}
-            rows={6}
-            rowsMax={10}
-            fullWidth
-          />
-        </Grid>
-      </Grid>
-    </div>
+    <OrganizationNameVisionMission />
   );
 }
 
 export function OrganizationLocationStep() {
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Organization Location
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={3} md={6}>
-          <TextField required id="address" label="Address" fullWidth />
-        </Grid>
-        <Grid item xs={3} md={3}>
-          <CountriesController />
-        </Grid>
-      </Grid>
-    </React.Fragment>
+    <OrganizationLocation />
   );
 }
 
@@ -74,7 +23,7 @@ export function MainContactStep() {
   return (
     <React.Fragment>
       <Grid container spacing={3}>
-          <MainContactController />
+        <MainContactController />
       </Grid>
     </React.Fragment>
   );

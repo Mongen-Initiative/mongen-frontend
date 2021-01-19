@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-import {MainContactStep, OrganizationDetailsStep, OrganizationLocationStep, SummaryStep}  from '../components/templates/organization/creationSteps';
+import { MainContactStep, OrganizationDetailsStep, OrganizationLocationStep, SummaryStep } from '../components/templates/organization/creationSteps';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -87,56 +87,56 @@ function Index() {
   };
 
   return (
-      <NoSsr>
-        <BasePageAboutMongen className={classes.rootLight}>
+    <NoSsr>
+      <BasePageAboutMongen className={classes.rootLight}>
         <title>Mongen Initiative</title>
         <Container className={classes.layout}>
-            <Paper className={classes.paper}>
-              <Typography component="h1" variant="h4" align="center" style={{paddingTop:"5px", paddingBottom:"5px"}}>
-                Add a new organization
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h4" align="center" style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+              Add a new organization
               </Typography>
-              <Stepper activeStep={activeStep} className={classes.stepper}>
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-                {activeStep === steps.length ? (
-                  <div>
-                    <Typography variant="h5" gutterBottom>
-                      New organization added
+            <Stepper activeStep={activeStep} className={classes.stepper}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {activeStep === steps.length ? (
+              <div>
+                <Typography variant="h5" gutterBottom>
+                  New organization added
                     </Typography>
-                    <Typography variant="subtitle1" style={{padding:"10px"}}>
-                      Thank you :)
+                <Typography variant="subtitle1" style={{ padding: "10px" }}>
+                  Thank you :)
                     </Typography>
-                  </div>
-                ) : (
-                  <div>
-                    {getStepContent(activeStep)}
-                    <div className={classes.buttons}>
-                      {activeStep !== 0 && (
-                        <Button onClick={handleBack} className={classes.button}  variant="outlined">
-                          Back
-                        </Button>
-                      )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Create Organization' : 'Next'}
+              </div>
+            ) : (
+                <div>
+                  {getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <Button onClick={handleBack} className={classes.button} variant="outlined">
+                        Back
                       </Button>
-                    </div>
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Create Organization' : 'Next'}
+                    </Button>
                   </div>
-                )}
-            </Paper>
-          </Container>
+                </div>
+              )}
+          </Paper>
+        </Container>
         <Divider />
-          <AboutMongenFooter />
-        </BasePageAboutMongen>
-      </NoSsr>
+        <AboutMongenFooter />
+      </BasePageAboutMongen>
+    </NoSsr>
   )
 }
 
