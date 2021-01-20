@@ -2,7 +2,14 @@ import { Typography, Grid, TextField } from "@material-ui/core";
 import React from "react";
 import CountriesController from "../autocomplete/Countries";
 
-export default function OrganizationLocation() {
+type Props = {
+  callback
+}
+
+export default function OrganizationLocation(props: Props) {
+
+  const { callback } = props
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

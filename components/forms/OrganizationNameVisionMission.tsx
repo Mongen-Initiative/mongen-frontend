@@ -1,7 +1,13 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
 import React from "react";
 
-export default function OrganizationNameVisionMission() {
+type Props = {
+  callback
+}
+
+export default function OrganizationNameVisionMission(props: Props) {
+  const { callback } = props
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>

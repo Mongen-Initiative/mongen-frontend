@@ -7,23 +7,23 @@ import OrganizationNameVisionMission from '../../forms/OrganizationNameVisionMis
 import OrganizationLocation from '../../forms/OrganizationLocation';
 
 
-export function OrganizationDetailsStep() {
+export function OrganizationDetailsStep(callback) {
   return (
-    <OrganizationNameVisionMission />
+    <OrganizationNameVisionMission callback={callback}/>
   );
 }
 
-export function OrganizationLocationStep() {
+export function OrganizationLocationStep(callback) {
   return (
-    <OrganizationLocation />
+    <OrganizationLocation callback={callback}/>
   );
 }
 
-export function MainContactStep() {
+export function MainContactStep(callback) {
   return (
     <React.Fragment>
       <Grid container spacing={3}>
-        <MainContactController />
+        <MainContactController callback={callback}/>
       </Grid>
     </React.Fragment>
   );

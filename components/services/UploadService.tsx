@@ -1,4 +1,4 @@
-import http from "../../common/http";
+import mediaService from "../../common/mediaService";
 
 
 class UploadFilesService {
@@ -7,7 +7,7 @@ class UploadFilesService {
 
     formData.append("file", file);
 
-    return http.post("/api/v1/send_file/", formData, {
+    return mediaService.post("/api/v1/send_file/", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -16,7 +16,7 @@ class UploadFilesService {
   }
 
   getFile(file_id) {
-    return http.get(`/api/v1/get_file/${file_id}`);
+    return mediaService.get(`/api/v1/get_file/${file_id}`);
   }
 }
 

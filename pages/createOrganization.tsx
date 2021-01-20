@@ -59,20 +59,20 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <OrganizationDetailsStep />;
-    case 1:
-      return <OrganizationLocationStep />;
-    case 2:
-      return <MainContactStep />;
-    case 3:
-      return <SummaryStep />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return <OrganizationDetailsStep callback={updateOrganizationDetails}/>;
+//     case 1:
+//       return <OrganizationLocationStep />;
+//     case 2:
+//       return <MainContactStep />;
+//     case 3:
+//       return <SummaryStep />;
+//     default:
+//       throw new Error('Unknown step');
+//   }
+// }
 
 function Index() {
   const classes = useStyles();
@@ -85,6 +85,23 @@ function Index() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const [organizationDetails, setOrganizationDetails] = React.useState({})
+  const [organizationLocation, setOrganizationLocation] = React.useState({})
+  const [mainContact, setMainContact] = React.useState({})
+
+  const updateOrganizationDetails = (data) => {
+    setOrganizationDetails(data);
+  }
+
+  const updateOrganizationLocation = (data) => {
+    setOrganizationLocation(data);
+  }
+
+  const updateMainContact = (data) => {
+    setMainContact(data);
+  }
+
 
   return (
     <NoSsr>
@@ -113,7 +130,28 @@ function Index() {
               </div>
             ) : (
                 <div>
-                  {getStepContent(activeStep)}
+                  {/* {getStepContent(activeStep)} */}
+                  {activeStep == 0?
+                    <OrganizationDetailsStep>
+                      callback={updateOrganizationDetails}
+                      </OrganizationDetailsStep>
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 1?
+                    <OrganizationLocationStep>
+                      callback={updateOrganizationDetails}
+                    </OrganizationLocationStep>
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 2?
+                    <MainContactStep>
+                      callback={updateOrganizationDetails}
+                    </MainContactStep>
+                    :
+                    <div></div>
+                  }
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button} variant="outlined">

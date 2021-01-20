@@ -3,6 +3,11 @@ import React from "react";
 import CountriesController from "../autocomplete/Countries";
 import PhotoIDUpload from "./PhotoIDUpload";
 
+
+type Props = {
+  callback
+}
+
 interface MainContactType {
   first_name: string;
   last_name: string;
@@ -14,7 +19,10 @@ interface MainContactType {
 }
 
 
-export default function MainContactController() {
+export default function MainContactController(props: Props) {
+
+  const { callback } = props
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
