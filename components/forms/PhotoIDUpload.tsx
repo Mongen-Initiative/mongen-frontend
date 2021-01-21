@@ -35,10 +35,6 @@ export default class PhotoIDUpload extends Component<{}, filesParams> {
 
     const {callback} = props;
 
-    // console.log("### PhotoIDUpload ###")
-    // console.log(props)
-    // console.log(callback)
-
     this.state = {
       selectedFiles: undefined,
       currentFile: undefined,
@@ -74,8 +70,6 @@ export default class PhotoIDUpload extends Component<{}, filesParams> {
         const {
           callback
         } = this.state;
-        // console.log("### Inside Request ###")
-        // console.log(callback)
         callback(`http://localhost:9090/api/v1/get_file/${response.data.file_id}`)
       })
       .catch(() => {
@@ -99,10 +93,11 @@ export default class PhotoIDUpload extends Component<{}, filesParams> {
   }
 
   componentDidMount() {
-    // UploadService.getFile().then((response) => {
+    // TODO: Here he can load the image already uploaded
+    // if the user goes back and forth to this component
     // this.setState({
-    //     fileInfos: response.data,
-    // });
+    //     file_id: props.file_id,
+    //     name: props.name,
     // });
   }
 

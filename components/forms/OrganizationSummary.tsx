@@ -1,4 +1,4 @@
-import { Typography, Grid, TextField, List, ListItem, ListItemText } from "@material-ui/core";
+import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
 import React from "react";
 
 type Props = {

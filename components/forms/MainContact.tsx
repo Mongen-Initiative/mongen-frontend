@@ -3,22 +3,10 @@ import React from "react";
 import CountriesController from "../autocomplete/Countries";
 import PhotoIDUpload from "./PhotoIDUpload";
 
-
 type Props = {
   callback
   values
 }
-
-// interface MainContactType {
-//   first_name: string;
-//   last_name: string;
-//   country_code: string;
-//   type_id: number;
-//   photo_id_url;
-//   verification_selfie_url;
-
-// }
-
 
 export default function MainContactController(props: Props) {
 
@@ -30,28 +18,28 @@ export default function MainContactController(props: Props) {
     country: {},
     photo_id_url: '',
   });
-  
+
 
   function updateForm(type, data) {
-        setOrgData({ ...orgData, [type]: data })
-        callback(orgData);
+    setOrgData({ ...orgData, [type]: data })
+    callback(orgData);
   }
 
-  function updateCountry(data){
+  function updateCountry(data) {
     updateForm("country", data);
   }
 
-  function updatePhotoIdUrl(data){
+  function updatePhotoIdUrl(data) {
     updateForm("photo_id_url", data);
   }
 
   function getValue(type) {
-      if (values){
-        if (type in values){
-          return values[type]
-        }
+    if (values) {
+      if (type in values) {
+        return values[type]
       }
-      return ""
+    }
+    return ""
   }
 
   return (
@@ -84,10 +72,10 @@ export default function MainContactController(props: Props) {
         </Grid>
         <Grid item xs={10}>
           <Typography variant="subtitle2">Nationality:</Typography>
-          <CountriesController callback={updateCountry}/>
+          <CountriesController callback={updateCountry} />
         </Grid>
         <Grid item xs={10}>
-          <PhotoIDUpload callback={updatePhotoIdUrl}/>
+          <PhotoIDUpload callback={updatePhotoIdUrl} />
         </Grid>
         {/*
           Need to discuss if this layer will be needed or not
