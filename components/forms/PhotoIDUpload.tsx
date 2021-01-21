@@ -25,12 +25,19 @@ interface filesParams {
   file_id: number,
   name: string,
   isError: boolean
+  callback
 }
 
 export default class PhotoIDUpload extends Component<{}, filesParams> {
 
   constructor(props) {
     super(props);
+
+    const {callback} = props;
+
+    // console.log("### PhotoIDUpload ###")
+    // console.log(props)
+    // console.log(callback)
 
     this.state = {
       selectedFiles: undefined,
@@ -40,6 +47,7 @@ export default class PhotoIDUpload extends Component<{}, filesParams> {
       file_id: 0,
       name: "",
       isError: false,
+      callback: callback
     };
   }
 
@@ -63,6 +71,12 @@ export default class PhotoIDUpload extends Component<{}, filesParams> {
           name: response.data.name,
           isError: false
         });
+        const {
+          callback
+        } = this.state;
+        // console.log("### Inside Request ###")
+        // console.log(callback)
+        callback(`http://localhost:9090/api/v1/get_file/${response.data.file_id}`)
       })
       .catch(() => {
         this.setState({

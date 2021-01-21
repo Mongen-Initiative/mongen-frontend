@@ -1,10 +1,10 @@
 import coreService from "../../common/coreService";
 
 
-class OrganizationService {
+class MainContactService {
   create(data) {
 
-    return coreService.post("/api/v1/organization/", data, {
+    return coreService.post("/api/v1/main_contact/", data, {
       headers: {
         "Content-type": "application/json",
       }
@@ -12,4 +12,4 @@ class OrganizationService {
   }
 }
 
-export default new OrganizationService();
+export default new MainContactService();

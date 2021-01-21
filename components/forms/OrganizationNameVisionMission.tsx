@@ -3,10 +3,33 @@ import React from "react";
 
 type Props = {
   callback
+  values
 }
 
 export default function OrganizationNameVisionMission(props: Props) {
-  const { callback } = props
+  const { callback, values } = props
+
+  const [orgData, setOrgData] = React.useState({
+    name: '',
+    seo_name: '',
+    mission: '',
+    vision: '',
+  });
+  
+
+  function updateForm(type, data) {
+        setOrgData({ ...orgData, [type]: data })
+        callback(orgData);
+  }
+
+  function getValue(type) {
+      if (values){
+        if (type in values){
+          return values[type]
+        }
+      }
+      return ""
+  }
 
   return (
     <div>
@@ -20,6 +43,8 @@ export default function OrganizationNameVisionMission(props: Props) {
             id="name"
             name="name"
             label="Organization Name"
+            onChange={(event) => updateForm("name", event.target.value)}
+            defaultValue={() => getValue("name")}
             fullWidth
           />
         </Grid>
@@ -29,6 +54,8 @@ export default function OrganizationNameVisionMission(props: Props) {
             id="seo_name"
             name="seo_name"
             label="SEO Name"
+            onChange={(event) => updateForm("seo_name", event.target.value)}
+            defaultValue={() => getValue("seo_name")}
             fullWidth
           />
         </Grid>
@@ -42,6 +69,8 @@ export default function OrganizationNameVisionMission(props: Props) {
             multiline={true}
             rows={6}
             rowsMax={10}
+            onChange={(event) => updateForm("mission", event.target.value)}
+            defaultValue={() => getValue("mission")}
             fullWidth
           />
         </Grid>
@@ -54,6 +83,8 @@ export default function OrganizationNameVisionMission(props: Props) {
             multiline={true}
             rows={6}
             rowsMax={10}
+            onChange={(event) => updateForm("vision", event.target.value)}
+            defaultValue={() => getValue("vision")}
             fullWidth
           />
         </Grid>

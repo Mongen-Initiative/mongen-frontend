@@ -11,9 +11,15 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
+import MainContactController from "../components/forms/MainContact"
+import OrganizationLocation from "../components/forms/OrganizationLocation"
+import OrganizationNameVisionMission from "../components/forms/OrganizationNameVisionMission"
+import OrganizationSummary from "../components/forms/OrganizationSummary"
+import MainContactService from "../components/services/MainContactService"
+import OrganizationService from "../components/services/OrganizationService"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-import { MainContactStep, OrganizationDetailsStep, OrganizationLocationStep, SummaryStep } from '../components/templates/organization/creationSteps';
+// import { SummaryStep } from '../components/templates/organization/creationSteps';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -74,21 +80,37 @@ const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
 //   }
 // }
 
+type MainContact = {
+  country: {}
+}
+
 function Index() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [organizationDetails, setOrganizationDetails] = React.useState({})
+  const [organizationLocation, setOrganizationLocation] = React.useState({})
+  const [mainContact, setMainContact] = React.useState({})
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if(activeStep === steps.length - 1)
+      createOrganization()
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const [organizationDetails, setOrganizationDetails] = React.useState({})
-  const [organizationLocation, setOrganizationLocation] = React.useState({})
-  const [mainContact, setMainContact] = React.useState({})
+  const createOrganization = () => {
+    MainContactService.create({...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator"}, () => {})
+      .then((response) => {
+        console.log(response)
+        console.log(response.data)
+      })
+      .catch(() => {
+        console.log("Something failed ):")
+      });
+  };
 
   const updateOrganizationDetails = (data) => {
     setOrganizationDetails(data);
@@ -96,10 +118,14 @@ function Index() {
 
   const updateOrganizationLocation = (data) => {
     setOrganizationLocation(data);
+    // console.log("### updateOrganizationLocation ###")
+    // console.log(organizationLocation)
   }
 
   const updateMainContact = (data) => {
     setMainContact(data);
+    console.log("### updateMainContact ###")
+    console.log(mainContact)
   }
 
 
@@ -132,23 +158,22 @@ function Index() {
                 <div>
                   {/* {getStepContent(activeStep)} */}
                   {activeStep == 0?
-                    <OrganizationDetailsStep>
-                      callback={updateOrganizationDetails}
-                      </OrganizationDetailsStep>
+                    <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails}/>
                     :
                     <div></div>
                   }
                   {activeStep === 1?
-                    <OrganizationLocationStep>
-                      callback={updateOrganizationDetails}
-                    </OrganizationLocationStep>
+                    <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation}/>
                     :
                     <div></div>
                   }
                   {activeStep === 2?
-                    <MainContactStep>
-                      callback={updateOrganizationDetails}
-                    </MainContactStep>
+                    <MainContactController callback={updateMainContact} values={mainContact}/>
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 3?
+                    <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact}/>
                     :
                     <div></div>
                   }
