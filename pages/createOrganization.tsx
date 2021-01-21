@@ -19,7 +19,6 @@ import MainContactService from "../components/services/MainContactService"
 import OrganizationService from "../components/services/OrganizationService"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-// import { SummaryStep } from '../components/templates/organization/creationSteps';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -65,21 +64,6 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <OrganizationDetailsStep callback={updateOrganizationDetails}/>;
-//     case 1:
-//       return <OrganizationLocationStep />;
-//     case 2:
-//       return <MainContactStep />;
-//     case 3:
-//       return <SummaryStep />;
-//     default:
-//       throw new Error('Unknown step');
-//   }
-// }
-
 type MainContact = {
   country: {}
 }
@@ -93,7 +77,7 @@ function Index() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    if(activeStep === steps.length - 1)
+    if (activeStep === steps.length - 1)
       createOrganization()
   };
 
@@ -102,11 +86,13 @@ function Index() {
   };
 
   const createOrganization = () => {
-    MainContactService.create({...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator"}, () => {})
+    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" }, () => { })
       .then((response) => {
-        console.log(response)
-        console.log(response.data)
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocation, country_iso: organizationLocation.country.countryISO, contact_id: response.data.id })
       })
+      .then(
+        console.log("Organization Created!")
+      )
       .catch(() => {
         console.log("Something failed ):")
       });
@@ -118,14 +104,10 @@ function Index() {
 
   const updateOrganizationLocation = (data) => {
     setOrganizationLocation(data);
-    // console.log("### updateOrganizationLocation ###")
-    // console.log(organizationLocation)
   }
 
   const updateMainContact = (data) => {
     setMainContact(data);
-    console.log("### updateMainContact ###")
-    console.log(mainContact)
   }
 
 
@@ -150,30 +132,32 @@ function Index() {
                 <Typography variant="h5" gutterBottom>
                   New organization added
                     </Typography>
+                <Typography variant="subtitle2" gutterBottom>
+                  We will check the information your provided and we will contact you for further steps
+                    </Typography>
                 <Typography variant="subtitle1" style={{ padding: "10px" }}>
                   Thank you :)
                     </Typography>
               </div>
             ) : (
                 <div>
-                  {/* {getStepContent(activeStep)} */}
-                  {activeStep == 0?
-                    <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails}/>
+                  {activeStep == 0 ?
+                    <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails} />
                     :
                     <div></div>
                   }
-                  {activeStep === 1?
-                    <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation}/>
+                  {activeStep === 1 ?
+                    <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation} />
                     :
                     <div></div>
                   }
-                  {activeStep === 2?
-                    <MainContactController callback={updateMainContact} values={mainContact}/>
+                  {activeStep === 2 ?
+                    <MainContactController callback={updateMainContact} values={mainContact} />
                     :
                     <div></div>
                   }
-                  {activeStep === 3?
-                    <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact}/>
+                  {activeStep === 3 ?
+                    <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact} />
                     :
                     <div></div>
                   }
