@@ -52,28 +52,27 @@ import {DropzoneArea} from 'material-ui-dropzone'
               <Typography variant="h6" align="center" color="textSecondary" paragraph>
               On this page you can enter information related to your Organization, it will be displayed throughout the site.
               </Typography>
-                <div>
-                    <div style={{width:"30%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
-                        <DropzoneArea
+              <div>
+                <div style={{width:"30%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
+                  <DropzoneArea
                         acceptedFiles={['image/*']}
                         onChange={(files) => console.log('Files:', files)}
                         dropzoneText="Upload the logo"
-                        />
-                    </div> 
+                  />
+                </div> 
                 <div style={{width:"60%", float: "right"}}>
-            <form>
-                <TextField id="name" label="Organization name" className={classes.textField} />
-                <TextField id="tagline" label="Tagline"className={classes.textField}/>
-                <TextField id="mission" label="Your Mission" multiline rowsMax={4} className={classes.textField}/>
-                <TextField id="values" label="Your Values" multiline rowsMax={4} className={classes.textField}/>
-                <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
-                <TextField id="country" label="Country" multiline rowsMax={4} className={classes.textField}/>
-                <TextField id="social" label="Social Network Url" multiline rowsMax={4} className={classes.textField}/>
-                <TextField id="main_contact" label="Main Contact" multiline rowsMax={4} className={classes.textField}/>
-
-            </form>
-            </div>
-        </div>
+                  <form>
+                      <TextField id="name" label="Organization name" className={classes.textField} />
+                      <TextField id="tagline" label="Tagline"className={classes.textField}/>
+                      <TextField id="mission" label="Your Mission" multiline rowsMax={4} className={classes.textField}/>
+                      <TextField id="values" label="Your Values" multiline rowsMax={4} className={classes.textField}/>
+                      <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
+                      <TextField id="country" label="Country" multiline rowsMax={4} className={classes.textField}/>
+                      <TextField id="social" label="Social Network Url" multiline rowsMax={4} className={classes.textField}/>
+                      <TextField id="main_contact" label="Main Contact" multiline rowsMax={4} className={classes.textField}/>
+                  </form>
+                </div>
+              </div>
         <Button variant="contained" color="primary" size="large" style = {{marginLeft:"40%", marginTop:"8%", width: "10%"}}> Update </Button>
         </Container>
           </div>

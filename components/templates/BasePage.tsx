@@ -6,11 +6,9 @@ import {
   Typography,
   Link,
   Toolbar, 
-  Menu,
-  MenuItem,
   IconButton} from "@material-ui/core"
 import { useRouter } from "next/router"
-import MenuIcon from '@material-ui/icons/Menu'
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,16 +39,6 @@ export const BasePage = function(props: Props) {
   const { children, className, color, title } = props
   const classes = useStyles(props)
   
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-
-  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-  };
-  
   const router = useRouter()
 
   const url = convertTitleToSeoUrl(title)
@@ -75,21 +63,10 @@ export const BasePage = function(props: Props) {
               </Link>
             </Typography>
             <div style={{ float: "right", width: "6%"}}>
-            {/* Menu dropdown */}
-            <IconButton onClick={handleMenuClick}>
-              <MenuIcon />
+            {/* Login icon */}
+            <IconButton onClick={() => router.push(`/loginSponsor`)}>
+              <AccountBoxIcon style={{color:"#edf2ea"}} />
             </IconButton>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-                style={{marginTop:"2%"}}
-              >
-                <MenuItem onClick={() => router.push(`/loginOrgMember`)}>Go to organization profile</MenuItem>
-                <MenuItem onClick={() => router.push(`/loginSponsor`)}>Go to sponsor's profile</MenuItem>
-              </Menu>
             </div>
           </div>
         </Toolbar>

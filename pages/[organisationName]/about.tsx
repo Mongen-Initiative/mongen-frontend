@@ -4,10 +4,11 @@ import {
     Container,
     Typography,
     NoSsr,
+    Link,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage } from "../../components/templates"
+  import { BasePage, convertTitleToSeoUrl } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
@@ -35,13 +36,15 @@ import { Footer } from "../../components/templates/Footer";
 
   function About() {
     const classes = useStyles(organization)
-  
+    const url = convertTitleToSeoUrl(title)
+
     return (
         <NoSsr>
           <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | About us</title>
           {organization ? (
             <div className={classes.content}>
+              <Link style={{marginLeft:"7%"}} href={`/${url}`}> &larr; Back to Homepage</Link>
             <Container>
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
               </Typography>
@@ -69,7 +72,8 @@ import { Footer } from "../../components/templates/Footer";
             <h1>There is no organization with such name</h1>
           )}
           </BasePage>
-          <div style={{marginBottom:"50px"}}></div>
+           {/* a bit of space between cards and footer */}
+           <div style={{marginBottom:"200px"}}></div> 
           <Footer />
         </NoSsr>
     )

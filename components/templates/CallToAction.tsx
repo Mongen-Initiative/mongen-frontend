@@ -22,7 +22,7 @@ export const CallToActionButtons = function(props: Props) {
             </Grid>
             <Grid item>
                 <Button variant="outlined" color="primary" size="large" href={`/${url}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
-                    How "{title}" works?
+                    Who We are? How we help?
                 </Button>
             </Grid>
         </Grid>
