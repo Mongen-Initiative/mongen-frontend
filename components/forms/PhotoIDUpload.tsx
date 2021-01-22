@@ -70,7 +70,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
         const {
           callback
         } = this.state;
-        callback(`http://localhost:9090/api/v1/get_file/${response.data.file_id}`)
+        callback(`${process.env.mongenMedia}/api/v1/get_file/${response.data.file_id}`)
       })
       .catch(() => {
         this.setState({
@@ -172,7 +172,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
                       component="img"
                       alt={name}
                       height="140"
-                      image={`http://localhost:9090/api/v1/get_file/${file_id}`}
+                      image={`${process.env.mongenMedia}/api/v1/get_file/${file_id}`}
                       title={name}
                     />
                   </CardActionArea>

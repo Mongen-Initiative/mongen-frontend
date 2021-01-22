@@ -167,7 +167,7 @@ import { Footer } from "../../components/templates/Footer";
   // export const getServerSideProps: GetServerSideProps = async context => {
   //   const { childId } = context.query
   
-  //   const childReq = await fetch(`http://localhost:8080/api/v1/${childId}`, {
+  //   const childReq = await fetch(`${process.env.mongenCore}/api/v1/${childId}`, {
   //     method: "GET",
   //   })
   //   const children: Children[] = await childReq.json()
