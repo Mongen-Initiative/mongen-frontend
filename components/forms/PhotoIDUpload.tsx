@@ -28,7 +28,7 @@ interface filesParams {
   callback
 }
 
-export default class PhotoIDUpload extends Component<{}, filesParams> {
+export default class PhotoIDUpload extends Component<{callback}, filesParams> {
 
   constructor(props) {
     super(props);

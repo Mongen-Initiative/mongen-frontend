@@ -64,16 +64,52 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
 
+type OrganizationAddress = {
+  address: string
+  country: {
+    callingCode: string
+    countryISO: string
+    countryISO3: string
+    name: string
+  }
+}
+
 type MainContact = {
-  country: {}
+  first_name: string
+  last_name: string
+  photo_id_url: string
+  country: {
+    callingCode: string
+    countryISO: string
+    countryISO3: string
+    name: string
+  }
 }
 
 function Index() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [organizationDetails, setOrganizationDetails] = React.useState({})
-  const [organizationLocation, setOrganizationLocation] = React.useState({})
-  const [mainContact, setMainContact] = React.useState({})
+  const [organizationLocation, setOrganizationLocation] = React.useState<OrganizationAddress>({
+    address: "",
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    }
+  })
+  const [mainContact, setMainContact] = React.useState<MainContact>({
+    first_name: "",
+    last_name: "",
+    photo_id_url: "",
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    }
+  })
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -86,12 +122,15 @@ function Index() {
   };
 
   const createOrganization = () => {
-    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" }, () => { })
+    console.log(mainContact)
+    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" })
       .then((response) => {
         return OrganizationService.create({ ...organizationDetails, ...organizationLocation, country_iso: organizationLocation.country.countryISO, contact_id: response.data.id })
       })
       .then(
-        console.log("Organization Created!")
+        (response) => {
+          console.log(`Organization created! ID: ${response.data.id}`)
+        }
       )
       .catch(() => {
         console.log("Something failed ):")

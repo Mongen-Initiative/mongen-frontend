@@ -63,11 +63,11 @@ export const MainOrganizationList = function() {
                                                     <Typography gutterBottom variant="h5" component="h2">
                                                         {org.name}
                                                     </Typography>
-                                                    <Typography variant="subtitle1">
-                                                        {`/${org.mission}`}
-                                                    </Typography>
                                                     <Typography variant="subtitle2">
-                                                        {`/${org.vision}`}
+                                                        {`${org.mission}`}
+                                                    </Typography>
+                                                    <Typography variant="subtitle1">
+                                                        {`${org.vision}`}
                                                     </Typography>
                                                     <Typography variant="overline">
                                                         This Organization works with us. Click to view their website
