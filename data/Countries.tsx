@@ -8,7 +8,7 @@ export default function getCountries() {
     mutate,
     error,
   } = useSWR(
-    `http://localhost:8080/api/v1/countries`,
+    `${process.env.mongenCore}/api/v1/countries`,
     fetcher
   )
 

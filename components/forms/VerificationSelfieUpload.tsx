@@ -164,7 +164,7 @@ export default class VerificationSelfieUpload extends Component<{}, filesParams>
                             component="img"
                             alt={name}
                             height="140"
-                            image={`http://localhost:9090/api/v1/get_file/${file_id}`}
+                            image={`${process.env.mongenMedia}/api/v1/get_file/${file_id}`}
                             title={name}
                           />
                         </CardActionArea>

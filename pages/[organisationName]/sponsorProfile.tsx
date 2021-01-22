@@ -106,7 +106,7 @@ import { MuiTheme } from "../../components/MuiTheme"
   // export const getServerSideProps: GetServerSideProps = async context => {
   //   const { sponsorId } = context.query
   
-  //   const sponsorReq = await fetch(`http://localhost:8080/api/v1/${sponsorId}`, {
+  //   const sponsorReq = await fetch(`${process.env.mongenCore}/api/v1/${sponsorId}`, {
   //     method: "GET",
   //   })
   //   const sponsor: Sponsor[] = await sponsorReq.json()

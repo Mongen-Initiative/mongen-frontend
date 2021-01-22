@@ -133,7 +133,7 @@ function Index() {
 // export const getServerSideProps: GetServerSideProps = async context => {
 //   const { organizationName } = context.query
 
-//   const orgReq = await fetch(`http://localhost:8080/api/v1/${organizationName}`, {
+//   const orgReq = await fetch(`${process.env.mongenCore}/api/v1/${organizationName}`, {
 //     method: "GET",
 //   })
 //   const organization: Organization[] = await orgReq.json()

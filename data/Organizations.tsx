@@ -8,7 +8,7 @@ export default function getOrganizations() {
     mutate,
     error,
   } = useSWR(
-    `http://localhost:8080/api/v1/organizations`,
+    `${process.env.mongenCore}/api/v1/organizations`,
     fetcher
   )
 
