@@ -6,7 +6,12 @@ import getCountries from '../../data/Countries';
 
 const filter = createFilterOptions<CountryType>();
 
-export default function CountriesController() {
+type Props = {
+  callback
+}
+
+export default function CountriesController(props: Props) {
+  const { callback } = props
   const { loading, noData, countries } = getCountries()
   const [value, setValue] = React.useState<CountryType | null>(null);
 
@@ -30,8 +35,11 @@ export default function CountriesController() {
                     setTimeout(() => { });
                   } else if (newValue && newValue.inputValue) {
                     setValue(newValue);
+                    callback(newValue)
                   } else {
                     setValue(newValue);
+                    if (newValue)
+                      callback(newValue)
                   }
                 }}
                 filterOptions={(options, params) => {
