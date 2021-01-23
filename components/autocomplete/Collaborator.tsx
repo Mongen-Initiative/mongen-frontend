@@ -8,12 +8,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import CountriesController from './Countries';
+// import CountriesController from './Countries';
 import CollaboratorTypesController from './CollaboratorTypes';
 
 const filter = createFilterOptions<CollaboratorType>();
 
-export default function MainContactController() {
+// Not currently used
+export default function CollaboratorController() {
   const [value, setValue] = React.useState<CollaboratorType | null>(null);
   const [open, toggleOpen] = React.useState(false);
 
@@ -135,7 +136,7 @@ export default function MainContactController() {
               label="Last Name"
               type="text"
             />
-            <CountriesController />
+            {/* <CountriesController /> */}
             <CollaboratorTypesController />
           </DialogContent>
           <DialogActions>

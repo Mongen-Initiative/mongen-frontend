@@ -8,7 +8,7 @@ export default function getCollaboratorTypes() {
     mutate,
     error,
   } = useSWR(
-    `http://localhost:8080/api/v1/collaborators/type`,
+    `${process.env.mongenCore}/api/v1/collaborators/type`,
     fetcher
   )
 

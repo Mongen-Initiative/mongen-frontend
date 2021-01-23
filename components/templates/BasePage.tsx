@@ -65,7 +65,6 @@ export const BasePage = function(props: Props) {
             <div style={{ float: "right", width: "6%"}}>
             {/* Login icon */}
             <IconButton onClick={() => router.push(`/loginSponsor`)}>
-
               <PersonIcon style={{color:"#edf2ea"}} />
             </IconButton>
             </div>
