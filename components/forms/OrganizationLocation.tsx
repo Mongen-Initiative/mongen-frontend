@@ -35,19 +35,26 @@ function getValue(type) {
 }
 
   return (
-    <React.Fragment>
+    <div style={{marginBottom:"50px"}}>
       <Typography variant="h6" gutterBottom>
         Organization Location
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={3} md={6}>
-          <TextField required id="address" label="Address" fullWidth onChange={(event) => updateForm("address", event.target.value)}
-            defaultValue={() => getValue("address")}/>
-        </Grid>
-        <Grid item xs={3} md={3}>
+        <Grid item xs={12}  style={{marginTop:"40px"}}>
           <CountriesController callback={updateCountry}/>
         </Grid>
+        <Grid item xs={12}>
+          <TextField 
+            required 
+            id="address"
+            label="Enter the address of your main office"
+            fullWidth
+            onChange={(event) => updateForm("address", event.target.value)}
+            style={{marginTop:"20px"}}
+            defaultValue={() => getValue("address")}
+          />
+        </Grid>
       </Grid>
-    </React.Fragment>
-  );
+    </div>
+  )
 }

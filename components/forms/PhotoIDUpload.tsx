@@ -115,8 +115,8 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
     return (
       <div>
         <Typography variant="subtitle2">Photo ID:</Typography>
-        <Typography variant="body2">Upload a picture of your Passport, National ID, Driver License or any ID your can provide</Typography>
-        <div className="mg20">
+        <Typography variant="body2" style={{marginTop:"10px"}}>Upload a picture of your Passport, National ID, Driver License or any ID your can provide</Typography>
+        <div className="mg20" style={{marginTop:"20px"}}>
           {currentFile && (
             <Box className="mb25" display="flex" alignItems="center">
               <Box width="100%" mr={1}>
@@ -127,7 +127,15 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
               </Box>
             </Box>)
           }
-
+          {/* Confirmation message */}
+         <div className="file-name">
+            {selectedFiles && selectedFiles.length > 0 ? 
+            <Typography variant="body2" style={{color:"green", marginBottom:"10px"}}>Your photo looks good. Please click the 'Upload' button to save it</Typography> 
+            : 
+            null
+            }
+          </div>
+           {/* Upload buttons */}
           <label htmlFor="btn-upload">
             <input
               id="btn-upload"
@@ -140,33 +148,30 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
               variant="outlined"
               component="span" >
               Choose File
-                </Button>
+            </Button>
           </label>
-          <div className="file-name">
-            {selectedFiles && selectedFiles.length > 0 ? selectedFiles[0].name : null}
-          </div>
           <Button
             className="btn-upload"
             color="primary"
             variant="contained"
             component="span"
             disabled={!selectedFiles}
-            onClick={this.upload}>
+            onClick={this.upload}
+            style={{marginLeft:"15px"}}
+          >
             Upload
-                </Button>
-
+          </Button>
           <Typography variant="subtitle2" className={`upload-message ${isError ? "error" : ""}`}>
             {message}
           </Typography>
 
-
           {file_id != 0 && name != "" ?
             <div>
-              <Typography variant="h6" className="list-header">
+              <Typography variant="h6" className="list-header" style={{marginTop:"30px"}}>
                 Uploaded file
-                    </Typography>
-              <ul className="list-group">
-                <Card>
+              </Typography>
+              <ul>
+                <Card style={{marginRight:"30px"}}> 
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -182,7 +187,6 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
             :
             <div></div>
           }
-
         </div>
       </div>
     );

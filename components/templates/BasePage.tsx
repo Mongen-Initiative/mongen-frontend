@@ -64,7 +64,7 @@ export const BasePage = function(props: Props) {
             </Typography>
             <div style={{ float: "right", width: "6%"}}>
             {/* Login icon */}
-            <IconButton onClick={() => router.push(`/loginSponsor`)}>
+            <IconButton onClick={() => router.push(`/login-sponsor`)}>
               <PersonIcon style={{color:"#edf2ea"}} />
             </IconButton>
             </div>
@@ -90,7 +90,6 @@ export const BasePageAboutMongen = function(props: Props) {
         {/* top nav bar with mongen name */}
       <CssBaseline />
       <main className={classes.content}>
-        <div style={{marginTop:"30px"}} />
           {/* all the main body */}
         <section>{children}</section>
       </main>

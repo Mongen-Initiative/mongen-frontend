@@ -61,8 +61,8 @@ import {
                     Login as a sponsor
                     </Typography>
                         <div>
-                        <Button className={classes.button} href="/loginOrgMember">Log in as org member</Button>
-                        <Button className={classes.button} href="/loginAdmin">Log in as an admin</Button>
+                        <Button className={classes.button} href="/login-member">Log in as org member</Button>
+                        <Button className={classes.button} href="/-admin">Log in as an admin</Button>
                         </div>
                         <Paper component="form" style={{width: "60%", padding: '12px 14px',  marginLeft:"23%",  alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Username" style={{flex: "1"}} />
