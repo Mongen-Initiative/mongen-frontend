@@ -44,8 +44,13 @@ const useStyles = makeStyles((theme: Theme) =>
         marginLeft:"20%",
     },
     commentsField: {
-        width:"50%",
+        width:"60%",
         marginTop:"3%",
+        marginLeft:"5%",
+    },
+    commentsFieldCollab: {
+        width:"70%",
+        marginTop:"1%",
         marginLeft:"5%",
     },
   }),
@@ -55,6 +60,8 @@ const mission = "Saving children. Saving children. Saving children. Saving child
 const country = "Nigeria"
 const url = "https://instagram.com/saving-children"
 const contact = "James The Boss"
+const type = "Collaborator"
+const date = "03/12/2020"
 
 export function PendingOrgReviewModal(children: any) {
   const { org } = children
@@ -84,7 +91,7 @@ export function PendingOrgReviewModal(children: any) {
             <Fade in={open}>
                 <div className={classes.frameLight} id="frame">
                     <div>
-                        <Button onClick={handleModalClose} style={{marginLeft:"90%", }}>X</Button>
+                        <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
                         <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org}</h2>
                         <Divider />
                         <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
@@ -111,8 +118,8 @@ export function PendingOrgReviewModal(children: any) {
                         <Divider />
                         <div id="approvalPart" style={{marginTop:"10px"}} >
                             <TextField label="Comments" className={classes.commentsField}/>
-                                <Button style={{marginLeft:"65%", marginTop:"20px", color:"green"}} variant="outlined" href="#">Accept</Button>
-                                <Button style={{marginLeft:"5%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Reject</Button>
+                            <Button style={{marginLeft:"65%", marginTop:"20px", color:"green"}} variant="outlined" href="#">Accept</Button>
+                            <Button style={{marginLeft:"5%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Reject</Button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +129,7 @@ export function PendingOrgReviewModal(children: any) {
   );
 }
 
-export function LiveOrgReviewModal(children: any) {
+export function LiveOrgModal(children: any) {
     const { org } = children
   
     const classes = useStyles();
@@ -149,7 +156,7 @@ export function LiveOrgReviewModal(children: any) {
               <Fade in={open}>
                    <div className={classes.frameLight} id="frame">
                     <div>
-                        <Button onClick={handleModalClose} style={{marginLeft:"90%", }}>X</Button>
+                        <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
                         <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org}</h2>
                         <Divider />
                         <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
@@ -196,8 +203,69 @@ export function LiveOrgReviewModal(children: any) {
                         <Divider />
                         <div id="approvalPart" style={{marginTop:"10px"}} >
                             <TextField label="Comments" className={classes.commentsField}/>
-                                <Button style={{marginLeft:"80%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Disable</Button>
+                            <Button style={{marginLeft:"80%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Disable</Button>
                         </div>
+                    </div>
+                </div>
+              </Fade>
+        </Modal>
+      </div>
+    )
+  }
+
+  export function CollaboratorsModal(children: any) {
+    const { collaborator, button, isNew } = children
+  
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+  
+    const handleModalOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleModalClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <div>
+          <Button variant="outlined" href="#" style={{width:"35%", marginTop:"3%"}} onClick={handleModalOpen}>
+              {button}
+          </Button>
+          <Modal
+              open={open}
+              onClose={handleModalClose}
+              className={classes.modal}
+          >
+              <Fade in={open} style={{width:"40%", height:"77%"}}>
+                   <div className={classes.frameLight} id="frame">
+                    <div>
+                        <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
+                        <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
+                        <Divider />
+                        <div style={{marginBottom:"50px"}}>
+                            <form>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Name</Typography>
+                                <TextField className={classes.textField} defaultValue={collaborator} /> 
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Nationality</Typography>
+                                <TextField className={classes.textField} defaultValue={country} />
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Type</Typography>
+                                <TextField className={classes.textField} defaultValue={type} />
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Date created</Typography>
+                                <TextField className={classes.textField} defaultValue={date} />
+                            </form>
+                        </div>
+                        {isNew === "yes" ? (
+                            <Button style={{marginLeft:"37%", marginTop:"10px", color:"green", width: "120px"}} variant="outlined" href="#">Add</Button>
+                        ) : (
+                            <div>
+                                <Divider />
+                                <div style={{marginTop:"20px"}}>
+                                    <Button style={{marginLeft:"40%", marginTop:"20px", color:"green", width: "120px"}} variant="outlined" href="#">Update</Button>
+                                    <Button style={{marginLeft:"8%", marginTop:"20px", color:"red",  width: "120px"}} variant="outlined" href="#">Deactivate</Button>
+                                </div>
+                            </div> 
+                        )}  
                     </div>
                 </div>
               </Fade>

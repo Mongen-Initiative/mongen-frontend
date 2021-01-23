@@ -7,7 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates"
-import { LiveOrgReviewModal } from "../../components/templates/OrgReviewModal"
+import { LiveOrgModal } from "../../components/templates/DetailedInfoModal"
 import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid'
 
   const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid'
         field: 'button',
         headerName: '.',
         renderCell: (params: ValueGetterParams) =>  (
-          <LiveOrgReviewModal org={params.getValue('orgName')}></LiveOrgReviewModal>
+          <LiveOrgModal org={params.getValue('orgName')}></LiveOrgModal>
          ),
         sortable: false,
         width: 150,

@@ -8,7 +8,7 @@ import {
   Toolbar, 
   IconButton} from "@material-ui/core"
 import { useRouter } from "next/router"
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import PersonIcon from '@material-ui/icons/Person'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,7 +65,8 @@ export const BasePage = function(props: Props) {
             <div style={{ float: "right", width: "6%"}}>
             {/* Login icon */}
             <IconButton onClick={() => router.push(`/loginSponsor`)}>
-              <AccountBoxIcon style={{color:"#edf2ea"}} />
+
+              <PersonIcon style={{color:"#edf2ea"}} />
             </IconButton>
             </div>
           </div>

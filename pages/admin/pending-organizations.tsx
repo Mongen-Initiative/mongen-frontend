@@ -7,7 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates";
-import { PendingOrgReviewModal } from "../../components/templates/OrgReviewModal";
+import { PendingOrgReviewModal } from "../../components/templates/DetailedInfoModal";
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
