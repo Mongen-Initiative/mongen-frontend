@@ -16,6 +16,7 @@ import React from "react"
 import { BasePage, CallToActionButtons, convertTitleToSeoUrl } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
+import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -65,11 +66,11 @@ export interface Sponsor {
 const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6", "Child 7", "Child 8", "Child 9"];
 const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
 const title = "Your title"
-const organization = ["123"]
+// const organization = ["123"]
 
-function Index() {
+function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
-  const url = convertTitleToSeoUrl(title)
+  const url = convertTitleToSeoUrl("123")
 
   return (
       <NoSsr>
@@ -80,7 +81,7 @@ function Index() {
               <div>
               <Container maxWidth="sm" className={classes.heroContent}>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-                  {title}
+                  {organization.name}
                 </Typography>
                 <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
                   {infoText}
@@ -130,17 +131,17 @@ function Index() {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async context => {
-//   const { organizationName } = context.query
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { organizationId} = context.query
 
-//   const orgReq = await fetch(`${process.env.mongenCore}/api/v1/${organizationName}`, {
-//     method: "GET",
-//   })
-//   const organization: Organization[] = await orgReq.json()
+  const orgReq = await fetch(`http://localhost:8080/api/v1/organization/1`, {
+    method: "GET",
+  })
+  const organization: Organization[] = await orgReq.json()
 
-//   return {
-//     props: { organization },
-//   }
-// }
+  return {
+    props: { organization },
+  }
+}
 
 export default Index
