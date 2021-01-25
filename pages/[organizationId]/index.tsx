@@ -134,9 +134,10 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
 export const getServerSideProps: GetServerSideProps = async context => {
   const { organizationId} = context.query
 
-  const orgReq = await fetch(`http://localhost:8080/api/v1/organization/1`, {
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/1/`, {
     method: "GET",
   })
+
   const organization: Organization[] = await orgReq.json()
 
   return {
