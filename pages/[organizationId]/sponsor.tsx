@@ -11,7 +11,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, convertTitleToSeoUrl } from "../../components/templates"
+  import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { MuiTheme } from "../../components/MuiTheme"
 
@@ -54,11 +54,11 @@ import { MuiTheme } from "../../components/MuiTheme"
 
   function SponsorProfile() {
     const classes = useStyles(sponsor)
-    const url = convertTitleToSeoUrl(title)
+    const url = "1"
 
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title}>
+          <BasePage className={classes.rootLight} title={title} orgId='1'>
           <title>Mongen | Sponsor's profile</title>
           {sponsor ? (
             <div className={classes.heroContent}>
@@ -98,7 +98,7 @@ import { MuiTheme } from "../../components/MuiTheme"
           </BasePage>
         {/* a bit of space between cards and footer */}
           <div style={{marginBottom:"250px"}}></div> 
-          <Footer />
+          <Footer orgName={title} orgMission={title} />
         </NoSsr>
     )
   }

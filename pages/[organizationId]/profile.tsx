@@ -42,7 +42,7 @@ import {DropzoneArea} from 'material-ui-dropzone'
   
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title}>
+          <BasePage className={classes.rootLight} title={title} orgId='1'>
           <title>Mongen | Organization profile </title>
              {/* Hero unit */}
              <div className={classes.heroContent}>

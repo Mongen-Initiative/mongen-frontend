@@ -6,7 +6,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, CallToActionButtons, convertTitleToSeoUrl } from "../../components/templates"
+  import { BasePage, CallToActionButtons } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
   
   const useStyles = makeStyles((theme) => ({
@@ -81,11 +81,11 @@ import { Footer } from "../../components/templates/Footer";
 
   function Child() {
     const classes = useStyles(children)
-    const url = convertTitleToSeoUrl(title)
+    const url = "1"
 
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title}>
+          <BasePage className={classes.rootLight} title={title} orgId='1'>
           <title>Mongen | Child details</title>
           {children ? (
           <Container className={classes.cardGrid}>
@@ -96,7 +96,7 @@ import { Footer } from "../../components/templates/Footer";
                         className={classes.image}
                         focusVisibleClassName={classes.focusVisible}
                         style={{height: "350px", width: "55%", marginLeft: "25%"}}
-                        href={`/${url}/paymentForm`}
+                        href={`/${url}/payment`}
                         >
                             <span
                                 className={classes.imageSrc}
@@ -105,7 +105,7 @@ import { Footer } from "../../components/templates/Footer";
                                 }}
                             />
                     </ButtonBase>
-                  <CallToActionButtons title={title}/>
+                  <CallToActionButtons orgId="1"/>
                   <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
                     Information about "Child 1"
                   </Typography>
@@ -153,12 +153,12 @@ import { Footer } from "../../components/templates/Footer";
                     {infoText}
                   </Typography>
                   </div>
-                  <CallToActionButtons title={title}/>
+                  <CallToActionButtons orgId="1"/>
           </Container>
           ) : (
             <h1>Sorry, we can't display the info about this child now. Come back later, we are working hard to fix the issue!</h1>
           )}
-            <Footer />
+            <Footer orgName={title} orgMission={infoText} />
           </BasePage>
         </NoSsr>
     )

@@ -45,36 +45,53 @@ export default function MainContactController(props: Props) {
   return (
     <div>
       <Typography variant="h6" gutterBottom>
-        Main Contact Information
-        </Typography>
+        Contact Information
+      </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={10}>
+        <Typography style={{marginTop:"7px", marginLeft:"2%",fontSize:"13px", fontStyle:"italic"}}>
+          We'd need this information to verify your identity
+        </Typography>
+        <Grid item xs={12}>
           <TextField
             required
             id="first_name"
             name="first_name"
-            label="First Name"
+            label="Enter your first name"
             onChange={(event) => updateForm("first_name", event.target.value)}
             defaultValue={() => getValue("first_name")}
             fullWidth
+            style={{marginTop:"20px"}}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <TextField
             required
             id="last_name"
             name="last_name"
-            label="Last Name"
+            label="Enter your last name"
             onChange={(event) => updateForm("last_name", event.target.value)}
             defaultValue={() => getValue("last_name")}
             fullWidth
+            style={{marginTop:"20px"}}
           />
         </Grid>
-        <Grid item xs={10}>
-          <Typography variant="subtitle2">Nationality:</Typography>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="email"
+            name="email"
+            label="Enter your email, so we can contact you"
+            onChange={(event) => updateForm("email", event.target.value)}
+            defaultValue={() => getValue("email")}
+            fullWidth
+            style={{marginTop:"20px"}}
+          />
+        </Grid>
+        <Grid item xs={12} style={{marginTop:"20px"}}>
+          <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality:</Typography>
           <CountriesController callback={updateCountry} />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12} style={{marginTop:"20px"}}>
           <PhotoIDUpload callback={updatePhotoIdUrl} />
         </Grid>
         {/*

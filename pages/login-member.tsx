@@ -8,7 +8,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePageAboutMongen, convertTitleToSeoUrl } from "../components/templates"
+  import { BasePageAboutMongen } from "../components/templates"
   import { AboutMongenFooter } from "../components/templates/Footer"
   
   const useStyles = makeStyles((theme) => ({
@@ -46,11 +46,9 @@ import {
     },
   }));
     
-  const title = "Your title"
-  
-  function LoginAdmin() {
+  function LoginOrgMember() {
     const classes = useStyles()  
-    const url = convertTitleToSeoUrl(title)
+    const url = "1"
 
     return (
         <NoSsr>
@@ -58,11 +56,11 @@ import {
                 <title>Mongen | Login</title>
                 <Container maxWidth="sm" className={classes.heroContent}>
                     <Typography  align="center" color="textPrimary" gutterBottom style={{fontSize:"2.8em"}}>
-                    Login as an admin
+                    Login as an org member
                     </Typography>
                         <div>
-                        <Button  className={classes.button} href="/loginOrgMember">Log in as org member</Button>
-                        <Button className={classes.button}  href="/loginSponsor">Log in as a sponsor</Button>
+                        <Button className={classes.button} href="/login-admin">Log in as an administrator</Button>
+                        <Button className={classes.button} href="/login-sponsor">Log in as a sponsor</Button>
                         </div>
                         <Paper component="form" style={{width: "60%", padding: '12px 14px',  marginLeft:"23%",  alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Username" style={{flex: "1"}} />
@@ -70,7 +68,7 @@ import {
                         <Paper component="form" style={{width: "60%", padding: '12px 14px', marginTop:"20px", marginLeft:"23%", marginBottom:"30px", alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Password" style={{flex: "1"}} />
                         </Paper>
-                        <Button href={`/${url}/admin`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
+                        <Button href={`/${url}/new-record`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
                         <Button style={{display:"block", marginLeft:"22%", marginTop:"40px"}} href="mailto:support@example.com">Don't have an account yet? Contact us</Button>
                 </Container>
                 <AboutMongenFooter />
@@ -79,4 +77,5 @@ import {
     )
   }
   
-  export default LoginAdmin
+  export default LoginOrgMember
+ 

@@ -42,10 +42,11 @@ export default function OrganizationNameVisionMission(props: Props) {
             required
             id="name"
             name="name"
-            label="Organization Name"
+            label="Enter the Organization name"
             onChange={(event) => updateForm("name", event.target.value)}
             defaultValue={() => getValue("name")}
             fullWidth
+            style={{marginTop:"20px"}}
           />
         </Grid>
         <Grid item xs={12}>
@@ -53,39 +54,45 @@ export default function OrganizationNameVisionMission(props: Props) {
             required
             id="seo_name"
             name="seo_name"
-            label="SEO Name"
+            label="Enter organization name, how you want it to be displayed in the url"
             onChange={(event) => updateForm("seo_name", event.target.value)}
             defaultValue={() => getValue("seo_name")}
             fullWidth
+            style={{marginTop:"10px"}}
           />
-        </Grid>
-        <Typography variant="body2">This is the name for the custom URL for your organization, ex. www.mongen.org/f/SEO_NAME</Typography>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="mission"
-            name="mission"
-            label="Mission"
-            multiline={true}
-            rows={6}
-            rowsMax={10}
-            onChange={(event) => updateForm("mission", event.target.value)}
-            defaultValue={() => getValue("mission")}
-            fullWidth
-          />
+            <Typography  style={{marginTop:"5px", fontSize:"12px"}}>
+              E.g, organization is called "Saving Children", please enter "saving-children", so the link to your page would be  {" "}
+              <span style={{fontStyle:"italic"}}>/saving-children</span>
+            </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
             id="vision"
             name="vision"
-            label="Vision"
+            label="Please tell us your story"
             multiline={true}
             rows={6}
-            rowsMax={10}
+            rowsMax={6}
             onChange={(event) => updateForm("vision", event.target.value)}
             defaultValue={() => getValue("vision")}
             fullWidth
+            style={{marginTop:"5px"}}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="mission"
+            name="mission"
+            label="Tell us the organization's mission and values"
+            multiline={true}
+            rows={6}
+            rowsMax={6}
+            onChange={(event) => updateForm("mission", event.target.value)}
+            defaultValue={() => getValue("mission")}
+            fullWidth
+            style={{marginTop:"10px"}}
           />
         </Grid>
       </Grid>

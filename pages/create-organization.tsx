@@ -8,6 +8,7 @@ import {
   Paper,
   StepLabel,
   Step,
+  Link,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
@@ -24,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+  },
+  content: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(5, 0, 6),
   },
   rootLight: {
     flexGrow: 1,
@@ -50,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5),
+    padding: theme.spacing(5, 0, 5),
   },
   buttons: {
     display: 'flex',
@@ -62,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location', 'Main Contact', 'Summary'];
+const steps = ['Mission and Vision', 'Location', 'Contact info', 'Summary'];
 
 type OrganizationAddress = {
   address: string
@@ -87,6 +92,10 @@ type MainContact = {
 }
 
 function Index() {
+
+  //TODO: implement form validation https://react-hook-form.com/get-started#Applyvalidation
+
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [organizationDetails, setOrganizationDetails] = React.useState({})
@@ -154,72 +163,72 @@ function Index() {
     <NoSsr>
       <BasePageAboutMongen className={classes.rootLight}>
         <title>Mongen Initiative</title>
-        <Container className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center" style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-              Add a new organization
-              </Typography>
-            <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            {activeStep === steps.length ? (
-              <div>
-                <Typography variant="h5" gutterBottom>
-                  New organization added
-                    </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  We will check the information your provided and we will contact you for further steps
-                    </Typography>
-                <Typography variant="subtitle1" style={{ padding: "10px" }}>
-                  Thank you :)
-                    </Typography>
-              </div>
-            ) : (
+        <div className={classes.content}>
+          <Link style={{marginLeft:"7%"}} href={`/`}> &larr; Back to Homepage</Link>
+          <Container className={classes.layout}>
+            <Paper className={classes.paper}>
+              <Typography component="h1" variant="h4" align="center" style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                Register your interest
+                </Typography>
+              <Stepper activeStep={activeStep} className={classes.stepper}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              {activeStep === steps.length ? (
                 <div>
-                  {activeStep == 0 ?
-                    <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails} />
-                    :
-                    <div></div>
-                  }
-                  {activeStep === 1 ?
-                    <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation} />
-                    :
-                    <div></div>
-                  }
-                  {activeStep === 2 ?
-                    <MainContactController callback={updateMainContact} values={mainContact} />
-                    :
-                    <div></div>
-                  }
-                  {activeStep === 3 ?
-                    <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact} />
-                    :
-                    <div></div>
-                  }
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button} variant="outlined">
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Create Organization' : 'Next'}
-                    </Button>
-                  </div>
+                  <Typography style={{marginTop:"80px", fontSize:"17px"}}>
+                    We will check the information your provided and contact you for further steps.
+                      </Typography>
+                  <Typography variant="subtitle1" style={{marginTop:"40px", marginLeft:"80%", marginBottom:"80px"}}>
+                    Thank you :)
+                      </Typography>
                 </div>
+              ) : (
+                  <div style={{height:"max-content"}}>
+                    {activeStep == 0 ?
+                      <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails} />
+                      :
+                      <div></div>
+                    }
+                    {activeStep === 1 ?
+                      <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation} />
+                      :
+                      <div></div>
+                    }
+                    {activeStep === 2 ?
+                      <MainContactController callback={updateMainContact} values={mainContact} />
+                      :
+                      <div></div>
+                    }
+                    {activeStep === 3 ?
+                      <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact} />
+                      :
+                      <div></div>
+                    }
+                    <div className={classes.buttons}>
+                      {activeStep !== 0 && (
+                        <Button onClick={handleBack} className={classes.button} variant="outlined">
+                          Back
+                        </Button>
+                      )}
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        {activeStep === steps.length - 1 ? 'Create Organization' : 'Next'}
+                      </Button>
+                    </div>
+                  </div>
               )}
-          </Paper>
-        </Container>
-        <Divider />
+            </Paper>
+          </Container> 
+          <Divider />
+        </div>
         <AboutMongenFooter />
       </BasePageAboutMongen>
     </NoSsr>

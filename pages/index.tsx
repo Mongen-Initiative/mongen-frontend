@@ -42,9 +42,6 @@ export interface Homepage {
 
 function Index() {
   const classes = useStyles()
-  // TODO: This function looks amazing to be implemented for org creation form
-  // const url = convertTitleToSeoUrl(organizations[1])
-
     return (
       <NoSsr>
         <BasePageAboutMongen className={classes.rootLight}>

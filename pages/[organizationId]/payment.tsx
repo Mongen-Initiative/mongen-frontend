@@ -89,7 +89,7 @@ export default function Checkout() {
 
   return (
     <NoSsr>
-      <BasePage className={classes.rootLight} title={title}>
+      <BasePage className={classes.rootLight} title={title} orgId='1'>
       <title>Mongen | Sponsor a child</title>
         <Container className={classes.layout}>
           <Paper className={classes.paper}>

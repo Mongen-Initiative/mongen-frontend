@@ -8,7 +8,7 @@ import {
   Toolbar, 
   IconButton} from "@material-ui/core"
 import { useRouter } from "next/router"
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import PersonIcon from '@material-ui/icons/Person'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,10 +20,8 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
   },
   titleLight: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "7%",
+    display:"flex",
+    marginTop: "8px",
     color: "#edf2ea",
   },
 }))
@@ -33,15 +31,14 @@ type Props = {
   className?: string
   color?: any
   title?: string
+  orgId?: any
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, color, title } = props
+  const { children, className, color, title, orgId } = props
   const classes = useStyles(props)
   
   const router = useRouter()
-
-  const url = convertTitleToSeoUrl(title)
   
   return (
     <div className={`${classes.root} ${className}`}>
@@ -56,7 +53,7 @@ export const BasePage = function(props: Props) {
             >
               <Link
                 underline="none"
-                href={`/${url}`}
+                href={`/${orgId}`}
                 className={classes.titleLight}
               >
                 {title}
@@ -64,8 +61,8 @@ export const BasePage = function(props: Props) {
             </Typography>
             <div style={{ float: "right", width: "6%"}}>
             {/* Login icon */}
-            <IconButton onClick={() => router.push(`/loginSponsor`)}>
-              <AccountBoxIcon style={{color:"#edf2ea"}} />
+            <IconButton onClick={() => router.push(`/login-sponsor`)}>
+              <PersonIcon style={{color:"#edf2ea"}} />
             </IconButton>
             </div>
           </div>
@@ -90,7 +87,6 @@ export const BasePageAboutMongen = function(props: Props) {
         {/* top nav bar with mongen name */}
       <CssBaseline />
       <main className={classes.content}>
-        <div style={{marginTop:"30px"}} />
           {/* all the main body */}
         <section>{children}</section>
       </main>
