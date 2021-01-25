@@ -48,13 +48,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export interface Organization {
-  id: any
-  address: any
+  id: number
+  address: string
   country: any
-  name: any
+  name: string
   verified: any
-  mission: any
-  vision: any
+  mission: string
+  vision: string
+  seoName: string
 }
 export interface Children {
   id: any
@@ -64,9 +65,6 @@ export interface Sponsor {
 }
 
 const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6", "Child 7", "Child 8", "Child 9"];
-const infoText = "Information about the child. Information about the child. Information about the child. \n Information about the child. Information about the child. Information about the child. Information about the child.  \n Information about the child. Information about the child. Information about the child. Information about the child."
-const title = "Your title"
-// const organization = ["123"]
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
@@ -74,59 +72,60 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
 
   return (
       <NoSsr>
-        <BasePage className={classes.rootLight} title={title}>
-        <title>Mongen Initiative</title>
         {organization ? (
-            <div>
+          <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
+          <title>Mongen Initiative</title>
               <div>
-              <Container maxWidth="sm" className={classes.heroContent}>
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
-                  {organization.name}
-                </Typography>
-                <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
-                  {infoText}
-                </Typography>
-              </Container>
-              </div>
-              <CallToActionButtons title={title}/>
-              <Divider />
-                <Container className={classes.cardGrid} maxWidth="md">
-                  <Grid container spacing={4}>
-                    {children.map((child) => (
-                      <Grid item key={child} xs={12} sm={6} md={4}>
-                        <Link href={`/${url}/child`} underline="none">
-                          <Card className={classes.card}>
-                            <CardMedia
-                              className={classes.cardMedia}
-                              image="child.jpg"
-                              title="Image title"
-                            />
-                            <CardContent className={classes.cardContent}>
-                              <Typography gutterBottom variant="h5" component="h2">
-                                {child}
-                              </Typography>
-                              <Typography>
-                                This is a child that needs your help. You can use this section to put some key info about the child.
-                              </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Button size="small"  href={`/${url}/child`} style={{color: MuiTheme.palette.primary.main}}>
-                                Learn more
-                              </Button>
-                            </CardActions>
-                          </Card>
-                        </Link>
-                      </Grid>
-                    ))}
-                  </Grid>
+                <div>
+                <Container maxWidth="sm" className={classes.heroContent}>
+                  <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom >
+                    {organization.name}
+                  </Typography>
+                  <Typography style={{fontSize: "1.8em"}} align="center" color="textSecondary">
+                  {organization.mission}
+                  </Typography>
                 </Container>
-              <CallToActionButtons title={title}/>
-              <Footer />
-            </div>
-        ) : (
-          <h1>There is no organization with such name</h1>
-        )}
-        </BasePage>
+                </div>
+                <CallToActionButtons orgId={organization.id}/>
+                <Divider />
+                  <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                      {children.map((child) => (
+                        <Grid item key={child} xs={12} sm={6} md={4}>
+                          <Link href={`/${url}/child`} underline="none">
+                            <Card className={classes.card}>
+                              <CardMedia
+                                className={classes.cardMedia}
+                                image="child.jpg"
+                                title="Image title"
+                              />
+                              <CardContent className={classes.cardContent}>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                  {child}
+                                </Typography>
+                                <Typography>
+                                  This is a child that needs your help. You can use this section to put some key info about the child.
+                                </Typography>
+                              </CardContent>
+                              <CardActions>
+                                <Button size="small"  href={`/${organization.id}/child`} style={{color: MuiTheme.palette.primary.main}}>
+                                  Learn more
+                                </Button>
+                              </CardActions>
+                            </Card>
+                          </Link>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Container>
+                  <CallToActionButtons orgId={organization.id}/>
+                <Footer orgName={organization.name} orgMission={organization.mission} />
+              </div>
+          
+          </BasePage>
+      ) : (
+        <h1>There is no organization with such name</h1>
+      )}
       </NoSsr>
   )
 }
@@ -134,7 +133,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
 export const getServerSideProps: GetServerSideProps = async context => {
   const { organizationId} = context.query
 
-  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/1/`, {
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
     method: "GET",
   })
 

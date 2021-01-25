@@ -75,4 +75,3 @@ import {
   }
   
   export default About
-  

@@ -33,15 +33,14 @@ type Props = {
   className?: string
   color?: any
   title?: string
+  orgId?: any
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, color, title } = props
+  const { children, className, color, title, orgId } = props
   const classes = useStyles(props)
   
   const router = useRouter()
-
-  const url = convertTitleToSeoUrl(title)
   
   return (
     <div className={`${classes.root} ${className}`}>
@@ -56,7 +55,7 @@ export const BasePage = function(props: Props) {
             >
               <Link
                 underline="none"
-                href={`/${url}`}
+                href={`/${orgId}`}
                 className={classes.titleLight}
               >
                 {title}
