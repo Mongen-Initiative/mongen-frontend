@@ -20,10 +20,8 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
   },
   titleLight: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: "8%",
+    display:"flex",
+    marginTop: "8px",
     color: "#edf2ea",
   },
 }))
