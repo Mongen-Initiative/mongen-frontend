@@ -96,7 +96,7 @@ import { Footer } from "../../components/templates/Footer";
                         className={classes.image}
                         focusVisibleClassName={classes.focusVisible}
                         style={{height: "350px", width: "55%", marginLeft: "25%"}}
-                        href={`/${url}/paymentForm`}
+                        href={`/${url}/payment`}
                         >
                             <span
                                 className={classes.imageSrc}

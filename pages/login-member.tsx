@@ -68,7 +68,7 @@ import {
                         <Paper component="form" style={{width: "60%", padding: '12px 14px', marginTop:"20px", marginLeft:"23%", marginBottom:"30px", alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Password" style={{flex: "1"}} />
                         </Paper>
-                        <Button href={`/${url}/newRecord`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
+                        <Button href={`/${url}/new-record`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
                         <Button style={{display:"block", marginLeft:"22%", marginTop:"40px"}} href="mailto:support@example.com">Don't have an account yet? Contact us</Button>
                 </Container>
                 <AboutMongenFooter />

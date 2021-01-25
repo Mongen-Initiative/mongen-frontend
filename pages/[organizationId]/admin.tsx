@@ -71,7 +71,7 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
                     {title} Admin panel
                     </Typography>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
-                        <Button  href={`/${url}/orgProfile`} variant="outlined"  style={{width:"35%", marginTop:"3%"}}>
+                        <Button  href={`/${url}/profile`} variant="outlined"  style={{width:"35%", marginTop:"3%"}}>
                             View the organization profile
                         </Button>
                     </div>
