@@ -10,7 +10,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-import { BasePageAboutMongen, convertTitleToSeoUrl } from "../../components/templates"
+import { BasePageAboutMongen } from "../../components/templates"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid"
 import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal"
@@ -32,7 +32,7 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
 
   function Admin() {
     const classes = useStyles()  
-    const url = convertTitleToSeoUrl(title)
+    const url = "1"
 
     const columns: ColDef[] = [
         { field: 'id', headerName: 'Id', width: 80 },
@@ -63,7 +63,9 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
           <BasePageAboutMongen className={classes.rootLight}>
           <title>Admin | Mongen Initiative</title>
             <div>
-                <Link style={{marginLeft:"7%", color:"#656565"}} href={`/${url}`}> &larr; Back to {title} Homepage</Link>
+                <div style={{marginTop:"40px"}}>
+                    <Link style={{marginLeft:"7%", color:"#656565"}} href={`/${url}`}> &larr; Back to {title} Homepage</Link>
+                </div>
                 <Container className={classes.heroContent}>
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
                     {title} Admin panel

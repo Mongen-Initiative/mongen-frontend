@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: "7%",
+    paddingTop: "8%",
     color: "#edf2ea",
   },
 }))

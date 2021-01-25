@@ -8,7 +8,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePageAboutMongen, convertTitleToSeoUrl } from "../components/templates"
+  import { BasePageAboutMongen } from "../components/templates"
   import { AboutMongenFooter } from "../components/templates/Footer"
   
   const useStyles = makeStyles((theme) => ({
@@ -46,11 +46,9 @@ import {
     },
   }));
   
-  const title = "Your title"
-
   function LoginSponsor() {
     const classes = useStyles()  
-    const url = convertTitleToSeoUrl(title)
+    const url = "1"
 
     return (
         <NoSsr>

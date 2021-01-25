@@ -8,7 +8,7 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePage, convertTitleToSeoUrl } from "../../components/templates"
+  import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 import { Organization } from "."
@@ -42,8 +42,10 @@ import { Organization } from "."
           {organization ? (
             <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
               <title>{organization.name} | About us</title>
+              <div style={{marginTop:"40px"}}>
+                <Link style={{marginLeft:"7%"}} href={`/${organization.id}`}> &larr; Back to Homepage</Link>
+              </div>
               <div className={classes.content}>
-              <Link style={{marginLeft:"7%"}} href={`/${organization.id}`}> &larr; Back to Homepage</Link>
                 <Container>
                   <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
                   </Typography>
