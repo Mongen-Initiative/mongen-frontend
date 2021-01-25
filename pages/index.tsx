@@ -61,6 +61,7 @@ function Index() {
           </div>
           <AboutMongenCallToActionButtons />
           <Divider />
+          {/* all organizations (should be only verified later) */}
           <MainOrganizationList/>
           <AboutMongenFooter />
         </BasePageAboutMongen>

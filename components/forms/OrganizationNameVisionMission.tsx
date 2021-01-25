@@ -1,5 +1,6 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
 import React from "react";
+import { convertTitleToSeoUrl } from "../templates/BasePage";
 
 type Props = {
   callback
@@ -22,6 +23,12 @@ export default function OrganizationNameVisionMission(props: Props) {
         callback(orgData);
   }
 
+  function updateNameAndSeoLink(data) {
+    setOrgData({ ...orgData, ["name"]: data })
+    setOrgData({ ...orgData, ["seo_name"]: convertTitleToSeoUrl(data) })
+    callback(orgData);
+}
+
   function getValue(type) {
       if (values){
         if (type in values){
@@ -43,38 +50,25 @@ export default function OrganizationNameVisionMission(props: Props) {
             id="name"
             name="name"
             label="Enter the Organization name"
-            onChange={(event) => updateForm("name", event.target.value)}
+            onChange={(event) => updateNameAndSeoLink(event.target.value)}
             defaultValue={() => getValue("name")}
             fullWidth
             style={{marginTop:"20px"}}
           />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="seo_name"
-            name="seo_name"
-            label="Enter organization name, how you want it to be displayed in the url"
-            onChange={(event) => updateForm("seo_name", event.target.value)}
-            defaultValue={() => getValue("seo_name")}
-            fullWidth
-            style={{marginTop:"10px"}}
-          />
             <Typography  style={{marginTop:"5px", fontSize:"12px"}}>
-              E.g, organization is called "Saving Children", please enter "saving-children", so the link to your page would be  {" "}
+              Note that the url for your site will be generated from the name you enter. E.g., organization is called "Saving Children", so the link to your page would be  {" "}
               <span style={{fontStyle:"italic"}}>/saving-children</span>
             </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="vision"
-            name="vision"
+            id="story"
+            name="story"
             label="Please tell us your story"
             multiline={true}
             rows={6}
             rowsMax={6}
-            onChange={(event) => updateForm("vision", event.target.value)}
             defaultValue={() => getValue("vision")}
             fullWidth
             style={{marginTop:"5px"}}
@@ -91,6 +85,21 @@ export default function OrganizationNameVisionMission(props: Props) {
             rowsMax={6}
             onChange={(event) => updateForm("mission", event.target.value)}
             defaultValue={() => getValue("mission")}
+            fullWidth
+            style={{marginTop:"10px"}}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="vision"
+            name="vision"
+            label="Tell us the organization's vision: big plan or milestone you are moving towards"
+            multiline={true}
+            rows={6}
+            rowsMax={6}
+            onChange={(event) => updateForm("vision", event.target.value)}
+            defaultValue={() => getValue("vision")}
             fullWidth
             style={{marginTop:"10px"}}
           />
