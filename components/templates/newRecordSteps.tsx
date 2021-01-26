@@ -25,17 +25,16 @@ export function GeneralInfoStep(props: Props) {
     firstName: '',
     lastName: '',
     birth: '',
-    onTheStreet:'no',
     address: '',
     reason: '',
-    age: '',
-    country_iso: '',
-    created: '',
-    gender: '',
-    height: '',
-    street_situation: '',
-    updated: '',
-    weight: '',
+    age: 23,
+    gender: 'girl',
+    height: 165,
+    street_situation_id: 1,
+    living_in_street: "false",
+    start_date: "2021-01-26T14:59:32.842Z",
+    end_date: "2021-01-26T14:59:32.842Z",
+    weight: 55,
   })
   
   function updateForm(type, data) {
@@ -70,18 +69,18 @@ export function GeneralInfoStep(props: Props) {
           />
         </Grid>
         <Grid item xs={12}>
+          <Typography style={{color:"grey", marginBottom:"5px"}}>Date of birth</Typography>
           <TextField
             required
             id="dob"
             name="dob"
-            label="Date of birth"
-            fullWidth
+            type="date"
             onChange={(event) => updateForm("birth", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="street-child" value="yes" onChange={(event) => updateForm("onTheStreet", event.target.value)}
+            control={<Checkbox color="secondary" name="street-child" value="true" onChange={(event) => updateForm("living_in_street", event.target.value)}
             />}
             label="Street child"
           />
@@ -117,7 +116,7 @@ export function GeneralInfoStep(props: Props) {
         <Button
             variant="contained"
             component="label"
-            style = {{margin:"15px"}}
+            style = {{margin:"15px", marginTop:"20px"}}
         >
         Upload Child's photo
         <input

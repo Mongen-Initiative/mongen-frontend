@@ -77,7 +77,7 @@ export default function AddNewRecord() {
   };
 
   const createBeneficiary = () => {
-    BeneficiaryService.create({ ...generalInfo, ...academicRecords, ...parent, ...counsellor })
+    BeneficiaryService.create({ ...generalInfo })
       .then(
         (response) => {
           console.log(`Beneficiary added! ID: ${response.data.id}`)
@@ -142,9 +142,17 @@ export default function AddNewRecord() {
                     <Typography variant="h5" gutterBottom>
                       New record is added
                     </Typography>
-                    <Typography variant="subtitle1" style={{padding:"10px"}}>
-                      Thank you :)
+                    <Typography variant="subtitle1" style={{paddingTop:"50px", paddingLeft:"80px"}}>
+                      Thank you for adding a new record. It will appear on your homepage now :)
                     </Typography>
+                    <Button
+                    variant="contained"
+                    color="primary"
+                    href="/1"
+                    style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
+                  >
+                    Go back to the homepage
+                  </Button>
                   </div>
                 ) : (
                   <div style={{height:"max-content"}}>
