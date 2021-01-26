@@ -1,14 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { BasePage } from '../../components/templates';
-import { Container, NoSsr } from '@material-ui/core';
-import {GeneralInfoStep, AcademicRecordsStep, CounsellorStep, NewRecordSummaryStep, ParentStep}  from '../../components/templates/newRecordSteps';
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import { BasePage } from '../../components/templates'
+import { Container, NoSsr } from '@material-ui/core'
+import {GeneralInfoStep, AcademicRecordsStep, CounsellorStep, NewRecordSummaryStep, ParentStep}  from '../../components/templates/newRecordSteps'
+import BeneficiaryService from '../../components/services/BeneficiaryService'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,36 +55,71 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <GeneralInfoStep />;
-    case 1:
-      return <AcademicRecordsStep />;
-    case 2:
-      return <ParentStep />;
-    case 3:
-      return <CounsellorStep />;
-    case 4:
-      return <NewRecordSummaryStep />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 const title = "Your title"
+
+// http://localhost:8080/swagger-ui.html#/beneficiary-controller/createBeneficiaryUsingPOST
 
 export default function AddNewRecord() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0)
+  const [generalInfo, setGeneralInfo] = useState({})
+  const [academicRecords, setAcademicRecords] = useState({})
+  const [parent, setParent] = useState({})
+  const [counsellor, setCounsellor] = useState({})
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    setActiveStep(activeStep + 1)
+    if (activeStep === steps.length - 1) createBeneficiary()
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const createBeneficiary = () => {
+    BeneficiaryService.create({ ...generalInfo, ...academicRecords, ...parent, ...counsellor })
+      .then(
+        (response) => {
+          console.log(`Beneficiary added! ID: ${response.data.id}`)
+        }
+      )
+      .catch(() => {
+        console.log("Something failed ):")
+      });
+  };
+
+  const updateGeneralInfo = (data) => {
+    setGeneralInfo(data);
+  }
+
+  const updateAcademicRecords = (data) => {
+    setAcademicRecords(data);
+  }
+
+  const updateParent = (data) => {
+    setParent(data);
+  }
+
+  const updateCounsellor = (data) => {
+    setCounsellor(data);
+  }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <GeneralInfoStep callback={updateGeneralInfo}/>;
+      case 1:
+        return <AcademicRecordsStep callback={updateAcademicRecords}/>;
+      case 2:
+        return <ParentStep callback={updateParent}/>;
+      case 3:
+        return <CounsellorStep callback={updateCounsellor}/>;
+      case 4:
+        return <NewRecordSummaryStep generalInfo={generalInfo} academicRecords={academicRecords} parent={parent} counsellor={counsellor}/>;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   return (
       <NoSsr>
@@ -111,11 +147,11 @@ export default function AddNewRecord() {
                     </Typography>
                   </div>
                 ) : (
-                  <div>
+                  <div style={{height:"max-content"}}>
                     {getStepContent(activeStep)}
                     <div className={classes.buttons}>
                       {activeStep !== 0 && (
-                        <Button onClick={handleBack} className={classes.button}  variant="outlined">
+                        <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
                       )}
@@ -128,7 +164,7 @@ export default function AddNewRecord() {
                         {activeStep === steps.length - 1 ? 'Add a record' : 'Next'}
                       </Button>
                     </div>
-                  </div>
+                </div>
                 )}
             </Paper>
           </Container>

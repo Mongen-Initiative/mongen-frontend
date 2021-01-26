@@ -9,7 +9,40 @@ import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
 import { List, ListItem, ListItemText, Button } from '@material-ui/core';
 
-export function GeneralInfoStep() {
+type Props = {
+  callback?:any
+  values?:any
+  generalInfo?:any
+  academicRecords?:any
+  parent?:any
+  counsellor?:any
+}
+
+
+export function GeneralInfoStep(props: Props) {
+  const { callback } = props
+  const [generalInfoData, setGeneralInfoData] = React.useState({
+    firstName: '',
+    lastName: '',
+    birth: '',
+    onTheStreet:'no',
+    address: '',
+    reason: '',
+    age: '',
+    country_iso: '',
+    created: '',
+    gender: '',
+    height: '',
+    street_situation: '',
+    updated: '',
+    weight: '',
+  })
+  
+  function updateForm(type, data) {
+    setGeneralInfoData({ ...generalInfoData, [type]: data })
+    callback(generalInfoData);
+  }
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -23,6 +56,7 @@ export function GeneralInfoStep() {
             name="firstName"
             label="First name"
             fullWidth
+            onChange={(event) => updateForm("firstName", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -32,6 +66,7 @@ export function GeneralInfoStep() {
             name="lastName"
             label="Last name"
             fullWidth
+            onChange={(event) => updateForm("lastName", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -41,11 +76,13 @@ export function GeneralInfoStep() {
             name="dob"
             label="Date of birth"
             fullWidth
+            onChange={(event) => updateForm("birth", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="street-child" value="yes" />}
+            control={<Checkbox color="secondary" name="street-child" value="yes" onChange={(event) => updateForm("onTheStreet", event.target.value)}
+            />}
             label="Street child"
           />
         </Grid>
@@ -53,8 +90,9 @@ export function GeneralInfoStep() {
           <TextField
             id="location"
             name="location"
-            label="Location on the street"
+            label="Current location"
             fullWidth
+            onChange={(event) => updateForm("address", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -73,6 +111,7 @@ export function GeneralInfoStep() {
             name="reason-being-on-the-street"
             label="Reason for being on the street"
             fullWidth
+            onChange={(event) => updateForm("reason", event.target.value)}
           />
         </Grid>
         <Button
@@ -91,41 +130,75 @@ export function GeneralInfoStep() {
   );
 }
 
-export function AcademicRecordsStep() {
+export function AcademicRecordsStep(props: Props) {
+  const { callback } = props
+  const [academicRecordsData, setAcademicRecordsData] = React.useState({
+    lastSchool: '',
+    lastClass: '',
+    depDate: '',
+  })
+  
+  function updateForm(type, data) {
+    setAcademicRecordsData({ ...academicRecordsData, [type]: data })
+    callback(academicRecordsData);
+  }
+
   return (
-    <React.Fragment>
+    <div>
       <Typography variant="h6" gutterBottom>
         Academic Records
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={3} md={6}>
-          <TextField required id="last-school" label="Last school attended" fullWidth/>
+          <TextField 
+            required id="last-school" label="Last school attended" fullWidth
+            onChange={(event) => updateForm("lastSchool", event.target.value)}
+          />
         </Grid>
         <Grid item xs={3} md={3}>
           <TextField
             required
-            id="last-school"
-            label="Las't class"
+            id="last-class"
+            label="Last class attended"
             fullWidth
+            onChange={(event) => updateForm("lastClass", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="depDate" label="Departure date" fullWidth/>
+          <TextField 
+            required id="depDate" label="Departure date" fullWidth
+            onChange={(event) => updateForm("depDate", event.target.value)}
+          />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </div>
   );
 }
 
-export function ParentStep() {
-    return (
-      <React.Fragment>
+export function ParentStep(props: Props) {
+  const { callback } = props
+  const [parentData, setParentData] = React.useState({
+    parentName: '',
+    parentPhone: '',
+    parentAddress: '',
+  })
+  
+  function updateForm(type, data) {
+    setParentData({ ...parentData, [type]: data })
+    callback(parentData);
+  }
+
+  return (
+      <div>
         <Typography variant="h6" gutterBottom>
           Parent/Ward details
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <TextField required id="parent-name" label="Name of parent/ward" fullWidth/>
+            <TextField 
+              required id="parent-name" label="Name of parent/ward" fullWidth
+              onChange={(event) => updateForm("parentName", event.target.value)}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
@@ -133,25 +206,44 @@ export function ParentStep() {
               id="parent-phone"
               label="Phone number of parent/ward"
               fullWidth
+              onChange={(event) => updateForm("parentPhone", event.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField required id="parent-address" label="Address of parent/ward" fullWidth />
+            <TextField 
+              required id="parent-address" label="Address of parent/ward" fullWidth 
+              onChange={(event) => updateForm("parentAddress", event.target.value)}
+            />
           </Grid>
         </Grid>
-      </React.Fragment>
-    );
-  }
+      </div>
+  )
+}
 
-  export function CounsellorStep() {
+export function CounsellorStep(props: Props) {
+    const { callback } = props
+    const [counsellorData, setCounsellorData] = React.useState({
+      counsellorName: '',
+      timesCounselled: '',
+      notes: '',
+    })
+    
+    function updateForm(type, data) {
+      setCounsellorData({ ...counsellorData, [type]: data })
+      callback(counsellorData);
+    }
+
     return (
-      <React.Fragment>
+      <div>
         <Typography variant="h6" gutterBottom>
           Counselor's segment
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <TextField required id="counsellor-name" label="Name of counsellor in charge" fullWidth/>
+            <TextField 
+              required id="counsellor-name" label="Name of counsellor in charge" fullWidth
+              onChange={(event) => updateForm("counsellorName", event.target.value)}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
@@ -159,41 +251,62 @@ export function ParentStep() {
               id="times-counselled"
               label="Times counselled"
               fullWidth
+              onChange={(event) => updateForm("timesCounselled", event.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField required id="counsellor-note" label="Remark about the child"  multiline rows={4} fullWidth />
+            <TextField 
+              required id="counsellor-note" label="Notes about the child"  multiline rows={4} fullWidth
+              onChange={(event) => updateForm("notes", event.target.value)}
+             />
           </Grid>
         </Grid>
-      </React.Fragment>
+      </div>
     );
-  }
+}
 
 
-export function NewRecordSummaryStep() {
+export function NewRecordSummaryStep(props: Props) {
+  const { generalInfo, academicRecords, parent, counsellor } = props
+  console.log(generalInfo)
+  console.log(academicRecords)
+  console.log(parent)
+  console.log(counsellor)
 
   return (
       <div>
         <Typography variant="h6" gutterBottom>
           New record summary
         </Typography>
-        <Typography variant="h5" align="center" style={{padding:"15px"}}>Child 1</Typography>
+        <Typography variant="h5" align="center" style={{padding:"15px"}}>{generalInfo.firstName} {generalInfo.lastName}</Typography>
         <List>
-            <ListItem>
-              <ListItemText>Fear:</ListItemText>
-              <Typography variant="subtitle1">Loneliness</Typography>
+          <ListItem>
+            <ListItemText>Reason for being on the street:</ListItemText>
+            <Typography variant="subtitle1">{generalInfo.reason}</Typography>
+          </ListItem>
+          <ListItem>
+            <ListItemText>Date of birth:</ListItemText>
+            <Typography variant="subtitle1">{generalInfo.birth}</Typography>
+          </ListItem>
+          <ListItem>
+              <ListItemText>Current location:</ListItemText>
+              <Typography variant="subtitle1">{generalInfo.address}</Typography>
             </ListItem>
           <ListItem>
-          <ListItemText>Date of birth:</ListItemText>
-            <Typography variant="subtitle1">03/08/2005</Typography>
+            <ListItemText>Last school attended:</ListItemText>
+            <Typography variant="subtitle1">{academicRecords.lastSchool} on {academicRecords.depDate}</Typography>
           </ListItem>
           <ListItem>
-          <ListItemText>Ward name:</ListItemText>
-            <Typography variant="subtitle1">John Smith</Typography>
+            <ListItemText>Ward/Parent name:</ListItemText>
+            <Typography variant="subtitle1">{parent.parentName}</Typography>
           </ListItem>
           <ListItem>
-          <ListItemText>Counselor's notes:</ListItemText>
-            <Typography variant="subtitle1">Needs another appointment</Typography>
+            <ListItemText>Counsellor:</ListItemText>
+            <Typography variant="subtitle1">{counsellor.counsellorName}</Typography>
+          </ListItem>
+          <ListItem>
+            <ListItemText>Counsellor's notes:</ListItemText>
+            <Typography variant="subtitle1">{counsellor.notes}</Typography>
           </ListItem>
         </List>
     </div>
