@@ -149,9 +149,17 @@ export default function AddNewRecord() {
                     variant="contained"
                     color="primary"
                     href="/1"
-                    style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
+                    style={{marginTop:"60px", marginLeft:"30%", marginBottom:"10px", width:"270px"}}
                   >
                     Go back to the homepage
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    href="/1/new-record"
+                    style={{marginTop:"10px", marginLeft:"30%", marginBottom:"80px", width:"270px"}}
+                  >
+                    Create another record
                   </Button>
                   </div>
                 ) : (

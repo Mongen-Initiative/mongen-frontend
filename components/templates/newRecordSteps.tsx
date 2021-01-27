@@ -18,23 +18,17 @@ type Props = {
   counsellor?:any
 }
 
-
 export function GeneralInfoStep(props: Props) {
   const { callback } = props
   const [generalInfoData, setGeneralInfoData] = React.useState({
-    firstName: '',
-    lastName: '',
-    birth: '',
+    first_name: '',
+    last_name: '',
+    date_of_birth: '',
     address: '',
-    reason: '',
-    age: 23,
-    gender: 'girl',
-    height: 165,
-    street_situation_id: 1,
-    living_in_street: "false",
-    start_date: "2021-01-26T14:59:32.842Z",
-    end_date: "2021-01-26T14:59:32.842Z",
-    weight: 55,
+    gender: '',
+    height: 0,
+    weight: 0,
+    country_iso: "US"
   })
   
   function updateForm(type, data) {
@@ -55,7 +49,7 @@ export function GeneralInfoStep(props: Props) {
             name="firstName"
             label="First name"
             fullWidth
-            onChange={(event) => updateForm("firstName", event.target.value)}
+            onChange={(event) => updateForm("first_name", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -65,7 +59,7 @@ export function GeneralInfoStep(props: Props) {
             name="lastName"
             label="Last name"
             fullWidth
-            onChange={(event) => updateForm("lastName", event.target.value)}
+            onChange={(event) => updateForm("last_name", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -75,12 +69,12 @@ export function GeneralInfoStep(props: Props) {
             id="dob"
             name="dob"
             type="date"
-            onChange={(event) => updateForm("birth", event.target.value)}
+            onChange={(event) => updateForm("date_of_birth", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="street-child" value="true" onChange={(event) => updateForm("living_in_street", event.target.value)}
+            control={<Checkbox color="secondary" name="street-child" value="true"
             />}
             label="Street child"
           />
@@ -110,13 +104,42 @@ export function GeneralInfoStep(props: Props) {
             name="reason-being-on-the-street"
             label="Reason for being on the street"
             fullWidth
-            onChange={(event) => updateForm("reason", event.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="gender"
+            name="gender"
+            label="Gender"
+            fullWidth
+            onChange={(event) => updateForm("gender", event.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <TextField
+            required
+            id="weight"
+            name="weight"
+            label="Weight in kilos"
+            fullWidth
+            onChange={(event) => updateForm("weight", event.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <TextField
+            required
+            id="height"
+            name="height"
+            label="Height in cm"
+            fullWidth
+            onChange={(event) => updateForm("height", event.target.value)}
           />
         </Grid>
         <Button
             variant="contained"
             component="label"
-            style = {{margin:"15px", marginTop:"20px"}}
+            style = {{margin:"15px", marginTop:"30px"}}
         >
         Upload Child's photo
         <input
@@ -163,9 +186,11 @@ export function AcademicRecordsStep(props: Props) {
             onChange={(event) => updateForm("lastClass", event.target.value)}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={3}>
+        <Typography style={{color:"grey", marginTop:"-2px", fontSize:"12px"}}>Departure date</Typography>
           <TextField 
-            required id="depDate" label="Departure date" fullWidth
+            required id="depDate"
+            type="date"
             onChange={(event) => updateForm("depDate", event.target.value)}
           />
         </Grid>
@@ -277,7 +302,7 @@ export function NewRecordSummaryStep(props: Props) {
         <Typography variant="h6" gutterBottom>
           New record summary
         </Typography>
-        <Typography variant="h5" align="center" style={{padding:"15px"}}>{generalInfo.firstName} {generalInfo.lastName}</Typography>
+        <Typography variant="h5" align="center" style={{padding:"15px"}}>{generalInfo.first_name} {generalInfo.last_name}</Typography>
         <List>
           <ListItem>
             <ListItemText>Reason for being on the street:</ListItemText>
@@ -285,7 +310,7 @@ export function NewRecordSummaryStep(props: Props) {
           </ListItem>
           <ListItem>
             <ListItemText>Date of birth:</ListItemText>
-            <Typography variant="subtitle1">{generalInfo.birth}</Typography>
+            <Typography variant="subtitle1">{generalInfo.date_of_birth}</Typography>
           </ListItem>
           <ListItem>
               <ListItemText>Current location:</ListItemText>
