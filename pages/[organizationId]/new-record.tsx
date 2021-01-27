@@ -138,7 +138,7 @@ export default function AddNewRecord() {
                 ))}
               </Stepper>
                 {activeStep === steps.length ? (
-                  <div>
+                  <div style={{height:"max-content"}}>
                     <Typography variant="h5" gutterBottom>
                       New record is added
                     </Typography>

@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import DisabilitiesController from '../autocomplete/Disabilities'
 import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
-import { List, ListItem, ListItemText, Button } from '@material-ui/core';
+import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio } from '@material-ui/core'
 
 type Props = {
   callback?:any
@@ -34,6 +34,12 @@ export function GeneralInfoStep(props: Props) {
   function updateForm(type, data) {
     setGeneralInfoData({ ...generalInfoData, [type]: data })
     callback(generalInfoData);
+  }
+  const [gender, setGender] = React.useState('female');
+
+  const handleChangeGender = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGender((event.target as HTMLInputElement).value)
+    updateForm("gender", event.target.value)
   }
 
   return (
@@ -63,16 +69,6 @@ export function GeneralInfoStep(props: Props) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography style={{color:"grey", marginBottom:"5px"}}>Date of birth</Typography>
-          <TextField
-            required
-            id="dob"
-            name="dob"
-            type="date"
-            onChange={(event) => updateForm("date_of_birth", event.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="street-child" value="true"
             />}
@@ -82,12 +78,35 @@ export function GeneralInfoStep(props: Props) {
         <Grid item xs={12}>
           <TextField
             id="location"
+            required
             name="location"
             label="Current location"
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
           />
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl component="fieldset" style={{marginLeft:"5px", marginTop:"20px", marginBottom:"30px"}}>
+            <FormLabel component="legend">Gender *</FormLabel>
+            <RadioGroup row name="gender" value={gender} onChange={handleChangeGender}>
+              <FormControlLabel value="female" control={<Radio color="default"/>} label="Female" />
+              <FormControlLabel value="male" control={<Radio color="default"/>} label="Male" />
+              <FormControlLabel value="other" control={<Radio color="default"/>} label="Other" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography style={{color:"grey", marginBottom:"5px", marginTop:"15px", marginLeft:"50px"}}>Date of birth *</Typography>
+          <TextField
+            required
+            id="dob"
+            name="dob"
+            type="date"
+            onChange={(event) => updateForm("date_of_birth", event.target.value)}
+            style={{marginLeft:"50px"}}
+          />
+        </Grid>
+
         <Grid item xs={12} sm={6}>
           <DisabilitiesController/>
         </Grid>
@@ -109,29 +128,19 @@ export function GeneralInfoStep(props: Props) {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="gender"
-            name="gender"
-            label="Gender"
-            fullWidth
-            onChange={(event) => updateForm("gender", event.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <TextField
-            required
             id="weight"
             name="weight"
-            label="Weight in kilos"
+            label="Weight in kilograms"
             fullWidth
             onChange={(event) => updateForm("weight", event.target.value)}
           />
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <TextField
             required
             id="height"
             name="height"
-            label="Height in cm"
+            label="Height in centimeters"
             fullWidth
             onChange={(event) => updateForm("height", event.target.value)}
           />
@@ -192,6 +201,7 @@ export function AcademicRecordsStep(props: Props) {
             required id="depDate"
             type="date"
             onChange={(event) => updateForm("depDate", event.target.value)}
+            style={{marginBottom:"130px"}}
           />
         </Grid>
       </Grid>
@@ -237,6 +247,7 @@ export function ParentStep(props: Props) {
             <TextField 
               required id="parent-address" label="Address of parent/ward" fullWidth 
               onChange={(event) => updateForm("parentAddress", event.target.value)}
+              style={{marginBottom:"60px"}}
             />
           </Grid>
         </Grid>
