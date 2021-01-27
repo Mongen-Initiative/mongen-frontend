@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import { Paper, Stepper, Step, StepLabel, Button, Typography, Container, NoSsr } from '@material-ui/core'
 import { BasePage } from '../../components/templates'
-import { Container, NoSsr } from '@material-ui/core'
 import {GeneralInfoStep, AcademicRecordsStep, CounsellorStep, NewRecordSummaryStep, ParentStep}  from '../../components/templates/newRecordSteps'
 import BeneficiaryService from '../../components/services/BeneficiaryService'
 
@@ -56,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
 const title = "Your title"
-
-// http://localhost:8080/swagger-ui.html#/beneficiary-controller/createBeneficiaryUsingPOST
 
 export default function AddNewRecord() {
   const classes = useStyles();

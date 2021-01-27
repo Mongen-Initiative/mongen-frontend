@@ -1,13 +1,8 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import DisabilitiesController from '../autocomplete/Disabilities'
 import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
-import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio } from '@material-ui/core'
+import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio, Grid, Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
 
 type Props = {
   callback?:any
@@ -25,7 +20,7 @@ export function GeneralInfoStep(props: Props) {
     last_name: '',
     date_of_birth: '',
     address: '',
-    gender: '',
+    gender: 'female',
     height: 0,
     weight: 0,
     country_iso: "US"
@@ -34,12 +29,6 @@ export function GeneralInfoStep(props: Props) {
   function updateForm(type, data) {
     setGeneralInfoData({ ...generalInfoData, [type]: data })
     callback(generalInfoData);
-  }
-  const [gender, setGender] = React.useState('female');
-
-  const handleChangeGender = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGender((event.target as HTMLInputElement).value)
-    updateForm("gender", event.target.value)
   }
 
   return (
@@ -70,8 +59,7 @@ export function GeneralInfoStep(props: Props) {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="street-child" value="true"
-            />}
+            control={<Checkbox color="secondary" name="street-child" value="true" />}
             label="Street child"
           />
         </Grid>
@@ -88,7 +76,7 @@ export function GeneralInfoStep(props: Props) {
         <Grid item xs={12} sm={6}>
           <FormControl component="fieldset" style={{marginLeft:"5px", marginTop:"20px", marginBottom:"30px"}}>
             <FormLabel component="legend">Gender *</FormLabel>
-            <RadioGroup row name="gender" value={gender} onChange={handleChangeGender}>
+            <RadioGroup row name="gender" value={generalInfoData.gender} onChange={(event) => updateForm("gender", event.target.value)}>
               <FormControlLabel value="female" control={<Radio color="default"/>} label="Female" />
               <FormControlLabel value="male" control={<Radio color="default"/>} label="Male" />
               <FormControlLabel value="other" control={<Radio color="default"/>} label="Other" />
