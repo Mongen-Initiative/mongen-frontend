@@ -1,4 +1,4 @@
-import { Container, Grid, Link, Card, CardMedia, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import { Container, Grid, Link, Card, CardMedia, CardContent, Typography, CardActions, Button, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react";
 import getOrganizations from "../../data/Organizations";
@@ -48,6 +48,11 @@ export const MainOrganizationList = function() {
                 {loading ? (
                     "Loading organizations..."
                 ) : (
+                    <div>
+                    <Typography gutterBottom variant="h5" component="h2" style={{marginLeft:"40%", marginTop:"30px", marginBottom:"30px"}}>
+                        Organizations working with us
+                    </Typography>
+                    <Divider />
                         <Container className={classes.cardGrid} maxWidth="md">
                             <Grid container spacing={4}>
                                 {organizations.map((org) => (
@@ -57,24 +62,18 @@ export const MainOrganizationList = function() {
                                                 <CardMedia
                                                     className={classes.cardMedia}
                                                     image={org.collaborator.photoIdURL}
-                                                    title={`${org.collaborator.firstName} ${org.collaborator.lastName}`}
+                                                    title={`${org.name}`}
                                                 />
                                                 <CardContent className={classes.cardContent}>
                                                     <Typography gutterBottom variant="h5" component="h2">
                                                         {org.name}
                                                     </Typography>
-                                                    <Typography variant="subtitle2">
-                                                        {`${org.mission}`}
-                                                    </Typography>
-                                                    <Typography variant="subtitle1">
-                                                        {`${org.vision}`}
-                                                    </Typography>
-                                                    <Typography variant="overline">
-                                                        This Organization works with us. Click to view their website
+                                                    <Typography >
+                                                    ${org.mission}
                                                     </Typography>
                                                 </CardContent>
                                                 <CardActions>
-                                                    <Button size="small" href={`/${org.id}`} style={{ color: MuiTheme.palette.primary.main }}>
+                                                    <Button size="small" href={`/${org.id}`} style={{ color: MuiTheme.palette.primary.dark }}>
                                                         Learn more
                                                     </Button>
                                                 </CardActions>
@@ -84,6 +83,7 @@ export const MainOrganizationList = function() {
                                 ))}
                             </Grid>
                         </Container>
+                        </div>
                     )
                 }
             </div>

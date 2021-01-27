@@ -1,4 +1,4 @@
-import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
+import { Typography, List, ListItem, ListItemText } from "@material-ui/core"
 import React from "react";
 
 type Props = {
@@ -17,20 +17,16 @@ export default function OrganizationSummary(props: Props) {
   return (
     <div>
       <Typography variant="h6" gutterBottom>
-        Organization Summary
+        The summary of your application
         </Typography>
       <Typography variant="h5" align="center" style={{ padding: "15px" }}>{organizationDetails.name}</Typography>
       <List>
         <ListItem>
           <ListItemText>Mission</ListItemText>
-        </ListItem>
-        <ListItem>
           <Typography variant="body1">{organizationDetails.mission}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Vision:</ListItemText>
-        </ListItem>
-        <ListItem>
           <Typography variant="body1">{organizationDetails.vision}</Typography>
         </ListItem>
         <ListItem>

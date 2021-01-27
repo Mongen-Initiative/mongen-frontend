@@ -45,7 +45,7 @@ import {
               <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Who we are
               </Typography>
               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Mongen Initiative is a volunteering project created by developers:
+              [TODO] Mongen Initiative is a volunteering project created by developers:
               Juan Negrier  <span style={{ fontStyle: "italic" }}>(Chile)</span>, Marcelo Negrier <span style={{ fontStyle: "italic" }}>(Chile)</span> and Oleksandra Pishcheiko <span style={{ fontStyle: "italic" }}>(Ukraine)</span>.
                We want to help small charity organizations to have a place, where they can store, access, view their data,
                and share their great missions with the world!

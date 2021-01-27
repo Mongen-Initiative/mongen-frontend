@@ -180,11 +180,16 @@ function Index() {
               {activeStep === steps.length ? (
                 <div>
                   <Typography style={{marginTop:"80px", fontSize:"17px"}}>
-                    We will check the information your provided and contact you for further steps.
+                    We will check the information your provided and contact you for further steps. Thank you :)
                       </Typography>
-                  <Typography variant="subtitle1" style={{marginTop:"40px", marginLeft:"80%", marginBottom:"80px"}}>
-                    Thank you :)
-                      </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href="/"
+                    style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
+                  >
+                    Go back to the homepage
+                  </Button>
                 </div>
               ) : (
                   <div style={{height:"max-content"}}>
@@ -220,7 +225,7 @@ function Index() {
                         onClick={handleNext}
                         className={classes.button}
                       >
-                        {activeStep === steps.length - 1 ? 'Create Organization' : 'Next'}
+                        {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
                       </Button>
                     </div>
                   </div>

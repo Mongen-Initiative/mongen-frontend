@@ -140,13 +140,15 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
             <input
               id="btn-upload"
               name="btn-upload"
-              style={{ display: 'none' }}
+              style={{ display: 'none'}}
               type="file"
               onChange={this.selectFile} />
             <Button
               className="btn-choose"
               variant="outlined"
-              component="span" >
+              component="span"
+              style={{marginTop:"15px"}}
+            >
               Choose File
             </Button>
           </label>
@@ -157,7 +159,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
             component="span"
             disabled={!selectedFiles}
             onClick={this.upload}
-            style={{marginLeft:"15px"}}
+            style={{marginLeft:"15px", marginTop:"15px"}}
           >
             Upload
           </Button>
