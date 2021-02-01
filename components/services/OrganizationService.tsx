@@ -10,6 +10,15 @@ class OrganizationService {
       }
     });
   }
+
+  update(data) {
+
+    return coreService.patch(`/api/v1/organization/1`, data, {
+      headers: {
+        "Content-type": "application/json",
+      }
+    });
+  }
 }
 
 export default new OrganizationService();

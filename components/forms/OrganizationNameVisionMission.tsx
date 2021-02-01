@@ -27,7 +27,7 @@ export default function OrganizationNameVisionMission(props: Props) {
     setOrgData({ ...orgData, ["name"]: data })
     setOrgData({ ...orgData, ["seo_name"]: convertTitleToSeoUrl(data) })
     callback(orgData);
-}
+  }
 
   function getValue(type) {
       if (values){
