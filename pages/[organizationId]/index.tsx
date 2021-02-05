@@ -11,6 +11,8 @@ import {
   Divider,
   Link,
   Paper,
+  IconButton,
+  TextField,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
@@ -18,6 +20,10 @@ import { BasePage, CallToActionButtons, convertTitleToSeoUrl } from "../../compo
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
+import InstagramIcon from '@material-ui/icons/Instagram'
+import FacebookIcon from '@material-ui/icons/Facebook'
+import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import YouTubeIcon from '@material-ui/icons/YouTube'
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -72,7 +78,7 @@ export interface Sponsor {
   id: any
 }
 
-const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6", "Child 7", "Child 8", "Child 9"];
+const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6"];
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
@@ -104,7 +110,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                 </Paper>
                 <CallToActionButtons orgId={organization.id}/>
                 <div style={{marginTop:"90px"}} >
-                  <Paper elevation={3} style={{height:"350px", backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
+                  <Paper elevation={3} style={{height:"350px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
                     <div>
                       <Typography variant="h2" align="center" style={{color:"white", paddingTop:"40px", textShadow: "black 0.1em 0.1em 0.2em"}}>Who we are</Typography>
                       <Typography align="center" style={{color:"white", marginTop:"30px", marginLeft:"10%", marginRight:"10%", textShadow: "black 0.1em 0.1em 0.2em"}}>
@@ -113,7 +119,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                         text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text 
                       </Typography>
-                      <Button variant="outlined" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", marginTop:"5%", marginLeft:"45%"}}>
+                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", marginTop:"5%", marginLeft:"45%"}}>
                         Read More
                       </Button>
                     </div>
@@ -151,6 +157,38 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     </Grid>
                   </Container>
                   <CallToActionButtons orgId={organization.id}/>
+
+                  <div style={{marginTop:"90px"}} >
+                  <Paper elevation={3} style={{height:"200px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
+                    <div style={{paddingTop:"80px", textShadow: "black 0.1em 0.1em 0.1m"}}>
+                      <Typography variant="h4" style={{color:"white", paddingLeft:"250px", float:"left", width:"20%"}}>Newsletter</Typography>
+                      <div style={{color:"white", marginLeft:"18%", marginRight:"2%", width:"30%", float:"left"}}>
+                      <TextField label="Email"  variant="outlined" style={{width:"70%"}}></TextField>
+                      </div>
+                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", width:"10%", float:"left", marginTop:"4px"}}>
+                        Sign Up
+                      </Button>
+                    </div>
+                  </Paper>
+                  <Divider />
+                </div> 
+                <div>
+                    <Typography align="center" variant="h5"  style={{color:"black", marginTop:"60px", marginBottom:"60px"}}>
+                        Please join us on our social media!
+                        <IconButton>
+                          <InstagramIcon href="#" style={{marginRight:"10px"}}></InstagramIcon>
+                        </IconButton>
+                        <IconButton>
+                          <FacebookIcon href="#" style={{marginRight:"10px"}}></FacebookIcon>
+                        </IconButton>
+                        <IconButton>
+                          <LinkedInIcon href="#" style={{marginRight:"10px"}}></LinkedInIcon>
+                        </IconButton>
+                        <IconButton>
+                          <YouTubeIcon href="#" style={{marginRight:"10px"}}></YouTubeIcon>
+                        </IconButton>
+                    </Typography>
+                  </div>     
                 <Footer orgName={organization.name} orgMission={organization.mission} />
               </div>
           
