@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(8, 1, 1),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(13),
+    paddingBottom: theme.spacing(4),
   },
   card: {
     height: '100%',
@@ -84,7 +84,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
           <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
           <title>Mongen Initiative</title>
               <div>
-                <Paper elevation={0} style={{marginTop:"60px"}}>
+                <Paper elevation={0} style={{marginTop:"60px", marginBottom:"300px"}}>
                    {/* image on the left */}
                    <div>
                     <Paper elevation={0} style={{width:"50%", opacity:"0.8", position: "relative", textAlign: "center", color: "white", marginTop:"-50px", marginBottom:"280px"}}>
@@ -103,9 +103,8 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     </div>
                 </Paper>
                 <CallToActionButtons orgId={organization.id}/>
-                <Divider />
-                <div style={{marginTop:"50px"}}>
-                  <Paper elevation={3} style={{  marginBottom:"5%", height:"350px", backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
+                <div style={{marginTop:"90px"}} >
+                  <Paper elevation={3} style={{height:"350px", backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
                     <div>
                       <Typography variant="h2" align="center" style={{color:"white", paddingTop:"40px", textShadow: "black 0.1em 0.1em 0.2em"}}>Who we are</Typography>
                       <Typography align="center" style={{color:"white", marginTop:"30px", marginLeft:"10%", marginRight:"10%", textShadow: "black 0.1em 0.1em 0.2em"}}>
