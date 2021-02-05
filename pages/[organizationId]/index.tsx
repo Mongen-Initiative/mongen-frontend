@@ -100,7 +100,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                       </Typography>
                       <Paper elevation={0} style={{position: "absolute", height: "100%", overflowY: "auto", overflowX: "hidden", left:"100%",  boxSizing: "border-box", width:"100%", marginTop:"-50px"}}>
                         {/* text on the right */}
-                        <Typography style={{fontSize: "1.8em",  paddingLeft:"15px", paddingRight:"15px"}} align="center" >
+                        <Typography style={{fontSize: "2em",  paddingLeft:"15px", paddingRight:"15px"}} align="center" >
                           {/* {organization.tagline} */}
                           Saving children all around Africa
                         </Typography>
@@ -113,13 +113,13 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                   <Paper elevation={3} style={{height:"350px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
                     <div>
                       <Typography variant="h2" align="center" style={{color:"white", paddingTop:"40px", textShadow: "black 0.1em 0.1em 0.2em"}}>Who we are</Typography>
-                      <Typography align="center" style={{color:"white", marginTop:"30px", marginLeft:"10%", marginRight:"10%", textShadow: "black 0.1em 0.1em 0.2em"}}>
+                      <Typography align="center" style={{color:"white", marginTop:"30px", marginLeft:"10%", marginRight:"10%", textShadow: "black 0.1em 0.1em 0.2em", fontSize:20}}>
                         text texttext text text text text text text text text text text text 
                         text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text 
                       </Typography>
-                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", marginTop:"5%", marginLeft:"45%"}}>
+                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", marginTop:"3%", marginLeft:"45%"}}>
                         Read More
                       </Button>
                     </div>
