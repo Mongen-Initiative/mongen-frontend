@@ -67,7 +67,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location', 'Contact info', 'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Networks', 'Contact info', 'Summary'];
+
+type MissionVisionLogo = {
+  name: string,
+  seo_name: string,
+  mission: string,
+  vision: string,
+  logo_url: string
+}
+
+type SocialNetworks = {
+  name: string
+  network_name: string
+  url: string
+}
 
 type OrganizationAddress = {
   address: string
@@ -77,6 +91,7 @@ type OrganizationAddress = {
     countryISO3: string
     name: string
   }
+  social_networks: SocialNetworks[]
 }
 
 type MainContact = {
@@ -98,15 +113,22 @@ function Index() {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [organizationDetails, setOrganizationDetails] = React.useState({})
-  const [organizationLocation, setOrganizationLocation] = React.useState<OrganizationAddress>({
+  const [organizationDetails, setOrganizationDetails] = React.useState<MissionVisionLogo>({
+    name: "",
+    seo_name: "",
+    mission: "",
+    vision: "",
+    logo_url: ""
+  })
+  const [organizationLocationSocialNetworks, setOrganizationLocationSocialNetworks] = React.useState<OrganizationAddress>({
     address: "",
     country: {
       callingCode: "",
       countryISO: "",
       countryISO3: "",
       name: ""
-    }
+    },
+    social_networks: []
   })
   const [mainContact, setMainContact] = React.useState<MainContact>({
     first_name: "",
@@ -134,7 +156,7 @@ function Index() {
     console.log(mainContact)
     MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" })
       .then((response) => {
-        return OrganizationService.create({ ...organizationDetails, ...organizationLocation, country_iso: organizationLocation.country.countryISO, contact_id: response.data.id })
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
       })
       .then(
         (response) => {
@@ -150,8 +172,8 @@ function Index() {
     setOrganizationDetails(data);
   }
 
-  const updateOrganizationLocation = (data) => {
-    setOrganizationLocation(data);
+  const updateOrganizationLocationAndSocialNetworks = (data) => {
+    setOrganizationLocationSocialNetworks(data);
   }
 
   const updateMainContact = (data) => {
@@ -199,7 +221,7 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 1 ?
-                      <OrganizationLocation callback={updateOrganizationLocation} values={organizationLocation} />
+                      <OrganizationLocation callback={updateOrganizationLocationAndSocialNetworks} values={organizationLocationSocialNetworks} />
                       :
                       <div></div>
                     }
@@ -209,7 +231,7 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 3 ?
-                      <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocation} mainContact={mainContact} />
+                      <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} />
                       :
                       <div></div>
                     }

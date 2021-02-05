@@ -1,6 +1,7 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
 import React from "react";
 import { convertTitleToSeoUrl } from "../templates/BasePage";
+import OrganizationLogoUpload from "./OrganizationLogoUpload";
 
 type Props = {
   callback
@@ -15,19 +16,24 @@ export default function OrganizationNameVisionMission(props: Props) {
     seo_name: '',
     mission: '',
     vision: '',
+    logo_url: '',
   });
   
 
   function updateForm(type, data) {
-        setOrgData({ ...orgData, [type]: data })
-        callback(orgData);
+    setOrgData({ ...orgData, [type]: data })
+    callback(orgData);
+  }
+
+  function updateLogoUrl(data) {
+    updateForm("logo_url", data);
   }
 
   function updateNameAndSeoLink(data) {
     setOrgData({ ...orgData, ["name"]: data })
     setOrgData({ ...orgData, ["seo_name"]: convertTitleToSeoUrl(data) })
     callback(orgData);
-}
+  }
 
   function getValue(type) {
       if (values){
@@ -44,6 +50,9 @@ export default function OrganizationNameVisionMission(props: Props) {
         Organization details
       </Typography>
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <OrganizationLogoUpload callback={updateLogoUrl} />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
