@@ -54,6 +54,17 @@ function getValue(type) {
             defaultValue={() => getValue("address")}
           />
         </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="social_network_url"
+            label="Enter the URL of your main social network"
+            fullWidth
+            onChange={(event) => updateForm("social_network_url", event.target.value)}
+            style={{marginTop:"20px"}}
+            defaultValue={() => getValue("social_network_url")}
+          />
+        </Grid>
       </Grid>
     </div>
   )

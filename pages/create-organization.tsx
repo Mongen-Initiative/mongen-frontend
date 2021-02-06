@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location and Social Networks', 'Contact info', 'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Summary'];
 
 type MissionVisionLogo = {
   name: string,
@@ -77,11 +77,11 @@ type MissionVisionLogo = {
   logo_url: string
 }
 
-type SocialNetworks = {
-  name: string
-  network_name: string
-  url: string
-}
+// type SocialNetworks = {
+//   name: string
+//   network_name: string
+//   url: string
+// }
 
 type OrganizationAddress = {
   address: string
@@ -91,7 +91,8 @@ type OrganizationAddress = {
     countryISO3: string
     name: string
   }
-  social_networks: SocialNetworks[]
+  // social_networks: SocialNetworks[]
+  social_network_url: string
 }
 
 type MainContact = {
@@ -128,7 +129,7 @@ function Index() {
       countryISO3: "",
       name: ""
     },
-    social_networks: []
+    social_network_url: ""
   })
   const [mainContact, setMainContact] = React.useState<MainContact>({
     first_name: "",
