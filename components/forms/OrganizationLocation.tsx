@@ -37,7 +37,7 @@ function getValue(type) {
   return (
     <div style={{marginBottom:"50px"}}>
       <Typography variant="h6" gutterBottom>
-        Organization Location and Social Networks
+        Organization Location and Main Social Network
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
