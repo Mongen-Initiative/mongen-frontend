@@ -28,7 +28,7 @@ interface filesParams {
   callback
 }
 
-export default class PhotoIDUpload extends Component<{callback}, filesParams> {
+export default class OrganizationLogoUpload extends Component<{callback}, filesParams> {
 
   constructor(props) {
     super(props);
@@ -114,8 +114,8 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
 
     return (
       <div>
-        <Typography variant="subtitle2">Photo ID:</Typography>
-        <Typography variant="body2" style={{marginTop:"10px"}}>Upload a picture of your Passport, National ID, Driver License or any ID your can provide</Typography>
+        <Typography variant="subtitle2">Organization Logo:</Typography>
+        <Typography variant="body2" style={{marginTop:"10px"}}>Upload the logo of your organization</Typography>
         <div className="mg20" style={{marginTop:"20px"}}>
           {currentFile && (
             <Box className="mb25" display="flex" alignItems="center">
@@ -130,7 +130,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
           {/* Confirmation message */}
          <div className="file-name">
             {selectedFiles && selectedFiles.length > 0 ? 
-            <Typography variant="body2" style={{color:"green", marginBottom:"10px"}}>Your photo looks good. Please click the 'Upload' button to save it</Typography> 
+            <Typography variant="body2" style={{color:"green", marginBottom:"10px"}}>Your logo looks good. Please click the 'Upload' button to save it</Typography> 
             : 
             null
             }
@@ -173,12 +173,11 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
                 Uploaded file
               </Typography>
               <ul>
-                <Card style={{margin: "auto", maxWidth: "512px"}}> 
+                <Card style={{margin: "auto", maxWidth: "256px"}}> 
                   <CardActionArea>
                     <CardMedia
                       component="img"
                       alt={name}
-                      height="256"
                       image={`${process.env.mongenMedia}/api/v1/get_file/${file_id}`}
                       title={name}
                     />

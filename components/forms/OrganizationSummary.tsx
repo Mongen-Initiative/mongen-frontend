@@ -1,4 +1,4 @@
-import { Typography, List, ListItem, ListItemText } from "@material-ui/core"
+import { Typography, List, ListItem, ListItemText, CardMedia, Card } from "@material-ui/core"
 import React from "react";
 
 type Props = {
@@ -10,10 +10,6 @@ type Props = {
 export default function OrganizationSummary(props: Props) {
   const { organizationDetails, organizationLocation, mainContact } = props
 
-  console.log(organizationDetails)
-  console.log(organizationLocation)
-  console.log(mainContact)
-
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -21,6 +17,16 @@ export default function OrganizationSummary(props: Props) {
         </Typography>
       <Typography variant="h5" align="center" style={{ padding: "15px" }}>{organizationDetails.name}</Typography>
       <List>
+        <ListItem>
+          <Card style={{margin: "auto", maxWidth: "256px"}}>
+            <CardMedia 
+              component="img"
+              alt={organizationDetails.name}
+              image={organizationDetails.logo_url}
+              title={organizationDetails.name}
+            />
+          </Card>
+        </ListItem>
         <ListItem>
           <ListItemText>Mission</ListItemText>
           <Typography variant="body1">{organizationDetails.mission}</Typography>

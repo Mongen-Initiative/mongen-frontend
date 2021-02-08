@@ -37,7 +37,7 @@ function getValue(type) {
   return (
     <div style={{marginBottom:"50px"}}>
       <Typography variant="h6" gutterBottom>
-        Organization Location
+        Organization Location and Main Social Network
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
@@ -52,6 +52,17 @@ function getValue(type) {
             onChange={(event) => updateForm("address", event.target.value)}
             style={{marginTop:"20px"}}
             defaultValue={() => getValue("address")}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="social_network_url"
+            label="Enter the URL of your main social network"
+            fullWidth
+            onChange={(event) => updateForm("social_network_url", event.target.value)}
+            style={{marginTop:"20px"}}
+            defaultValue={() => getValue("social_network_url")}
           />
         </Grid>
       </Grid>
