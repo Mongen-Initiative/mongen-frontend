@@ -69,6 +69,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             multiline={true}
             rows={6}
             rowsMax={6}
+            onChange={(event) => updateForm("story", event.target.value)}
             defaultValue={() => getValue("vision")}
             fullWidth
             style={{marginTop:"5px"}}
