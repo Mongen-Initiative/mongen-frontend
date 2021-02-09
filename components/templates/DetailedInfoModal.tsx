@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal'
 import { Link, Typography, Button, TextField, Fade, Divider, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Image from 'material-ui-image'
+import OrganizationService from '../services/OrganizationService'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,11 +78,18 @@ export function PendingOrgReviewModal(children: any) {
     setOpen(false);
   };
 
+  const updateVerificationStatus = (status: boolean, org_id: number) => {
+    OrganizationService.setVerifiedStatus(
+        {verified: status},
+        org_id
+    )
+  }
+
   return (
     <div>
         -{" "} {" "} {" "}
         <Link href="#" style={{color:"#656565", paddingLeft:"15%"}} onClick={handleModalOpen}>
-            {org}
+            {org.name}
         </Link>
         <Modal
             open={open}
@@ -92,34 +100,36 @@ export function PendingOrgReviewModal(children: any) {
                 <div className={classes.frameLight} id="frame">
                     <div>
                         <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
-                        <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org}</h2>
+                        <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org.name}</h2>
                         <Divider />
                         <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
                             <div style={{border:"1px solid black", padding:"1px"}}>
-                                <Image  src="/photoId.jpg"/>
+                                <Image  src={org.logoUrl}/>
                             </div>
                         </div> 
                         <div style={{width:"75%", float: "right"}}>
                             <form>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Mission</Typography>
-                                <Typography className={classes.textField}> {mission} </Typography>
+                                <Typography className={classes.textField}> {org.mission} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Vision</Typography>
-                                <Typography className={classes.textField}> {mission} </Typography>
+                                <Typography className={classes.textField}> {org.vision} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
-                                <Typography className={classes.textField}> {country} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Social networks</Typography>
+                                <Typography className={classes.textField}> {org.country.name} </Typography>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main Social network</Typography>
                                 <div className={classes.textField}>
-                                    <Link  href={url}> {url} </Link>
+                                    <Link  href={org.socialNetworkUrl}> {org.socialNetworkUrl} </Link>
                                 </div>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main contact</Typography>
-                                <Typography className={classes.textField}> {contact} </Typography>
+                                <Typography className={classes.textField}> {org.collaborator.firstName} {org.collaborator.lastName}</Typography>
+                                <Typography className={classes.textField}> {org.collaborator.email}</Typography>
+                                {/* <Typography className={classes.textField}> {org.collaborator.countryCollaborator.name}</Typography> */}
                             </form>
                         </div>
                         <Divider />
                         <div id="approvalPart" style={{marginTop:"10px"}} >
                             <TextField label="Comments" className={classes.commentsField}/>
-                            <Button style={{marginLeft:"65%", marginTop:"20px", color:"green"}} variant="outlined" href="#">Accept</Button>
-                            <Button style={{marginLeft:"5%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Reject</Button>
+                            <Button style={{marginLeft:"65%", marginTop:"20px", color:"green"}} onClick={() => updateVerificationStatus(true, org.id)} variant="outlined" href="#">Accept</Button>
+                            <Button style={{marginLeft:"5%", marginTop:"20px", color:"red"}} onClick={() => updateVerificationStatus(false, org.id)} variant="outlined" href="#">Reject</Button>
                         </div>
                     </div>
                 </div>

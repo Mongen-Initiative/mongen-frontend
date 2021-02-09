@@ -8,6 +8,7 @@ import {
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates";
 import { PendingOrgReviewModal } from "../../components/templates/DetailedInfoModal";
+import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerifiedStatus";
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -24,30 +25,44 @@ import { PendingOrgReviewModal } from "../../components/templates/DetailedInfoMo
   
   function PendingOrganizations() {
     const classes = useStyles()  
-    const organizations = ["Visible Children", "Organization 1", "Organization 2", "Organization 3", "Organization 4", "Organization 5"]
+    const { loading, noData, organizations } = getOrganizationsByVerifiedStatus(false)
 
-    return (
-        <NoSsr>
-          <BasePageAboutMongen className={classes.rootLight}>
-          <title>Admin | Mongen Initiative</title>
-            <div>
-                <Link style={{marginLeft:"7%"}} href="/admin"> &larr; Back to Admin Panel</Link>
-                <Container  className={classes.heroContent}>
-                    <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
-                        Pending review queue
-                    </Typography>
-                    <div style={{paddingTop:"50px", paddingLeft:"18%"}}>
-                        {organizations.map((org) => (
-                            <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}} key={org}>
-                                <PendingOrgReviewModal org={org}></PendingOrgReviewModal>
+    if (noData) {
+      return (
+          <></>
+      )
+  } else {
+      return (
+          <div>
+              {" "}
+              {loading ? (
+                  "Loading organizations..."
+              ) : (
+                <NoSsr>
+                  <BasePageAboutMongen className={classes.rootLight}>
+                  <title>Admin | Mongen Initiative</title>
+                    <div>
+                        <Link style={{marginLeft:"7%"}} href="/admin"> &larr; Back to Admin Panel</Link>
+                        <Container  className={classes.heroContent}>
+                            <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
+                                Pending review queue
+                            </Typography>
+                            <div style={{paddingTop:"50px", paddingLeft:"18%"}}>
+                                {organizations.map((org) => (
+                                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}} key={org.id}>
+                                        <PendingOrgReviewModal org={org}></PendingOrgReviewModal>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </Container>
                     </div>
-                </Container>
-            </div>
-          </BasePageAboutMongen>
-        </NoSsr>
-    )
+                  </BasePageAboutMongen>
+                </NoSsr>
+              )
+              }
+          </div>
+      )
   }
+}
   
-  export default PendingOrganizations
+export default PendingOrganizations
