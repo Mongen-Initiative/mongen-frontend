@@ -88,7 +88,7 @@ export const BasePage = function(props: Props) {
               <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${orgId}/payment`}>Donate</Button>
             </div>
             <div style={{ float: "left", width: "3%", marginLeft:"10%"}}>
-              <IconButton onClick={() => router.push(`/login-sponsor`)}>
+              <IconButton onClick={() => router.push(`/${orgId}/login-sponsor`)}>
                 <PersonIcon style={{color:"#6c6c6c"}} />
               </IconButton>
             </div>
