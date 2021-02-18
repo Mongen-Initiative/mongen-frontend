@@ -14,6 +14,8 @@ import { BasePageAboutMongen } from "../../components/templates"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid"
 import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal"
+import { InferGetServerSidePropsType, GetServerSideProps } from "next"
+import { Organization } from "."
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -30,8 +32,8 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
 
   const title ="Your title"
 
-  function Admin() {
-    const classes = useStyles()  
+  function Admin({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const classes = useStyles(organization)  
     const url = "1"
 
     const columns: ColDef[] = [
@@ -60,26 +62,30 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
 
     return (
         <NoSsr>
+        {organization ? (
           <BasePageAboutMongen className={classes.rootLight}>
           <title>Admin | Mongen Initiative</title>
             <div>
                 <div style={{marginTop:"40px"}}>
-                    <Link style={{marginLeft:"7%", color:"#656565"}} href={`/${url}`}> &larr; Back to {title} Homepage</Link>
+                    <Link style={{marginLeft:"7%", color:"#656565"}} href={`/${url}`}> &larr; Back to {organization.name} Homepage</Link>
                 </div>
                 <Container className={classes.heroContent}>
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
-                    {title} Admin panel
+                    {organization.name} Admin panel
                     </Typography>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
-                        <Button  href={`/${url}/profile`} variant="outlined"  style={{width:"35%", marginTop:"3%"}}>
+                        <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
                             View the organization profile
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal collaborator={"New Collaborator"} button = "Add Collaborator" isNew="yes"></CollaboratorsModal>
+                        <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes"></CollaboratorsModal>
+                    </div>
+                    <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
+                        <CollaboratorsModal collaborator={"New Collaborator"} nationality={""} button = "Add Beneficiary" isNew="yes"></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"20%", width:"80%"}}>
-                        <Accordion style={{marginTop:"3%"}}>
+                        <Accordion style={{marginTop:"7%"}}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                             >
@@ -119,8 +125,24 @@ import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal
                 </Container>
             </div>
           </BasePageAboutMongen>
+          ) : (
+            <h1>There is no organization with such name</h1>
+          )}
         </NoSsr>
     )
   }
+
+  export const getServerSideProps: GetServerSideProps = async context => {
+    const { organizationId} = context.query
   
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+      method: "GET",
+    })
+  
+    const organization: Organization[] = await orgReq.json()
+  
+    return {
+      props: { organization },
+    }
+  }
   export default Admin

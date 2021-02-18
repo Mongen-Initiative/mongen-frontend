@@ -49,7 +49,7 @@ import { Organization } from "."
   }));
   
   function LoginSponsor({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const classes = useStyles()  
+    const classes = useStyles(organization)  
     const url = "1"
 
     return (
