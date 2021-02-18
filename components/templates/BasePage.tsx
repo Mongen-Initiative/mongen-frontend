@@ -66,7 +66,7 @@ export const BasePage = function(props: Props) {
               <Typography>
                 <Link
                   underline="none"
-                  href={`/${orgId}`}
+                  href={`/${orgId}/about`}
                   className={classes.titleLight}
                 >
                   About Us
@@ -77,7 +77,7 @@ export const BasePage = function(props: Props) {
               <Typography>
                 <Link
                   underline="none"
-                  href={`/${orgId}`}
+                  href={`/${orgId}/payment`}
                   className={classes.titleLight}
                 >
                   Get involved
@@ -85,7 +85,7 @@ export const BasePage = function(props: Props) {
               </Typography>
             </div>
             <div style={{ float: "left", backgroundColor: `${MuiTheme.palette.primary.main}`, marginLeft:"20%", width:"100px" }}>
-              <Button size="large" style={{color:'white', paddingLeft:"20%"}}>Donate</Button>
+              <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${orgId}/payment`}>Donate</Button>
             </div>
             <div style={{ float: "left", width: "3%", marginLeft:"10%"}}>
               <IconButton onClick={() => router.push(`/login-sponsor`)}>

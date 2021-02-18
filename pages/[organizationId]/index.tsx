@@ -167,7 +167,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                       <div style={{color:"white", marginLeft:"18%", marginRight:"2%", width:"20%", float:"left", backgroundColor:"white"}}>
                       <TextField label="Email"  variant="outlined" style={{width:"100%"}}></TextField>
                       </div>
-                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", width:"10%", float:"left", marginTop:"4px", marginLeft:"10%"}}>
+                      <Button variant="contained" size="large" href={`#`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", width:"10%", float:"left", marginTop:"4px", marginLeft:"10%"}}>
                         Sign Up
                       </Button>
                     </div>
@@ -179,7 +179,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     <Typography align="center" variant="h5"  style={{color:"black", marginTop:"60px", marginBottom:"60px"}}>
                         Please join us on our social media!
                         <IconButton>
-                          <InstagramIcon href="#" style={{marginRight:"10px"}}></InstagramIcon>
+                          <InstagramIcon href="#" style={{marginLeft:"30px", marginRight:"10px"}}></InstagramIcon>
                         </IconButton>
                         <IconButton>
                           <FacebookIcon href="#" style={{marginRight:"10px"}}></FacebookIcon>

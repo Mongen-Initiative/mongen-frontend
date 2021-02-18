@@ -42,9 +42,6 @@ import { Organization } from "."
           {organization ? (
             <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
               <title>{organization.name} | About us</title>
-              <div style={{marginTop:"40px"}}>
-                <Link style={{marginLeft:"7%"}} href={`/${organization.id}`}> &larr; Back to Homepage</Link>
-              </div>
               <div className={classes.content}>
                 <Container>
                   <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
