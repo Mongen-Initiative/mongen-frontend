@@ -304,11 +304,11 @@ export function LiveOrgModal(children: any) {
                     <div>
                         <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
                         {isNew === "yes" ? (
-                                <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>New Collaborator</h2>
+                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>New Collaborator</h2>
                         ) : (
-                                <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
+                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
                         )}  
-                         <Divider />
+                        <Divider />
                         <div style={{marginBottom:"50px"}}>
                             <form>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>First Name</Typography>
