@@ -15,12 +15,28 @@ export const CallToActionButtons = function(props: Props) {
         <Grid container spacing={3} justify="center">
             <Grid item>
                 <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
-                    Sponsor a child
+                    Donate
                 </Button>
             </Grid>
             <Grid item>
                 <Button variant="outlined" color="primary" size="large" href={`/${orgId}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
                     Who We are? How we help?
+                </Button>
+            </Grid>
+        </Grid>
+    </div>
+  );
+}
+
+export const CallToActionDonateButton = function(props: Props) {
+    const {orgId} = props
+
+    return (
+    <div style={{margin: "60px"}}>
+        <Grid container spacing={3} justify="center">
+            <Grid item>
+                <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
+                    Donate
                 </Button>
             </Grid>
         </Grid>

@@ -9,6 +9,8 @@ import {
   IconButton} from "@material-ui/core"
 import { useRouter } from "next/router"
 import PersonIcon from '@material-ui/icons/Person'
+import { Button } from "@material-ui/core"
+import { MuiTheme } from "../MuiTheme"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   titleLight: {
     display:"flex",
     marginTop: "8px",
-    color: "#edf2ea",
+    color: "#6c6c6c",
   },
 }))
 
@@ -35,7 +37,7 @@ type Props = {
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, color, title, orgId } = props
+  const { children, className, title, orgId } = props
   const classes = useStyles(props)
   
   const router = useRouter()
@@ -43,27 +45,52 @@ export const BasePage = function(props: Props) {
   return (
     <div className={`${classes.root} ${className}`}>
         {/* top nav bar with mongen name */}
-      <CssBaseline />
-      <AppBar position="absolute" style={{color: `${color}`}}>
+      <AppBar position="absolute" style={{backgroundColor: "#f2f2f2", height:"105px"}}>
         <Toolbar>
-          <div  style={{ width: "100%"}}>
-            <Typography
-              variant="h5"
-              style={{ fontWeight: 400, fontSize: "1.8em", float: "left"}}
-            >
-              <Link
-                underline="none"
-                href={`/${orgId}`}
-                className={classes.titleLight}
+          <div style={{ width: "100%", marginTop:"32px"}}>
+            <div style={{ float: "left", width: "40%"}} >
+              <Typography
+                variant="h5"
+                style={{ fontWeight: 400, fontSize: "1.8em", float: "left", marginLeft:"10px"}}
               >
-                {title}
-              </Link>
-            </Typography>
-            <div style={{ float: "right", width: "6%"}}>
-            {/* Login icon */}
-            <IconButton onClick={() => router.push(`/login-sponsor`)}>
-              <PersonIcon style={{color:"#edf2ea"}} />
-            </IconButton>
+                <Link
+                  underline="none"
+                  href={`/${orgId}`}
+                  className={classes.titleLight}
+                >
+                  {title}
+                </Link>
+              </Typography>
+            </div>
+            <div style={{ float: "left", width: "10%"}}>
+              <Typography>
+                <Link
+                  underline="none"
+                  href={`/${orgId}/about`}
+                  className={classes.titleLight}
+                >
+                  About Us
+                </Link>
+              </Typography>
+            </div>
+            <div style={{ float: "left", width: "10%"}}>
+              <Typography>
+                <Link
+                  underline="none"
+                  href={`/${orgId}/payment`}
+                  className={classes.titleLight}
+                >
+                  Get involved
+                </Link>
+              </Typography>
+            </div>
+            <div style={{ float: "left", backgroundColor: `${MuiTheme.palette.primary.main}`, marginLeft:"20%", width:"100px" }}>
+              <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${orgId}/payment`}>Donate</Button>
+            </div>
+            <div style={{ float: "left", width: "3%", marginLeft:"10%"}}>
+              <IconButton onClick={() => router.push(`/${orgId}/login-sponsor`)}>
+                <PersonIcon style={{color:"#6c6c6c"}} />
+              </IconButton>
             </div>
           </div>
         </Toolbar>

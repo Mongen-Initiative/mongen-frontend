@@ -60,7 +60,7 @@ import {
                     </Typography>
                         <div>
                         <Button className={classes.button} href="/login-admin">Log in as an administrator</Button>
-                        <Button className={classes.button} href="/login-sponsor">Log in as a sponsor</Button>
+                        <Button className={classes.button} href={`/1/login-sponsor`}>Log in as a sponsor</Button>
                         </div>
                         <Paper component="form" style={{width: "60%", padding: '12px 14px',  marginLeft:"23%",  alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Username" style={{flex: "1"}} />

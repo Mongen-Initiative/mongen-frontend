@@ -5,6 +5,8 @@ import { Link, Typography, Button, TextField, Fade, Divider, Accordion, Accordio
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Image from 'material-ui-image'
 import OrganizationService from '../services/OrganizationService'
+import CollaboratorService from '../../components/services/CollaboratorService'
+import DoneAllIcon from '@material-ui/icons/DoneAll'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,8 +63,6 @@ const mission = "Saving children. Saving children. Saving children. Saving child
 const country = "Nigeria"
 const url = "https://instagram.com/saving-children"
 const contact = "James The Boss"
-const type = "Collaborator"
-const date = "03/12/2020"
 
 export function PendingOrgReviewModal(children: any) {
   const { org } = children
@@ -224,17 +224,69 @@ export function LiveOrgModal(children: any) {
   }
 
   export function CollaboratorsModal(children: any) {
-    const { collaborator, button, isNew } = children
+    const { collaborator, nationality, button, isNew } = children
   
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-  
+    const [successMessage, setSuccessMessage] = React.useState(false);
+
+    const [collaboratorData, setCollaboratorData] = React.useState({
+        first_name: collaborator,
+        last_name: collaborator,
+        country_iso: nationality,
+        type: "Collaborator",
+    })
+      
+    function updateForm(type, data) {
+        setCollaboratorData({ ...collaboratorData, [type]: data })
+    }
+
     const handleModalOpen = () => {
       setOpen(true);
     };
   
     const handleModalClose = () => {
       setOpen(false);
+      setSuccessMessage(false);
+    };
+
+    const createCollaborator = () => {
+        CollaboratorService.create({ ...collaboratorData })
+          .then(
+            (response) => {
+              console.log(`Collaborator added! ID: ${response.data.id}`)
+              setSuccessMessage(true);
+            }
+          )
+          .catch(() => {
+            console.log("Something failed ):")
+          });
+    };
+
+    const updateCollaborator = () => {
+        CollaboratorService.update({ ...collaboratorData })
+          .then(
+            (response) => {
+              console.log(`Collaborator updated! ID: ${response.data.id}`)
+              setSuccessMessage(true);
+            }
+          )
+          .catch(() => {
+            console.log("Something failed ):")
+          });
+    };
+
+    const deleteCollaborator = () => {
+        CollaboratorService.delete()
+          .then(
+            (response) => {
+              console.log(`Collaborator deleted! ID: ${response.data.id}`)
+              setSuccessMessage(true);
+            }
+          )
+          .catch(() => {
+            console.log("Something failed ):")
+          });
     };
   
     return (
@@ -247,35 +299,75 @@ export function LiveOrgModal(children: any) {
               onClose={handleModalClose}
               className={classes.modal}
           >
-              <Fade in={open} style={{width:"40%", height:"77%"}}>
+              <Fade in={open} style={{width:"40%", height:"67%"}}>
                    <div className={classes.frameLight} id="frame">
                     <div>
                         <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
-                        <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
+                        {isNew === "yes" ? (
+                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>New Collaborator</h2>
+                        ) : (
+                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
+                        )}  
                         <Divider />
                         <div style={{marginBottom:"50px"}}>
                             <form>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Name</Typography>
-                                <TextField className={classes.textField} defaultValue={collaborator} /> 
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>First Name</Typography>
+                                <TextField 
+                                    className={classes.textField}
+                                    defaultValue={collaborator}
+                                    id="first_name"
+                                    onChange={(event) => updateForm("first_name", event.target.value)}
+                                /> 
+                                  <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Last Name</Typography>
+                                <TextField 
+                                    className={classes.textField}
+                                    defaultValue={collaborator}
+                                    id="last_name"
+                                    onChange={(event) => updateForm("last_name", event.target.value)}
+                                /> 
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Nationality</Typography>
-                                <TextField className={classes.textField} defaultValue={country} />
+                                <TextField 
+                                    className={classes.textField} 
+                                    defaultValue={nationality} 
+                                    id="country_iso"
+                                    onChange={(event) => updateForm("country_iso", event.target.value)}
+                                />
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Type</Typography>
-                                <TextField className={classes.textField} defaultValue={type} />
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Date created</Typography>
-                                <TextField className={classes.textField} defaultValue={date} />
+                                <TextField 
+                                    className={classes.textField} 
+                                    defaultValue="Collaborator" 
+                                    id="type"
+                                    onChange={(event) => updateForm("type", event.target.value)}
+                                />
                             </form>
                         </div>
                         {isNew === "yes" ? (
-                            <Button style={{marginLeft:"37%", marginTop:"10px", color:"green", width: "120px"}} variant="outlined" href="#">Add</Button>
+                            <div>
+                                <Button style={{marginLeft:"34%", marginTop:"10px", color:"green", width: "120px"}} variant="outlined" onClick={createCollaborator}>Add</Button>
+                                {successMessage === true ? (
+                                    <div style={{marginLeft:"30%", marginTop:"10px"}}>
+                                        <Typography style={{color:"green"}}><DoneAllIcon style={{color:"green", marginRight:"5px"}} />Information sent!</Typography>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )}  
+                            </div>
                         ) : (
                             <div>
                                 <Divider />
                                 <div style={{marginTop:"20px"}}>
-                                    <Button style={{marginLeft:"40%", marginTop:"20px", color:"green", width: "120px"}} variant="outlined" href="#">Update</Button>
-                                    <Button style={{marginLeft:"8%", marginTop:"20px", color:"red",  width: "120px"}} variant="outlined" href="#">Deactivate</Button>
+                                    <Button style={{marginLeft:"40%", marginTop:"20px", color:"green", width: "120px"}} variant="outlined" href="#" onClick={updateCollaborator}>Update</Button>
+                                    <Button style={{marginLeft:"8%", marginTop:"20px", color:"red",  width: "120px"}} variant="outlined" href="#" onClick={deleteCollaborator}>Deactivate</Button>
+                                    {successMessage === true ? (
+                                        <div style={{marginLeft:"30%", marginTop:"10px"}}>
+                                            <Typography style={{color:"green"}}><DoneAllIcon style={{color:"green", marginRight:"5px"}} />Information sent!</Typography>
+                                        </div>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             </div> 
-                        )}  
+                        )} 
                     </div>
                 </div>
               </Fade>

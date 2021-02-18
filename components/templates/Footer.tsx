@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core'
 
 export const Footer = ({orgName, orgMission}) => {
     return (
-        <footer style={{ background:"white", paddingTop: "30px", paddingBottom: "40px", marginTop:"15px"}}>
+        <footer style={{ background:"#f2f2f2", paddingTop: "30px", paddingBottom: "40px", marginTop:"15px"}}>
         <Typography variant="h6" align="center" gutterBottom> {orgName} </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
          { orgMission }

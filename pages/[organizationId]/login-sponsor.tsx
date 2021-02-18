@@ -8,13 +8,15 @@ import {
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
-  import { BasePageAboutMongen } from "../components/templates"
-  import { AboutMongenFooter } from "../components/templates/Footer"
-  
+  import { BasePage } from "../../components/templates"
+  import { AboutMongenFooter } from "../../components/templates/Footer"
+  import { InferGetServerSidePropsType, GetServerSideProps } from "next"
+import { Organization } from "."
+
   const useStyles = makeStyles((theme) => ({
     heroContent: {
-      padding: theme.spacing(8, 1, 1),
-      marginBottom:"200px"
+      marginBottom:"200px",
+      marginTop:"150px",
     },
     cardGrid: {
       paddingTop: theme.spacing(8),
@@ -46,13 +48,14 @@ import {
     },
   }));
   
-  function LoginSponsor() {
-    const classes = useStyles()  
+  function LoginSponsor({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const classes = useStyles(organization)  
     const url = "1"
 
     return (
         <NoSsr>
-            <BasePageAboutMongen className={classes.rootLight}>
+           {organization ? (
+            <BasePage className={classes.rootLight} title="123" orgId="1">
                 <title>Mongen | Login</title>
                 <Container maxWidth="sm" className={classes.heroContent}>
                     <Typography  align="center" color="textPrimary" gutterBottom style={{fontSize:"2.8em"}}>
@@ -72,9 +75,26 @@ import {
                         <Button style={{display:"block", marginLeft:"22%", marginTop:"40px"}} href="mailto:support@example.com">Don't have an account yet? Contact us</Button>
                 </Container>
                 <AboutMongenFooter />
-            </BasePageAboutMongen>
+            </BasePage>
+            ) : (
+              <h1>There is no organization with such name</h1>
+            )}
         </NoSsr>
     )
+  }
+  
+  export const getServerSideProps: GetServerSideProps = async context => {
+    const { organizationId} = context.query
+  
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+      method: "GET",
+    })
+  
+    const organization: Organization[] = await orgReq.json()
+  
+    return {
+      props: { organization },
+    }
   }
   
   export default LoginSponsor
