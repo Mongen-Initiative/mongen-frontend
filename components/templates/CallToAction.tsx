@@ -15,7 +15,7 @@ export const CallToActionButtons = function(props: Props) {
         <Grid container spacing={3} justify="center">
             <Grid item>
                 <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
-                    Sponsor a child
+                    Donate
                 </Button>
             </Grid>
             <Grid item>

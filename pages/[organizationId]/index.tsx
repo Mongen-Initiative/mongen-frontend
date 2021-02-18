@@ -90,31 +90,33 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
           <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
           <title>Mongen Initiative</title>
               <div>
-                <Paper elevation={0} style={{marginTop:"60px", marginBottom:"300px"}}>
-                   {/* image on the left */}
+                <div>
+                <Paper elevation={0} style={{marginTop:"60px", marginBottom:"420px"}}>
                    <div>
-                    <Paper elevation={0} style={{width:"50%", opacity:"0.8", position: "relative", textAlign: "center", color: "white", marginTop:"-50px", marginBottom:"280px"}}>
-                      <img src="childrenBig.jpg" style={{width:"100%"}}></img>
-                      <Typography component="h2" variant="h3" align="center" style={{ marginTop: "-45%", left: "20%", fontWeight:"bolder", textShadow: "black 0.1em 0.1em 0.2em", fontSize:60}}>
-                        {organization.name}
+                    <Paper elevation={0} style={{width:"100%", opacity:"0.8", textAlign: "center", color: "white", marginTop:"-50px"}}>
+                      <img src="homepage.jpg" style={{width:"100%"}}></img>
+                      <div style={{width:"30%",  marginLeft:"70px", marginTop: "-35%"}}>
+                      <Typography component="h2" variant="h3" style={{fontWeight:"bolder", textShadow: "black 0.1em 0.1em 0.2em", fontSize:60}}>
+                        {/* {organization.tagline} */}
+                        Let's fight childhood poverty together!
                       </Typography>
-                      <Paper elevation={0} style={{position: "absolute", height: "100%", overflowY: "auto", overflowX: "hidden", left:"100%",  boxSizing: "border-box", width:"100%", marginTop:"-50px"}}>
-                        {/* text on the right */}
-                        <Typography style={{fontSize: "2em",  paddingLeft:"15px", paddingRight:"15px"}} align="center" >
-                          {/* {organization.tagline} */}
-                          Saving children all around Africa
-                        </Typography>
-                      </Paper>
+                      </div>
                     </Paper>
                     </div>
                 </Paper>
+                </div>
                 <CallToActionButtons orgId={organization.id}/>
                 <div style={{marginTop:"90px"}} >
-                  <Paper elevation={3} style={{height:"350px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
-                    <div>
+                  <Paper elevation={3} style={{height:"max-content", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9",  paddingBottom:"40px"}}>
+                    <div style={{width:"50%", marginLeft:"25%"}}>
                       <Typography variant="h2" align="center" style={{color:"white", paddingTop:"40px", textShadow: "black 0.1em 0.1em 0.2em"}}>Who we are</Typography>
-                      <Typography align="center" style={{color:"white", marginTop:"30px", marginLeft:"10%", marginRight:"10%", textShadow: "black 0.1em 0.1em 0.2em", fontSize:20}}>
+                      <Typography align="center" style={{color:"white", marginTop:"30px", textShadow: "black 0.1em 0.1em 0.2em", fontSize:20}}>
                         text texttext text text text text text text text text text text text 
+                        text texttext text text text text text text text text text text
+                        text texttext text text text text text text text text text text
+                        text texttext text text text text text text text text text text
+                        text texttext text text text text text text text text text text
+                        text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text
                         text texttext text text text text text text text text text text 
@@ -162,16 +164,17 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                   <Paper elevation={3} style={{height:"200px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
                     <div style={{paddingTop:"80px", textShadow: "black 0.1em 0.1em 0.1m"}}>
                       <Typography variant="h4" style={{color:"white", paddingLeft:"250px", float:"left", width:"20%"}}>Newsletter</Typography>
-                      <div style={{color:"white", marginLeft:"18%", marginRight:"2%", width:"30%", float:"left"}}>
-                      <TextField label="Email"  variant="outlined" style={{width:"70%"}}></TextField>
+                      <div style={{color:"white", marginLeft:"18%", marginRight:"2%", width:"20%", float:"left", backgroundColor:"white"}}>
+                      <TextField label="Email"  variant="outlined" style={{width:"100%"}}></TextField>
                       </div>
-                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", width:"10%", float:"left", marginTop:"4px"}}>
+                      <Button variant="contained" size="large" href={`/${organization.id}/about`} style={{color: MuiTheme.palette.primary.main, backgroundColor:"#edf2ea", width:"10%", float:"left", marginTop:"4px", marginLeft:"10%"}}>
                         Sign Up
                       </Button>
                     </div>
                   </Paper>
                   <Divider />
                 </div> 
+                <Divider />
                 <div>
                     <Typography align="center" variant="h5"  style={{color:"black", marginTop:"60px", marginBottom:"60px"}}>
                         Please join us on our social media!
@@ -188,7 +191,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                           <YouTubeIcon href="#" style={{marginRight:"10px"}}></YouTubeIcon>
                         </IconButton>
                     </Typography>
-                  </div>     
+                  </div>   
                 <Footer orgName={organization.name} orgMission={organization.mission} />
               </div>
           
