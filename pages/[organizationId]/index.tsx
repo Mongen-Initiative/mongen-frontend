@@ -8,7 +8,6 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Divider,
   Link,
   Paper,
   IconButton,

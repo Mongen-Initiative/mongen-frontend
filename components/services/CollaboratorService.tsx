@@ -18,8 +18,8 @@ class CollaboratorsService {
     });
   }
 
-  delete(data) {
-    return coreService.delete("/api/v1/collaborators/1", data, {
+  delete() {
+    return coreService.delete("/api/v1/collaborators/1", {
       headers: {
         "Content-type": "application/json",
       }

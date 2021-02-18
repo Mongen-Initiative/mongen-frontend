@@ -277,7 +277,7 @@ export function LiveOrgModal(children: any) {
     };
 
     const deleteCollaborator = () => {
-        CollaboratorService.delete({ ...collaboratorData })
+        CollaboratorService.delete()
           .then(
             (response) => {
               console.log(`Collaborator deleted! ID: ${response.data.id}`)
