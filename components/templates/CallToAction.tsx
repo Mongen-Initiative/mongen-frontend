@@ -28,6 +28,22 @@ export const CallToActionButtons = function(props: Props) {
   );
 }
 
+export const CallToActionDonateButton = function(props: Props) {
+    const {orgId} = props
+
+    return (
+    <div style={{margin: "60px"}}>
+        <Grid container spacing={3} justify="center">
+            <Grid item>
+                <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
+                    Donate
+                </Button>
+            </Grid>
+        </Grid>
+    </div>
+  );
+}
+
 export const AboutMongenCallToActionButtons = function() {
     return (
     <div style={{margin: "60px"}}>
