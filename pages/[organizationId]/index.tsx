@@ -85,7 +85,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
           <title>Mongen Initiative</title>
               <div>
                 <div>
-                <Paper elevation={0} style={{marginTop:"60px", marginBottom:"430px"}}>
+                <Paper elevation={0} style={{marginTop:"60px", marginBottom:"360px"}}>
                    <div>
                     <Paper elevation={0} style={{width:"100%", opacity:"0.8", textAlign: "center", color: "white", marginTop:"-50px"}}>
                       <img src="homepage.jpg" style={{width:"100%", height:"800px"}}></img>
