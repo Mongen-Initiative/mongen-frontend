@@ -30,8 +30,6 @@ import { Organization } from "."
     },
   }));
 
-  const title ="Your title"
-
   function Admin({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)  
     const url = "1"
@@ -82,7 +80,7 @@ import { Organization } from "."
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
                         <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes"></CollaboratorsModal>
                     </div>
-                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"20%", width:"90%"}}>
+                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
