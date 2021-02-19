@@ -114,15 +114,15 @@ export function PendingOrgReviewModal(children: any) {
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Vision</Typography>
                                 <Typography className={classes.textField}> {org.vision} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
-                                <Typography className={classes.textField}> {org.country.name} </Typography>
+                                <Typography className={classes.textField}> {org.country} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main Social network</Typography>
                                 <div className={classes.textField}>
-                                    <Link  href={org.socialNetworkUrl}> {org.socialNetworkUrl} </Link>
+                                    <Link  href={org.social_network_url}> {org.social_network_url} </Link>
                                 </div>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main contact</Typography>
-                                <Typography className={classes.textField}> {org.collaborator.firstName} {org.collaborator.lastName}</Typography>
-                                <Typography className={classes.textField}> {org.collaborator.email}</Typography>
-                                {/* <Typography className={classes.textField}> {org.collaborator.countryCollaborator.name}</Typography> */}
+                                <Typography className={classes.textField}> {org.main_contact.first_name} {org.main_contact.last_name}</Typography>
+                                <Typography className={classes.textField}> {org.main_contact.email}</Typography>
+                                <Typography className={classes.textField}> {org.main_contact.nationality}</Typography>
                             </form>
                         </div>
                         <Divider />
