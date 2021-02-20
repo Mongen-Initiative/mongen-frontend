@@ -91,6 +91,8 @@ import { Organization } from "."
     })
   
     const organization: Organization[] = await orgReq.json()
+
+    console.log(orgReq)
   
     return {
       props: { organization },

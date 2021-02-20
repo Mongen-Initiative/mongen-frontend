@@ -7,6 +7,7 @@ import Image from 'material-ui-image'
 import OrganizationService from '../services/OrganizationService'
 import CollaboratorService from '../../components/services/CollaboratorService'
 import DoneAllIcon from '@material-ui/icons/DoneAll'
+import CountriesController from '../autocomplete/Countries'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +57,11 @@ const useStyles = makeStyles((theme: Theme) =>
         marginTop:"1%",
         marginLeft:"5%",
     },
+    countrySelector: {
+        width:"80%",
+        marginTop:"3%",
+        marginLeft:"20%",
+    }
   }),
 );
 
@@ -224,7 +230,7 @@ export function LiveOrgModal(children: any) {
   }
 
   export function CollaboratorsModal(children: any) {
-    const { collaborator, nationality, button, isNew } = children
+    const { collaborator, nationality, button, isNew, organizationId } = children
   
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -233,12 +239,18 @@ export function LiveOrgModal(children: any) {
     const [collaboratorData, setCollaboratorData] = React.useState({
         first_name: collaborator,
         last_name: collaborator,
+        email: collaborator,
         country_iso: nationality,
         type: "Collaborator",
+        organization_id: organizationId,
     })
       
     function updateForm(type, data) {
         setCollaboratorData({ ...collaboratorData, [type]: data })
+    }
+
+    function updateCountry(country) {
+        setCollaboratorData({ ...collaboratorData, country_iso: country.countryISO })
     }
 
     const handleModalOpen = () => {
@@ -318,20 +330,28 @@ export function LiveOrgModal(children: any) {
                                     id="first_name"
                                     onChange={(event) => updateForm("first_name", event.target.value)}
                                 /> 
-                                  <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Last Name</Typography>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Last Name</Typography>
                                 <TextField 
                                     className={classes.textField}
                                     defaultValue={collaborator}
                                     id="last_name"
                                     onChange={(event) => updateForm("last_name", event.target.value)}
                                 /> 
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Nationality</Typography>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Email</Typography>
                                 <TextField 
+                                    className={classes.textField}
+                                    defaultValue={collaborator}
+                                    id="email"
+                                    onChange={(event) => updateForm("email", event.target.value)}
+                                /> 
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Nationality</Typography>
+                                <CountriesController callback={updateCountry} className={classes.countrySelector}/>
+                                {/* <TextField 
                                     className={classes.textField} 
                                     defaultValue={nationality} 
                                     id="country_iso"
                                     onChange={(event) => updateForm("country_iso", event.target.value)}
-                                />
+                                /> */}
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Type</Typography>
                                 <TextField 
                                     className={classes.textField} 

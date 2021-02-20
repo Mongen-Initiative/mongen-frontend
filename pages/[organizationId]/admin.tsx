@@ -78,7 +78,7 @@ import { Organization } from "."
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes"></CollaboratorsModal>
+                        <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>

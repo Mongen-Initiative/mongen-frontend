@@ -8,10 +8,11 @@ const filter = createFilterOptions<CountryType>();
 
 type Props = {
   callback
+  className
 }
 
 export default function CountriesController(props: Props) {
-  const { callback } = props
+  const { callback, className } = props
   const { loading, noData, countries } = getCountries()
   const [value, setValue] = React.useState<CountryType | null>(null);
 
@@ -21,7 +22,7 @@ export default function CountriesController(props: Props) {
     )
   } else {
     return (
-      <div>
+      <div className={className}>
         {" "}
         {loading ? (
           "Loading countries..."
