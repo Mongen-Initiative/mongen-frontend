@@ -61,7 +61,7 @@ export const MainOrganizationList = function() {
                                             <Card className={classes.card}>
                                                 <CardMedia
                                                     className={classes.cardMedia}
-                                                    image={org.collaborator.photoIdURL}
+                                                    image={org.logo_url}
                                                     title={`${org.name}`}
                                                 />
                                                 <CardContent className={classes.cardContent}>

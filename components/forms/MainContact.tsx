@@ -89,7 +89,7 @@ export default function MainContactController(props: Props) {
         </Grid>
         <Grid item xs={12} style={{marginTop:"20px"}}>
           <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality:</Typography>
-          <CountriesController callback={updateCountry} />
+          <CountriesController callback={updateCountry} className={""}/>
         </Grid>
         <Grid item xs={12} style={{marginTop:"20px"}}>
           <PhotoIDUpload callback={updatePhotoIdUrl} />

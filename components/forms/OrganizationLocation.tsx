@@ -41,7 +41,7 @@ function getValue(type) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
-          <CountriesController callback={updateCountry}/>
+          <CountriesController callback={updateCountry} className={""}/>
         </Grid>
         <Grid item xs={12}>
           <TextField 
