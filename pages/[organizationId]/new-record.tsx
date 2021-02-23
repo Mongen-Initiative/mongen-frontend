@@ -69,7 +69,7 @@ export default function AddNewRecord() {
   };
 
   const createBeneficiary = () => {
-    BeneficiaryService.create({ ...generalInfo })
+    BeneficiaryService.create({ ...generalInfo, organization_id: 10 })
       .then(
         (response) => {
           console.log(`Beneficiary added! ID: ${response.data.id}`)
