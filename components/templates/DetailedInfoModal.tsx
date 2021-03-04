@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme: Theme) =>
         marginLeft:"20%",
     },
     commentsField: {
-        width:"60%",
+        width:"50%",
         marginTop:"3%",
+        marginBottom:"3%",
         marginLeft:"5%",
     },
     commentsFieldCollab: {
@@ -65,46 +66,50 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const mission = "Saving children. Saving children. Saving children. Saving children. Saving children. Saving children."
-const country = "Nigeria"
-const url = "https://instagram.com/saving-children"
-const contact = "James The Boss"
-
-export function PendingOrgReviewModal(children: any) {
-  const { org } = children
-
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleModalOpen = () => {
-    setOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setOpen(false);
-  };
-
-  const updateVerificationStatus = (status: boolean, org_id: number) => {
+const updateVerificationStatus = (status: boolean, org_id: number) => {
     OrganizationService.setVerifiedStatus(
         {verified: status},
         org_id
     )
-  }
+}
 
-  return (
-    <div>
-        -{" "} {" "} {" "}
-        <Link href="#" style={{color:"#656565", paddingLeft:"15%"}} onClick={handleModalOpen}>
-            {org.name}
-        </Link>
-        <Modal
-            open={open}
-            onClose={handleModalClose}
-            className={classes.modal}
-        >
-            <Fade in={open}>
-                <div className={classes.frameLight} id="frame">
-                    <div>
+export function OrgModal(children: any) {
+    const { org, button } = children
+  
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+  
+    const handleModalOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleModalClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <div>
+          { button === "yes" ? (
+            <Button variant="outlined" href="#" style={{ paddingLeft:"15%"}} onClick={handleModalOpen}>
+              Summary
+            </Button>
+          ): (
+              <div>
+            -{" "} {" "} {" "}
+            <Link href="#" style={{color:"#656565", paddingLeft:"15%"}} onClick={handleModalOpen}>
+                {org.name}
+            </Link>
+            </div>
+          )}
+          
+          <Modal
+              open={open}
+              onClose={handleModalClose}
+              className={classes.modal}
+          >
+              <Fade in={open}>
+                   <div className={classes.frameLight} id="frame">
+                    <div style={{width:"1000px"}}>
                         <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
                         <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org.name}</h2>
                         <Divider />
@@ -121,7 +126,7 @@ export function PendingOrgReviewModal(children: any) {
                                 <Typography className={classes.textField}> {org.vision} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
                                 <Typography className={classes.textField}> {org.country} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main Social network</Typography>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Social networks</Typography>
                                 <div className={classes.textField}>
                                     <Link  href={org.social_network_url}> {org.social_network_url} </Link>
                                 </div>
@@ -129,71 +134,6 @@ export function PendingOrgReviewModal(children: any) {
                                 <Typography className={classes.textField}> {org.main_contact.first_name} {org.main_contact.last_name}</Typography>
                                 <Typography className={classes.textField}> {org.main_contact.email}</Typography>
                                 <Typography className={classes.textField}> {org.main_contact.nationality}</Typography>
-                            </form>
-                        </div>
-                        <Divider />
-                        <div id="approvalPart" style={{marginTop:"10px"}} >
-                            <TextField label="Comments" className={classes.commentsField}/>
-                            <Button style={{marginLeft:"65%", marginTop:"20px", color:"green"}} onClick={() => updateVerificationStatus(true, org.id)} variant="outlined" href="#">Accept</Button>
-                            <Button style={{marginLeft:"5%", marginTop:"20px", color:"red"}} onClick={() => updateVerificationStatus(false, org.id)} variant="outlined" href="#">Reject</Button>
-                        </div>
-                    </div>
-                </div>
-            </Fade>
-      </Modal>
-    </div>
-  );
-}
-
-export function LiveOrgModal(children: any) {
-    const { org } = children
-  
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-  
-    const handleModalOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleModalClose = () => {
-      setOpen(false);
-    };
-  
-    return (
-      <div>
-          <Button variant="outlined" href="#" style={{ paddingLeft:"15%"}} onClick={handleModalOpen}>
-              View
-          </Button>
-          <Modal
-              open={open}
-              onClose={handleModalClose}
-              className={classes.modal}
-          >
-              <Fade in={open}>
-                   <div className={classes.frameLight} id="frame">
-                    <div>
-                        <Button onClick={handleModalClose} style={{marginLeft:"90%"}}>X</Button>
-                        <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{org}</h2>
-                        <Divider />
-                        <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
-                            <div style={{border:"1px solid black", padding:"1px"}}>
-                                <Image  src="/photoId.jpg"/>
-                            </div>
-                        </div> 
-                        <div style={{width:"75%", float: "right"}}>
-                            <form>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Mission</Typography>
-                                <Typography className={classes.textField}> {mission} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Vision</Typography>
-                                <Typography className={classes.textField}> {mission} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
-                                <Typography className={classes.textField}> {country} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Social networks</Typography>
-                                <div className={classes.textField}>
-                                    <Link  href={url}> {url} </Link>
-                                </div>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Main contact</Typography>
-                                <Typography className={classes.textField}> {contact} </Typography>
                                 <Accordion style={{width:"50%", marginLeft:"18%", marginTop:"3%"}}>
                                     <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -219,7 +159,12 @@ export function LiveOrgModal(children: any) {
                         <Divider />
                         <div id="approvalPart" style={{marginTop:"10px"}} >
                             <TextField label="Comments" className={classes.commentsField}/>
-                            <Button style={{marginLeft:"80%", marginTop:"20px", color:"red"}} variant="outlined" href="#">Disable</Button>
+                            {org.verified ? (
+                                <Button style={{marginLeft:"5%", marginTop:"30px", color:"red"}} onClick={() => updateVerificationStatus(false, org.id)} variant="outlined" href="#">Move to pending</Button>
+                            ) : (
+                                <Button style={{marginLeft:"65%", marginTop:"30px", color:"green"}} onClick={() => updateVerificationStatus(true, org.id)} variant="outlined" href="#">Approve</Button>
+                            )}
+                            <Button style={{marginLeft:"5%", marginTop:"30px", color:"red"}} variant="outlined" href="#">Delete org</Button>
                         </div>
                     </div>
                 </div>

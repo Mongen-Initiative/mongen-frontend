@@ -74,7 +74,7 @@ import { Organization } from "."
                     </Typography>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
                         <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
-                            View the organization profile
+                            Edit the organization
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>

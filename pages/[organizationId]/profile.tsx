@@ -91,7 +91,7 @@ import OrganizationService from "../../components/services/OrganizationService"
                           <TextField id="story" label="Your Story" multiline rowsMax={4} className={classes.textField}/>
                           <TextField id="country" label="Country" multiline rowsMax={4} className={classes.textField} defaultValue={organization.country}/>
                           <TextField id="social" label="Social Network Url" multiline rowsMax={4} className={classes.textField}/>
-                          <TextField id="main_contact" label="Main Contact" multiline rowsMax={4} className={classes.textField} defaultValue={`${organization.main_contact.firstName} ${organization.main_contact.firstName}`}/>
+                          <TextField id="main_contact" label="Main Contact" multiline rowsMax={4} className={classes.textField} defaultValue={`${organization.main_contact.first_name} ${organization.main_contact.last_name}`}/>
                       </form>
                     </div>
                   </div>

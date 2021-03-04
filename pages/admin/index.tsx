@@ -28,7 +28,7 @@ import { BasePageAboutMongen } from "../../components/templates";
         <NoSsr>
           <BasePageAboutMongen className={classes.rootLight}>
           <title>Admin | Mongen Initiative</title>
-            <div>
+            <div style={{marginTop:"30px"}}>
                 <Link style={{marginLeft:"7%", color:"#656565"}} href="/"> &larr; Back to Mongen Homepage</Link>
                 <Container maxWidth="sm" className={classes.heroContent}>
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
@@ -44,6 +44,12 @@ import { BasePageAboutMongen } from "../../components/templates";
                         -{" "} {" "} {" "}
                         <Link href="/admin/all-organizations">
                             View the list of all organizations
+                        </Link>
+                    </div>
+                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}}>
+                        -{" "} {" "} {" "}
+                        <Link href="/admin/create-organization">
+                            Create organization
                         </Link>
                     </div>
                 </Container>

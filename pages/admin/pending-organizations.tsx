@@ -7,7 +7,7 @@ import {
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates";
-import { PendingOrgReviewModal } from "../../components/templates/DetailedInfoModal";
+import { OrgModal } from "../../components/templates/DetailedInfoModal";
 import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerifiedStatus";
 
   const useStyles = makeStyles((theme) => ({
@@ -41,7 +41,7 @@ import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerified
                 <NoSsr>
                   <BasePageAboutMongen className={classes.rootLight}>
                   <title>Admin | Mongen Initiative</title>
-                    <div>
+                    <div style={{marginTop:"30px"}}>
                         <Link style={{marginLeft:"7%"}} href="/admin"> &larr; Back to Admin Panel</Link>
                         <Container  className={classes.heroContent}>
                             <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
@@ -50,7 +50,7 @@ import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerified
                             <div style={{paddingTop:"50px", paddingLeft:"18%"}}>
                                 {organizations.map((org) => (
                                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}} key={org.id}>
-                                        <PendingOrgReviewModal org={org}></PendingOrgReviewModal>
+                                        <OrgModal org={org} button="no"></OrgModal>
                                     </div>
                                 ))}
                             </div>
