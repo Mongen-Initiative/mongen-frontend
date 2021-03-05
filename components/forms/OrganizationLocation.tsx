@@ -1,5 +1,5 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import CountriesController from "../autocomplete/Countries";
 
 type Props = {
@@ -23,7 +23,6 @@ export default function OrganizationLocation(props: Props) {
 
   function updateForm(type, data) {
     setOrgLocation({ ...orgLocation, [type]: data })
-    callback(orgLocation);
   }
 
   function updateCountry(data) {
@@ -38,6 +37,10 @@ export default function OrganizationLocation(props: Props) {
     }
     return ""
   }
+
+  useEffect(()=>{
+    callback(orgLocation);
+  }, [orgLocation])
 
   return (
     <div style={{marginBottom:"50px"}}>

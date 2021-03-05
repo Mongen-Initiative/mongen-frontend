@@ -108,6 +108,10 @@ type MainContact = {
   email: string
 }
 
+interface BackendErrors<T> {
+  [index: string]: T
+}
+
 function Index() {
 
   const classes = useStyles();
@@ -144,6 +148,10 @@ function Index() {
   })
 
   const [validationError, setValidationError] = React.useState(0);
+
+  const [endMessage, setEndMessage] = React.useState(
+    "We will check the information your provided and contact you for further steps. Thank you :)"
+    );
 
   function validateOrganizationDetails () {
     if (organizationDetails.name === "" || 
@@ -211,14 +219,47 @@ function Index() {
     MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" })
       .then((response) => {
         return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            let backend_errors: string = "Some information is missing for the organization:\n\n";
+            let errors: BackendErrors<object> = error.response.data
+            Object.keys(errors).forEach(key => {
+              backend_errors += `${errors[key]}: ${key}\n`
+            })
+            setEndMessage(backend_errors);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+            console.log(error.config);
+        });
       })
       .then(
         (response) => {
           console.log(`Organization created! ID: ${response.data.id}`)
         }
       )
-      .catch(() => {
-        console.log("Something failed ):")
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          let backend_errors: string = "Some information is missing for the main contact:\n\n";
+          let errors: BackendErrors<object> = error.response.data
+          Object.keys(errors).forEach(key => {
+            backend_errors += `${errors[key]}: ${key}\n`
+          })
+          setEndMessage(backend_errors);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+          console.log(error.config);
       });
   };
 
@@ -255,9 +296,9 @@ function Index() {
               </Stepper>
               {activeStep === steps.length ? (
                 <div>
-                  <Typography style={{marginTop:"80px", fontSize:"17px"}}>
-                    We will check the information your provided and contact you for further steps. Thank you :)
-                      </Typography>
+                  <Typography style={{marginTop:"80px", fontSize:"17px", whiteSpace:"pre-wrap"}}>
+                    {endMessage}
+                  </Typography>
                   <Button
                     variant="contained"
                     color="primary"

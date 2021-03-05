@@ -1,5 +1,5 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import CountriesController from "../autocomplete/Countries";
 import PhotoIDUpload from "./PhotoIDUpload";
 
@@ -28,7 +28,6 @@ export default function MainContactController(props: Props) {
 
   function updateForm(type, data) {
     setOrgData({ ...orgData, [type]: data })
-    callback(orgData);
   }
 
   function updateCountry(data) {
@@ -47,6 +46,10 @@ export default function MainContactController(props: Props) {
     }
     return ""
   }
+
+  useEffect(()=>{
+    callback(orgData);
+  }, [orgData])
 
   return (
     <div>

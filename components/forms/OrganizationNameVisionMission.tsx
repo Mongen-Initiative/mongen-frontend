@@ -1,5 +1,5 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { convertTitleToSeoUrl } from "../templates/BasePage";
 import OrganizationLogoUpload from "./OrganizationLogoUpload";
 
@@ -22,7 +22,6 @@ export default function OrganizationNameVisionMission(props: Props) {
   
   function updateForm(type, data) {
     setOrgData({ ...orgData, [type]: data })
-    callback(orgData);
   }
 
   function updateLogoUrl(data) {
@@ -31,7 +30,6 @@ export default function OrganizationNameVisionMission(props: Props) {
 
   function updateNameAndSeoLink(data) {
     setOrgData({ ...orgData, ["name"]: data, ["seo_name"]: convertTitleToSeoUrl(data) })
-    callback(orgData);
   }
 
   function getValue(type) {
@@ -42,6 +40,10 @@ export default function OrganizationNameVisionMission(props: Props) {
       }
       return ""
   }
+
+  useEffect(()=>{
+    callback(orgData);
+  }, [orgData])
 
   return (
     <div>
