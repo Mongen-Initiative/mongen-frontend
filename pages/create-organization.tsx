@@ -183,7 +183,7 @@ function Index() {
       setValidationError(0)
       setActiveStep(activeStep + 1)
     }
-}
+  }
 
   const handleNext = () => {
     //// form validation
@@ -199,6 +199,7 @@ function Index() {
       console.log(mainContact)
       validateMainContactDetails()
     }
+    //// org creation
     if (activeStep === steps.length - 1) {
       setActiveStep(activeStep + 1)
       createOrganization()

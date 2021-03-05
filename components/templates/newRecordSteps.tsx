@@ -23,12 +23,21 @@ export function GeneralInfoStep(props: Props) {
     gender: 'female',
     height: 0,
     weight: 0,
-    country_iso: "US"
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    },
   })
   
   function updateForm(type, data) {
     setGeneralInfoData({ ...generalInfoData, [type]: data })
     callback(generalInfoData);
+  }
+
+  function updateDate(data) {
+    setGeneralInfoData({ ...generalInfoData, ["date_of_birth"]: data })
   }
 
   return (
@@ -65,9 +74,9 @@ export function GeneralInfoStep(props: Props) {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            id="location"
+            id="address"
             required
-            name="location"
+            name="address"
             label="Current location"
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
@@ -90,7 +99,7 @@ export function GeneralInfoStep(props: Props) {
             id="dob"
             name="dob"
             type="date"
-            onChange={(event) => updateForm("date_of_birth", event.target.value)}
+            onChange={(event) => updateDate(event.target.value)}
             style={{marginLeft:"50px"}}
           />
         </Grid>
@@ -162,34 +171,39 @@ export function AcademicRecordsStep(props: Props) {
     callback(academicRecordsData);
   }
 
+  function updateDate(data) {
+    setAcademicRecordsData({ ...academicRecordsData, ["depDate"]: data })
+    callback(academicRecordsData);
+  }
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
         Academic Records
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{marginTop:"30px"}}>
+        <Grid item xs={12}>
+          <Typography style={{color:"grey", marginTop:"-2px", fontSize:"12px"}}>Departure date *</Typography>
+            <TextField 
+              required id="depDate"
+              type="date"
+              onChange={(event) => updateDate(event.target.value)}
+              style={{marginBottom:"50px"}}
+            />
+          </Grid>
         <Grid item xs={3} md={6}>
           <TextField 
-            required id="last-school" label="Last school attended" fullWidth
+            required id="lastSchool" label="Last school attended" fullWidth
             onChange={(event) => updateForm("lastSchool", event.target.value)}
           />
         </Grid>
-        <Grid item xs={3} md={3}>
+        <Grid item xs={3} md={6}>
           <TextField
             required
-            id="last-class"
+            id="lastClass"
             label="Last class attended"
             fullWidth
             onChange={(event) => updateForm("lastClass", event.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-        <Typography style={{color:"grey", marginTop:"-2px", fontSize:"12px"}}>Departure date</Typography>
-          <TextField 
-            required id="depDate"
-            type="date"
-            onChange={(event) => updateForm("depDate", event.target.value)}
-            style={{marginBottom:"130px"}}
           />
         </Grid>
       </Grid>
@@ -218,14 +232,14 @@ export function ParentStep(props: Props) {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <TextField 
-              required id="parent-name" label="Name of parent/ward" fullWidth
+              required id="parentName" label="Name of parent/ward" fullWidth
               onChange={(event) => updateForm("parentName", event.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
               required
-              id="parent-phone"
+              id="parentPhone"
               label="Phone number of parent/ward"
               fullWidth
               onChange={(event) => updateForm("parentPhone", event.target.value)}
@@ -233,7 +247,7 @@ export function ParentStep(props: Props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField 
-              required id="parent-address" label="Address of parent/ward" fullWidth 
+              required id="parentAddress" label="Address of parent/ward" fullWidth 
               onChange={(event) => updateForm("parentAddress", event.target.value)}
               style={{marginBottom:"60px"}}
             />
@@ -264,14 +278,14 @@ export function CounsellorStep(props: Props) {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <TextField 
-              required id="counsellor-name" label="Name of counsellor in charge" fullWidth
+              required id="counsellorName" label="Name of counsellor in charge" fullWidth
               onChange={(event) => updateForm("counsellorName", event.target.value)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
               required
-              id="times-counselled"
+              id="timesCounselled"
               label="Times counselled"
               fullWidth
               onChange={(event) => updateForm("timesCounselled", event.target.value)}
@@ -279,7 +293,7 @@ export function CounsellorStep(props: Props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField 
-              required id="counsellor-note" label="Notes about the child"  multiline rows={4} fullWidth
+              required id="notes" label="Notes about the child"  multiline rows={4} fullWidth
               onChange={(event) => updateForm("notes", event.target.value)}
              />
           </Grid>
