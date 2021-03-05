@@ -17,9 +17,9 @@ export default function OrganizationNameVisionMission(props: Props) {
     mission: '',
     vision: '',
     logo_url: '',
+    story: '',
   });
   
-
   function updateForm(type, data) {
     setOrgData({ ...orgData, [type]: data })
     callback(orgData);
@@ -30,8 +30,7 @@ export default function OrganizationNameVisionMission(props: Props) {
   }
 
   function updateNameAndSeoLink(data) {
-    setOrgData({ ...orgData, ["name"]: data })
-    setOrgData({ ...orgData, ["seo_name"]: convertTitleToSeoUrl(data) })
+    setOrgData({ ...orgData, ["name"]: data, ["seo_name"]: convertTitleToSeoUrl(data) })
     callback(orgData);
   }
 
@@ -79,7 +78,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             rows={6}
             rowsMax={6}
             onChange={(event) => updateForm("story", event.target.value)}
-            defaultValue={() => getValue("vision")}
+            defaultValue={() => getValue("story")}
             fullWidth
             style={{marginTop:"5px"}}
           />

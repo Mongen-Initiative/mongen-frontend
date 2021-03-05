@@ -114,7 +114,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
 
     return (
       <div>
-        <Typography variant="subtitle2">Photo ID:</Typography>
+        <Typography variant="subtitle2">Photo ID *:</Typography>
         <Typography variant="body2" style={{marginTop:"10px"}}>Upload a picture of your Passport, National ID, Driver License or any ID your can provide</Typography>
         <div className="mg20" style={{marginTop:"20px"}}>
           {currentFile && (

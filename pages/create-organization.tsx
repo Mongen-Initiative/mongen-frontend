@@ -63,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: theme.spacing(5),
-    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -74,7 +73,8 @@ type MissionVisionLogo = {
   seo_name: string,
   mission: string,
   vision: string,
-  logo_url: string
+  logo_url: string,
+  story: string
 }
 
 // type SocialNetworks = {
@@ -105,12 +105,10 @@ type MainContact = {
     countryISO3: string
     name: string
   }
+  email: string
 }
 
 function Index() {
-
-  //TODO: implement form validation https://react-hook-form.com/get-started#Applyvalidation
-
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -119,7 +117,8 @@ function Index() {
     seo_name: "",
     mission: "",
     vision: "",
-    logo_url: ""
+    logo_url: "",
+    story: ""
   })
   const [organizationLocationSocialNetworks, setOrganizationLocationSocialNetworks] = React.useState<OrganizationAddress>({
     address: "",
@@ -140,17 +139,51 @@ function Index() {
       countryISO: "",
       countryISO3: "",
       name: ""
-    }
+    },
+    email: ""
   })
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    if (activeStep === steps.length - 1)
-      createOrganization()
-  };
+  const [validationError, setValidationError] = React.useState(0);
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  const handleNext = () => {
+    // form validation
+    if(activeStep === 0) {
+      console.log(organizationDetails)
+      if (organizationDetails.name === "" || 
+      organizationDetails.mission === "" || 
+      organizationDetails.logo_url === "" || 
+      organizationDetails.vision === "" || 
+      organizationDetails.story === "") setValidationError(1)
+      else {
+        setValidationError(0)
+        setActiveStep(activeStep + 1)
+      }
+    }
+    if(activeStep === 1) {
+      console.log(organizationLocationSocialNetworks)
+      if (organizationLocationSocialNetworks.address === "" || 
+      organizationLocationSocialNetworks.social_network_url === "" ||
+      Object.keys(organizationLocationSocialNetworks.country).length === 0)  setValidationError(1)
+      else {
+        setValidationError(0)
+        setActiveStep(activeStep + 1)
+      }
+    }
+    if(activeStep === 2) {
+      console.log(mainContact)
+      if (mainContact.first_name === "" || 
+      mainContact.last_name === "" ||
+      mainContact.email === "" ||
+      mainContact.photo_id_url === "" ||
+      Object.keys(mainContact.country).length === 0) setValidationError(1)
+      else {
+        setValidationError(0)
+        setActiveStep(activeStep + 1)
+      }
+    }
+    if (activeStep === steps.length - 1)
+      setActiveStep(activeStep + 1)
+      createOrganization()
   };
 
   const createOrganization = () => {
@@ -217,7 +250,7 @@ function Index() {
               ) : (
                   <div style={{height:"max-content"}}>
                     {activeStep == 0 ?
-                      <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails} />
+                      <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails}/>
                       :
                       <div></div>
                     }
@@ -237,19 +270,30 @@ function Index() {
                       <div></div>
                     }
                     <div className={classes.buttons}>
-                      {activeStep !== 0 && (
+                    {/* TODO: back button logic needs to be implemented */}
+                      {/* {activeStep !== 0 && (
                         <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
-                      )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
-                      </Button>
+                      )} */}
+                      <div>
+                        <div style={{width:"10%", float:"right", marginRight:"70px"}}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                            className={classes.button}
+                            style={{ }}
+                          >
+                            {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
+                          </Button>
+                        </div>
+                        {validationError ? (
+                          <div style={{width:"50%", float:"right", marginRight:"200px", paddingLeft:"70px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
+                      </div>
                     </div>
                   </div>
               )}
