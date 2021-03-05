@@ -67,7 +67,7 @@ export default function CountriesController(props: Props) {
                 style={{ width: 300 }}
                 freeSolo
                 renderInput={(params) => (
-                  <TextField {...params} label="Select a country from the list" variant="outlined" />
+                  <TextField {...params} label="Select a country from the list *" variant="outlined" />
                 )}
               />
             </React.Fragment>

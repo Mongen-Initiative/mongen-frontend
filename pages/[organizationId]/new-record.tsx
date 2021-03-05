@@ -90,7 +90,8 @@ export default function AddNewRecord() {
     generalInfo.date_of_birth === "" ||
     generalInfo.address === "" ||
     generalInfo.height === 0 ||
-    generalInfo.weight === 0) {
+    generalInfo.weight === 0 ||
+    Object.keys(generalInfo.country).length === 0) {
       setValidationError(1)
     }
     else {
@@ -153,7 +154,7 @@ export default function AddNewRecord() {
       console.log(counsellor)
       validateCounsellorRecords()
     }
-    //// org creation
+    //// beneficiary creation
     if (activeStep === steps.length - 1) {
       setActiveStep(activeStep + 1)
       createBeneficiary()

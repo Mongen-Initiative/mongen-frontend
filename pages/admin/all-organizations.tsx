@@ -33,9 +33,8 @@ import { Button } from "@material-ui/core"
       { field: 'name', headerName: 'Organization', width: 180 },
       { field: 'country', headerName: 'Country', width: 130 },
       {
-        field: 'main_contact',
+        field: 'main_contact.first_name',
         headerName: 'Main Contact',
-        valueFormatter: ({ value }) => value.first_name + " " + value.last_name,
         width: 150,
       },
       {

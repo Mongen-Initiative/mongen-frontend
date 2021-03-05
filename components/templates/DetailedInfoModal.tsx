@@ -8,7 +8,6 @@ import OrganizationService from '../services/OrganizationService'
 import CollaboratorService from '../../components/services/CollaboratorService'
 import DoneAllIcon from '@material-ui/icons/DoneAll'
 import CountriesController from '../autocomplete/Countries'
-import useSWR from 'swr'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

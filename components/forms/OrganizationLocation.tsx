@@ -26,18 +26,18 @@ export default function OrganizationLocation(props: Props) {
     callback(orgLocation);
   }
 
-function updateCountry(data) {
-  updateForm("country", data);
-}
-
-function getValue(type) {
-  if (values){
-    if (type in values){
-      return values[type]
-    }
+  function updateCountry(data) {
+    updateForm("country", data);
   }
-  return ""
-}
+
+  function getValue(type) {
+    if (values){
+      if (type in values){
+        return values[type]
+      }
+    }
+    return ""
+  }
 
   return (
     <div style={{marginBottom:"50px"}}>

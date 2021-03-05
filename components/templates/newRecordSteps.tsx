@@ -3,6 +3,7 @@ import DisabilitiesController from '../autocomplete/Disabilities'
 import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
 import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio, Grid, Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
+import CountriesController from '../autocomplete/Countries';
 
 type Props = {
   callback?:any
@@ -40,6 +41,10 @@ export function GeneralInfoStep(props: Props) {
     setGeneralInfoData({ ...generalInfoData, ["date_of_birth"]: data })
   }
 
+  function updateCountry(data) {
+    updateForm("country", data);
+  }
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -66,18 +71,21 @@ export function GeneralInfoStep(props: Props) {
             onChange={(event) => updateForm("last_name", event.target.value)}
           />
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
+        <Grid item xs={3}>
+        <FormControlLabel
             control={<Checkbox color="secondary" name="street-child" value="true" />}
             label="Street child"
           />
+        </Grid>
+        <Grid item xs={12}>
+          <CountriesController callback={updateCountry} className=""/>
         </Grid>
         <Grid item xs={12}>
           <TextField
             id="address"
             required
             name="address"
-            label="Current location"
+            label="Current address"
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
           />
