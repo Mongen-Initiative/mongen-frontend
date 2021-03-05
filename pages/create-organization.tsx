@@ -145,45 +145,64 @@ function Index() {
 
   const [validationError, setValidationError] = React.useState(0);
 
+  function validateOrganizationDetails () {
+    if (organizationDetails.name === "" || 
+    organizationDetails.mission === "" || 
+    // organizationDetails.logo_url === "" ||  //TODO: figure out how to handle this validation
+    organizationDetails.vision === "" || 
+    organizationDetails.story === "") {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateSocialDetails () {
+    if (organizationLocationSocialNetworks.address === "" || 
+      organizationLocationSocialNetworks.social_network_url === "" ||
+      Object.keys(organizationLocationSocialNetworks.country).length === 0) {
+        setValidationError(1)
+    } 
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateMainContactDetails () {
+    if (mainContact.first_name === "" || 
+      mainContact.last_name === "" ||
+      mainContact.email === "" ||
+      // mainContact.photo_id_url === "" || //TODO: figure out how to handle this validation
+      Object.keys(mainContact.country).length === 0) {
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+}
+
   const handleNext = () => {
-    // form validation
+    //// form validation
     if(activeStep === 0) {
       console.log(organizationDetails)
-      if (organizationDetails.name === "" || 
-      organizationDetails.mission === "" || 
-      organizationDetails.logo_url === "" || 
-      organizationDetails.vision === "" || 
-      organizationDetails.story === "") setValidationError(1)
-      else {
-        setValidationError(0)
-        setActiveStep(activeStep + 1)
-      }
+      validateOrganizationDetails()
     }
     if(activeStep === 1) {
       console.log(organizationLocationSocialNetworks)
-      if (organizationLocationSocialNetworks.address === "" || 
-      organizationLocationSocialNetworks.social_network_url === "" ||
-      Object.keys(organizationLocationSocialNetworks.country).length === 0)  setValidationError(1)
-      else {
-        setValidationError(0)
-        setActiveStep(activeStep + 1)
-      }
+      validateSocialDetails()
     }
     if(activeStep === 2) {
       console.log(mainContact)
-      if (mainContact.first_name === "" || 
-      mainContact.last_name === "" ||
-      mainContact.email === "" ||
-      mainContact.photo_id_url === "" ||
-      Object.keys(mainContact.country).length === 0) setValidationError(1)
-      else {
-        setValidationError(0)
-        setActiveStep(activeStep + 1)
-      }
+      validateMainContactDetails()
     }
-    if (activeStep === steps.length - 1)
+    if (activeStep === steps.length - 1) {
       setActiveStep(activeStep + 1)
       createOrganization()
+    }
   };
 
   const createOrganization = () => {

@@ -13,15 +13,20 @@ export default function OrganizationLocation(props: Props) {
 
   const [orgLocation, setOrgLocation] = React.useState({
     address: '',
-    country: {},
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    },
   });
 
   function updateForm(type, data) {
     setOrgLocation({ ...orgLocation, [type]: data })
     callback(orgLocation);
-}
+  }
 
-function updateCountry(data){
+function updateCountry(data) {
   updateForm("country", data);
 }
 
@@ -41,7 +46,7 @@ function getValue(type) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
-          <CountriesController callback={updateCountry} className={""}/>
+          <CountriesController callback={updateCountry} className=""/>
         </Grid>
         <Grid item xs={12}>
           <TextField 
