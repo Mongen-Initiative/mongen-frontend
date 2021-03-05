@@ -8,6 +8,7 @@ import OrganizationService from '../services/OrganizationService'
 import CollaboratorService from '../../components/services/CollaboratorService'
 import DoneAllIcon from '@material-ui/icons/DoneAll'
 import CountriesController from '../autocomplete/Countries'
+import useSWR from 'swr'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,7 +87,8 @@ export function OrgModal(children: any) {
     const handleModalClose = () => {
       setOpen(false);
     };
-  
+
+
     return (
       <div>
           { button === "yes" ? (
@@ -115,7 +117,7 @@ export function OrgModal(children: any) {
                         <Divider />
                         <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
                             <div style={{border:"1px solid black", padding:"1px"}}>
-                                <Image  src={org.logoUrl}/>
+                                <Image src={org.logo_url}/>
                             </div>
                         </div> 
                         <div style={{width:"75%", float: "right"}}>
@@ -141,7 +143,9 @@ export function OrgModal(children: any) {
                                     <Typography>List of Collaborators</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <Typography> Alex P, Juan N, other great people  </Typography>
+                                        {org.collaborators.map(collaborator => (
+                                            <Typography> {collaborator.firstName}  {collaborator.lastName} </Typography>
+                                        ))}
                                     </AccordionDetails>
                                 </Accordion>
                                 <Accordion style={{width:"50%", marginLeft:"18%", marginTop:"3%"}}>
@@ -151,7 +155,9 @@ export function OrgModal(children: any) {
                                     <Typography>List of Beneficiaries</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <Typography> Alex P, Juan N, other great people  </Typography>
+                                        {org.beneficiaries.map(beneficiary => (
+                                            <Typography> {beneficiary.firstName}  {beneficiary.lastName} </Typography>
+                                        ))}
                                     </AccordionDetails>
                                 </Accordion>
                             </form>
