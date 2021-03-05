@@ -50,14 +50,6 @@ import { Organization } from "."
             width: 150,
          },
       ];
-      
-      const rows = [
-        { id: 1, firstName: 'Alex', lastName: 'O`Sullivan', countryCollaborator: 'Nigeria', type: "Collaborator"},
-        { id: 2, firstName: 'Juan', lastName: 'O`Sullivan', countryCollaborator: 'Nigeria', type: "Moderator"},
-        { id: 3, firstName: 'David', lastName: 'Kinsella', countryCollaborator: 'Argentina', type: "Collaborator"},
-        { id: 4, firstName: 'John', lastName: 'Black', countryCollaborator: 'Argentina', type: "Beneficiary"},
-        { id: 5, firstName: 'Barack', lastName: 'Smith', countryCollaborator: 'Nigeria', type: "Admin"},
-      ];
 
     return (
         <NoSsr>
@@ -89,7 +81,7 @@ import { Organization } from "."
                             </AccordionSummary>
                                 <AccordionDetails>
                                     <div style={{ height: 390, width:"900px", marginLeft:"13px" }}>
-                                        <DataGrid rows={rows} columns={columns} pageSize={5} />
+                                        <DataGrid rows={organization.collaborators} columns={columns} pageSize={5} />
                                     </div>
                                 </AccordionDetails>
                         </Accordion>
@@ -101,7 +93,7 @@ import { Organization } from "."
                             </AccordionSummary>
                                 <AccordionDetails>
                                     <div style={{ height: 390, width:"900px", marginLeft:"13px" }}>
-                                        <DataGrid rows={rows} columns={columns} pageSize={5} />
+                                        <DataGrid rows={organization.beneficiaries} columns={columns} pageSize={5} />
                                     </div>
                                 </AccordionDetails>
                         </Accordion>
@@ -113,7 +105,7 @@ import { Organization } from "."
                             </AccordionSummary>
                                 <AccordionDetails>
                                     <div style={{ height: 390, width:"900px", marginLeft:"13px" }}>
-                                        <DataGrid rows={rows} columns={columns} pageSize={5} />
+                                        <DataGrid rows={organization.collaborators} columns={columns} pageSize={5} />
                                     </div>
                                 </AccordionDetails>
                         </Accordion>

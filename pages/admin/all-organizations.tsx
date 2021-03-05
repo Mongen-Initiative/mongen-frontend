@@ -27,7 +27,7 @@ import { Button } from "@material-ui/core"
   }));
   
   function Organizations({ organizations }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const classes = useStyles()  
+    const classes = useStyles(organizations)  
 
     const columns: ColDef[] = [
       { field: 'name', headerName: 'Organization', width: 180 },
