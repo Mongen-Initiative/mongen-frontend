@@ -11,31 +11,14 @@ export default function OrganizationLocation(props: Props) {
 
   const { callback, values } = props
 
-  const [orgLocation, setOrgLocation] = React.useState({
-    address: '',
-    country: {
-      callingCode: "",
-      countryISO: "",
-      countryISO3: "",
-      name: ""
-    },
-  });
+  const [orgLocation, setOrgLocation] = React.useState(values);
 
   function updateForm(type, data) {
     setOrgLocation({ ...orgLocation, [type]: data })
   }
 
   function updateCountry(data) {
-    updateForm("country", data);
-  }
-
-  function getValue(type) {
-    if (values){
-      if (type in values){
-        return values[type]
-      }
-    }
-    return ""
+    setOrgLocation({ ...orgLocation, ["country"]: data })
   }
 
   useEffect(()=>{
@@ -59,7 +42,7 @@ export default function OrganizationLocation(props: Props) {
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
             style={{marginTop:"20px"}}
-            defaultValue={() => getValue("address")}
+            defaultValue={values.address}
           />
         </Grid>
         <Grid item xs={12}>
@@ -70,7 +53,7 @@ export default function OrganizationLocation(props: Props) {
             fullWidth
             onChange={(event) => updateForm("social_network_url", event.target.value)}
             style={{marginTop:"20px"}}
-            defaultValue={() => getValue("social_network_url")}
+            defaultValue={values.social_network_url}
           />
         </Grid>
       </Grid>

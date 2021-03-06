@@ -115,7 +115,8 @@ export default class OrganizationLogoUpload extends Component<{callback}, filesP
     return (
       <div>
         <Typography variant="subtitle2">Organization Logo *:</Typography>
-        <Typography variant="body2" style={{marginTop:"10px"}}>Upload the logo of your organization</Typography>
+        <Typography variant="body2" style={{marginTop:"10px"}}>Upload the logo of your organization, so we can use it later for your page</Typography>
+        <Typography variant="body2" style={{marginTop:"10px"}}>TODO: define the size</Typography>
         <div className="mg20" style={{marginTop:"20px"}}>
           {currentFile && (
             <Box className="mb25" display="flex" alignItems="center">

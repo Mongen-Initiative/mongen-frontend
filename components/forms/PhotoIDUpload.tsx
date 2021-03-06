@@ -116,7 +116,8 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
       <div>
         <Typography variant="subtitle2">Photo ID *:</Typography>
         <Typography variant="body2" style={{marginTop:"10px"}}>Upload a picture of your Passport, National ID, Driver License or any ID your can provide</Typography>
-        <div className="mg20" style={{marginTop:"20px"}}>
+        <Typography variant="body2" style={{marginTop:"10px"}}>We'd need this information to verify your identity. We will not, in any circumstances, share your personal information with other individuals or organizations without your permission. </Typography>
+        <div className="mg20" style={{marginTop:"20px"}} id="photo_id_progress_bar">
           {currentFile && (
             <Box className="mb25" display="flex" alignItems="center">
               <Box width="100%" mr={1}>
@@ -128,23 +129,24 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
             </Box>)
           }
           {/* Confirmation message */}
-         <div className="file-name">
+         <div className="file-name" id="photo_id_confirmation1">
             {selectedFiles && selectedFiles.length > 0 ? 
-            <Typography variant="body2" style={{color:"green", marginBottom:"10px"}}>Your photo looks good. Please click the 'Upload' button to save it</Typography> 
+              <Typography variant="body2" style={{color:"green", marginBottom:"10px"}} id="photo_id_confirmation1-text">Your photo looks good. Please click the 'Upload' button to save it</Typography> 
             : 
-            null
+              null
             }
           </div>
            {/* Upload buttons */}
-          <label htmlFor="btn-upload">
+          <label htmlFor="btn-upload-photo-id">
             <input
-              id="btn-upload"
-              name="btn-upload"
+              id="btn-upload-photo-id"
+              name="btn-upload-photo-id"
               style={{ display: 'none'}}
               type="file"
               onChange={this.selectFile} />
             <Button
-              className="btn-choose"
+              className="btn-choose-photo-id"
+              id="btn-choose-photo-id"
               variant="outlined"
               component="span"
               style={{marginTop:"15px"}}
@@ -153,7 +155,8 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
             </Button>
           </label>
           <Button
-            className="btn-upload"
+            className="btn-upload-photo-id"
+            id="btn-upload2-photo-id"
             color="primary"
             variant="contained"
             component="span"
@@ -163,17 +166,17 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
           >
             Upload
           </Button>
-          <Typography variant="subtitle2" className={`upload-message ${isError ? "error" : ""}`}>
+          <Typography variant="subtitle2" className={`upload-message ${isError ? "error" : ""}`} id="photo-id-uploaded-message">
             {message}
           </Typography>
 
           {file_id != 0 && name != "" ?
-            <div>
-              <Typography variant="h6" className="list-header" style={{marginTop:"30px"}}>
+            <div id="photo-id-uploaded-message-div">
+              <Typography variant="h6" className="list-header" style={{marginTop:"30px"}} id="photo-id-uploaded-message2">
                 Uploaded file
               </Typography>
               <ul>
-                <Card style={{margin: "auto", maxWidth: "512px"}}> 
+                <Card style={{margin: "auto", maxWidth: "512px"}} id="photo-id-file"> 
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -181,6 +184,7 @@ export default class PhotoIDUpload extends Component<{callback}, filesParams> {
                       height="256"
                       image={`${process.env.mongenMedia}/api/v1/get_file/${file_id}`}
                       title={name}
+                      id="photo-id-file2"
                     />
                   </CardActionArea>
                 </Card>

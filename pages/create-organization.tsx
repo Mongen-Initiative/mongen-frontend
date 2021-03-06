@@ -13,6 +13,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import MainContactController from "../components/forms/MainContact"
+import OrganizationMedia from "../components/forms/OrganizationMedia"
 import OrganizationLocation from "../components/forms/OrganizationLocation"
 import OrganizationNameVisionMission from "../components/forms/OrganizationNameVisionMission"
 import OrganizationSummary from "../components/forms/OrganizationSummary"
@@ -66,14 +67,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Media' ,'Summary'];
 
 type MissionVisionLogo = {
   name: string,
   seo_name: string,
   mission: string,
   vision: string,
-  logo_url: string,
   story: string
 }
 
@@ -98,7 +98,6 @@ type OrganizationAddress = {
 type MainContact = {
   first_name: string
   last_name: string
-  photo_id_url: string
   country: {
     callingCode: string
     countryISO: string
@@ -106,6 +105,11 @@ type MainContact = {
     name: string
   }
   email: string
+}
+
+type Media = {
+  photo_id_url: string
+  logo_url: string
 }
 
 interface BackendErrors<T> {
@@ -121,7 +125,6 @@ function Index() {
     seo_name: "",
     mission: "",
     vision: "",
-    logo_url: "",
     story: ""
   })
   const [organizationLocationSocialNetworks, setOrganizationLocationSocialNetworks] = React.useState<OrganizationAddress>({
@@ -137,7 +140,6 @@ function Index() {
   const [mainContact, setMainContact] = React.useState<MainContact>({
     first_name: "",
     last_name: "",
-    photo_id_url: "",
     country: {
       callingCode: "",
       countryISO: "",
@@ -146,17 +148,21 @@ function Index() {
     },
     email: ""
   })
+  const [media, setMedia] = React.useState<Media>({
+    photo_id_url: "",
+    logo_url: "",
+  })
+
 
   const [validationError, setValidationError] = React.useState(0);
 
   const [endMessage, setEndMessage] = React.useState(
     "We will check the information your provided and contact you for further steps. Thank you :)"
-    );
+  );
 
   function validateOrganizationDetails () {
     if (organizationDetails.name === "" || 
     organizationDetails.mission === "" || 
-    // organizationDetails.logo_url === "" ||  //TODO: figure out how to handle this validation
     organizationDetails.vision === "" || 
     organizationDetails.story === "") {
       setValidationError(1)
@@ -183,8 +189,18 @@ function Index() {
     if (mainContact.first_name === "" || 
       mainContact.last_name === "" ||
       mainContact.email === "" ||
-      // mainContact.photo_id_url === "" || //TODO: figure out how to handle this validation
       Object.keys(mainContact.country).length === 0) {
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+    function validateMedia () {
+    if (media.logo_url === "" ||  
+      media.photo_id_url === ""){
         setValidationError(1)
     }
     else {
@@ -207,6 +223,10 @@ function Index() {
       console.log(mainContact)
       validateMainContactDetails()
     }
+    if(activeStep === 3) {
+      console.log(media)
+      validateMedia()
+    }
     //// org creation
     if (activeStep === steps.length - 1) {
       setActiveStep(activeStep + 1)
@@ -216,9 +236,9 @@ function Index() {
 
   const createOrganization = () => {
     console.log(mainContact)
-    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" })
+    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: media.photo_id_url })
       .then((response) => {
-        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id, logo_url: media.logo_url })
         .catch((error) => {
           if (error.response) {
             console.log(error.response.data);
@@ -275,6 +295,14 @@ function Index() {
     setMainContact(data);
   }
 
+  const updateMedia = (data) => {
+    setMedia(data);
+  }
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+    setValidationError(0)
+  };
 
   return (
     <NoSsr>
@@ -326,35 +354,38 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 3 ?
+                      <OrganizationMedia callback={updateMedia} values={media} />
+                      :
+                      <div></div>
+                    }
+                    {activeStep === 4 ?
                       <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} />
                       :
                       <div></div>
                     }
                     <div className={classes.buttons}>
-                    {/* TODO: back button logic needs to be implemented */}
-                      {/* {activeStep !== 0 && (
+                    {validationError ? (
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
+                     {activeStep !== 0 && (
+                       <div style={{width:"10%", float:"right", marginRight:"70px"}}>
                         <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
-                      )} */}
-                      <div>
-                        <div style={{width:"10%", float:"right", marginRight:"70px"}}>
+                        </div>
+                      )}
+                        <div style={{width:"10%", float:"right"}}>
                           <Button
                             variant="contained"
                             color="primary"
                             onClick={handleNext}
                             className={classes.button}
-                            style={{ }}
                           >
                             {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
                           </Button>
                         </div>
-                        {validationError ? (
-                          <div style={{width:"50%", float:"right", marginRight:"200px", paddingLeft:"70px"}}>
-                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
-                          </div>
-                        ): (<></>)}
-                      </div>
                     </div>
                   </div>
               )}
