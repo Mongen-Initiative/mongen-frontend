@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DisabilitiesController from '../autocomplete/Disabilities'
 import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
 import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio, Grid, Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
 import CountriesController from '../autocomplete/Countries';
+import { BeneficiaryPhotoUpload } from '../forms/PhotoIDUpload';
 
 type Props = {
   callback?:any
@@ -15,22 +16,8 @@ type Props = {
 }
 
 export function GeneralInfoStep(props: Props) {
-  const { callback } = props
-  const [generalInfoData, setGeneralInfoData] = React.useState({
-    first_name: '',
-    last_name: '',
-    date_of_birth: '',
-    address: '',
-    gender: 'female',
-    height: 0,
-    weight: 0,
-    country: {
-      callingCode: "",
-      countryISO: "",
-      countryISO3: "",
-      name: ""
-    },
-  })
+  const { callback, values } = props
+  const [generalInfoData, setGeneralInfoData] = React.useState(values)
   
   function updateForm(type, data) {
     setGeneralInfoData({ ...generalInfoData, [type]: data })
@@ -44,6 +31,14 @@ export function GeneralInfoStep(props: Props) {
   function updateCountry(data) {
     updateForm("country", data);
   }
+
+  // function updatePhotoIdUrl(data) {
+  //   setGeneralInfoData({}) //TODO: here we need to list each attribute one by one
+  // }
+
+  useEffect(()=>{
+    callback(generalInfoData);
+  }, [generalInfoData])
 
   return (
     <div>
@@ -59,6 +54,7 @@ export function GeneralInfoStep(props: Props) {
             label="First name"
             fullWidth
             onChange={(event) => updateForm("first_name", event.target.value)}
+            defaultValue={values.first_name}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -69,6 +65,7 @@ export function GeneralInfoStep(props: Props) {
             label="Last name"
             fullWidth
             onChange={(event) => updateForm("last_name", event.target.value)}
+            defaultValue={values.last_name}
           />
         </Grid>
         <Grid item xs={3}>
@@ -88,6 +85,7 @@ export function GeneralInfoStep(props: Props) {
             label="Current address"
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
+            defaultValue={values.address}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -104,11 +102,12 @@ export function GeneralInfoStep(props: Props) {
           <Typography style={{color:"grey", marginBottom:"5px", marginTop:"15px", marginLeft:"50px"}}>Date of birth *</Typography>
           <TextField
             required
-            id="dob"
-            name="dob"
+            id="date_of_birth"
+            name="date_of_birth"
             type="date"
             onChange={(event) => updateDate(event.target.value)}
             style={{marginLeft:"50px"}}
+            defaultValue={values.date_of_birth}
           />
         </Grid>
 
@@ -138,6 +137,7 @@ export function GeneralInfoStep(props: Props) {
             label="Weight in kilograms"
             fullWidth
             onChange={(event) => updateForm("weight", event.target.value)}
+            defaultValue={values.weight}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -148,31 +148,20 @@ export function GeneralInfoStep(props: Props) {
             label="Height in centimeters"
             fullWidth
             onChange={(event) => updateForm("height", event.target.value)}
+            defaultValue={values.height}
           />
         </Grid>
-        <Button
-            variant="contained"
-            component="label"
-            style = {{margin:"15px", marginTop:"30px"}}
-        >
-        Upload Child's photo
-        <input
-            type="file"
-            style={{ display: "none" }}
-        />
-        </Button>
+        {/* <Grid item xs={12}>
+          <BeneficiaryPhotoUpload callback={updatePhoto} />
+        </Grid> */}
       </Grid>
     </div>
   );
 }
 
 export function AcademicRecordsStep(props: Props) {
-  const { callback } = props
-  const [academicRecordsData, setAcademicRecordsData] = React.useState({
-    lastSchool: '',
-    lastClass: '',
-    depDate: '',
-  })
+  const { callback, values } = props
+  const [academicRecordsData, setAcademicRecordsData] = React.useState(values)
   
   function updateForm(type, data) {
     setAcademicRecordsData({ ...academicRecordsData, [type]: data })
@@ -183,6 +172,10 @@ export function AcademicRecordsStep(props: Props) {
     setAcademicRecordsData({ ...academicRecordsData, ["depDate"]: data })
     callback(academicRecordsData);
   }
+
+  useEffect(()=>{
+    callback(academicRecordsData);
+  }, [academicRecordsData])
 
   return (
     <div>
@@ -197,12 +190,14 @@ export function AcademicRecordsStep(props: Props) {
               type="date"
               onChange={(event) => updateDate(event.target.value)}
               style={{marginBottom:"50px"}}
+              defaultValue={values.depDate}
             />
           </Grid>
         <Grid item xs={3} md={6}>
           <TextField 
             required id="lastSchool" label="Last school attended" fullWidth
             onChange={(event) => updateForm("lastSchool", event.target.value)}
+            defaultValue={values.lastSchool}
           />
         </Grid>
         <Grid item xs={3} md={6}>
@@ -212,6 +207,7 @@ export function AcademicRecordsStep(props: Props) {
             label="Last class attended"
             fullWidth
             onChange={(event) => updateForm("lastClass", event.target.value)}
+            defaultValue={values.lastClass}
           />
         </Grid>
       </Grid>
@@ -220,17 +216,17 @@ export function AcademicRecordsStep(props: Props) {
 }
 
 export function ParentStep(props: Props) {
-  const { callback } = props
-  const [parentData, setParentData] = React.useState({
-    parentName: '',
-    parentPhone: '',
-    parentAddress: '',
-  })
+  const { callback, values } = props
+  const [parentData, setParentData] = React.useState(values)
   
   function updateForm(type, data) {
     setParentData({ ...parentData, [type]: data })
     callback(parentData);
   }
+
+  useEffect(()=>{
+    callback(parentData);
+  }, [parentData])
 
   return (
       <div>
@@ -242,6 +238,7 @@ export function ParentStep(props: Props) {
             <TextField 
               required id="parentName" label="Name of parent/ward" fullWidth
               onChange={(event) => updateForm("parentName", event.target.value)}
+              defaultValue={values.parentName}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -251,6 +248,7 @@ export function ParentStep(props: Props) {
               label="Phone number of parent/ward"
               fullWidth
               onChange={(event) => updateForm("parentPhone", event.target.value)}
+              defaultValue={values.parentPhone}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -258,6 +256,7 @@ export function ParentStep(props: Props) {
               required id="parentAddress" label="Address of parent/ward" fullWidth 
               onChange={(event) => updateForm("parentAddress", event.target.value)}
               style={{marginBottom:"60px"}}
+              defaultValue={values.parentAddress}
             />
           </Grid>
         </Grid>
@@ -266,17 +265,17 @@ export function ParentStep(props: Props) {
 }
 
 export function CounsellorStep(props: Props) {
-    const { callback } = props
-    const [counsellorData, setCounsellorData] = React.useState({
-      counsellorName: '',
-      timesCounselled: '',
-      notes: '',
-    })
+    const { callback, values } = props
+    const [counsellorData, setCounsellorData] = React.useState(values)
     
     function updateForm(type, data) {
       setCounsellorData({ ...counsellorData, [type]: data })
       callback(counsellorData);
     }
+
+    useEffect(()=>{
+      callback(counsellorData);
+    }, [counsellorData])
 
     return (
       <div>
@@ -288,6 +287,7 @@ export function CounsellorStep(props: Props) {
             <TextField 
               required id="counsellorName" label="Name of counsellor in charge" fullWidth
               onChange={(event) => updateForm("counsellorName", event.target.value)}
+              defaultValue={values.counsellorName}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -297,12 +297,14 @@ export function CounsellorStep(props: Props) {
               label="Times counselled"
               fullWidth
               onChange={(event) => updateForm("timesCounselled", event.target.value)}
+              defaultValue={values.timesCounselled}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField 
               required id="notes" label="Notes about the child"  multiline rows={4} fullWidth
               onChange={(event) => updateForm("notes", event.target.value)}
+              defaultValue={values.notes}
              />
           </Grid>
         </Grid>

@@ -302,7 +302,7 @@ function Index() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
     setValidationError(0)
-  };
+  }
 
   return (
     <NoSsr>

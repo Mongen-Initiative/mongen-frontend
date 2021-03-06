@@ -192,18 +192,23 @@ export default function AddNewRecord() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <GeneralInfoStep callback={updateGeneralInfo}/>;
+        return <GeneralInfoStep callback={updateGeneralInfo} values={generalInfo}/>;
       case 1:
-        return <AcademicRecordsStep callback={updateAcademicRecords}/>;
+        return <AcademicRecordsStep callback={updateAcademicRecords} values={academicRecords}/>;
       case 2:
-        return <ParentStep callback={updateParent}/>;
+        return <ParentStep callback={updateParent} values={parent}/>;
       case 3:
-        return <CounsellorStep callback={updateCounsellor}/>;
+        return <CounsellorStep callback={updateCounsellor} values={counsellor}/>;
       case 4:
         return <NewRecordSummaryStep generalInfo={generalInfo} academicRecords={academicRecords} parent={parent} counsellor={counsellor}/>;
       default:
         throw new Error('Unknown step');
     }
+  }
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+    setValidationError(0)
   }
 
   return (
@@ -251,30 +256,28 @@ export default function AddNewRecord() {
                   <div style={{height:"max-content"}}>
                     {getStepContent(activeStep)}
                     <div className={classes.buttons}>
-                      {/* TODO: back button logic needs to be implemented */}
-                      {/* {activeStep !== 0 && (
+                    {validationError ? (
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
+                     {activeStep !== 0 && (
+                       <div style={{width:"10%", float:"right", marginRight:"70px"}}>
                         <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
-                      )} */}
-                       <div>
-                        <div style={{width:"10%", float:"right", marginRight:"70px"}}>
+                        </div>
+                      )}
+                        <div style={{width:"10%", float:"right", marginRight:"30px"}}>
                           <Button
                             variant="contained"
                             color="primary"
                             onClick={handleNext}
                             className={classes.button}
-                            style={{ }}
                           >
                             {activeStep === steps.length - 1 ? 'Add' : 'Next'}
                           </Button>
                         </div>
-                        {validationError ? (
-                          <div style={{width:"50%", float:"right", marginRight:"150px", paddingLeft:"50px", marginTop:"40px"}}>
-                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
-                          </div>
-                        ): (<></>)}
-                      </div>
                     </div>
                 </div>
                 )}
