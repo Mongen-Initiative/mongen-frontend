@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import DisabilitiesController from '../autocomplete/Disabilities'
 import FearTraumaController from '../autocomplete/FearsTraumas'
 import SkillsAbilitiesController from '../autocomplete/SkillsAbilities'
-import { List, ListItem, ListItemText, Button, FormControl, FormLabel, RadioGroup, Radio, Grid, Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
+import { List, ListItem, ListItemText, FormControl, FormLabel, RadioGroup, Radio, Grid, Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core'
 import CountriesController from '../autocomplete/Countries';
-import { BeneficiaryPhotoUpload } from '../forms/PhotoIDUpload';
 
 type Props = {
   callback?:any

@@ -260,7 +260,7 @@ function Index() {
       })
       .then(
         (response) => {
-          console.log(`Organization created! ID: ${response.data.id}`)
+          console.log(`Organization created! ID: ${response}`)
         }
       )
       .catch((error) => {

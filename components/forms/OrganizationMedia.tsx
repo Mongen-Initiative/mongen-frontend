@@ -1,4 +1,4 @@
-import { Typography, Grid, Divider } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import PhotoIDUpload from "./PhotoIDUpload";
 import OrganizationLogoUpload from "./OrganizationLogoUpload";
@@ -8,7 +8,7 @@ type Props = {
   values
 }
 
-export default function OrganzationMedia(props: Props) {
+export default function OrganizationMedia(props: Props) {
 
   const { callback, values } = props
 
