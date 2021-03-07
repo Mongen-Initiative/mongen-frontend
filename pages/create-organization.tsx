@@ -13,6 +13,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import MainContactController from "../components/forms/MainContact"
+import OrganizationMedia from "../components/forms/OrganizationMedia"
 import OrganizationLocation from "../components/forms/OrganizationLocation"
 import OrganizationNameVisionMission from "../components/forms/OrganizationNameVisionMission"
 import OrganizationSummary from "../components/forms/OrganizationSummary"
@@ -63,18 +64,17 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: theme.spacing(5),
-    marginLeft: theme.spacing(2),
   },
 }));
 
-const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Media' ,'Summary'];
 
 type MissionVisionLogo = {
   name: string,
   seo_name: string,
   mission: string,
   vision: string,
-  logo_url: string
+  story: string
 }
 
 // type SocialNetworks = {
@@ -98,19 +98,25 @@ type OrganizationAddress = {
 type MainContact = {
   first_name: string
   last_name: string
-  photo_id_url: string
   country: {
     callingCode: string
     countryISO: string
     countryISO3: string
     name: string
   }
+  email: string
+}
+
+type Media = {
+  photo_id_url: string
+  logo_url: string
+}
+
+interface BackendErrors<T> {
+  [index: string]: T
 }
 
 function Index() {
-
-  //TODO: implement form validation https://react-hook-form.com/get-started#Applyvalidation
-
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -119,7 +125,7 @@ function Index() {
     seo_name: "",
     mission: "",
     vision: "",
-    logo_url: ""
+    story: ""
   })
   const [organizationLocationSocialNetworks, setOrganizationLocationSocialNetworks] = React.useState<OrganizationAddress>({
     address: "",
@@ -134,38 +140,146 @@ function Index() {
   const [mainContact, setMainContact] = React.useState<MainContact>({
     first_name: "",
     last_name: "",
-    photo_id_url: "",
     country: {
       callingCode: "",
       countryISO: "",
       countryISO3: "",
       name: ""
-    }
+    },
+    email: ""
+  })
+  const [media, setMedia] = React.useState<Media>({
+    photo_id_url: "",
+    logo_url: "",
   })
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    if (activeStep === steps.length - 1)
-      createOrganization()
-  };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  const [validationError, setValidationError] = React.useState(0);
+
+  const [endMessage, setEndMessage] = React.useState(
+    "We will check the information your provided and contact you for further steps. Thank you :)"
+  );
+
+  function validateOrganizationDetails () {
+    if (organizationDetails.name === "" || 
+    organizationDetails.mission === "" || 
+    organizationDetails.vision === "" || 
+    organizationDetails.story === "") {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateSocialDetails () {
+    if (organizationLocationSocialNetworks.address === "" || 
+      organizationLocationSocialNetworks.social_network_url === "" ||
+      Object.keys(organizationLocationSocialNetworks.country).length === 0) {
+        setValidationError(1)
+    } 
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateMainContactDetails () {
+    if (mainContact.first_name === "" || 
+      mainContact.last_name === "" ||
+      mainContact.email === "" ||
+      Object.keys(mainContact.country).length === 0) {
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+    function validateMedia () {
+    if (media.logo_url === "" ||  
+      media.photo_id_url === ""){
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  const handleNext = () => {
+    //// form validation
+    if(activeStep === 0) {
+      console.log(organizationDetails)
+      validateOrganizationDetails()
+    }
+    if(activeStep === 1) {
+      console.log(organizationLocationSocialNetworks)
+      validateSocialDetails()
+    }
+    if(activeStep === 2) {
+      console.log(mainContact)
+      validateMainContactDetails()
+    }
+    if(activeStep === 3) {
+      console.log(media)
+      validateMedia()
+    }
+    //// org creation
+    if (activeStep === steps.length - 1) {
+      setActiveStep(activeStep + 1)
+      createOrganization()
+    }
   };
 
   const createOrganization = () => {
     console.log(mainContact)
-    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator" })
+    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: media.photo_id_url })
       .then((response) => {
-        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id, logo_url: media.logo_url })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            let backend_errors: string = "Some information is missing for the organization:\n\n";
+            let errors: BackendErrors<object> = error.response.data
+            Object.keys(errors).forEach(key => {
+              backend_errors += `${errors[key]}: ${key}\n`
+            })
+            setEndMessage(backend_errors);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+            console.log(error.config);
+        });
       })
       .then(
         (response) => {
           console.log(`Organization created! ID: ${response.data.id}`)
         }
       )
-      .catch(() => {
-        console.log("Something failed ):")
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          let backend_errors: string = "Some information is missing for the main contact:\n\n";
+          let errors: BackendErrors<object> = error.response.data
+          Object.keys(errors).forEach(key => {
+            backend_errors += `${errors[key]}: ${key}\n`
+          })
+          setEndMessage(backend_errors);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+          console.log(error.config);
       });
   };
 
@@ -181,6 +295,14 @@ function Index() {
     setMainContact(data);
   }
 
+  const updateMedia = (data) => {
+    setMedia(data);
+  }
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+    setValidationError(0)
+  }
 
   return (
     <NoSsr>
@@ -202,9 +324,9 @@ function Index() {
               </Stepper>
               {activeStep === steps.length ? (
                 <div>
-                  <Typography style={{marginTop:"80px", fontSize:"17px"}}>
-                    We will check the information your provided and contact you for further steps. Thank you :)
-                      </Typography>
+                  <Typography style={{marginTop:"80px", fontSize:"17px", whiteSpace:"pre-wrap"}}>
+                    {endMessage}
+                  </Typography>
                   <Button
                     variant="contained"
                     color="primary"
@@ -217,7 +339,7 @@ function Index() {
               ) : (
                   <div style={{height:"max-content"}}>
                     {activeStep == 0 ?
-                      <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails} />
+                      <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails}/>
                       :
                       <div></div>
                     }
@@ -232,24 +354,38 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 3 ?
+                      <OrganizationMedia callback={updateMedia} values={media} />
+                      :
+                      <div></div>
+                    }
+                    {activeStep === 4 ?
                       <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} />
                       :
                       <div></div>
                     }
                     <div className={classes.buttons}>
-                      {activeStep !== 0 && (
+                    {validationError ? (
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
+                     {activeStep !== 0 && (
+                       <div style={{width:"10%", float:"right", marginRight:"70px"}}>
                         <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
+                        </div>
                       )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
-                      </Button>
+                        <div style={{width:"10%", float:"right"}}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                            className={classes.button}
+                          >
+                            {activeStep === steps.length - 1 ? 'Apply' : 'Next'}
+                          </Button>
+                        </div>
                     </div>
                   </div>
               )}

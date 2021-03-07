@@ -1,7 +1,6 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { convertTitleToSeoUrl } from "../templates/BasePage";
-import OrganizationLogoUpload from "./OrganizationLogoUpload";
 
 type Props = {
   callback
@@ -11,38 +10,19 @@ type Props = {
 export default function OrganizationNameVisionMission(props: Props) {
   const { callback, values } = props
 
-  const [orgData, setOrgData] = React.useState({
-    name: '',
-    seo_name: '',
-    mission: '',
-    vision: '',
-    logo_url: '',
-  });
+  const [orgData, setOrgData] = React.useState(values)
   
-
   function updateForm(type, data) {
     setOrgData({ ...orgData, [type]: data })
-    callback(orgData);
-  }
-
-  function updateLogoUrl(data) {
-    updateForm("logo_url", data);
   }
 
   function updateNameAndSeoLink(data) {
-    setOrgData({ ...orgData, ["name"]: data })
-    setOrgData({ ...orgData, ["seo_name"]: convertTitleToSeoUrl(data) })
-    callback(orgData);
+    setOrgData({ ...orgData, ["name"]: data, ["seo_name"]: convertTitleToSeoUrl(data) })
   }
 
-  function getValue(type) {
-      if (values){
-        if (type in values){
-          return values[type]
-        }
-      }
-      return ""
-  }
+  useEffect(()=>{
+    callback(orgData);
+  }, [orgData])
 
   return (
     <div>
@@ -51,16 +31,13 @@ export default function OrganizationNameVisionMission(props: Props) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <OrganizationLogoUpload callback={updateLogoUrl} />
-        </Grid>
-        <Grid item xs={12}>
           <TextField
             required
             id="name"
             name="name"
             label="Enter the Organization name"
             onChange={(event) => updateNameAndSeoLink(event.target.value)}
-            defaultValue={() => getValue("name")}
+            defaultValue={values.name}
             fullWidth
             style={{marginTop:"20px"}}
           />
@@ -79,7 +56,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             rows={6}
             rowsMax={6}
             onChange={(event) => updateForm("story", event.target.value)}
-            defaultValue={() => getValue("vision")}
+            defaultValue={values.story}
             fullWidth
             style={{marginTop:"5px"}}
           />
@@ -94,7 +71,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             rows={6}
             rowsMax={6}
             onChange={(event) => updateForm("mission", event.target.value)}
-            defaultValue={() => getValue("mission")}
+            defaultValue={values.mission}
             fullWidth
             style={{marginTop:"10px"}}
           />
@@ -109,7 +86,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             rows={6}
             rowsMax={6}
             onChange={(event) => updateForm("vision", event.target.value)}
-            defaultValue={() => getValue("vision")}
+            defaultValue={values.vision}
             fullWidth
             style={{marginTop:"10px"}}
           />

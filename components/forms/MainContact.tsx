@@ -1,7 +1,6 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import CountriesController from "../autocomplete/Countries";
-import PhotoIDUpload from "./PhotoIDUpload";
 
 type Props = {
   callback
@@ -12,35 +11,20 @@ export default function MainContactController(props: Props) {
 
   const { callback, values } = props
 
-  const [orgData, setOrgData] = React.useState({
-    first_name: '',
-    last_name: '',
-    country: {},
-    photo_id_url: '',
-  });
+  const [orgData, setOrgData] = React.useState(values);
 
 
   function updateForm(type, data) {
     setOrgData({ ...orgData, [type]: data })
-    callback(orgData);
   }
 
   function updateCountry(data) {
     updateForm("country", data);
   }
 
-  function updatePhotoIdUrl(data) {
-    updateForm("photo_id_url", data);
-  }
-
-  function getValue(type) {
-    if (values) {
-      if (type in values) {
-        return values[type]
-      }
-    }
-    return ""
-  }
+  useEffect(()=>{
+    callback(orgData);
+  }, [orgData])
 
   return (
     <div>
@@ -58,7 +42,7 @@ export default function MainContactController(props: Props) {
             name="first_name"
             label="Enter your first name"
             onChange={(event) => updateForm("first_name", event.target.value)}
-            defaultValue={() => getValue("first_name")}
+            defaultValue={values.first_name}
             fullWidth
             style={{marginTop:"20px"}}
           />
@@ -70,7 +54,7 @@ export default function MainContactController(props: Props) {
             name="last_name"
             label="Enter your last name"
             onChange={(event) => updateForm("last_name", event.target.value)}
-            defaultValue={() => getValue("last_name")}
+            defaultValue={values.last_name}
             fullWidth
             style={{marginTop:"20px"}}
           />
@@ -82,17 +66,14 @@ export default function MainContactController(props: Props) {
             name="email"
             label="Enter your email, so we can contact you"
             onChange={(event) => updateForm("email", event.target.value)}
-            defaultValue={() => getValue("email")}
+            defaultValue={values.email}
             fullWidth
             style={{marginTop:"20px"}}
           />
         </Grid>
         <Grid item xs={12} style={{marginTop:"20px"}}>
-          <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality:</Typography>
-          <CountriesController callback={updateCountry} className={""}/>
-        </Grid>
-        <Grid item xs={12} style={{marginTop:"20px"}}>
-          <PhotoIDUpload callback={updatePhotoIdUrl} />
+          <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality *:</Typography>
+          <CountriesController callback={updateCountry} className =""/>
         </Grid>
         {/*
           Need to discuss if this layer will be needed or not

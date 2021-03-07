@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Stepper, Step, StepLabel, Button, Typography, Container, NoSsr } from '@material-ui/core'
-import { BasePage } from '../../components/templates'
+import { BasePageAboutMongen } from '../../components/templates'
 import {GeneralInfoStep, AcademicRecordsStep, CounsellorStep, NewRecordSummaryStep, ParentStep}  from '../../components/templates/newRecordSteps'
 import BeneficiaryService from '../../components/services/BeneficiaryService'
 
@@ -49,27 +49,120 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
-const title = "Your title"
-
 export default function AddNewRecord() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0)
-  const [generalInfo, setGeneralInfo] = useState({})
-  const [academicRecords, setAcademicRecords] = useState({})
-  const [parent, setParent] = useState({})
-  const [counsellor, setCounsellor] = useState({})
+  const [generalInfo, setGeneralInfo] = useState({
+    first_name: '',
+    last_name: '',
+    date_of_birth: '',
+    address: '',
+    gender: 'female',
+    height: 0,
+    weight: 0,
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    },
+  })
+  const [academicRecords, setAcademicRecords] = useState({
+    lastSchool: '',
+    lastClass: '',
+    depDate: '',
+  })
+  const [parent, setParent] = useState({
+    parentName: '',
+    parentPhone: '',
+    parentAddress: '',
+  })
+  const [counsellor, setCounsellor] = useState({
+    counsellorName: '',
+    timesCounselled: '',
+    notes: '',
+  })
+  const [validationError, setValidationError] = React.useState(0);
+
+  function validateGeneralInfoDetails () {
+    if (generalInfo.first_name === "" || 
+    generalInfo.last_name === "" ||
+    generalInfo.date_of_birth === "" ||
+    generalInfo.address === "" ||
+    generalInfo.height === 0 ||
+    generalInfo.weight === 0 ||
+    Object.keys(generalInfo.country).length === 0) {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateAcademicRecords () {
+    if (academicRecords.lastSchool === "" || 
+    academicRecords.lastClass === "" ||
+    academicRecords.depDate === "" ) {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateParentRecords () {
+    if (parent.parentName === "" || 
+    parent.parentPhone === "" ||
+    parent.parentAddress === "" ) {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validateCounsellorRecords () {
+    if (counsellor.counsellorName === "" || 
+    counsellor.timesCounselled === "" ||
+    counsellor.notes === "" ) {
+      setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1)
-    if (activeStep === steps.length - 1) createBeneficiary()
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+    //// form validation
+    if(activeStep === 0) {
+      console.log(generalInfo)
+      validateGeneralInfoDetails()
+    }
+    if(activeStep === 1) {
+      console.log(academicRecords)
+      validateAcademicRecords()
+    }
+    if(activeStep === 2) {
+      console.log(parent)
+      validateParentRecords()
+    }
+    if(activeStep === 3) {
+      console.log(counsellor)
+      validateCounsellorRecords()
+    }
+    //// beneficiary creation
+    if (activeStep === steps.length - 1) {
+      setActiveStep(activeStep + 1)
+      createBeneficiary()
+    }
   };
 
   const createBeneficiary = () => {
-    BeneficiaryService.create({ ...generalInfo, organization_id: 10 })
+    BeneficiaryService.create({ ...generalInfo, ...academicRecords, ...parent, ...counsellor, organization_id: 10 })
       .then(
         (response) => {
           console.log(`Beneficiary added! ID: ${response.data.id}`)
@@ -99,13 +192,13 @@ export default function AddNewRecord() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <GeneralInfoStep callback={updateGeneralInfo}/>;
+        return <GeneralInfoStep callback={updateGeneralInfo} values={generalInfo}/>;
       case 1:
-        return <AcademicRecordsStep callback={updateAcademicRecords}/>;
+        return <AcademicRecordsStep callback={updateAcademicRecords} values={academicRecords}/>;
       case 2:
-        return <ParentStep callback={updateParent}/>;
+        return <ParentStep callback={updateParent} values={parent}/>;
       case 3:
-        return <CounsellorStep callback={updateCounsellor}/>;
+        return <CounsellorStep callback={updateCounsellor} values={counsellor}/>;
       case 4:
         return <NewRecordSummaryStep generalInfo={generalInfo} academicRecords={academicRecords} parent={parent} counsellor={counsellor}/>;
       default:
@@ -113,9 +206,14 @@ export default function AddNewRecord() {
     }
   }
 
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+    setValidationError(0)
+  }
+
   return (
       <NoSsr>
-        <BasePage className={classes.rootLight} title={title} orgId='1'>
+       <BasePageAboutMongen className={classes.rootLight}>
         <title>Mongen | Add a new child</title>
           <Container className={classes.layout}>
             <Paper className={classes.paper}>
@@ -158,25 +256,34 @@ export default function AddNewRecord() {
                   <div style={{height:"max-content"}}>
                     {getStepContent(activeStep)}
                     <div className={classes.buttons}>
-                      {activeStep !== 0 && (
+                    {validationError ? (
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
+                     {activeStep !== 0 && (
+                       <div style={{width:"10%", float:"right", marginRight:"70px"}}>
                         <Button onClick={handleBack} className={classes.button} variant="outlined">
                           Back
                         </Button>
+                        </div>
                       )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Add a record' : 'Next'}
-                      </Button>
+                        <div style={{width:"10%", float:"right", marginRight:"30px"}}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                            className={classes.button}
+                          >
+                            {activeStep === steps.length - 1 ? 'Add' : 'Next'}
+                          </Button>
+                        </div>
                     </div>
                 </div>
                 )}
             </Paper>
           </Container>
-      </BasePage>
+      </BasePageAboutMongen>
      </NoSsr>
   );
 }

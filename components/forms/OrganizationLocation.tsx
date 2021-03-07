@@ -1,5 +1,5 @@
 import { Typography, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import CountriesController from "../autocomplete/Countries";
 
 type Props = {
@@ -11,28 +11,19 @@ export default function OrganizationLocation(props: Props) {
 
   const { callback, values } = props
 
-  const [orgLocation, setOrgLocation] = React.useState({
-    address: '',
-    country: {},
-  });
+  const [orgLocation, setOrgLocation] = React.useState(values);
 
   function updateForm(type, data) {
     setOrgLocation({ ...orgLocation, [type]: data })
-    callback(orgLocation);
-}
-
-function updateCountry(data){
-  updateForm("country", data);
-}
-
-function getValue(type) {
-  if (values){
-    if (type in values){
-      return values[type]
-    }
   }
-  return ""
-}
+
+  function updateCountry(data) {
+    setOrgLocation({ ...orgLocation, ["country"]: data })
+  }
+
+  useEffect(()=>{
+    callback(orgLocation);
+  }, [orgLocation])
 
   return (
     <div style={{marginBottom:"50px"}}>
@@ -41,7 +32,7 @@ function getValue(type) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
-          <CountriesController callback={updateCountry} className={""}/>
+          <CountriesController callback={updateCountry} className=""/>
         </Grid>
         <Grid item xs={12}>
           <TextField 
@@ -51,7 +42,7 @@ function getValue(type) {
             fullWidth
             onChange={(event) => updateForm("address", event.target.value)}
             style={{marginTop:"20px"}}
-            defaultValue={() => getValue("address")}
+            defaultValue={values.address}
           />
         </Grid>
         <Grid item xs={12}>
@@ -62,7 +53,7 @@ function getValue(type) {
             fullWidth
             onChange={(event) => updateForm("social_network_url", event.target.value)}
             style={{marginTop:"20px"}}
-            defaultValue={() => getValue("social_network_url")}
+            defaultValue={values.social_network_url}
           />
         </Grid>
       </Grid>
