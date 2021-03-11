@@ -21,7 +21,7 @@ import MainContactService from "../components/services/MainContactService"
 import OrganizationService from "../components/services/OrganizationService"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-import OrganizationLogo from "../components/forms/OrganizationLogo"
+// import OrganizationLogo from "../components/forms/OrganizationLogo"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Logo', 'Photo ID' ,'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Photo ID', 'Summary'];
 
 type MissionVisionLogo = {
   name: string,
@@ -106,10 +106,6 @@ type MainContact = {
     name: string
   }
   email: string
-}
-
-type Logo = {
-  logo_url: string
 }
 
 type PhotoId = {
@@ -151,9 +147,6 @@ function Index() {
       name: ""
     },
     email: ""
-  })
-  const [logo, setLogo] = React.useState<Logo>({
-    logo_url: "",
   })
 
   const [photoId, setPhotoId] = React.useState<PhotoId>({
@@ -204,16 +197,6 @@ function Index() {
     }
   }
 
-  function validateLogo () {
-    if (logo.logo_url === ""){
-        setValidationError(1)
-    }
-    else {
-      setValidationError(0)
-      setActiveStep(activeStep + 1)
-    }
-  }
-
   function validatePhotoId () {
       if (photoId.photo_id_url === ""){
           setValidationError(1)
@@ -239,10 +222,6 @@ function Index() {
       validateMainContactDetails()
     }
     if(activeStep === 3) {
-      console.log(logo)
-      validateLogo()
-    }
-    if(activeStep === 4) {
       console.log(photoId)
       validatePhotoId()
     }
@@ -257,7 +236,7 @@ function Index() {
     console.log(mainContact)
     MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: photoId.photo_id_url })
       .then((response) => {
-        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id, logo_url: logo.logo_url })
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
         .catch((error) => {
           if (error.response) {
             console.log(error.response.data);
@@ -312,10 +291,6 @@ function Index() {
 
   const updateMainContact = (data) => {
     setMainContact(data);
-  }
-
-  const updateLogo = (data) => {
-    setLogo(data);
   }
 
   const updatePhotoId = (data) => {
@@ -377,16 +352,11 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 3 ?
-                      <OrganizationLogo callback={updateLogo} values={logo} />
+                      <OrganizationPhotoId callback={updatePhotoId} values={photoId} />
                       :
                       <div></div>
                     }
                     {activeStep === 4 ?
-                      <OrganizationPhotoId callback={updatePhotoId} values={logo} />
-                      :
-                      <div></div>
-                    }
-                    {activeStep === 5 ?
                       <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} />
                       :
                       <div></div>
