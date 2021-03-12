@@ -2,13 +2,13 @@ import useSWR from "swr"
 
 const fetcher = url => fetch(url).then(res => res.json())
 
-export default function getOrganizationsByVerifiedStatus(status: boolean) {
+export default function getOrganizationsByStatus(status: string) {
   const {
     data,
     mutate,
     error,
   } = useSWR(
-    `${process.env.mongenCore}/api/v1/organizations/verified/${status}`,
+    `${process.env.mongenCore}/api/v1/organizations/status/${status}`,
     fetcher
   )
 

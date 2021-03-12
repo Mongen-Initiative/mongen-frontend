@@ -13,7 +13,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import MainContactController from "../components/forms/MainContact"
-import OrganizationMedia from "../components/forms/OrganizationMedia"
+import OrganizationPhotoId from "../components/forms/OrganizationPhotoId"
 import OrganizationLocation from "../components/forms/OrganizationLocation"
 import OrganizationNameVisionMission from "../components/forms/OrganizationNameVisionMission"
 import OrganizationSummary from "../components/forms/OrganizationSummary"
@@ -21,6 +21,7 @@ import MainContactService from "../components/services/MainContactService"
 import OrganizationService from "../components/services/OrganizationService"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
+// import OrganizationLogo from "../components/forms/OrganizationLogo"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Media' ,'Summary'];
+const steps = ['Mission and Vision', 'Location and Social Network', 'Contact info', 'Photo ID', 'Summary'];
 
 type MissionVisionLogo = {
   name: string,
@@ -107,9 +108,8 @@ type MainContact = {
   email: string
 }
 
-type Media = {
+type PhotoId = {
   photo_id_url: string
-  logo_url: string
 }
 
 interface BackendErrors<T> {
@@ -148,11 +148,10 @@ function Index() {
     },
     email: ""
   })
-  const [media, setMedia] = React.useState<Media>({
-    photo_id_url: "",
-    logo_url: "",
-  })
 
+  const [photoId, setPhotoId] = React.useState<PhotoId>({
+    photo_id_url: "",
+  })
 
   const [validationError, setValidationError] = React.useState(0);
 
@@ -198,15 +197,14 @@ function Index() {
     }
   }
 
-    function validateMedia () {
-    if (media.logo_url === "" ||  
-      media.photo_id_url === ""){
-        setValidationError(1)
-    }
-    else {
-      setValidationError(0)
-      setActiveStep(activeStep + 1)
-    }
+  function validatePhotoId () {
+      if (photoId.photo_id_url === ""){
+          setValidationError(1)
+      }
+      else {
+        setValidationError(0)
+        setActiveStep(activeStep + 1)
+      }
   }
 
   const handleNext = () => {
@@ -224,8 +222,8 @@ function Index() {
       validateMainContactDetails()
     }
     if(activeStep === 3) {
-      console.log(media)
-      validateMedia()
+      console.log(photoId)
+      validatePhotoId()
     }
     //// org creation
     if (activeStep === steps.length - 1) {
@@ -236,9 +234,9 @@ function Index() {
 
   const createOrganization = () => {
     console.log(mainContact)
-    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: media.photo_id_url })
+    MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: photoId.photo_id_url })
       .then((response) => {
-        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id, logo_url: media.logo_url })
+        return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
         .catch((error) => {
           if (error.response) {
             console.log(error.response.data);
@@ -295,8 +293,8 @@ function Index() {
     setMainContact(data);
   }
 
-  const updateMedia = (data) => {
-    setMedia(data);
+  const updatePhotoId = (data) => {
+    setPhotoId(data);
   }
 
   const handleBack = () => {
@@ -354,7 +352,7 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 3 ?
-                      <OrganizationMedia callback={updateMedia} values={media} />
+                      <OrganizationPhotoId callback={updatePhotoId} values={photoId} />
                       :
                       <div></div>
                     }

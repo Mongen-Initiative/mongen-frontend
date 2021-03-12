@@ -20,9 +20,9 @@ class OrganizationService {
     });
   }
 
-  setVerifiedStatus(data: {verified: boolean}, org_id: number) {
+  setOrganizationStatus(data: {status: string}, org_id: number) {
 
-    return coreService.patch(`/api/v1/set_organization_verified/${org_id}`, data, {
+    return coreService.patch(`/api/v1/set_organization_status/${org_id}`, data, {
       headers: {
         "Content-type": "application/json",
       }
