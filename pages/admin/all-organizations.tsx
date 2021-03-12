@@ -38,8 +38,8 @@ import { Button } from "@material-ui/core"
         width: 150,
       },
       {
-        field: 'verified',
-        headerName: 'Verified',
+        field: 'status',
+        headerName: 'Status',
         width: 130,
       },
       {

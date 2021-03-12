@@ -8,7 +8,7 @@ import {
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates";
 import { OrgModal } from "../../components/templates/DetailedInfoModal";
-import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerifiedStatus";
+import getOrganizationsByStatus from "../../data/OrganizationsByStatus";
 
   const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -25,7 +25,7 @@ import getOrganizationsByVerifiedStatus from "../../data/OrganizationsByVerified
   
   function PendingOrganizations() {
     const classes = useStyles()  
-    const { loading, noData, organizations } = getOrganizationsByVerifiedStatus(false)
+    const { loading, noData, organizations } = getOrganizationsByStatus("Pending")
 
     if (noData) {
       return (

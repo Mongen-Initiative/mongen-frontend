@@ -66,9 +66,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const updateVerificationStatus = (status: boolean, org_id: number) => {
-    OrganizationService.setVerifiedStatus(
-        {verified: status},
+const updateOrganizationStatus = (status: string, org_id: number) => {
+    OrganizationService.setOrganizationStatus(
+        {status: status},
         org_id
     )
 }
@@ -116,7 +116,7 @@ export function OrgModal(children: any) {
                         <Divider />
                         <div style={{width:"20%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
                             <div style={{border:"1px solid black", padding:"1px"}}>
-                                <Image src={org.logo_url}/>
+                                <Image src={org.main_contact.photo_id_url}/>
                             </div>
                         </div> 
                         <div style={{width:"75%", float: "right"}}>
@@ -162,14 +162,16 @@ export function OrgModal(children: any) {
                             </form>
                         </div>
                         <Divider />
-                        <div id="approvalPart" style={{marginTop:"10px"}} >
-                            <TextField label="Comments" className={classes.commentsField}/>
-                            {org.verified ? (
-                                <Button style={{marginLeft:"5%", marginTop:"30px", color:"red"}} onClick={() => updateVerificationStatus(false, org.id)} variant="outlined" href="#">Move to pending</Button>
+                        <div id="approvalPart" style={{marginTop:"10px", paddingBottom: "5%"}} >
+                            <TextField style={{marginLeft:"30%"}} label="Comments" className={classes.commentsField}/>
+                            <Divider />
+                            {org.status == "Draft" ? (
+                                <Button style={{marginLeft:"5%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Pending", org.id)} variant="outlined" href="#">Move to pending</Button>
                             ) : (
-                                <Button style={{marginLeft:"65%", marginTop:"30px", color:"green"}} onClick={() => updateVerificationStatus(true, org.id)} variant="outlined" href="#">Approve</Button>
+                                <Button style={{marginLeft:"30%", marginTop:"30px", color:"green"}} onClick={() => updateOrganizationStatus("Draft", org.id)} variant="outlined" href="#">Approve</Button>
                             )}
-                            <Button style={{marginLeft:"5%", marginTop:"30px", color:"red"}} variant="outlined" href="#">Delete org</Button>
+                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Under Review", org.id)} variant="outlined" href="#">Set under review</Button>
+                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Disabled", org.id)} variant="outlined" href="#">Delete org</Button>
                         </div>
                     </div>
                 </div>

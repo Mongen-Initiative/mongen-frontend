@@ -58,7 +58,7 @@ export interface Organization {
   address: string
   country: any
   name: string
-  verified: any
+  status: string
   mission: string
   vision: string
   seoName: string
