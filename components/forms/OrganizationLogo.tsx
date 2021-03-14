@@ -4,17 +4,16 @@ import OrganizationLogoUpload from "./OrganizationLogoUpload";
 
 type Props = {
   callback
-  values
 }
 
 export default function OrganizationLogo(props: Props) {
 
-  const { callback, values } = props
+  const { callback } = props
 
-  const [orgMedia, setOrgMedia] = React.useState(values);
+  const [orgMedia, setOrgMedia] = React.useState("");
 
   function updateLogoUrl(data) {
-    setOrgMedia({ ["logo_url"]: data })
+    setOrgMedia(data)
   }
 
   useEffect(() => {
@@ -23,8 +22,8 @@ export default function OrganizationLogo(props: Props) {
 
   return (
     <div style={{ marginBottom: "50px" }}>
-      <Typography variant="h6" gutterBottom>
-        Organization logo
+      <Typography variant="h6" gutterBottom color="secondary">
+        Organization logo *
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} style={{ marginTop: "20px" }}>

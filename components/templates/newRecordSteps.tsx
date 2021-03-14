@@ -74,7 +74,7 @@ export function GeneralInfoStep(props: Props) {
           />
         </Grid>
         <Grid item xs={12}>
-          <CountriesController callback={updateCountry} className=""/>
+          <CountriesController callback={updateCountry} className="" defaultValue={generalInfoData.country}/>
         </Grid>
         <Grid item xs={12}>
           <TextField

@@ -297,7 +297,7 @@ export function OrgModal(children: any) {
                                     onChange={(event) => updateForm("email", event.target.value)}
                                 /> 
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Nationality</Typography>
-                                <CountriesController callback={updateCountry} className={classes.countrySelector}/>
+                                <CountriesController callback={updateCountry} className={classes.countrySelector} defaultValue={collaboratorData.country_iso}/>
                                 {/* <TextField 
                                     className={classes.textField} 
                                     defaultValue={nationality} 

@@ -9,12 +9,13 @@ const filter = createFilterOptions<CountryType>();
 type Props = {
   callback
   className
+  defaultValue
 }
 
 export default function CountriesController(props: Props) {
-  const { callback, className } = props
+  const { callback, className, defaultValue } = props
   const { loading, noData, countries } = getCountries()
-  const [value, setValue] = React.useState<CountryType | null>(null);
+  const [value, setValue] = React.useState<CountryType | null>(defaultValue);
 
   if (noData) {
     return (
@@ -67,7 +68,7 @@ export default function CountriesController(props: Props) {
                 style={{ width: 300 }}
                 freeSolo
                 renderInput={(params) => (
-                  <TextField {...params} label="Select a country from the list *" variant="outlined" />
+                  <TextField {...params} label="Country *" variant="outlined" />
                 )}
               />
             </React.Fragment>
