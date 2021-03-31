@@ -1,7 +1,7 @@
 import { Container, Grid, Link, Card, CardMedia, CardContent, Typography, CardActions, Button, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react";
-import getOrganizations from "../../data/Organizations";
+import getOrganizationsByStatus from "../../data/OrganizationsByStatus";
 import { MuiTheme } from "../MuiTheme";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const MainOrganizationList = function() {
-    const { loading, noData, organizations } = getOrganizations()
+    const { loading, noData, organizations } = getOrganizationsByStatus("Published")
 
     const classes = useStyles()
 
