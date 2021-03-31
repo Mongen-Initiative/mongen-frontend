@@ -15,6 +15,7 @@ import { Organization } from "."
 import OrganizationService from "../../components/services/OrganizationService"
 import CountriesController from "../../components/autocomplete/Countries"
 import OrganizationLogo from "../../components/forms/OrganizationLogo"
+import { Router, useRouter } from "next/router"
 
   const useStyles = makeStyles((theme) => ({
     icon: {
@@ -42,7 +43,9 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
   
   function Profile({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)
+    const router = useRouter()
     const [orgData, setOrgData] = React.useState({
+      id: organization.id,
       address: organization.address,
       country:  {
         callingCode: "374",
@@ -82,6 +85,7 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
     });
     const [validationError, setValidationError] = React.useState(0);
     const [page, setPage] = React.useState(1);
+    const [previewUrl, setpreviewUrl] = React.useState("");
 
     function updateForm(type, data) {
       setOrgData({ ...orgData, [type]: data })
@@ -117,12 +121,23 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
       setValidationError(0)
     }
 
+    const publishOrg = () => {
+      OrganizationService.setOrganizationStatus(
+          {status: "Published"},
+          orgData.id
+      )
+
+      router.push(`/${orgData.id}`)
+  }
+
     const updateOrganization = () => {
       console.log(orgData)
       OrganizationService.update(orgData)
       .then(
           (response) => {
             console.log(`Organization is updated! ID: ${response.data.id}`)
+            setpreviewUrl(`/${response.data.id}`)
+
           }
         )
         .catch(() => {
@@ -176,6 +191,22 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
                         <div>
                           <Typography style={{marginTop:"100px", marginLeft:"30%", color:"green"}}> Your organization is updated!</Typography>
                           <Typography style={{marginBottom:"100px", marginLeft:"30%"}}> Click PREVIEW to check how your org will look like live :)  </Typography>
+                          <Typography style={{marginBottom:"100px", marginLeft:"30%"}}> Click PUBLISH to publish your organization :)  </Typography>
+                          <a target="_blank" href={previewUrl} rel="noopener noreferrer">
+                            <Button
+                              variant="contained"
+                              color="primary"
+                            > Preview
+                            </Button>
+                          </a>
+                          <div style={{width:"20%", float:"right"}}>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={publishOrg}
+                            > Publish
+                            </Button>
+                          </div>
                         </div>
                       ) : ( <></> )}    
                   </div>
@@ -220,7 +251,7 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
     })
   
     const organization: Organization[] = await orgReq.json()
-  
+
     return {
       props: { organization },
     }
