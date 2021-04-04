@@ -4,6 +4,8 @@ import { Paper, Stepper, Step, StepLabel, Button, Typography, Container, NoSsr }
 import { BasePageAboutMongen } from '../../components/templates'
 import {GeneralInfoStep, AcademicRecordsStep, CounsellorStep, NewRecordSummaryStep, ParentStep}  from '../../components/templates/newRecordSteps'
 import BeneficiaryService from '../../components/services/BeneficiaryService'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Organization } from '.'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
-export default function AddNewRecord() {
+function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0)
   const [generalInfo, setGeneralInfo] = useState({
@@ -162,7 +164,7 @@ export default function AddNewRecord() {
   };
 
   const createBeneficiary = () => {
-    BeneficiaryService.create({ ...generalInfo, ...academicRecords, ...parent, ...counsellor, organization_id: 10 })
+    BeneficiaryService.create({ ...generalInfo, ...academicRecords, ...parent, ...counsellor, organization_id: organization.id })
       .then(
         (response) => {
           console.log(`Beneficiary added! ID: ${response.data.id}`)
@@ -287,3 +289,18 @@ export default function AddNewRecord() {
      </NoSsr>
   );
 }
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { organizationId} = context.query
+
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+    method: "GET",
+  })
+
+  const organization: Organization[] = await orgReq.json()
+
+  return {
+    props: { organization },
+  }
+}
+
+export default AddNewRecord

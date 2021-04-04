@@ -182,16 +182,16 @@ export function OrgModal(children: any) {
   }
 
   export function CollaboratorsModal(children: any) {
-    const { collaborator, nationality, button, isNew, organizationId } = children
+    const { firstName, lastName, email, nationality, button, isNew, organizationId } = children
   
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [successMessage, setSuccessMessage] = React.useState(false);
 
     const [collaboratorData, setCollaboratorData] = React.useState({
-        first_name: collaborator,
-        last_name: collaborator,
-        email: collaborator,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
         country_iso: nationality,
         type: "Collaborator",
         organization_id: organizationId,
@@ -270,7 +270,7 @@ export function OrgModal(children: any) {
                         {isNew === "yes" ? (
                             <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>New Collaborator</h2>
                         ) : (
-                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{collaborator}</h2>
+                            <h2 id="title" style={{marginLeft:"38%", marginTop:"-10px"}}>{`${firstName} ${lastName}`}</h2>
                         )}  
                         <Divider />
                         <div style={{marginBottom:"50px"}}>
@@ -278,21 +278,21 @@ export function OrgModal(children: any) {
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>First Name</Typography>
                                 <TextField 
                                     className={classes.textField}
-                                    defaultValue={collaborator}
+                                    defaultValue={firstName}
                                     id="first_name"
                                     onChange={(event) => updateForm("first_name", event.target.value)}
                                 /> 
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Last Name</Typography>
                                 <TextField 
                                     className={classes.textField}
-                                    defaultValue={collaborator}
+                                    defaultValue={lastName}
                                     id="last_name"
                                     onChange={(event) => updateForm("last_name", event.target.value)}
                                 /> 
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Email</Typography>
                                 <TextField 
                                     className={classes.textField}
-                                    defaultValue={collaborator}
+                                    defaultValue={email}
                                     id="email"
                                     onChange={(event) => updateForm("email", event.target.value)}
                                 /> 
@@ -304,13 +304,14 @@ export function OrgModal(children: any) {
                                     id="country_iso"
                                     onChange={(event) => updateForm("country_iso", event.target.value)}
                                 /> */}
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Type</Typography>
+                                {/* ### Hiding, as this value will always be Collaborator for the moment */}
+                                {/* <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Type</Typography>
                                 <TextField 
                                     className={classes.textField} 
                                     defaultValue="Collaborator" 
                                     id="type"
                                     onChange={(event) => updateForm("type", event.target.value)}
-                                />
+                                /> */}
                             </form>
                         </div>
                         {isNew === "yes" ? (

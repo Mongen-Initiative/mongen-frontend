@@ -44,7 +44,14 @@ import { Organization } from "."
             field: 'button',
             headerName: '.',
             renderCell: (params: ValueGetterParams) =>  (
-              <CollaboratorsModal collaborator={params.getValue('name')} button = "Edit" isNew = "no"></CollaboratorsModal>
+              <CollaboratorsModal
+                firstName={params.getValue('firstName')}
+                lastName={params.getValue('lastName')}
+                email={params.getValue('email')}
+                nationality={params.getValue('countryCollaborator')}
+                button = "Edit"
+                isNew = "no">
+              </CollaboratorsModal>
              ),
             sortable: false,
             width: 150,
@@ -70,7 +77,7 @@ import { Organization } from "."
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
+                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>
