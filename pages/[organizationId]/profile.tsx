@@ -15,7 +15,7 @@ import { Organization } from "."
 import OrganizationService from "../../components/services/OrganizationService"
 import CountriesController from "../../components/autocomplete/Countries"
 import OrganizationLogo from "../../components/forms/OrganizationLogo"
-import { Router, useRouter } from "next/router"
+import { useRouter } from "next/router"
 
   const useStyles = makeStyles((theme) => ({
     icon: {
@@ -151,8 +151,7 @@ import { Router, useRouter } from "next/router"
       .then(
           (response) => {
             console.log(`Organization is updated! ID: ${response.data.id}`)
-            // setPreviewUrl(`/${response.data.id}`)
-
+            setPreviewUrl(`/${response.data.id}`)
           }
         )
         .catch(() => {
