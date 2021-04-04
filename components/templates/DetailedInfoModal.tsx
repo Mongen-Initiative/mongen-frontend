@@ -170,8 +170,8 @@ export function OrgModal(children: any) {
                             ) : (
                                 <Button style={{marginLeft:"30%", marginTop:"30px", color:"green"}} onClick={() => updateOrganizationStatus("Draft", org.id)} variant="outlined" href="#">Approve</Button>
                             )}
-                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Under Review", org.id)} variant="outlined" href="#">Set under review</Button>
-                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Disabled", org.id)} variant="outlined" href="#">Delete org</Button>
+                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Under Review", org.id)} variant="outlined" href="#">Set as Under Review</Button>
+                            <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Disabled", org.id)} variant="outlined" href="#">Disable</Button>
                         </div>
                     </div>
                 </div>
