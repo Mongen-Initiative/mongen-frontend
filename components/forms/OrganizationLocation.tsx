@@ -32,7 +32,7 @@ export default function OrganizationLocation(props: Props) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}  style={{marginTop:"40px"}}>
-          <CountriesController callback={updateCountry} className=""/>
+          <CountriesController callback={updateCountry} className="" defaultValue={orgLocation.country}/>
         </Grid>
         <Grid item xs={12}>
           <TextField 

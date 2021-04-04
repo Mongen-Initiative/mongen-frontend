@@ -237,48 +237,25 @@ function Index() {
     MainContactService.create({ ...mainContact, country_iso: mainContact.country.countryISO, type: "Administrator", photo_id_url: photoId.photo_id_url })
       .then((response) => {
         return OrganizationService.create({ ...organizationDetails, ...organizationLocationSocialNetworks, country_iso: organizationLocationSocialNetworks.country.countryISO, contact_id: response.data.id })
+        // if there is a validation error on the backend
         .catch((error) => {
           if (error.response) {
             console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-            let backend_errors: string = "Some information is missing for the organization:\n\n";
+            let backend_errors: string = "There was an error creating your organization. Please go back and fill the required fields: \n\n";
             let errors: BackendErrors<object> = error.response.data
             Object.keys(errors).forEach(key => {
               backend_errors += `${errors[key]}: ${key}\n`
             })
             setEndMessage(backend_errors);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log('Error', error.message);
           }
             console.log(error.config);
         });
       })
       .then(
         (response) => {
-          console.log(`Organization created! ID: ${response}`)
-        }
-      )
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-          let backend_errors: string = "Some information is missing for the main contact:\n\n";
-          let errors: BackendErrors<object> = error.response.data
-          Object.keys(errors).forEach(key => {
-            backend_errors += `${errors[key]}: ${key}\n`
-          })
-          setEndMessage(backend_errors);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-          console.log(error.config);
-      });
+          if(JSON.stringify(response) === "undefined") console.log("Organization is not created!")
+          else console.log(`Organization created! ID: ${response}`)
+        })
   };
 
   const updateOrganizationDetails = (data) => {
@@ -322,17 +299,31 @@ function Index() {
               </Stepper>
               {activeStep === steps.length ? (
                 <div>
-                  <Typography style={{marginTop:"80px", fontSize:"17px", whiteSpace:"pre-wrap"}}>
-                    {endMessage}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href="/"
-                    style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
-                  >
-                    Go back to the homepage
-                  </Button>
+                  {/* Last step: error message with back button, if there is a backend error. Or success message, if all good */}
+                  {endMessage.startsWith("There was an error") ? (
+                    <div>
+                      <Typography style={{marginTop:"80px", fontSize:"17px", whiteSpace:"pre-wrap", color:"red"}}>
+                        {endMessage}
+                      </Typography>
+                      <Button onClick={handleBack} className={classes.button} variant="outlined">
+                        Back
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Typography style={{marginTop:"80px", fontSize:"17px", whiteSpace:"pre-wrap"}}>
+                        {endMessage}
+                      </Typography>
+                      <Button
+                      variant="contained"
+                      color="primary"
+                      href="/"
+                      style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
+                      >
+                        Go back to the homepage
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ) : (
                   <div style={{height:"max-content"}}>

@@ -19,19 +19,19 @@ export default function OrganizationSummary(props: Props) {
       <List>
         <ListItem>
           <ListItemText>Mission:</ListItemText>
-          <Typography variant="body1">{organizationDetails.mission}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.mission}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Vision:</ListItemText>
-          <Typography variant="body1">{organizationDetails.vision}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.vision}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Story:</ListItemText>
-          <Typography variant="body1">{organizationDetails.story}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.story}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Organization address:</ListItemText>
-          <Typography variant="subtitle1">{organizationLocation.address}</Typography>
+          <Typography variant="subtitle1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationLocation.address}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Country:</ListItemText>

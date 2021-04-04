@@ -44,7 +44,14 @@ import { Organization } from "."
             field: 'button',
             headerName: '.',
             renderCell: (params: ValueGetterParams) =>  (
-              <CollaboratorsModal collaborator={params.getValue('name')} button = "Edit" isNew = "no"></CollaboratorsModal>
+              <CollaboratorsModal
+                firstName={params.getValue('firstName')}
+                lastName={params.getValue('lastName')}
+                email={params.getValue('email')}
+                nationality={params.getValue('countryCollaborator')}
+                button = "Edit"
+                isNew = "no">
+              </CollaboratorsModal>
              ),
             sortable: false,
             width: 150,
@@ -64,13 +71,16 @@ import { Organization } from "."
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
                     {organization.name} Admin panel
                     </Typography>
+                    <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px",  marginTop:"50px", width:"50%", marginLeft:"25%"}}>
+                      <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
+                    </div>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
                         <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
                             Edit the organization
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal collaborator={""} nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
+                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>

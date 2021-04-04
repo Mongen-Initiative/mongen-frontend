@@ -73,7 +73,7 @@ export default function MainContactController(props: Props) {
         </Grid>
         <Grid item xs={12} style={{marginTop:"20px"}}>
           <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality *:</Typography>
-          <CountriesController callback={updateCountry} className =""/>
+          <CountriesController callback={updateCountry} className ="" defaultValue={orgData.country}/>
         </Grid>
         {/*
           Need to discuss if this layer will be needed or not
