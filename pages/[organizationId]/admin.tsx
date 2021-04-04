@@ -71,6 +71,9 @@ import { Organization } from "."
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
                     {organization.name} Admin panel
                     </Typography>
+                    <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px",  marginTop:"50px", width:"50%", marginLeft:"25%"}}>
+                      <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
+                    </div>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
                         <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
                             Edit the organization
