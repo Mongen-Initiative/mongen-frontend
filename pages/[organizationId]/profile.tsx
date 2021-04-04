@@ -45,7 +45,6 @@ import { Router, useRouter } from "next/router"
     const classes = useStyles(organization)
     const router = useRouter()
     const [orgData, setOrgData] = React.useState({
-      id: organization.id,
       address: organization.address,
       country:  {
         callingCode: "374",
@@ -56,9 +55,9 @@ import { Router, useRouter } from "next/router"
       logoUrl: organization.logo_url,
       main_contact: {
         countryCollaborator: {
-          callingCode: "",
-          countryISO: "",
-          countryISO3: "",
+          callingCode: "374",
+          countryISO: "AM",
+          countryISO3: "ARM",
           name: organization.country
         },
         email: organization.main_contact.email,
@@ -85,7 +84,7 @@ import { Router, useRouter } from "next/router"
     });
     const [validationError, setValidationError] = React.useState(0);
     const [page, setPage] = React.useState(1);
-    const [previewUrl, setpreviewUrl] = React.useState("");
+    const [previewUrl, setPreviewUrl] = React.useState("");
 
     function updateForm(type, data) {
       setOrgData({ ...orgData, [type]: data })
@@ -99,20 +98,36 @@ import { Router, useRouter } from "next/router"
       updateForm("logoUrl", data);
     }
 
+    function updateSocialNetworkUrl(data) {
+      setOrgData({ ...orgData, ["socialNetworkUrl"]: data })
+    }
+
     function handleNext() {
-      if (orgData.name === "" || 
+      //page 1 validation
+      if(page === 1) {
+        if (orgData.name === "" || 
         orgData.tagline === "" || 
         orgData.mission === "" || 
         orgData.vision === "" || 
         orgData.story === "" ||
-        orgData.socialNetworkUrl === "" ||
-        orgData.main_contact.firstName === ""){
+        orgData.socialNetworkUrl === "") {
         setValidationError(1)
+        }
+        else {
+          setValidationError(0)
+          setPage(page + 1)
+        }
       }
-      else {
+      //page 2 validation
+      if(page === 2) {
+        if (orgData.logoUrl === "") {
+        setValidationError(1)
+        }
+        else {
         setValidationError(0)
-        setPage(page+1)
-        if(page===2) updateOrganization()
+        setPage(page + 1)
+        updateOrganization()
+        }
       }
     }
 
@@ -124,10 +139,10 @@ import { Router, useRouter } from "next/router"
     const publishOrg = () => {
       OrganizationService.setOrganizationStatus(
           {status: "Published"},
-          orgData.id
+          organization.id
       )
 
-      router.push(`/${orgData.id}`)
+      router.push(`/${organization.id}`)
   }
 
     const updateOrganization = () => {
@@ -136,7 +151,7 @@ import { Router, useRouter } from "next/router"
       .then(
           (response) => {
             console.log(`Organization is updated! ID: ${response.data.id}`)
-            setpreviewUrl(`/${response.data.id}`)
+            // setPreviewUrl(`/${response.data.id}`)
 
           }
         )
@@ -155,17 +170,19 @@ import { Router, useRouter } from "next/router"
                 <Container>
                   <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Organization profile
                   </Typography>
-                  <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                  On this page you can enter information related to your Organization, it will be displayed throughout the site.
+                  <Typography variant="body1" align="center" color="textSecondary" paragraph>
+                    On this page you can enter information related to your Organization, it will be displayed throughout the site.
                   </Typography>
+                  <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px", marginBottom:"30px", marginTop:"50px", width:"50%", marginLeft:"25%"}}>
+                    <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
+                    {page === 3 ? (
+                      <Typography align="center" color="primary"> Preview your site and publish your organization, if it's still Pending.</Typography>
+                      ):(
+                      <Typography align="center" color="primary"> Go to the final step to save changes or publish your organization.</Typography>
+                      )
+                    }
+                  </div>
                   <div>
-                    {/* <div style={{width:"30%", float: "left", marginTop:"5%", marginLeft: "5%"}}>
-                      <DropzoneArea
-                            acceptedFiles={['image/*']}
-                            onChange={(files) => console.log('Files:', files)}
-                            dropzoneText="Upload the logo"
-                      />
-                    </div>  */}
                     {page === 1 ? (
                       <div>
                         <form>
@@ -177,58 +194,30 @@ import { Router, useRouter } from "next/router"
                             <div style={{marginLeft:"20%", marginTop:"30px"}}>
                               <CountriesController callback={updateCountry} className="" defaultValue={orgData.country}/>
                             </div>
-                            <TextField id="social" label="Social Network Url *" multiline rowsMax={4} className={classes.textField} defaultValue={orgData.socialNetworkUrl} onChange={(event) => updateForm("social_network_url", event.target.value)}/>
+                            <TextField id="social" label="Social Network Url *" multiline rowsMax={4} className={classes.textField} defaultValue={orgData.socialNetworkUrl} onChange={(event) => updateSocialNetworkUrl(event.target.value)}/>
                         </form>
                       </div>
                     ) : ( <></> )}
                       {page === 2 ? (
-                        <div style={{marginTop:"100px", marginBottom:"100px", marginLeft:"30%"}}>
+                        <div style={{marginTop:"50px", marginBottom:"100px", marginLeft:"30%"}}>
                           <OrganizationLogo callback={updateLogo}></OrganizationLogo>
                         </div>
                       ) : ( <></> )}
                       {page === 3 ? (
-                        <div>
-                          <Typography style={{marginTop:"100px", marginLeft:"30%", color:"green"}}> Your organization is updated!</Typography>
-                          <Typography style={{marginBottom:"100px", marginLeft:"30%"}}> Click PREVIEW to check how your org will look like live :)  </Typography>
-                          <Typography style={{marginBottom:"100px", marginLeft:"30%"}}> Click PUBLISH to publish your organization :)  </Typography>
-                          <a target="_blank" href={previewUrl} rel="noopener noreferrer">
-                            <Button
-                              variant="contained"
-                              color="primary"
-                            > Preview
-                            </Button>
-                          </a>
-                          <div style={{width:"20%", float:"right"}}>
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={publishOrg}
-                            > Publish
-                            </Button>
-                          </div>
-                        </div>
-                      ) : ( <></> )}    
+                        <Typography style={{marginTop:"70px", marginLeft:"40%", color:"green"}}> Your organization is updated!</Typography>
+                        ) : ( <></> )
+                      }    
                   </div>
+                  {/* Back and Next buttons logic */}
                   <div  style={{marginTop:"100px", marginBottom:"150px"}}>
-                    {/* The org is created as "Draft", then moved to "Pending" by admin. It can be later published by org admin */}
-                    {organization.status ? (
-                      <div style={{marginLeft:"50%", marginBottom:"30px"}}>
-                        <Typography> The status of your org is: <span style={{fontWeight:"bolder"}}>{organization.status}</span>.</Typography>
-                        {page == 1 ? (
-                          <Typography> Click Next to proceed </Typography>
-                        ):(
-                          <Typography> Click Next to Save and Preview the org site </Typography>
-                        )}
-                      </div>
-                      ):(
-                        <></>
-                      )}
-
-                    {validationError ? (
-                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginBottom:"250px"}}>
-                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
-                          </div>
-                        ): (<></>)}
+                    {page < 3 ? (
+                      <div>
+                        {validationError ? (
+                              <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginBottom:"250px"}}>
+                                <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                              </div>
+                          ):(<></>)
+                        }
                         <div style={{width:"20%", float:"right"}}>
                           <Button
                             variant="contained"
@@ -237,13 +226,39 @@ import { Router, useRouter } from "next/router"
                           > Next
                           </Button>
                         </div>
-                        {page !== 1 && (
-                       <div style={{width:"20%", float:"right", marginRight:"10px"}}>
-                        <Button onClick={handleBack} variant="outlined">
+                      </div>
+                      ):(
+                      <></>)
+                    }
+                    {page !== 1 && (
+                      <div>
+                        {page === 3 ? (
+                          <div style={{float:"right", marginRight:"100px"}}>
+                            <a target="_blank" href={previewUrl} rel="noopener noreferrer" style={{textDecoration:"none"}}>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                > Preview
+                                </Button>
+                            </a>
+                            {organization.status.includes("Pending") ? (
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={publishOrg}
+                                style={{marginLeft:"10px"}}
+                              > Publish
+                              </Button>
+                              ):(<></>)
+                            }
+                          </div>
+                          ):(<></>)
+                        }
+                        <Button onClick={handleBack} variant="outlined" style={{float:"right", marginRight:"10px", width:"10%"}}>
                           Back
                         </Button>
-                        </div>
-                      )}
+                      </div>
+                    )}
                     </div>
                 </Container>
               </div>

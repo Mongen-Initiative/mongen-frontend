@@ -253,7 +253,7 @@ function Index() {
       })
       .then(
         (response) => {
-          if(response === "undefined") console.log("Organization is not created!")
+          if(JSON.stringify(response) === "undefined") console.log("Organization is not created!")
           else console.log(`Organization created! ID: ${response.id}`)
         })
   };
