@@ -163,7 +163,6 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
                               <CountriesController callback={updateCountry} className="" defaultValue={orgData.country}/>
                             </div>
                             <TextField id="social" label="Social Network Url *" multiline rowsMax={4} className={classes.textField} defaultValue={orgData.socialNetworkUrl} onChange={(event) => updateForm("social_network_url", event.target.value)}/>
-                            {/* <TextField id="main_contact" label="Main Contact *" multiline rowsMax={4} className={classes.textField} defaultValue={`${orgData.main_contact.first_name} ${orgData.main_contact.last_name}`}/> */}
                         </form>
                       </div>
                     ) : ( <></> )}
@@ -180,8 +179,22 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
                       ) : ( <></> )}    
                   </div>
                   <div  style={{marginTop:"100px", marginBottom:"150px"}}>
+                    {/* The org is created as "Draft", then moved to "Pending" by admin. It can be later published by org admin */}
+                    {organization.status ? (
+                      <div style={{marginLeft:"50%", marginBottom:"30px"}}>
+                        <Typography> The status of your org is: <span style={{fontWeight:"bolder"}}>{organization.status}</span>.</Typography>
+                        {page == 1 ? (
+                          <Typography> Click Next to proceed </Typography>
+                        ):(
+                          <Typography> Click Next to Save and Preview the org site </Typography>
+                        )}
+                      </div>
+                      ):(
+                        <></>
+                      )}
+
                     {validationError ? (
-                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginBottom:"250px"}}>
                             <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
                           </div>
                         ): (<></>)}
@@ -190,13 +203,12 @@ import OrganizationLogo from "../../components/forms/OrganizationLogo"
                             variant="contained"
                             color="primary"
                             onClick={handleNext}
-                            className={classes.button}
                           > Next
                           </Button>
                         </div>
                         {page !== 1 && (
                        <div style={{width:"20%", float:"right", marginRight:"10px"}}>
-                        <Button onClick={handleBack} className={classes.button} variant="outlined">
+                        <Button onClick={handleBack} variant="outlined">
                           Back
                         </Button>
                         </div>
