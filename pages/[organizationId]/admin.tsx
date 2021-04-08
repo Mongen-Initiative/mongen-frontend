@@ -69,7 +69,7 @@ import { Organization } from "."
                 </div>
                 <Container className={classes.heroContent}>
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
-                    {organization.name} Admin panel
+                    "{organization.name}" Admin panel
                     </Typography>
                     <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px",  marginTop:"50px", width:"50%", marginLeft:"25%"}}>
                       <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>

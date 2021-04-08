@@ -51,15 +51,6 @@ import { Button } from "@material-ui/core"
         sortable: false,
         width: 150,
      },
-     {
-      field: 'button1',
-      headerName: '*',
-      renderCell: (params: ValueGetterParams) =>  (
-        <Button variant="outlined" href={`/${params.getValue('id')}/profile`}>Edit</Button>
-       ),
-      sortable: false,
-      width: 100,
-    },
     {
       field: 'button3',
       headerName: '*',
