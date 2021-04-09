@@ -34,22 +34,23 @@ import { BasePageAboutMongen } from "../../components/templates";
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom >
                     Admin panel
                     </Typography>
-                    <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"15%"}}>
+                    {/* TODO: do we need it in a separate page, if on the all orgs page the table can be easily sorted */}
+                    {/* <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"15%"}}>
                         -{" "} {" "} {" "}
                         <Link href="/admin/pending-organizations">
                             View the list of organizations pending review
                         </Link>
-                    </div>
-                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}}>
+                    </div> */}
+                    <div style={{fontSize: "1.5em", paddingTop:"80px", paddingLeft:"20%"}}>
                         -{" "} {" "} {" "}
                         <Link href="/admin/all-organizations">
                             View the list of all organizations
                         </Link>
                     </div>
-                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"15%"}}>
+                    <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"20%"}}>
                         -{" "} {" "} {" "}
                         <Link href="/admin/create-organization">
-                            Create organization
+                            Create a new organization
                         </Link>
                     </div>
                 </Container>

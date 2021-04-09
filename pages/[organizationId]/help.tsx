@@ -1,9 +1,8 @@
-
-
 import {
     Container,
     Typography,
     NoSsr,
+    Link,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
@@ -31,35 +30,32 @@ import { Organization } from "."
     },
   }));
   
-  function About({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  function Help({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)
 
     return (
         <NoSsr>
           {organization ? (
             <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
-              <title>{organization.name} | About us</title>
+              <title>{organization.name} | How to help</title>
               <div className={classes.content}>
                 <Container>
-                  <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> About Us
+                  <Typography  variant="h3" align="center" color="primary" gutterBottom className={classes.infoText}> Thank you for your desire to help. Changing the world is easy with the team effort!
+                  </Typography>
+                  <Typography variant="h4" align="center" color="textSecondary" style={{marginTop:"200px", marginBottom:"50px"}}>
+                    Ways you can support us:
                   </Typography>
                   <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  {organization.tagline}
+                   -  <Link href={`/${organization.id}/payment`}>Donate to the organization or choose a specific child to support</Link> 
                   </Typography>
-                  <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Mission
+                  <Typography variant="h5" align="center" color="textSecondary" paragraph >
+                   - Subscribe to our newsletter on the homepage
                   </Typography>
-                  <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    {organization.mission}
+                  <Typography variant="h5" align="center" color="textSecondary" paragraph >
+                  - Share our details on your social media page
                   </Typography>
-                  <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Values
-                  </Typography>
-                  <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    {organization.vision}
-                  </Typography>
-                <Typography  variant="h3" align="center" color="textPrimary" gutterBottom className={classes.infoText}> Our Story
-                  </Typography>
-                  <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                  {organization.story}
+                  <Typography variant="h5" align="center" color="textSecondary" paragraph >
+                  -  Volunteer your time, we have lots to enhance in our organization and need enthusiasts!
                   </Typography>
                 </Container>
               </div>
@@ -88,5 +84,5 @@ import { Organization } from "."
     }
   }
   
-  export default About
+  export default Help
   

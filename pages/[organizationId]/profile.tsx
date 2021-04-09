@@ -6,6 +6,7 @@ import {
     NoSsr,
     TextField,
     Button,
+    Link,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
   import React from "react"
@@ -15,7 +16,7 @@ import { Organization } from "."
 import OrganizationService from "../../components/services/OrganizationService"
 import CountriesController from "../../components/autocomplete/Countries"
 import OrganizationLogo from "../../components/forms/OrganizationLogo"
-import { useRouter } from "next/router"
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
   const useStyles = makeStyles((theme) => ({
     icon: {
@@ -43,7 +44,6 @@ import { useRouter } from "next/router"
   
   function Profile({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)
-    const router = useRouter()
     const [orgData, setOrgData] = React.useState({
       address: organization.address,
       country:  {
@@ -141,8 +141,7 @@ import { useRouter } from "next/router"
           {status: "Published"},
           organization.id
       )
-
-      router.push(`/${organization.id}`)
+      setPage(page + 1)
   }
 
     const updateOrganization = () => {
@@ -172,15 +171,19 @@ import { useRouter } from "next/router"
                   <Typography variant="body1" align="center" color="textSecondary" paragraph>
                     On this page you can enter information related to your Organization, it will be displayed throughout the site.
                   </Typography>
-                  <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px", marginBottom:"30px", marginTop:"50px", width:"50%", marginLeft:"25%"}}>
-                    <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
-                    {page === 3 ? (
+                  {page != 4 ? (
+                    <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px", marginBottom:"30px", marginTop:"50px", width:"50%", marginLeft:"25%"}}>
+                      <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
+                      {page === 3 ? (
                       <Typography align="center" color="primary"> Preview your site and publish your organization, if it's still Pending.</Typography>
                       ):(
-                      <Typography align="center" color="primary"> Go to the final step to save changes or publish your organization.</Typography>
+                        <Typography align="center" color="primary"> Go to the final step to save changes or publish your organization.</Typography>
                       )
-                    }
-                  </div>
+                      }
+                    </div>
+                    ):(
+                      <></>
+                    )}
                   <div>
                     {page === 1 ? (
                       <div>
@@ -204,6 +207,13 @@ import { useRouter } from "next/router"
                       ) : ( <></> )}
                       {page === 3 ? (
                         <Typography style={{marginTop:"70px", marginLeft:"40%", color:"green"}}> Your organization is updated!</Typography>
+                        ) : ( <></> )
+                      }  
+                      {page === 4 ? (
+                        <div>
+                          <Typography variant="h6" style={{marginTop:"70px", marginLeft:"32%", color:"green"}}> Your organization is published, congratulations <FavoriteIcon/> </Typography>
+                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.id}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.id}</Link></Typography>
+                        </div>
                         ) : ( <></> )
                       }    
                   </div>

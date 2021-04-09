@@ -77,17 +77,17 @@ export const BasePage = function(props: Props) {
               <Typography>
                 <Link
                   underline="none"
-                  href={`/${orgId}/payment`}
+                  href={`/${orgId}/help`}
                   className={classes.titleLight}
                 >
                   Get involved
                 </Link>
               </Typography>
             </div>
-            <div style={{ float: "left", backgroundColor: `${MuiTheme.palette.primary.main}`, marginLeft:"20%", width:"100px" }}>
+            <div style={{ float: "left", backgroundColor: `${MuiTheme.palette.primary.main}`, marginLeft:"10%", width:"100px" }}>
               <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${orgId}/payment`}>Donate</Button>
             </div>
-            <div style={{ float: "left", width: "3%", marginLeft:"10%"}}>
+            <div style={{ float: "right", width: "3%", marginLeft:"10%"}}>
               <IconButton onClick={() => router.push(`/${orgId}/login-sponsor`)}>
                 <PersonIcon style={{color:"#6c6c6c"}} />
               </IconButton>
