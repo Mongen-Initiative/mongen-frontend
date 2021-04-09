@@ -59,24 +59,32 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Your information', 'Payment details', 'Recurring Payment', 'Review your information'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <DonationContributorStep />;
-    case 1:
-      return <PaymentCardStep />;
-    case 2:
-      return <RecurringPaymentStep />
-    case 3:
-      return <PaymentSummaryStep />;
-    default:
-      throw new Error('Unknown step');
+type OrganizationAddress = {
+  firstName: string
+  lastName: string
+  address: string
+  country: {
+    callingCode: string
+    countryISO: string
+    countryISO3: string
+    name: string
   }
 }
 
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [donorInformation, setDonorInformation] = React.useState<OrganizationAddress>({
+    firstName: "",
+    lastName: "",
+    address: "",
+    country: {
+      callingCode: "",
+      countryISO: "",
+      countryISO3: "",
+      name: ""
+    },
+  })
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -85,6 +93,10 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const updateDonorInformation = (data) => {
+    setDonorInformation(data);
+  }
   
   const title = "Your title"
 
@@ -116,7 +128,26 @@ export default function Checkout() {
                 </div>
               ) : (
                 <div>
-                  {getStepContent(activeStep)}
+                  {activeStep == 0 ?
+                    <DonationContributorStep callback={updateDonorInformation} values={donorInformation}/>
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 1 ?
+                    <PaymentCardStep />
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 2 ?
+                    <RecurringPaymentStep />
+                    :
+                    <div></div>
+                  }
+                  {activeStep === 3 ?
+                    <PaymentSummaryStep />
+                    :
+                    <div></div>
+                  }
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button}  variant="outlined">
