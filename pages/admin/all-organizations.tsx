@@ -9,7 +9,7 @@ import {
 import { BasePageAboutMongen } from "../../components/templates"
 import { OrgModal } from "../../components/templates/DetailedInfoModal"
 import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid'
-import { Organization } from "../[organizationId]"
+import { Organization } from "../[organizationName]"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import { Button } from "@material-ui/core"
 
@@ -30,6 +30,7 @@ import { Button } from "@material-ui/core"
     const classes = useStyles(organizations)  
 
     const columns: ColDef[] = [
+      { field: 'id', headerName: 'Org id', width: 95 },
       { field: 'name', headerName: 'Organization', width: 180 },
       { field: 'country', headerName: 'Country', width: 130 },
       {
