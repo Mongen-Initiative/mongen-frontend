@@ -72,6 +72,11 @@ export const MainOrganizationList = function() {
                                                         {org.mission}
                                                     </Typography>
                                                 </CardContent>
+                                                <CardActions>
+                                                    <Button size="small" href={`/${org.seo_name}`} style={{ color: MuiTheme.palette.primary.dark }}>
+                                                        Learn more
+                                                    </Button>
+                                                </CardActions>
                                             </Card>
                                         </Link>
                                     </Grid>
