@@ -127,8 +127,6 @@ export function OrgModal(children: any) {
                                 <Typography className={classes.textField}> {org.vision} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
                                 <Typography className={classes.textField}> {org.country} </Typography>
-                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Url for the website</Typography>
-                                <Typography className={classes.textField}> <Link href={`http://localhost:3000/${org.seo_name}`}>http://localhost:3000/{org.seo_name}</Link></Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Social networks</Typography>
                                 <div className={classes.textField}>
                                     <Link  href={org.social_network_url}> {org.social_network_url} </Link>
