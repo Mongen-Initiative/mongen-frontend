@@ -161,7 +161,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
     return (
         <NoSsr>
           {organization ? (
-            <BasePageAboutMongen className={classes.rootLight} title={organization.name} orgId={organization.id}>
+            <BasePageAboutMongen className={classes.rootLight} title={organization.name}>
               <title>Mongen | Organization profile </title>
               {/* Hero unit */}
               <div className={classes.heroContent}>
@@ -282,7 +282,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
   export const getServerSideProps: GetServerSideProps = async context => {
     const { organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationName}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   

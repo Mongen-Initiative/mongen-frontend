@@ -62,21 +62,16 @@ export const MainOrganizationList = function() {
                                                 <CardMedia
                                                     className={classes.cardMedia}
                                                     image={org.logo_url}
-                                                    title={`${org.name}`}
+                                                    title={org.name}
                                                 />
                                                 <CardContent className={classes.cardContent}>
                                                     <Typography gutterBottom variant="h5" component="h2">
                                                         {org.name}
                                                     </Typography>
                                                     <Typography >
-                                                    ${org.mission}
+                                                        {org.mission}
                                                     </Typography>
                                                 </CardContent>
-                                                <CardActions>
-                                                    <Button size="small" href={`/${org.seo_name}`} style={{ color: MuiTheme.palette.primary.dark }}>
-                                                        Learn more
-                                                    </Button>
-                                                </CardActions>
                                             </Card>
                                         </Link>
                                     </Grid>

@@ -80,7 +80,7 @@ import { Organization } from "."
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.seo_name}></CollaboratorsModal>
+                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>
@@ -133,7 +133,7 @@ import { Organization } from "."
   export const getServerSideProps: GetServerSideProps = async context => {
     const { organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationName}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   

@@ -33,13 +33,13 @@ type Props = {
   className?: string
   color?: any
   title?: string
-  orgId?: any
 }
 
 export const BasePage = function(props: Props) {
-  const { children, className, title, orgId } = props
+  const { children, className, title } = props
   const classes = useStyles(props)
   
+  const seoName = convertTitleToSeoUrl(title)
   const router = useRouter()
   
   return (
@@ -55,7 +55,7 @@ export const BasePage = function(props: Props) {
               >
                 <Link
                   underline="none"
-                  href={`/${orgId}`}
+                  href={`/${seoName}`}
                   className={classes.titleLight}
                 >
                   {title}
@@ -66,7 +66,7 @@ export const BasePage = function(props: Props) {
               <Typography>
                 <Link
                   underline="none"
-                  href={`/${orgId}/about`}
+                  href={`/${seoName}/about`}
                   className={classes.titleLight}
                 >
                   About Us
@@ -77,7 +77,7 @@ export const BasePage = function(props: Props) {
               <Typography>
                 <Link
                   underline="none"
-                  href={`/${orgId}/help`}
+                  href={`/${seoName}/help`}
                   className={classes.titleLight}
                 >
                   Get involved
@@ -85,10 +85,10 @@ export const BasePage = function(props: Props) {
               </Typography>
             </div>
             <div style={{ float: "left", backgroundColor: `${MuiTheme.palette.primary.main}`, marginLeft:"10%", width:"100px" }}>
-              <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${orgId}/payment`}>Donate</Button>
+              <Button size="large" style={{color:'white', paddingLeft:"20%"}}  href={`/${seoName}/payment`}>Donate</Button>
             </div>
             <div style={{ float: "right", width: "3%", marginLeft:"10%"}}>
-              <IconButton onClick={() => router.push(`/${orgId}/login-sponsor`)}>
+              <IconButton onClick={() => router.push(`/${seoName}/login-sponsor`)}>
                 <PersonIcon style={{color:"#6c6c6c"}} />
               </IconButton>
             </div>

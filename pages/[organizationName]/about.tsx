@@ -37,7 +37,7 @@ import { Organization } from "."
     return (
         <NoSsr>
           {organization ? (
-            <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
+            <BasePage className={classes.rootLight} title={organization.name}>
               <title>{organization.name} | About us</title>
               <div className={classes.content}>
                 <Container>
@@ -77,7 +77,7 @@ import { Organization } from "."
   export const getServerSideProps: GetServerSideProps = async context => {
     const {organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationName}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   

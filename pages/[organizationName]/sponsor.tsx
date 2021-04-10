@@ -58,7 +58,7 @@ import { MuiTheme } from "../../components/MuiTheme"
 
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title} orgId='1'>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Sponsor's profile</title>
           {sponsor ? (
             <div className={classes.heroContent}>

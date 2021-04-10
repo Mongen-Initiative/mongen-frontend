@@ -79,7 +79,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
   return (
       <NoSsr>
         {organization ? (
-          <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
+          <BasePage className={classes.rootLight} title={organization.name}>
           <title>Mongen Initiative</title>
               <div>
                 <div>
@@ -121,7 +121,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                   <div style={{color:"white", marginLeft:"39%", width:"20%", float:"left", backgroundColor:"white", marginTop:"3%", marginBottom:"2%"}}>
                       <TextField variant="outlined" style={{width:"100%"}} defaultValue="10"></TextField>
                       </div>
-                  <CallToActionDonateButton orgId={organization.id}/>
+                  <CallToActionDonateButton organizationName={organization.seo_name}/>
                 </div>                          
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4}>
@@ -153,8 +153,8 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                       ))}
                     </Grid>
                   </Container>
-                  <CallToActionButtons orgId={organization.id}/>
-
+                  
+                  <CallToActionButtons organizationName={organization.seo_name}/>
                   <div style={{marginTop:"90px"}} >
                   <Paper elevation={3} style={{height:"200px", background:`linear-gradient(${MuiTheme.palette.primary.main}, #83ab6a)`, backgroundColor:MuiTheme.palette.primary.main, opacity:"0.9"}}>
                     <div style={{paddingTop:"80px", textShadow: "black 0.1em 0.1em 0.1m"}}>
@@ -199,7 +199,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
 export const getServerSideProps: GetServerSideProps = async context => {
   const { organizationName} = context.query
 
-  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationName}/`, {
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
     method: "GET",
   })
 

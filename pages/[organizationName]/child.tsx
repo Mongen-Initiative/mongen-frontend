@@ -85,7 +85,7 @@ import { Footer } from "../../components/templates/Footer";
 
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title} orgId='1'>
+          <BasePage className={classes.rootLight} title={title}>
           <title>Mongen | Child details</title>
           {children ? (
           <Container className={classes.cardGrid}>
@@ -105,7 +105,7 @@ import { Footer } from "../../components/templates/Footer";
                                 }}
                             />
                     </ButtonBase>
-                  <CallToActionButtons orgId="1"/>
+                  <CallToActionButtons organizationName="1"/>
                   <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom className={classes.textTitle}>
                     Information about "Child 1"
                   </Typography>
@@ -153,7 +153,7 @@ import { Footer } from "../../components/templates/Footer";
                     {infoText}
                   </Typography>
                   </div>
-                  <CallToActionButtons orgId="1"/>
+                  <CallToActionButtons organizationName="1"/>
           </Container>
           ) : (
             <h1>Sorry, we can't display the info about this child now. Come back later, we are working hard to fix the issue!</h1>

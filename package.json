@@ -32,6 +32,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
     "data-grid": "^3.0.0",
+    "eslint": "^7.24.0",
     "express": "^4.17.1",
     "immer": "^4.0.2",
     "isomorphic-unfetch": "^3.0.0",
