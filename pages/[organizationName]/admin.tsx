@@ -75,12 +75,12 @@ import { Organization } from "."
                       <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
-                        <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
+                        <Button  href={`/${organization.seo_name}/profile`} variant="outlined"  style={{width:"35%"}}>
                             Edit the organization
                         </Button>
                     </div>
                     <div style={{fontSize: "1.5em", paddingLeft:"450px"}}>
-                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.id}></CollaboratorsModal>
+                        <CollaboratorsModal nationality={""} button = "Add Collaborator" isNew="yes" organizationId={organization.seo_name}></CollaboratorsModal>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"10px", paddingLeft:"10%", width:"90%"}}>
                         <Accordion style={{marginTop:"7%"}}>

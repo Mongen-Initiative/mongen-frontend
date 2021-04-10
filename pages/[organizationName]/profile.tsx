@@ -212,7 +212,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
                       {page === 4 ? (
                         <div>
                           <Typography variant="h6" style={{marginTop:"70px", marginLeft:"32%", color:"green"}}> Your organization is published, congratulations <FavoriteIcon/> </Typography>
-                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.id}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.id}</Link></Typography>
+                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.seo_name}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.seo_name}</Link></Typography>
                         </div>
                         ) : ( <></> )
                       }    

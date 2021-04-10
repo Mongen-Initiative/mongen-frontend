@@ -46,7 +46,7 @@ import { Organization } from "."
                     Ways you can support us:
                   </Typography>
                   <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                   -  <Link href={`/${organization.id}/payment`}>Donate to the organization or choose a specific child to support</Link> 
+                   -  <Link href={`/${organization.seo_name}/payment`}>Donate to the organization or choose a specific child to support</Link> 
                   </Typography>
                   <Typography variant="h5" align="center" color="textSecondary" paragraph >
                    - Subscribe to our newsletter on the homepage

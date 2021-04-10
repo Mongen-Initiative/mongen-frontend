@@ -57,7 +57,7 @@ export const MainOrganizationList = function() {
                             <Grid container spacing={4}>
                                 {organizations.map((org) => (
                                     <Grid item key={org.id} xs={12} sm={6} md={4}>
-                                        <Link href={`/${org.id}`} underline="none">
+                                        <Link href={`/${org.seo_name}`} underline="none">
                                             <Card className={classes.card}>
                                                 <CardMedia
                                                     className={classes.cardMedia}
@@ -73,7 +73,7 @@ export const MainOrganizationList = function() {
                                                     </Typography>
                                                 </CardContent>
                                                 <CardActions>
-                                                    <Button size="small" href={`/${org.id}`} style={{ color: MuiTheme.palette.primary.dark }}>
+                                                    <Button size="small" href={`/${org.seo_name}`} style={{ color: MuiTheme.palette.primary.dark }}>
                                                         Learn more
                                                     </Button>
                                                 </CardActions>

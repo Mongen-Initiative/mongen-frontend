@@ -71,7 +71,6 @@ export interface Sponsor {
 }
 
 const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 6"];
-const text = "text texttext text text text text text text text text text text text text texttext text text text text text text text text text text text texttext text text text text text text text text text texttext texttext text text text text text text text text text texttext texttext text text text text text text text text text texttext texttext text text text text text text text text text texttext texttext text text text text text text text text text texttext texttext text text text text text text text text text texttext texttext text text text text text text text text text text"
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
@@ -102,9 +101,9 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                   <div style={{width:"40%", float:"left", marginLeft:"12%"}}>
                     <Typography style={{fontSize: "3em", fontWeight: 400, color:"#4a5c69", marginBottom:"30px"}}>Who We Are</Typography>
                     <Typography style={{width:"65%", fontWeight: 400, color:"#4a5c69", fontFamily: "proxima-nova, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif", wordWrap:"break-word"}}>
-                      {text}
+                      {organization.tagline}
                       </Typography>
-                      <Button variant="outlined" color="primary" size="large" href={`/${organization.id}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main, marginTop:"20px"}}>
+                      <Button variant="outlined" color="primary" size="large" href={`/${organization.seo_name}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main, marginTop:"20px"}}>
                         Read more
                       </Button>
                   </div>
@@ -144,7 +143,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                                 </Typography>
                               </CardContent>
                               <CardActions>
-                                <Button size="small"  href={`/${organization.id}/child`} style={{color: MuiTheme.palette.primary.main}}>
+                                <Button size="small"  href={`/${organization.seo_name}/child`} style={{color: MuiTheme.palette.primary.main}}>
                                   Learn more
                                 </Button>
                               </CardActions>
