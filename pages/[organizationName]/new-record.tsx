@@ -290,9 +290,9 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
   );
 }
 export const getServerSideProps: GetServerSideProps = async context => {
-  const { organizationId} = context.query
+  const { organizationName} = context.query
 
-  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationName}/`, {
     method: "GET",
   })
 
