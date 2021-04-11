@@ -4,22 +4,22 @@ import { Button } from '@material-ui/core';
 import { MuiTheme } from '../MuiTheme';
 
 type Props = {
-    orgId: any
+    organizationName: any
   }
 
 export const CallToActionButtons = function(props: Props) {
-    const {orgId} = props
+    const {organizationName} = props
 
     return (
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
+                <Button variant="contained" color="primary" href={`/${organizationName}/payment`} size="large">
                     Donate
                 </Button>
             </Grid>
             <Grid item>
-                <Button variant="outlined" color="primary" size="large" href={`/${orgId}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
+                <Button variant="outlined" color="primary" size="large" href={`/${organizationName}/about`} style={{border:"1px solid", color: MuiTheme.palette.primary.main}}>
                     Who We are? How we help?
                 </Button>
             </Grid>
@@ -29,13 +29,13 @@ export const CallToActionButtons = function(props: Props) {
 }
 
 export const CallToActionDonateButton = function(props: Props) {
-    const {orgId} = props
+    const {organizationName} = props
 
     return (
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
-                <Button variant="contained" color="primary" href={`/${orgId}/payment`} size="large">
+                <Button variant="contained" color="primary" href={`/${organizationName}/payment`} size="large">
                     Donate
                 </Button>
             </Grid>

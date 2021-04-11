@@ -12,7 +12,7 @@ class OrganizationService {
   }
 
   update(data) {
-
+// TODO:!!!!!
     return coreService.patch(`/api/v1/organization/1`, data, {
       headers: {
         "Content-type": "application/json",

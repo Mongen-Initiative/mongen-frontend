@@ -66,30 +66,33 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const updateOrganizationStatus = (status: string, org_id: number) => {
-    OrganizationService.setOrganizationStatus(
-        {status: status},
-        org_id
-    )
-}
 
 export function OrgModal(children: any) {
     const { org, button } = children
   
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-  
+    const [successMessage, setSuccessMessage] = React.useState(false);
+
     const handleModalOpen = () => {
       setOpen(true);
     };
   
     const handleModalClose = () => {
       setOpen(false);
+      setSuccessMessage(false);
     };
 
+    const updateOrganizationStatus = (status: string, org_id: number) => {
+        OrganizationService.setOrganizationStatus(
+            {status: status},
+            org_id
+        )
+        setSuccessMessage(true);
+    }
 
     return (
-      <div>
+      <div key={org.id}>
           { button === "yes" ? (
             <Button variant="outlined" href="#" style={{ paddingLeft:"15%"}} onClick={handleModalOpen}>
               Summary
@@ -127,6 +130,8 @@ export function OrgModal(children: any) {
                                 <Typography className={classes.textField}> {org.vision} </Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Country</Typography>
                                 <Typography className={classes.textField}> {org.country} </Typography>
+                                <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Url for the website</Typography>
+                                <Typography className={classes.textField}> <Link href={`http://localhost:3000/${org.seo_name}`}>http://localhost:3000/{org.seo_name}</Link></Typography>
                                 <Typography className={classes.titleField} style={{fontWeight:"bolder"}}>Social networks</Typography>
                                 <div className={classes.textField}>
                                     <Link  href={org.social_network_url}> {org.social_network_url} </Link>
@@ -172,6 +177,14 @@ export function OrgModal(children: any) {
                             )}
                             <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Under Review", org.id)} variant="outlined" href="#">Set as Under Review</Button>
                             <Button style={{marginLeft:"2%", marginTop:"30px", color:"red"}} onClick={() => updateOrganizationStatus("Disabled", org.id)} variant="outlined" href="#">Disable</Button>
+                            {successMessage === true ? (
+                                <div style={{marginLeft:"30%", marginTop:"10px"}}>
+                                    <Typography style={{color:"green"}}><DoneAllIcon style={{color:"green", marginRight:"5px"}} />Org status updated!</Typography>
+                                    <Typography style={{color:"green"}}>Refresh the page for the information to update :)</Typography>
+                                </div>
+                                ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                 </div>

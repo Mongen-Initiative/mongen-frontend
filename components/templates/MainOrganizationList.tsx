@@ -57,23 +57,23 @@ export const MainOrganizationList = function() {
                             <Grid container spacing={4}>
                                 {organizations.map((org) => (
                                     <Grid item key={org.id} xs={12} sm={6} md={4}>
-                                        <Link href={`/${org.id}`} underline="none">
+                                        <Link href={`/${org.seo_name}`} underline="none">
                                             <Card className={classes.card}>
                                                 <CardMedia
                                                     className={classes.cardMedia}
                                                     image={org.logo_url}
-                                                    title={`${org.name}`}
+                                                    title={org.name}
                                                 />
                                                 <CardContent className={classes.cardContent}>
                                                     <Typography gutterBottom variant="h5" component="h2">
                                                         {org.name}
                                                     </Typography>
                                                     <Typography >
-                                                    ${org.mission}
+                                                        {org.mission}
                                                     </Typography>
                                                 </CardContent>
                                                 <CardActions>
-                                                    <Button size="small" href={`/${org.id}`} style={{ color: MuiTheme.palette.primary.dark }}>
+                                                    <Button size="small" href={`/${org.seo_name}`} style={{ color: MuiTheme.palette.primary.dark }}>
                                                         Learn more
                                                     </Button>
                                                 </CardActions>

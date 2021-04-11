@@ -36,7 +36,7 @@ import { Organization } from "."
     return (
         <NoSsr>
           {organization ? (
-            <BasePage className={classes.rootLight} title={organization.name} orgId={organization.id}>
+            <BasePage className={classes.rootLight} title={organization.name}>
               <title>{organization.name} | How to help</title>
               <div className={classes.content}>
                 <Container>
@@ -46,7 +46,7 @@ import { Organization } from "."
                     Ways you can support us:
                   </Typography>
                   <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                   -  <Link href={`/${organization.id}/payment`}>Donate to the organization or choose a specific child to support</Link> 
+                   -  <Link href={`/${organization.seo_name}/payment`}>Donate to the organization or choose a specific child to support</Link> 
                   </Typography>
                   <Typography variant="h5" align="center" color="textSecondary" paragraph >
                    - Subscribe to our newsletter on the homepage
@@ -71,9 +71,9 @@ import { Organization } from "."
   }
   
   export const getServerSideProps: GetServerSideProps = async context => {
-    const { organizationId} = context.query
+    const { organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   
