@@ -68,6 +68,7 @@ export function DonationContributorStep(props: Props) {
             label="First name"
             fullWidth
             autoComplete="given-name"
+            onChange={(event) => updateForm("firstName", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -78,6 +79,7 @@ export function DonationContributorStep(props: Props) {
             label="Last name"
             fullWidth
             autoComplete="family-name"
+            onChange={(event) => updateForm("lastName", event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -91,6 +93,7 @@ export function DonationContributorStep(props: Props) {
             rowsMax={6}
             fullWidth
             autoComplete="shipping address-line1"
+            onChange={(event) => updateForm("address", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -101,7 +104,19 @@ export function DonationContributorStep(props: Props) {
   );
 }
 
-export function PaymentCardStep() {
+export function PaymentCardStep(props: Props) {
+  const { callback, values } = props
+
+  const [cardInfo, setCardInfo] = React.useState(values);
+
+  function updateForm(type, data) {
+    setCardInfo({ ...cardInfo, [type]: data })
+  }
+
+  useEffect(()=>{
+    callback(cardInfo);
+  }, [cardInfo])
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -109,7 +124,14 @@ export function PaymentCardStep() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
+          <TextField
+          required
+          id="cardName"
+          label="Name on card"
+          fullWidth
+          autoComplete="cc-name"
+          onChange={(event) => updateForm("nameOnCard", event.target.value)}
+          />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -118,10 +140,18 @@ export function PaymentCardStep() {
             label="Card number"
             fullWidth
             autoComplete="cc-number"
+            onChange={(event) => updateForm("cardNumber", event.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Expiry date" fullWidth autoComplete="cc-exp" />
+          <TextField
+          required
+          id="expDate"
+          label="Expiry date"
+          fullWidth
+          autoComplete="cc-exp"
+          onChange={(event) => updateForm("expiryDate", event.target.value)}
+          />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -131,6 +161,7 @@ export function PaymentCardStep() {
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-cvc"
+            onChange={(event) => updateForm("cvv", event.target.value)}
           />
         </Grid>
       </Grid>
@@ -162,7 +193,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function PaymentSummaryStep() {
+type PaymentProps = {
+  donorData
+  paymentData
+  recurringPayment
+}
+
+export function PaymentSummaryStep(props: PaymentProps) {
+  const { donorData, paymentData, recurringPayment } = props
   const classes = useStyles();
 
   return (
@@ -189,28 +227,47 @@ export function PaymentSummaryStep() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             Sponsor
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{donorData.firstName} {donorData.lastName}</Typography>
+          <Typography gutterBottom>{donorData.address}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Payment details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
               <div>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>Name on card</Typography>
                 </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>{paymentData.nameOnCard}</Typography>
+                </Grid>
+                </div>
+                <div>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>Card number</Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>{paymentData.cardNumber}</Typography>
+                </Grid>
+                </div>
+                <div>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>Card expiry date</Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography gutterBottom>{paymentData.expiryDate}</Typography>
                 </Grid>
               </div>
-            ))}
           </Grid>
         </Grid>
         <Grid item style={{fontStyle:"italic", marginTop: "20px"}}>
-          <Typography gutterBottom>This payment will be made each month. You'll receive an invoice 14 days prior payment</Typography>
+          {recurringPayment? (
+            <Typography gutterBottom>This payment will be made each month. You'll receive an invoice 14 days prior payment</Typography>
+          ) : (
+            <div></div>
+          )
+          }
         </Grid>
       </Grid>
     </div>

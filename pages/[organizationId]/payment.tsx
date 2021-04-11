@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import { BasePage } from '../../components/templates';
 import { Container, NoSsr } from '@material-ui/core';
 import {DonationContributorStep, PaymentCardStep, PaymentSummaryStep, RecurringPaymentStep}  from '../../components/templates/donationSteps';
+import DonorService from '../../components/services/DonorService';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { Organization } from '.';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Your information', 'Payment details', 'Recurring Payment', 'Review your information'];
 
-type OrganizationAddress = {
+type DonorInfo = {
   firstName: string
   lastName: string
   address: string
@@ -71,10 +74,25 @@ type OrganizationAddress = {
   }
 }
 
-export default function Checkout() {
+type PaymentDetails = {
+  nameOnCard: string
+  cardNumber: string
+  expiryDate: string
+  cvv: string
+}
+
+type RecurringPayment = {
+  eachMonth: boolean
+}
+
+interface BackendErrors<T> {
+  [index: string]: T
+}
+
+function Donation({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [donorInformation, setDonorInformation] = React.useState<OrganizationAddress>({
+  const [donorInformation, setDonorInformation] = React.useState<DonorInfo>({
     firstName: "",
     lastName: "",
     address: "",
@@ -85,10 +103,67 @@ export default function Checkout() {
       name: ""
     },
   })
+  const [paymentDetails, setPaymentDetails] = React.useState<PaymentDetails>({
+    nameOnCard: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: ""
+  })
+  const [recurringPayment, setRecurringPayment] = React.useState<RecurringPayment>({
+    eachMonth: false
+  })
+  const [endMessageTitle, setEndMessageTitle] = React.useState(
+    "Thank you for your contribution."
+  );
+  const [endMessageSubtitle, setEndMessageSubtitle] = React.useState(
+    `We have emailed you a confirmation, and we will
+    send you an update on how your contribution is being used.`
+  );
+  const [validationError, setValidationError] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if(activeStep === 0) {
+      console.log(donorInformation)
+      validateDonorInformation()
+    }
+    if(activeStep === 1) {
+      console.log(paymentDetails)
+      validatePaymentDetails()
+    }
+    if(activeStep === 2) {
+      setActiveStep(activeStep + 1)
+    }
+    if (activeStep === steps.length - 1) {
+      setActiveStep(activeStep + 1)
+      createDonor()
+    }
   };
+
+  function validateDonorInformation () {
+    if (donorInformation.address === "" ||
+    donorInformation.firstName === "" ||
+    donorInformation.lastName === "" ||
+      Object.keys(donorInformation.country).length === 0) {
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
+
+  function validatePaymentDetails () {
+    if (paymentDetails.nameOnCard === "" ||
+    paymentDetails.cardNumber === "" ||
+    paymentDetails.expiryDate === "" ||
+    paymentDetails.cvv === "") {
+        setValidationError(1)
+    }
+    else {
+      setValidationError(0)
+      setActiveStep(activeStep + 1)
+    }
+  }
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -97,6 +172,32 @@ export default function Checkout() {
   const updateDonorInformation = (data) => {
     setDonorInformation(data);
   }
+
+  const updatePaymentInformation = (data) => {
+    setPaymentDetails(data);
+  }
+
+  const createDonor = () => {
+    console.log(donorInformation)
+    DonorService.create({ ...donorInformation, countryIso: donorInformation.country.countryISO, organizationId: organization.id })
+        // if there is a validation error on the backend
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            let backend_errors: string = "";
+            let errors: BackendErrors<object> = error.response.data
+            Object.keys(errors).forEach(key => {
+              backend_errors += `${errors[key]}: ${key}\n`
+            })
+            setEndMessageTitle("There was an error processing your donation. Please go back and fill the required fields:");
+            setEndMessageSubtitle(backend_errors);
+          }
+            console.log(error.config);
+        })
+        .then((response) => {
+          console.log(response);
+        });
+  };
   
   const title = "Your title"
 
@@ -118,13 +219,29 @@ export default function Checkout() {
             </Stepper>
               {activeStep === steps.length ? (
                 <div>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for your contribution.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Your donation number is #2001539. We have emailed you <a href=""></a> a confirmation, and will
-                    send you an update on how your contribution is being used.
-                  </Typography>
+                  {/* Last step: error message with back button, if there is a backend error. Or success message, if all good */}
+                  {endMessageTitle.startsWith("There was an error") ? (
+                    <div>
+                      <Typography variant="h5" gutterBottom>
+                        {endMessageTitle}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {endMessageSubtitle}
+                      </Typography>
+                      <Button onClick={handleBack} className={classes.button}  variant="outlined">
+                        Back
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Typography variant="h5" gutterBottom>
+                        {endMessageTitle}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {endMessageSubtitle}
+                      </Typography>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div>
@@ -134,7 +251,7 @@ export default function Checkout() {
                     <div></div>
                   }
                   {activeStep === 1 ?
-                    <PaymentCardStep />
+                    <PaymentCardStep callback={updatePaymentInformation} values={paymentDetails} />
                     :
                     <div></div>
                   }
@@ -144,11 +261,16 @@ export default function Checkout() {
                     <div></div>
                   }
                   {activeStep === 3 ?
-                    <PaymentSummaryStep />
+                    <PaymentSummaryStep donorData={donorInformation} paymentData={paymentDetails} recurringPayment={recurringPayment} />
                     :
                     <div></div>
                   }
                   <div className={classes.buttons}>
+                  {validationError ? (
+                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                            <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
+                          </div>
+                        ): (<></>)}
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button}  variant="outlined">
                         Back
@@ -171,3 +293,19 @@ export default function Checkout() {
    </NoSsr>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { organizationId} = context.query
+
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+    method: "GET",
+  })
+
+  const organization: Organization[] = await orgReq.json()
+
+  return {
+    props: { organization },
+  }
+}
+
+export default Donation
