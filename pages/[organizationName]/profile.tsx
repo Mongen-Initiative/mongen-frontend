@@ -161,7 +161,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
     return (
         <NoSsr>
           {organization ? (
-            <BasePageAboutMongen className={classes.rootLight} title={organization.name} orgId={organization.id}>
+            <BasePageAboutMongen className={classes.rootLight} title={organization.name}>
               <title>Mongen | Organization profile </title>
               {/* Hero unit */}
               <div className={classes.heroContent}>
@@ -212,7 +212,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
                       {page === 4 ? (
                         <div>
                           <Typography variant="h6" style={{marginTop:"70px", marginLeft:"32%", color:"green"}}> Your organization is published, congratulations <FavoriteIcon/> </Typography>
-                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.id}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.id}</Link></Typography>
+                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.seo_name}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.seo_name}</Link></Typography>
                         </div>
                         ) : ( <></> )
                       }    
@@ -280,9 +280,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
   }
   
   export const getServerSideProps: GetServerSideProps = async context => {
-    const { organizationId} = context.query
+    const { organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   

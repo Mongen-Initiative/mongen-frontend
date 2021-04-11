@@ -203,7 +203,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
 
   return (
     <NoSsr>
-      <BasePage className={classes.rootLight} title={title} orgId='1'>
+      <BasePage className={classes.rootLight} title={title}>
       <title>Mongen | Sponsor a child</title>
         <Container className={classes.layout}>
           <Paper className={classes.paper}>

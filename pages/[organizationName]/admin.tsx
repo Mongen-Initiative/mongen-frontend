@@ -75,7 +75,7 @@ import { Organization } from "."
                       <Typography align="center" color="primary"> The status of your organization is: <span style={{fontWeight:"bolder"}}>{organization.status}</span></Typography>
                     </div>
                     <div style={{fontSize: "1.5em", paddingTop:"50px", paddingLeft:"450px"}}>
-                        <Button  href={`/${organization.id}/profile`} variant="outlined"  style={{width:"35%"}}>
+                        <Button  href={`/${organization.seo_name}/profile`} variant="outlined"  style={{width:"35%"}}>
                             Edit the organization
                         </Button>
                     </div>
@@ -131,9 +131,9 @@ import { Organization } from "."
   }
 
   export const getServerSideProps: GetServerSideProps = async context => {
-    const { organizationId} = context.query
+    const { organizationName} = context.query
   
-    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+    const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
       method: "GET",
     })
   
