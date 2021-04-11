@@ -30,8 +30,8 @@ import { Button } from "@material-ui/core"
     const classes = useStyles(organizations)  
 
     const columns: ColDef[] = [
-      { field: 'id', headerName: 'Org id', width: 95 },
-      { field: 'name', headerName: 'Organization', width: 180 },
+      { field: 'id', headerName: 'Id', width: 95 },
+      { field: 'name', headerName: 'Organization name', width: 180 },
       { field: 'country', headerName: 'Country', width: 130 },
       {
         field: 'main_contact.first_name',
@@ -45,7 +45,7 @@ import { Button } from "@material-ui/core"
       },
       {
         field: 'button2',
-        headerName: '*',
+        headerName: '^',
         renderCell: () =>  (
           <OrgModal org={organizations[0]} button="yes"></OrgModal>
          ),
@@ -54,12 +54,21 @@ import { Button } from "@material-ui/core"
      },
     {
       field: 'button3',
-      headerName: '*',
+      headerName: '^',
       renderCell: (params: ValueGetterParams) =>  (
-        <Button variant="outlined" href={`/${params.getValue('id')}/admin`}>Org admin</Button>
+        <Button variant="outlined" href={`/${params.getValue('seo_name')}/admin`}>Edit</Button>
        ),
       sortable: false,
-      width: 150,
+      width: 100,
+    },
+    {
+      field: 'button4',
+      headerName: '^',
+      renderCell: (params: ValueGetterParams) =>  (
+        <Button variant="outlined" href={`/${params.getValue('seo_name')}`}>Website</Button>
+       ),
+      sortable: false,
+      width: 160,
     },
     ];
 
@@ -82,8 +91,9 @@ import { Button } from "@material-ui/core"
                       <Typography color="primary"> 5. Mongen Admin can also mark a suspicious org as <span style={{fontWeight:"bolder"}}>Under Review</span>. The website page is still available to anyone in the web.</Typography>
                       <Typography color="primary"> 6. Mongen Admin can also mark an org as <span style={{fontWeight:"bolder"}}>Disabled</span>. The website page is then becomes unavailable.</Typography>
                     </div>
-                     <div style={{ height: 550, width:"1100px", paddingTop:"50px", marginLeft:"-10%"}}>
-                      <DataGrid rows={organizations} columns={columns} pageSize={7} checkboxSelection />
+                     <div style={{ height: 550, width:"1200px", paddingTop:"30px", marginLeft:"-10%"}}>
+                       <Typography style={{fontStyle:"italic", marginBottom:"20px", fontSize:"15px"}}>Tip: Click on the column header to sort</Typography>
+                      <DataGrid rows={organizations} columns={columns} pageSize={7} />
                     </div>
                 </Container>
             </div>
