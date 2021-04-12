@@ -14,6 +14,13 @@ export const ImageUpload = function(props: Props) {
     const [modal, setOpenModal] = React.useState(false);
     const [orgData, setOrgData] = React.useState(values);
 
+    function getUrl() {
+        // the type can be an org logo or a photo id url
+        if(type==="logoUrl") return orgData.logoUrl
+        if(type==="photo_id_url") return orgData.photo_id_url
+        else return ""
+    }
+
     function updateImage(data) {
         setOrgData({ ...orgData, [type]: data })
     }
@@ -57,27 +64,15 @@ export const ImageUpload = function(props: Props) {
                     showPreviews={true}
                     showFileNamesInPreview={true}
             />
-            {type === "logoUrl" ? (
-                <div>
-                    {orgData.logoUrl ? (
-                        <Paper style={{width:"max-content", height:"max-content",  marginTop:"30px"}} elevation={3}>
-                            <img src={`${orgData.logoUrl}`} style={{width:"533px", height:"300px"}}></img>
-                        </Paper>
-                    ): ( 
-                        <Typography style={{marginLeft:"15%", marginTop:"30px"}}>No image uploaded yet</Typography>
-                    )}
-                </div>
-            ) : (
-                <div>
-                    {orgData.photo_id_url ? (
-                        <Paper style={{width:"max-content", height:"max-content",  marginTop:"30px"}} elevation={3}>
-                            <img src={`${orgData.photo_id_url}`} style={{width:"533px", height:"300px"}}></img>
-                        </Paper>
-                    ): ( 
-                        <Typography style={{marginLeft:"15%", marginTop:"30px"}}>No image uploaded yet</Typography>
-                    )}
-                </div>
-            )}
+            <div>
+                {getUrl() ? (
+                    <Paper style={{width:"max-content", height:"max-content",  marginTop:"30px"}} elevation={3}>
+                        <img src={`${getUrl()}`} style={{width:"533px", height:"300px"}}></img>
+                    </Paper>
+                ): ( 
+                    <Typography style={{marginLeft:"15%", marginTop:"30px"}}>No image uploaded yet</Typography>
+                )}
+            </div>
         </div>
-  );
+  )
 }

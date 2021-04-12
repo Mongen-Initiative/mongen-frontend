@@ -1,4 +1,4 @@
-import { Typography, Grid, Button, Paper } from "@material-ui/core"
+import { Typography, Grid } from "@material-ui/core"
 import React, { useEffect } from "react"
 import { ImageUpload } from "../templates/ImageUpload"
 
