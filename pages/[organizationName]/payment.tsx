@@ -109,7 +109,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
     expiryDate: "",
     cvv: ""
   })
-  const [recurringPayment, setRecurringPayment] = React.useState<RecurringPayment>({
+  const [recurringPayment] = React.useState<RecurringPayment>({
     eachMonth: false
   })
   const [endMessageTitle, setEndMessageTitle] = React.useState(
