@@ -1,7 +1,7 @@
 import { Typography, Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { BasePage } from "../components/templates/BasePage"
+import { BasePageAboutMongen } from "../components/templates"
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -12,21 +12,22 @@ const useStyles = makeStyles(theme => ({
 }))
 
 type Props = {
-  httpStatusCode: number
+  httpStatusCode
 }
 
 function Error(props: Props) {
   const { httpStatusCode } = props
   const classes = useStyles(props)
   return (
-    <BasePage className={classes.root}>
+    <BasePageAboutMongen className={classes.root}>
       <Container className={classes.container}>
-        <Typography component="h3" variant="h6" color="error" gutterBottom>
-          {" "}
-          Http status code {httpStatusCode} error
+        <Typography component="h1" variant="h1" color="error" style={{marginTop:"20%"}} align="center" >
+          Oops! :(
         </Typography>
+        <Typography align="center" variant="h4" style={{marginTop:"30px"}}> Error {httpStatusCode} - Page Not Found</Typography>
+        <Typography align="center" style={{marginTop:"20px"}}> Please contact us, if you think this page should be working</Typography>
       </Container>
-    </BasePage>
+    </BasePageAboutMongen>
   )
 }
 

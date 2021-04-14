@@ -173,13 +173,6 @@ export function PaymentCardStep(props: Props) {
 const products = [
   { name: 'Child 1', desc: 'For education', price: '$9.99' },
 ];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
