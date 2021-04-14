@@ -15,8 +15,8 @@ import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 import { Organization } from "."
 import OrganizationService from "../../components/services/OrganizationService"
 import CountriesController from "../../components/autocomplete/Countries"
-import OrganizationLogo from "../../components/forms/OrganizationLogo"
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import { ImageUpload } from "../../components/templates/ImageUpload"
 
   const useStyles = makeStyles((theme) => ({
     icon: {
@@ -95,7 +95,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
     }
 
     function updateLogo(data) {
-      updateForm("logoUrl", data);
+      setOrgData( data )
     }
 
     function updateSocialNetworkUrl(data) {
@@ -169,7 +169,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
                   <Typography  variant="h3" align="center" color="textPrimary" gutterBottom style={{marginTop: "15px", fontWeight:300}}> Organization profile
                   </Typography>
                   <Typography variant="body1" align="center" color="textSecondary" paragraph>
-                    On this page you can enter information related to your Organization, it will be displayed throughout the site.
+                    On this page you can edit information related to your Organization, it will be displayed throughout the site.
                   </Typography>
                   {page != 4 ? (
                     <div style={{border:"1px solid", paddingTop:"10px", paddingBottom:"10px", marginBottom:"30px", marginTop:"50px", width:"50%", marginLeft:"25%"}}>
@@ -201,8 +201,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
                       </div>
                     ) : ( <></> )}
                       {page === 2 ? (
+                        /* Logo upload */
                         <div style={{marginTop:"50px", marginBottom:"100px", marginLeft:"30%"}}>
-                          <OrganizationLogo callback={updateLogo}></OrganizationLogo>
+                          <Typography variant="h6">Add or update the logo for your organization</Typography>
+                          <ImageUpload callback={updateLogo} values={orgData} type="logoUrl"></ImageUpload>
                         </div>
                       ) : ( <></> )}
                       {page === 3 ? (
@@ -212,7 +214,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
                       {page === 4 ? (
                         <div>
                           <Typography variant="h6" style={{marginTop:"70px", marginLeft:"32%", color:"green"}}> Your organization is published, congratulations <FavoriteIcon/> </Typography>
-                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`http://localhost:3000/${organization.seo_name}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.seo_name}</Link></Typography>
+                          <Typography style={{marginTop:"30px", marginLeft:"35%", color:"green"}}> Here is the link to access it: <Link href={`/${organization.seo_name}`} style={{color:"black", textDecoration:"underline"}}>http://localhost:3000/{organization.seo_name}</Link></Typography>
                         </div>
                         ) : ( <></> )
                       }    

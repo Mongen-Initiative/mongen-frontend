@@ -21,7 +21,6 @@ import MainContactService from "../components/services/MainContactService"
 import OrganizationService from "../components/services/OrganizationService"
 import { BasePageAboutMongen } from "../components/templates"
 import { AboutMongenFooter } from "../components/templates/Footer"
-// import OrganizationLogo from "../components/forms/OrganizationLogo"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -254,7 +253,7 @@ function Index() {
       .then(
         (response) => {
           if(JSON.stringify(response) === "undefined") console.log("Organization is not created!")
-          else console.log(`Organization created! ID: ${response}`)
+          else console.log(`Organization created!`)
         })
   };
 
