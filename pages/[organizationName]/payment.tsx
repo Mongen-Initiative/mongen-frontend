@@ -303,7 +303,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
                         </Button>
                       </div>
                     )}
-                    <div style={{width:"30%", float:"right", marginRight: responsive.marginRightNextButton}}>
+                    <div style={{width:"45%", float:"right", marginRight: responsive.marginRightNextButton}}>
                       <Button
                         variant="contained"
                         color="primary"
