@@ -11,7 +11,7 @@ import {
   Link,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { useState, useEffect } from "react"
 import MainContactController from "../components/forms/MainContact"
 import OrganizationPhotoId from "../components/forms/OrganizationPhotoId"
 import OrganizationLocation from "../components/forms/OrganizationLocation"
@@ -278,6 +278,33 @@ function Index() {
     setValidationError(0)
   }
 
+  // Responsive page
+  const [width, setWindowWidth] = useState(0)
+  useEffect(() => { 
+  updateDimensions();
+  window.addEventListener("resize", updateDimensions);
+   return () => 
+     window.removeEventListener("resize", updateDimensions);
+  }, [])
+
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+
+  const screenWidth = {
+    isDesktop: width > 1023,
+  }
+
+  const responsive = {
+    display: screenWidth.isDesktop ? 'flex': 'none',
+    paddingTopStepTitle: screenWidth.isDesktop ? '5px' : '35px',
+    marginRightNextButton: screenWidth.isDesktop ? "5px" : "10%",
+    marginRightError: screenWidth.isDesktop ? "100px" : "10%",
+    paddingLeftError: screenWidth.isDesktop ? "70px" : "10%",
+    marginLeftGoBackButton: screenWidth.isDesktop ? "33%" : "20%"
+  }
+  
   return (
     <NoSsr>
       <BasePageAboutMongen className={classes.rootLight}>
@@ -289,7 +316,7 @@ function Index() {
               <Typography component="h1" variant="h4" align="center" style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                 Register your interest
                 </Typography>
-              <Stepper activeStep={activeStep} className={classes.stepper}>
+              <Stepper activeStep={activeStep} className={classes.stepper} style={{display:responsive.display}}>
                 {steps.map((label) => (
                   <Step key={label}>
                     <StepLabel>{label}</StepLabel>
@@ -317,7 +344,7 @@ function Index() {
                       variant="contained"
                       color="primary"
                       href="/"
-                      style={{marginTop:"60px", marginLeft:"33%", marginBottom:"80px"}}
+                      style={{marginTop:"60px", marginLeft:responsive.marginLeftGoBackButton, marginBottom:"80px"}}
                       >
                         Go back to the homepage
                       </Button>
@@ -325,7 +352,7 @@ function Index() {
                   )}
                 </div>
               ) : (
-                  <div style={{height:"max-content"}}>
+                  <div style={{height:"max-content", paddingTop: responsive.paddingTopStepTitle}}>
                     {activeStep == 0 ?
                       <OrganizationNameVisionMission callback={updateOrganizationDetails} values={organizationDetails}/>
                       :
@@ -347,13 +374,13 @@ function Index() {
                       <div></div>
                     }
                     {activeStep === 4 ?
-                      <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} />
+                      <OrganizationSummary organizationDetails={organizationDetails} organizationLocation={organizationLocationSocialNetworks} mainContact={mainContact} isDesktop={screenWidth.isDesktop}/>
                       :
                       <div></div>
                     }
                     <div className={classes.buttons}>
                     {validationError ? (
-                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                          <div style={{width:"50%", float:"left", marginRight:responsive.marginRightError, paddingLeft:responsive.paddingLeftError, marginTop:"50px"}}>
                             <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
                           </div>
                         ): (<></>)}
@@ -364,7 +391,7 @@ function Index() {
                         </Button>
                         </div>
                       )}
-                        <div style={{width:"10%", float:"right"}}>
+                        <div style={{width:"10%", float:"right", marginRight: responsive.marginRightNextButton}}>
                           <Button
                             variant="contained"
                             color="primary"

@@ -5,7 +5,7 @@ import { MuiTheme } from '../MuiTheme';
 
 type Props = {
     organizationName: any
-  }
+}
 
 export const CallToActionButtons = function(props: Props) {
     const {organizationName} = props
@@ -45,12 +45,13 @@ export const CallToActionDonateButton = function(props: Props) {
 }
 
 export const AboutMongenCallToActionButtons = function() {
+
     return (
     <div style={{margin: "60px"}}>
         <Grid container spacing={3} justify="center">
             <Grid item>
                 <Button variant="contained" color="primary" href="/create-organization" size="large">
-                Apply to register your interest
+                Register your interest
                 </Button>
             </Grid>
             <Grid item>

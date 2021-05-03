@@ -14,7 +14,7 @@ import {
   TextField,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { BasePage, CallToActionButtons, convertTitleToSeoUrl, CallToActionDonateButton } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
@@ -76,10 +76,32 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
   const classes = useStyles(organization)
   const url = convertTitleToSeoUrl("123")
 
+  // Responsive page
+  const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+     return () => 
+       window.removeEventListener("resize", updateDimensions);
+  }, [])
+  
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+  
+  const screenWidth = {
+    isDesktop: width > 1023,
+  }
+  
+  const responsive = {
+      display: screenWidth.isDesktop ? 'flex': 'none',
+  }
+
   return (
       <NoSsr>
         {organization ? (
-          <BasePage className={classes.rootLight} title={organization.name}>
+          <BasePage className={classes.rootLight} title={organization.name} isDesktop={screenWidth.isDesktop}>
           <title>Mongen Initiative</title>
               <div>
                 <div>

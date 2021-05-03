@@ -5,11 +5,16 @@ type Props = {
   organizationDetails
   organizationLocation
   mainContact
+  isDesktop
 }
 
 export default function OrganizationSummary(props: Props) {
-  const { organizationDetails, organizationLocation, mainContact } = props
+  const { organizationDetails, organizationLocation, mainContact, isDesktop } = props
 
+  const responsive = {
+    paddingLeft: isDesktop ? "340px" : "10px"
+  }
+  
   return (
     <div>
       <Typography variant="h6" gutterBottom>
@@ -19,19 +24,19 @@ export default function OrganizationSummary(props: Props) {
       <List>
         <ListItem>
           <ListItemText>Mission:</ListItemText>
-          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.mission}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:responsive.paddingLeft}}>{organizationDetails.mission}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Vision:</ListItemText>
-          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.vision}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:responsive.paddingLeft}}>{organizationDetails.vision}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Story:</ListItemText>
-          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationDetails.story}</Typography>
+          <Typography variant="body1" style={{wordWrap: "break-word", paddingLeft:responsive.paddingLeft}}>{organizationDetails.story}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Organization address:</ListItemText>
-          <Typography variant="subtitle1" style={{wordWrap: "break-word", paddingLeft:"340px"}}>{organizationLocation.address}</Typography>
+          <Typography variant="subtitle1" style={{wordWrap: "break-word", paddingLeft:responsive.paddingLeft}}>{organizationLocation.address}</Typography>
         </ListItem>
         <ListItem>
           <ListItemText>Country:</ListItemText>

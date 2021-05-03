@@ -1,8 +1,8 @@
-import { Container, Grid, Link, Card, CardMedia, CardContent, Typography, CardActions, Button, Divider } from "@material-ui/core";
+import { Container, Grid, Link, Card, CardMedia, CardContent, Typography, CardActions, Button, Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react";
-import getOrganizationsByStatus from "../../data/OrganizationsByStatus";
-import { MuiTheme } from "../MuiTheme";
+import getOrganizationsByStatus from "../../data/OrganizationsByStatus"
+import { MuiTheme } from "../MuiTheme"
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const MainOrganizationList = function() {
     const { loading, noData, organizations } = getOrganizationsByStatus("Published")
-
     const classes = useStyles()
 
     if (noData) {
@@ -49,7 +48,7 @@ export const MainOrganizationList = function() {
                     "Loading organizations..."
                 ) : (
                     <div>
-                    <Typography gutterBottom variant="h5" component="h2" style={{marginLeft:"40%", marginTop:"30px", marginBottom:"30px"}}>
+                    <Typography gutterBottom variant="h5" component="h2" align="center" style={{ marginTop:"30px", marginBottom:"30px"}}>
                         Organizations working with us
                     </Typography>
                     <Divider />
