@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Paper, Stepper, Step, StepLabel, Button, Typography, Container, NoSsr } from '@material-ui/core'
 import { BasePageAboutMongen } from '../../components/templates'
@@ -213,6 +213,33 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
     setValidationError(0)
   }
 
+  // Responsive page
+  const [width, setWindowWidth] = useState(0)
+  useEffect(() => { 
+  updateDimensions();
+  window.addEventListener("resize", updateDimensions);
+   return () => 
+     window.removeEventListener("resize", updateDimensions);
+  }, [])
+
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+
+  const screenWidth = {
+    isDesktop: width > 1023,
+  }
+
+  const responsive = {
+    display: screenWidth.isDesktop ? 'flex': 'none',
+    paddingTopStepTitle: screenWidth.isDesktop ? '5px' : '35px',
+    marginRightNextButton: screenWidth.isDesktop ? "5px" : "10%",
+    marginRightError: screenWidth.isDesktop ? "100px" : "10%",
+    paddingLeftError: screenWidth.isDesktop ? "70px" : "10%",
+    marginLeftGoBackButton: screenWidth.isDesktop ? "30%" : "20%"
+  }
+
   return (
       <NoSsr>
        <BasePageAboutMongen className={classes.rootLight}>
@@ -222,7 +249,7 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
               <Typography component="h1" variant="h4" align="center" style={{paddingTop:"5px", paddingBottom:"5px"}}>
                 Add a new child
               </Typography>
-              <Stepper activeStep={activeStep} className={classes.stepper}>
+              <Stepper activeStep={activeStep} className={classes.stepper} style={{display:responsive.display}}>
                 {steps.map((label) => (
                   <Step key={label}>
                     <StepLabel>{label}</StepLabel>
@@ -230,18 +257,18 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
                 ))}
               </Stepper>
                 {activeStep === steps.length ? (
-                  <div style={{height:"max-content"}}>
+                  <div style={{height:"max-content", paddingTop: responsive.paddingTopStepTitle}}>
                     <Typography variant="h5" gutterBottom>
                       New record is added
                     </Typography>
-                    <Typography variant="subtitle1" style={{paddingTop:"50px", paddingLeft:"80px"}}>
+                    <Typography variant="subtitle1" align="center" style={{paddingTop:"50px"}}>
                       Thank you for adding a new record. It will appear on your homepage now :)
                     </Typography>
                     <Button
                     variant="contained"
                     color="primary"
                     href="/1"
-                    style={{marginTop:"60px", marginLeft:"30%", marginBottom:"10px", width:"270px"}}
+                    style={{marginTop:"60px", marginLeft:responsive.marginLeftGoBackButton, marginBottom:"10px", width:"270px"}}
                   >
                     Go back to the homepage
                   </Button>
@@ -249,17 +276,17 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
                     variant="outlined"
                     color="primary"
                     href="/1/new-record"
-                    style={{marginTop:"10px", marginLeft:"30%", marginBottom:"80px", width:"270px"}}
+                    style={{marginTop:"10px", marginLeft:responsive.marginLeftGoBackButton, marginBottom:"80px", width:"270px"}}
                   >
                     Create another record
                   </Button>
                   </div>
                 ) : (
-                  <div style={{height:"max-content"}}>
+                  <div style={{height:"max-content", paddingTop: responsive.paddingTopStepTitle}}>
                     {getStepContent(activeStep)}
                     <div className={classes.buttons}>
                     {validationError ? (
-                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                          <div style={{width:"50%", float:"left",  marginRight:responsive.marginRightError, paddingLeft:responsive.paddingLeftError, marginTop:"50px"}}>
                             <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
                           </div>
                         ): (<></>)}
@@ -270,7 +297,7 @@ function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getSe
                         </Button>
                         </div>
                       )}
-                        <div style={{width:"10%", float:"right", marginRight:"30px"}}>
+                        <div style={{width:"10%", float:"right",  marginRight: responsive.marginRightNextButton}}>
                           <Button
                             variant="contained"
                             color="primary"

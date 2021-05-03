@@ -192,14 +192,14 @@ export function AcademicRecordsStep(props: Props) {
               defaultValue={values.depDate}
             />
           </Grid>
-        <Grid item xs={3} md={6}>
+        <Grid item xs={6} md={6}>
           <TextField 
             required id="lastSchool" label="Last school attended" fullWidth
             onChange={(event) => updateForm("lastSchool", event.target.value)}
             defaultValue={values.lastSchool}
           />
         </Grid>
-        <Grid item xs={3} md={6}>
+        <Grid item xs={6} md={6}>
           <TextField
             required
             id="lastClass"
