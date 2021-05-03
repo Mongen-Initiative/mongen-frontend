@@ -74,7 +74,6 @@ const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
-  const url = convertTitleToSeoUrl("123")
 
   // Responsive page
   const [width, setWindowWidth] = useState(0)
@@ -92,10 +91,6 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
   
   const screenWidth = {
     isDesktop: width > 1023,
-  }
-  
-  const responsive = {
-      display: screenWidth.isDesktop ? 'flex': 'none',
   }
 
   return (
@@ -149,7 +144,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     <Grid container spacing={4}>
                       {children.map((child) => (
                         <Grid item key={child} xs={12} sm={6} md={4}>
-                          <Link href={`/${url}/child`} underline="none">
+                          <Link href={`/${organization.seo_name}/child`} underline="none">
                             <Card className={classes.card}>
                               <CardMedia
                                 className={classes.cardMedia}

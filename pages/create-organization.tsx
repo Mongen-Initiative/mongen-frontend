@@ -385,10 +385,10 @@ function Index() {
                           </div>
                         ): (<></>)}
                      {activeStep !== 0 && (
-                       <div style={{width:"10%", float:"right", marginRight:"70px"}}>
-                        <Button onClick={handleBack} className={classes.button} variant="outlined">
-                          Back
-                        </Button>
+                        <div style={{width:"10%", float:"right", marginRight:"70px"}}>
+                          <Button onClick={handleBack} className={classes.button} variant="outlined">
+                            Back
+                          </Button>
                         </div>
                       )}
                         <div style={{width:"10%", float:"right", marginRight: responsive.marginRightNextButton}}>

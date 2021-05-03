@@ -5,7 +5,7 @@ import {
     ButtonBase,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
-  import React from "react"
+  import React, {useEffect, useState} from "react"
   import { BasePage, CallToActionButtons } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer";
   
@@ -83,9 +83,27 @@ import { Footer } from "../../components/templates/Footer";
     const classes = useStyles(children)
     const url = "1"
 
+    // Responsive page
+    const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+      updateDimensions();
+      window.addEventListener("resize", updateDimensions);
+      return () => 
+        window.removeEventListener("resize", updateDimensions);
+    }, [])
+
+    const updateDimensions = () => {
+      const width = window.innerWidth
+      setWindowWidth(width)
+    }
+
+    const screenWidth = {
+      isDesktop: width > 1023,
+    }
+
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title}>
+          <BasePage className={classes.rootLight} title={title} isDesktop={screenWidth.isDesktop}>
           <title>Mongen | Child details</title>
           {children ? (
           <Container className={classes.cardGrid}>

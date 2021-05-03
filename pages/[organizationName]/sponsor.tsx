@@ -10,7 +10,7 @@ import {
     Button,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
-  import React from "react"
+  import React, {useState, useEffect} from "react"
   import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { MuiTheme } from "../../components/MuiTheme"
@@ -55,10 +55,28 @@ import { MuiTheme } from "../../components/MuiTheme"
   function SponsorProfile() {
     const classes = useStyles(sponsor)
     const url = "1"
+    
+    // Responsive page
+    const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+      updateDimensions();
+      window.addEventListener("resize", updateDimensions);
+      return () => 
+        window.removeEventListener("resize", updateDimensions);
+    }, [])
+
+    const updateDimensions = () => {
+      const width = window.innerWidth
+      setWindowWidth(width)
+    }
+
+    const screenWidth = {
+      isDesktop: width > 1023,
+    }
 
     return (
         <NoSsr>
-          <BasePage className={classes.rootLight} title={title}>
+          <BasePage className={classes.rootLight} title={title} isDesktop={screenWidth.isDesktop}>
           <title>Mongen | Sponsor's profile</title>
           {sponsor ? (
             <div className={classes.heroContent}>

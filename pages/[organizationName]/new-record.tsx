@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const steps = ['General', 'Academic ', 'Parental/Ward ', "Counselor's ", "Summary "];
 
 function AddNewRecord({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const classes = useStyles();
+  const classes = useStyles(organization);
   const [activeStep, setActiveStep] = useState(0)
   const [generalInfo, setGeneralInfo] = useState({
     first_name: '',

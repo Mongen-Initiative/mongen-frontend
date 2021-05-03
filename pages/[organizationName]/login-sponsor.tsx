@@ -7,7 +7,7 @@ import {
     InputBase,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
-  import React from "react"
+  import React, {useState, useEffect} from "react"
   import { BasePage } from "../../components/templates"
   import { AboutMongenFooter } from "../../components/templates/Footer"
   import { InferGetServerSidePropsType, GetServerSideProps } from "next"
@@ -50,12 +50,29 @@ import { Organization } from "."
   
   function LoginSponsor({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)  
-    const url = "1"
+
+    // Responsive page
+    const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+      updateDimensions();
+      window.addEventListener("resize", updateDimensions);
+      return () => 
+        window.removeEventListener("resize", updateDimensions);
+    }, [])
+
+    const updateDimensions = () => {
+      const width = window.innerWidth
+      setWindowWidth(width)
+    }
+
+    const screenWidth = {
+      isDesktop: width > 1023,
+    }
 
     return (
         <NoSsr>
            {organization ? (
-            <BasePage className={classes.rootLight} title="123">
+            <BasePage className={classes.rootLight} title={organization.name} isDesktop={screenWidth.isDesktop}>
                 <title>Mongen | Login</title>
                 <Container maxWidth="sm" className={classes.heroContent}>
                     <Typography  align="center" color="textPrimary" gutterBottom style={{fontSize:"2.8em"}}>
@@ -71,7 +88,7 @@ import { Organization } from "."
                         <Paper component="form" style={{width: "60%", padding: '12px 14px', marginTop:"20px", marginLeft:"23%", marginBottom:"30px", alignItems: 'center', display: 'flex'}}> 
                             <InputBase placeholder="Password" style={{flex: "1"}} />
                         </Paper>
-                        <Button href={`/${url}/sponsor`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
+                        <Button href={`/${organization.seo_name}/sponsor`} variant="outlined"  color="primary" style={{width:"30%", display:"block", marginLeft:"36%", marginTop:"40px", paddingLeft:"10%"}} size="large" >Sign In</Button>
                         <Button style={{display:"block", marginLeft:"22%", marginTop:"40px"}} href="mailto:support@example.com">Don't have an account yet? Contact us</Button>
                 </Container>
                 <AboutMongenFooter />
