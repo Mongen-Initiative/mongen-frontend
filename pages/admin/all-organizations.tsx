@@ -8,7 +8,7 @@ import {
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates"
 import { OrgModal } from "../../components/templates/DetailedInfoModal"
-import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid'
+import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid'
 import { Organization } from "../[organizationName]"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import { Button } from "@material-ui/core"
@@ -29,7 +29,7 @@ import { Button } from "@material-ui/core"
   function Organizations({ organizations }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organizations)  
 
-    const columns: ColDef[] = [
+    const columns: GridColDef[] = [
       { field: 'id', headerName: 'Id', width: 95 },
       { field: 'name', headerName: 'Organization name', width: 180 },
       { field: 'country', headerName: 'Country', width: 130 },
@@ -55,7 +55,7 @@ import { Button } from "@material-ui/core"
     {
       field: 'button3',
       headerName: '^',
-      renderCell: (params: ValueGetterParams) =>  (
+      renderCell: (params: GridValueGetterParams) =>  (
         <Button variant="outlined" href={`/${params.getValue('seo_name')}/admin`}>Edit</Button>
        ),
       sortable: false,
@@ -64,7 +64,7 @@ import { Button } from "@material-ui/core"
     {
       field: 'button4',
       headerName: '^',
-      renderCell: (params: ValueGetterParams) =>  (
+      renderCell: (params: GridValueGetterParams) =>  (
         <Button variant="outlined" href={`/${params.getValue('seo_name')}`}>Website</Button>
        ),
       sortable: false,
