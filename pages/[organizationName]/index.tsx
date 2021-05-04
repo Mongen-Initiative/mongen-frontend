@@ -14,7 +14,7 @@ import {
   TextField,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { BasePage, CallToActionButtons, convertTitleToSeoUrl, CallToActionDonateButton } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
@@ -74,12 +74,29 @@ const children = ["Child 1", "Child 2", "Child 3", "Child 4", "Child 5", "Child 
 
 function Index({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const classes = useStyles(organization)
-  const url = convertTitleToSeoUrl("123")
+
+  // Responsive page
+  const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+     return () => 
+       window.removeEventListener("resize", updateDimensions);
+  }, [])
+  
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+  
+  const screenWidth = {
+    isDesktop: width > 1023,
+  }
 
   return (
       <NoSsr>
         {organization ? (
-          <BasePage className={classes.rootLight} title={organization.name}>
+          <BasePage className={classes.rootLight} title={organization.name} isDesktop={screenWidth.isDesktop}>
           <title>Mongen Initiative</title>
               <div>
                 <div>
@@ -127,7 +144,7 @@ function Index({ organization }: InferGetServerSidePropsType<typeof getServerSid
                     <Grid container spacing={4}>
                       {children.map((child) => (
                         <Grid item key={child} xs={12} sm={6} md={4}>
-                          <Link href={`/${url}/child`} underline="none">
+                          <Link href={`/${organization.seo_name}/child`} underline="none">
                             <Card className={classes.card}>
                               <CardMedia
                                 className={classes.cardMedia}

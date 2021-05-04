@@ -6,7 +6,7 @@ import {
     NoSsr,
   } from "@material-ui/core"
   import { makeStyles } from "@material-ui/core/styles"
-  import React from "react"
+  import React, { useEffect, useState } from "react"
   import { BasePage } from "../../components/templates"
 import { Footer } from "../../components/templates/Footer"
 import { InferGetServerSidePropsType, GetServerSideProps } from "next"
@@ -34,10 +34,28 @@ import { Organization } from "."
   function About({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const classes = useStyles(organization)
 
+    // Responsive page
+    const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+      updateDimensions();
+      window.addEventListener("resize", updateDimensions);
+      return () => 
+        window.removeEventListener("resize", updateDimensions);
+    }, [])
+
+    const updateDimensions = () => {
+      const width = window.innerWidth
+      setWindowWidth(width)
+    }
+
+    const screenWidth = {
+      isDesktop: width > 1023,
+    }
+
     return (
         <NoSsr>
           {organization ? (
-            <BasePage className={classes.rootLight} title={organization.name}>
+            <BasePage className={classes.rootLight} title={organization.name} isDesktop={screenWidth.isDesktop}>
               <title>{organization.name} | About us</title>
               <div className={classes.content}>
                 <Container>

@@ -35,7 +35,7 @@ export default function MainContactController(props: Props) {
         <Typography style={{marginTop:"7px", marginLeft:"2%",fontSize:"13px", fontStyle:"italic"}}>
           We'd need this information to verify your identity
         </Typography>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="first_name"
@@ -47,7 +47,7 @@ export default function MainContactController(props: Props) {
             style={{marginTop:"20px"}}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="last_name"
@@ -59,7 +59,7 @@ export default function MainContactController(props: Props) {
             style={{marginTop:"20px"}}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="email"
@@ -71,7 +71,7 @@ export default function MainContactController(props: Props) {
             style={{marginTop:"20px"}}
           />
         </Grid>
-        <Grid item xs={12} style={{marginTop:"20px"}}>
+        <Grid item xs={11} style={{marginTop:"20px"}}>
           <Typography variant="subtitle2" style={{marginBottom:"10px"}}>Nationality *:</Typography>
           <CountriesController callback={updateCountry} className ="" defaultValue={orgData.country}/>
         </Grid>

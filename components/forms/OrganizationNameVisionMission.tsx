@@ -30,7 +30,7 @@ export default function OrganizationNameVisionMission(props: Props) {
         Organization details
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="name"
@@ -46,7 +46,7 @@ export default function OrganizationNameVisionMission(props: Props) {
               <span style={{fontStyle:"italic"}}>/saving-children</span>
             </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="story"
@@ -61,7 +61,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             style={{marginTop:"5px"}}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="mission"
@@ -76,7 +76,7 @@ export default function OrganizationNameVisionMission(props: Props) {
             style={{marginTop:"10px"}}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={11}>
           <TextField
             required
             id="vision"

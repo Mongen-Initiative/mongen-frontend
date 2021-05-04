@@ -12,13 +12,23 @@ type Props = {
   values
 }
 
-export function RecurringPaymentStep() {
+type RecurringPaymentProps = {
+  isDesktop?: any
+}
+
+export function RecurringPaymentStep(props: RecurringPaymentProps) {
+  const { isDesktop } = props
+  
+  const responsive = {
+    marginLeftCheckbox: isDesktop ? "200px": '20px',
+  }
+
   return (
     <div>
       <Typography variant="h6" gutterBottom>
         Recurring Payment
       </Typography>
-        <Grid item style={{marginLeft:"200px", marginTop:"50px"}}>
+        <Grid item style={{marginLeft:responsive.marginLeftCheckbox, marginTop:"50px"}}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Help this child every month *"
@@ -89,7 +99,7 @@ export function DonationContributorStep(props: Props) {
             name="address"
             label="Address line"
             multiline={true}
-            rows={6}
+            rows={4}
             rowsMax={6}
             fullWidth
             autoComplete="shipping address-line1"

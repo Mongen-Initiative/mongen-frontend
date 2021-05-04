@@ -67,7 +67,7 @@ export const ImageUpload = function(props: Props) {
             <div>
                 {getUrl() ? (
                     <Paper style={{width:"max-content", height:"max-content",  marginTop:"30px"}} elevation={3}>
-                        <img src={`${getUrl()}`} style={{width:"533px", height:"300px"}}></img>
+                        <img src={`${getUrl()}`} style={{width:"300px", height:"300px"}}></img>
                     </Paper>
                 ): ( 
                     <Typography style={{marginLeft:"15%", marginTop:"30px"}}>No image uploaded yet</Typography>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -90,7 +90,7 @@ interface BackendErrors<T> {
 }
 
 function Donation({ organization }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const classes = useStyles();
+  const classes = useStyles(organization)
   const [activeStep, setActiveStep] = React.useState(0);
   const [donorInformation, setDonorInformation] = React.useState<DonorInfo>({
     firstName: "",
@@ -199,18 +199,43 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
         });
   };
   
-  const title = "Your title"
+  // Responsive page
+  const [width, setWindowWidth] = useState(0)
+  useEffect(() => { 
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => 
+      window.removeEventListener("resize", updateDimensions);
+  }, [])
+
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+
+  const screenWidth = {
+    isDesktop: width > 1023,
+  }
+
+  const responsive = {
+    display: screenWidth.isDesktop ? 'flex': 'none',
+    paddingTopStepTitle: screenWidth.isDesktop ? '5px' : '35px',
+    marginRightNextButton: screenWidth.isDesktop ? "5px" : "10%",
+    marginRightError: screenWidth.isDesktop ? "100px" : "10%",
+    paddingLeftError: screenWidth.isDesktop ? "70px" : "10px",
+    marginLeftGoBackButton: screenWidth.isDesktop ? "33%" : "20%"
+  }
 
   return (
     <NoSsr>
-      <BasePage className={classes.rootLight} title={title}>
+      <BasePage className={classes.rootLight} title={organization.name} isDesktop={screenWidth.isDesktop}>
       <title>Mongen | Sponsor a child</title>
         <Container className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center" style={{paddingTop:"5px", paddingBottom:"5px"}}>
               Help a child with your donation
             </Typography>
-            <Stepper activeStep={activeStep} className={classes.stepper}>
+            <Stepper activeStep={activeStep} className={classes.stepper} style={{display:responsive.display}}>
               {steps.map((label) => (
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>
@@ -233,7 +258,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
                       </Button>
                     </div>
                   ) : (
-                    <div>
+                    <div style={{marginLeft:responsive.marginLeftGoBackButton}}>
                       <Typography variant="h5" gutterBottom>
                         {endMessageTitle}
                       </Typography>
@@ -244,7 +269,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
                   )}
                 </div>
               ) : (
-                <div>
+                <div style={{height:"max-content", paddingTop: responsive.paddingTopStepTitle}}>
                   {activeStep == 0 ?
                     <DonationContributorStep callback={updateDonorInformation} values={donorInformation}/>
                     :
@@ -256,7 +281,7 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
                     <div></div>
                   }
                   {activeStep === 2 ?
-                    <RecurringPaymentStep />
+                    <RecurringPaymentStep isDesktop={screenWidth.isDesktop}/>
                     :
                     <div></div>
                   }
@@ -267,23 +292,27 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
                   }
                   <div className={classes.buttons}>
                   {validationError ? (
-                          <div style={{width:"50%", float:"left", marginRight:"100px", paddingLeft:"70px", marginTop:"50px"}}>
+                          <div style={{width:"50%", float:"left", marginTop:"50px", marginRight:responsive.marginRightError, paddingLeft:responsive.paddingLeftError}}>
                             <Typography style={{color:"red"}}>* Please fill in all the required fields</Typography>
                           </div>
                         ): (<></>)}
                     {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}  variant="outlined">
-                        Back
-                      </Button>
+                      <div style={{width:"10%", float:"right", marginRight:"70px"}}>
+                        <Button onClick={handleBack} className={classes.button} variant="outlined">
+                          Back
+                        </Button>
+                      </div>
                     )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Start sponsorship' : 'Next'}
-                    </Button>
+                    <div style={{width:"45%", float:"right", marginRight: responsive.marginRightNextButton}}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        {activeStep === steps.length - 1 ? 'Start sponsorship' : 'Next'}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -295,9 +324,9 @@ function Donation({ organization }: InferGetServerSidePropsType<typeof getServer
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const { organizationId} = context.query
+  const { organizationName} = context.query
 
-  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/${organizationId}/`, {
+  const orgReq = await fetch(`${process.env.mongenCoreInternal}/api/v1/organization/seo_name/${organizationName}/`, {
     method: "GET",
   })
 
