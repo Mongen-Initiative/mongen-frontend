@@ -12,7 +12,7 @@ import {
   import React from "react"
 import { BasePageAboutMongen } from "../../components/templates"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { DataGrid, ColDef, ValueGetterParams } from "@material-ui/data-grid"
+import { DataGrid, GridColDef, GridValueGetterParams } from "@material-ui/data-grid"
 import { CollaboratorsModal } from "../../components/templates/DetailedInfoModal"
 import { InferGetServerSidePropsType, GetServerSideProps } from "next"
 import { Organization } from "."
@@ -34,7 +34,7 @@ import { Organization } from "."
     const classes = useStyles(organization)  
     const url = "1"
 
-    const columns: ColDef[] = [
+    const columns: GridColDef[] = [
         { field: 'id', headerName: 'Id', width: 70 },
         { field: 'firstName', headerName: 'First Name', width: 150 },
         { field: 'lastName', headerName: 'Last Name', width: 170 },
@@ -43,7 +43,7 @@ import { Organization } from "."
         {
             field: 'button',
             headerName: '.',
-            renderCell: (params: ValueGetterParams) =>  (
+            renderCell: (params: GridValueGetterParams) =>  (
               <CollaboratorsModal
                 firstName={params.getValue('firstName')}
                 lastName={params.getValue('lastName')}
