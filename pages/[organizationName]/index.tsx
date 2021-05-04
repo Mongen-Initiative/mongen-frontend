@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useEffect, useState } from "react"
-import { BasePage, CallToActionButtons, convertTitleToSeoUrl, CallToActionDonateButton } from "../../components/templates"
+import { BasePage, CallToActionButtons, CallToActionDonateButton } from "../../components/templates"
 import { MuiTheme } from "../../components/MuiTheme"
 import { Footer } from "../../components/templates/Footer"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
